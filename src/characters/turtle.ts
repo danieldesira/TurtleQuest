@@ -1,13 +1,15 @@
 import Character from "./character";
 
-class Turtle extends Character {
+class Turtle implements Character {
+    private x: number;
+    private y: number;
+
     constructor() {
-        super();
         this.x = 10;
         this.y = 10;
     }
 
-    paint(context) {
+    paint(context: CanvasRenderingContext2D) {
         const turtleImage = document.createElement('img');
         turtleImage.src = './images/turtle.png';
         turtleImage.onload = () => context.drawImage(turtleImage,
