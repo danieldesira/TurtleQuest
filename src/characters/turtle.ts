@@ -30,7 +30,6 @@ class Turtle implements Character {
   }
 
   paint(context: CanvasRenderingContext2D) {
-    console.log(`x: ${this.x}, y: ${this.y}`);
     const turtleImage = document.createElement("img");
     turtleImage.src = "./images/turtle.png";
     turtleImage.onload = () =>
