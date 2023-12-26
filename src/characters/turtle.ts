@@ -29,6 +29,11 @@ class Turtle implements Character {
     ++this.x;
   }
 
+  setPosition(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+
   paint(context: CanvasRenderingContext2D) {
     const turtleImage = document.createElement("img");
     turtleImage.src = "./images/turtle.png";

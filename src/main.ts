@@ -1,13 +1,13 @@
 import Turtle from "./characters/turtle";
-import bindKeyboard from "./controls/keyboard";
 import {version} from "../package.json";
+import bindControls from "./controls/controls";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const context = canvas.getContext("2d");
 const turtle = new Turtle();
 turtle.paint(context);
 
-bindKeyboard(canvas, turtle);
+bindControls(canvas, turtle);
 
 function paintBackground() {
   const backgroundImage = document.createElement("img");
