@@ -1,10 +1,10 @@
 import Turtle from "../characters/turtle";
 import bindKeyboard from "./keyboard";
-import bindMouse from "./mouse";
+import bindWheel from "./touchpad";
 
 function bindControls(canvas: HTMLCanvasElement, mainCharacter: Turtle) {
   bindKeyboard(canvas, mainCharacter);
-  bindMouse(canvas, mainCharacter);
+  bindWheel(canvas, mainCharacter);
 }
 
 export default bindControls;
