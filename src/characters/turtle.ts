@@ -12,6 +12,9 @@ class Turtle implements Character {
     this.angle = angles.right;
   }
 
+  getX = () => this.x;
+  getY = () => this.y;
+
   moveUp() {
     this.rotate(angles.up);
     if (this.y >= 0) {
