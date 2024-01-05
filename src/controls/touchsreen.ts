@@ -1,6 +1,7 @@
 import Turtle from "../characters/turtle";
 
 function handleTouchMove(event: TouchEvent, mainCharacter: Turtle) {
+  event.preventDefault();
   const touch = event.touches[0];
   if (touch.pageX < mainCharacter.getX()) {
     mainCharacter.moveLeft();
