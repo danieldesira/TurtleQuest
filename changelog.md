@@ -9,3 +9,5 @@
 
 #0.0.3 Preview - 08/01/2024 17:00 UTC+1
 * Respond to any pointing device on browsers with `PointerEvent` support (Edge/Chrome)
+
+#0.0.4 Preview - 

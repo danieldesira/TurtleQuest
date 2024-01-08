@@ -6,6 +6,9 @@ class Turtle implements Character {
   private y: number;
   private angle: number;
 
+  private limitX: number;
+  private limitY: number;
+
   constructor() {
     this.x = 10;
     this.y = 10;
@@ -15,28 +18,37 @@ class Turtle implements Character {
   getX = () => this.x;
   getY = () => this.y;
 
+  setLimits(x: number, y: number) {
+    this.limitX = x;
+    this.limitY = y;
+  }
+
   moveUp() {
     this.rotate(angles.up);
-    if (this.y >= 0) {
+    if (this.y > 0) {
       --this.y;
     }
   }
 
   moveDown() {
     this.rotate(angles.down);
-    ++this.y;
+    if (this.y < this.limitY) {
+      ++this.y;
+    }
   }
 
   moveLeft() {
     this.rotate(angles.left);
-    if (this.x >= 0) {
+    if (this.x > 0) {
       --this.x;
     }
   }
 
   moveRight() {
     this.rotate(angles.right);
-    ++this.x;
+    if (this.x < this.limitX) {
+      ++this.x;
+    }
   }
 
   private rotate(angle: number) {
