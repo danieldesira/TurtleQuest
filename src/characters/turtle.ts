@@ -6,17 +6,26 @@ class Turtle implements Character {
   private y: number;
   private angle: number;
 
+  private bgStartX: number;
+  private bgStartY: number;
   private limitX: number;
   private limitY: number;
 
   constructor() {
-    this.x = 10;
+    this.x = 50;
     this.y = 10;
     this.angle = angles.right;
+    this.bgStartX = 0;
+    this.bgStartY = 0;
   }
 
   getX = () => this.x;
   getY = () => this.y;
+
+  setBgStart(x: number, y: number) {
+    this.bgStartX = x;
+    this.bgStartY = y;
+  }
 
   setLimits(x: number, y: number) {
     this.limitX = x;
@@ -68,8 +77,8 @@ class Turtle implements Character {
       this.applyRotation(context);
       context.drawImage(
         turtleImage,
-        this.x,
-        this.y,
+        this.x - this.bgStartX,
+        this.y - this.bgStartY,
         turtleImage.width / 4,
         turtleImage.height / 4
       );

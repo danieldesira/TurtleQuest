@@ -10,4 +10,7 @@
 #0.0.3 Preview - 08/01/2024 17:00 UTC+1
 * Respond to any pointing device on browsers with `PointerEvent` support (Edge/Chrome)
 
-#0.0.4 Preview - 
+#0.0.4 Preview - 10/01/2024 23:00 UTC+1
+* Background moves with turtle
+* Set upper limits for turtle movement
+* Shifted initial turtle position a little to the right
