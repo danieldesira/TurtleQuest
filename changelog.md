@@ -14,3 +14,7 @@
 * Background moves with turtle
 * Set upper limits for turtle movement
 * Shifted initial turtle position a little to the right
+
+#0.0.5 Preview - 11/01/2024 23:15 UTC+1
+* Resize canvas depending on window size
+* Demo turtle observer `function`

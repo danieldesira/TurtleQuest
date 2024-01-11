@@ -1,5 +1,5 @@
 {
-  "version": "0.0.4 Preview",
+  "version": "0.0.5 Preview",
   "devDependencies": {
     "concurrently": "^8.2.2",
     "serve": "^14.2.1",
