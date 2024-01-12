@@ -1,8 +1,13 @@
 import Turtle from "./characters/turtle";
 
-function observeTurtle(mainCharacter: Turtle, bgWidth: number) {
-  if (mainCharacter.getX() === bgWidth) {
-    alert("Level complete"); //to-do: level increment logic and reset turtle position
+interface Options {
+  bgWidth: number;
+  currentLvl: number;
+}
+
+function observeTurtle(mainCharacter: Turtle, options: Options) {
+  if (mainCharacter.getX() === options.bgWidth) {
+    options.currentLvl++;
   }
 }
 

@@ -18,3 +18,5 @@
 #0.0.5 Preview - 11/01/2024 23:15 UTC+1
 * Resize canvas depending on window size
 * Demo turtle observer `function`
+
+#0.0.6 Preview - 

@@ -1,43 +1,47 @@
 import Turtle from "./characters/turtle";
+import Level from "./levels/level";
 
-function paintBackground(
-  canvas: HTMLCanvasElement,
-  context: CanvasRenderingContext2D,
-  mainCharacter: Turtle
-) {
+interface Options {
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+  mainCharacter: Turtle;
+  level: Level;
+}
+
+function paintBackground(options: Options) {
   const backgroundImage = document.createElement("img");
-  backgroundImage.src = "./images/background.png";
+  backgroundImage.src = options.level.getBgImg();
   const horizontalSegments = calculateScreenCutOffPoints(
     backgroundImage.width,
-    canvas.width
+    options.canvas.width
   );
   const verticalSegments = calculateScreenCutOffPoints(
     backgroundImage.height,
-    canvas.height
+    options.canvas.height
   );
   const x =
-    mainCharacter.getX() < canvas.width
+    options.mainCharacter.getX() < options.canvas.width
       ? 0
       : horizontalSegments[
-          Math.floor(backgroundImage.width / mainCharacter.getX()) - 1
+          Math.floor(backgroundImage.width / options.mainCharacter.getX()) - 1
         ];
   const y =
-    mainCharacter.getY() < canvas.height
+    options.mainCharacter.getY() < options.canvas.height
       ? 0
       : verticalSegments[
-          Math.floor(backgroundImage.height / mainCharacter.getY()) - 1
+          Math.floor(backgroundImage.height / options.mainCharacter.getY()) - 1
         ];
   backgroundImage.onload = () =>
-    context.drawImage(
+    options.context.drawImage(
       backgroundImage,
       x,
       y,
-      canvas.width,
-      canvas.height,
+      options.canvas.width,
+      options.canvas.height,
       0,
       0,
-      canvas.width,
-      canvas.height
+      options.canvas.width,
+      options.canvas.height
     );
   return backgroundImage;
 }

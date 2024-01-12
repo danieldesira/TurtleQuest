@@ -1,5 +1,5 @@
 interface Character {
-    paint(context: CanvasRenderingContext2D): void;
+  paint(context: CanvasRenderingContext2D): void;
 }
 
 export default Character;
