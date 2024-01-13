@@ -5,10 +5,12 @@ interface Options {
   currentLvl: number;
 }
 
-function observeTurtle(mainCharacter: Turtle, options: Options) {
+function checkTurtle(mainCharacter: Turtle, options: Options): number {
   if (mainCharacter.getX() === options.bgWidth) {
     options.currentLvl++;
+    mainCharacter.resetPosition();
   }
+  return options.currentLvl;
 }
 
-export default observeTurtle;
+export default checkTurtle;

@@ -2,7 +2,7 @@ import Turtle from "./characters/turtle";
 import { version } from "../package.json";
 import bindControls from "./controls/controls";
 import paintBackground from "./background";
-import observeTurtle from "./turtle-observer";
+import checkTurtle from "./turtle-observer";
 import selectLvl from "./levels/level-selector";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -14,19 +14,25 @@ let currentLevel: number = 1;
 bindControls(canvas, turtle);
 
 function render() {
-  const background = paintBackground({
-    canvas,
-    context,
-    mainCharacter: turtle,
-    level: selectLvl(currentLevel),
-  });
-  turtle.setLimits(background.width, background.height);
-  turtle.paint(context);
-  observeTurtle(turtle, {
-    bgWidth: background.width,
-    currentLvl: currentLevel,
-  });
-  requestAnimationFrame(render);
+  const level = selectLvl(currentLevel);
+
+  if (level === true) {
+    alert("Game complete! Demo for now.. Replace later.");
+  } else {
+    const background = paintBackground({
+      canvas,
+      context,
+      mainCharacter: turtle,
+      level,
+    });
+    turtle.setLimits(background.width, background.height);
+    turtle.paint(context);
+    currentLevel = checkTurtle(turtle, {
+      bgWidth: background.width,
+      currentLvl: currentLevel,
+    });
+    requestAnimationFrame(render);
+  }
 }
 
 function resizeCanvas() {

@@ -12,15 +12,18 @@ class Turtle implements Character {
   private limitY: number;
 
   constructor() {
-    this.x = 50;
-    this.y = 10;
+    this.resetPosition();
     this.angle = angles.right;
-    this.bgStartX = 0;
-    this.bgStartY = 0;
+    this.setBgStart(0, 0);
   }
 
   getX = () => this.x;
   getY = () => this.y;
+
+  resetPosition() {
+    this.x = 50;
+    this.y = 10;
+  }
 
   setBgStart(x: number, y: number) {
     this.bgStartX = x;

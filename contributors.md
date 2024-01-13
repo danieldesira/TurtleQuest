@@ -6,3 +6,4 @@
 - Liza Sountsova
 - Lenka Portelli
 - Corinne Wood
+- Marcos Méndez
