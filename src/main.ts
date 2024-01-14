@@ -37,15 +37,21 @@ function render() {
 }
 
 function resizeCanvas() {
-  canvas.height = window.innerHeight - 50;
+  canvas.height = window.innerHeight;
   canvas.width = window.innerWidth;
 }
 
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
-const versionSpan = document.getElementById("version");
-versionSpan.innerText = version;
+const versionAnchor = document.getElementById("version");
+versionAnchor.innerText = version;
 
 canvas.focus();
 render();
+
+Dialog.notify({
+  id: "dialog-game-welcome",
+  title: "Welcome",
+  text: ["Welcome to Turtle Escape!"],
+});

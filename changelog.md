@@ -19,7 +19,8 @@
 * Resize canvas depending on window size
 * Demo turtle observer `function`
 
-#0.0.6 Preview - 
+#0.0.6 Preview - 14/01/2024 23:45 UTC+1
 * Demo of switching from a level to the next
 * Included dialog library used in Daniel's Connect4
 * Installed and configured Tailwind
+* Some general styling improvements
