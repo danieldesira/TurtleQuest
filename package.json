@@ -2,7 +2,9 @@
   "version": "0.0.6 Preview",
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "postcss": "^8.4.33",
     "serve": "^14.2.1",
+    "tailwindcss": "^3.4.1",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",
@@ -11,7 +13,8 @@
   "scripts": {
     "webpack": "npx webpack --watch",
     "serve": "npx serve -l 5000",
-    "dev": "npx concurrently \"npm run webpack\" \"npm run serve\"",
+    "tailwind": "npx tailwindcss -i ./src/main.css -o ./dist/bundle.css --watch --minify",
+    "dev": "npx concurrently \"npm run webpack\" \"npm run serve\" \"npm run tailwind\"",
     "start": "npm run dev"
   }
 }

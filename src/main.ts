@@ -4,6 +4,7 @@ import bindControls from "./controls/controls";
 import paintBackground from "./background";
 import checkTurtle from "./turtle-observer";
 import selectLvl from "./levels/level-selector";
+import Dialog from "./dialog/dialog";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const context = canvas.getContext("2d");

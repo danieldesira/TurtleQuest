@@ -21,3 +21,5 @@
 
 #0.0.6 Preview - 
 * Demo of switching from a level to the next
+* Included dialog library used in Daniel's Connect4
+* Installed and configured Tailwind
