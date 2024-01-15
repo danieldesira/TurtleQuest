@@ -13,24 +13,25 @@ export default class Dialog {
       const modal = document.createElement("div");
       modal.tabIndex = 1;
       modal.id = options.id;
-      modal.classList.add("dialog");
-      modal.classList.add("fixed");
-      modal.classList.add("text-white");
-      modal.classList.add("w-4/5");
-      modal.classList.add("opacity-80");
-      modal.classList.add("focus:opacity-95");
-      modal.classList.add("bg-amber-500");
-      modal.classList.add("dark:bg-gray-900");
-      modal.classList.add("pt-5");
-      modal.classList.add("pb-5");
-      modal.classList.add("rounded-3xl");
-      modal.classList.add("max-w-xl");
+      modal.classList.add(
+        "dialog",
+        "fixed",
+        "text-white",
+        "w-4/5",
+        "opacity-80",
+        "focus:opacity-95",
+        "bg-amber-500",
+        "dark:bg-gray-900",
+        "pt-5",
+        "pb-5",
+        "rounded-3xl",
+        "max-w-xl"
+      );
 
       if (options.title) {
         const h1 = document.createElement("h1");
         h1.innerText = options.title;
-        h1.classList.add("text-center");
-        h1.classList.add("text-xl");
+        h1.classList.add("text-center", "text-xl");
         modal.appendChild(h1);
         modal.appendChild(document.createElement("hr"));
       }
@@ -43,8 +44,7 @@ export default class Dialog {
         case DialogType.Confirmation: {
           const o = options as ConfirmationDialogOptions;
           const btnContainer = document.createElement("div");
-          btnContainer.classList.add("w-fit");
-          btnContainer.classList.add("m-auto");
+          btnContainer.classList.add("w-fit", "m-auto");
           modal.appendChild(btnContainer);
 
           this.appendBtn(
@@ -115,14 +115,10 @@ export default class Dialog {
   ) {
     const btn = document.createElement("button");
     btn.type = btnType;
-    btn.classList.add("rounded-3xl");
-    btn.classList.add("m-1");
-    btn.classList.add("cursor-pointer");
+    btn.classList.add("rounded-3xl", "m-1", "cursor-pointer");
     this.assignButtonColor(btn, isDanger);
     const span = document.createElement("span");
-    span.classList.add("text-xl");
-    span.classList.add("ml-2");
-    span.classList.add("mr-2");
+    span.classList.add("text-xl", "ml-2", "mr-2");
     span.innerText = text;
     btn.appendChild(span);
     if (btnType === "button") {
@@ -136,8 +132,7 @@ export default class Dialog {
     options: PromptDialogOptions
   ) {
     const inputContainer = document.createElement("div") as HTMLDivElement;
-    inputContainer.classList.add("m-auto");
-    inputContainer.classList.add("w-3/4");
+    inputContainer.classList.add("m-auto", "w-3/4");
     modal.appendChild(inputContainer);
 
     const form = document.createElement("form") as HTMLFormElement;
@@ -154,8 +149,7 @@ export default class Dialog {
     this.appendSelects(form, options.selects);
 
     const btnContainer = document.createElement("div") as HTMLDivElement;
-    btnContainer.classList.add("w-fit");
-    btnContainer.classList.add("m-auto");
+    btnContainer.classList.add("w-fit", "m-auto");
     form.appendChild(btnContainer);
 
     this.appendBtn(btnContainer, "OK", null, false, "submit");
@@ -196,12 +190,14 @@ export default class Dialog {
   }
 
   private static assignInputClassNames(input: HTMLElement) {
-    input.classList.add("text-center");
-    input.classList.add("w-full");
-    input.classList.add("rounded-3xl");
-    input.classList.add("h-9");
-    input.classList.add("text-lg");
-    input.classList.add("text-gray-700");
+    input.classList.add(
+      "text-center",
+      "w-full",
+      "rounded-3xl",
+      "h-9",
+      "text-lg",
+      "text-gray-700"
+    );
   }
 
   private static appendSelects(
@@ -283,16 +279,13 @@ export default class Dialog {
 
   private static appendOKButton(modal: HTMLDivElement) {
     const btnContainer = document.createElement("div") as HTMLDivElement;
-    btnContainer.classList.add("w-fit");
-    btnContainer.classList.add("m-auto");
+    btnContainer.classList.add("w-fit", "m-auto");
     modal.appendChild(btnContainer);
 
     this.appendBtn(
       btnContainer,
       "OK",
-      () => {
-        this.closeModal(modal);
-      },
+      () => this.closeModal(modal),
       false,
       "button"
     );
@@ -308,18 +301,13 @@ export default class Dialog {
 
   private static appendMenu(modal: HTMLDivElement, options: MenuDialogOptions) {
     const container = document.createElement("div");
-    container.classList.add("w-1/3");
-    container.classList.add("m-auto");
+    container.classList.add("w-1/3", "m-auto");
     modal.appendChild(container);
     for (const b of options.buttons) {
       const button = document.createElement("button");
       button.type = "button";
       button.innerText = b.text;
-      button.classList.add("w-full");
-      button.classList.add("h-12");
-      button.classList.add("rounded-3xl");
-      button.classList.add("mt-3");
-      button.classList.add("mb-3");
+      button.classList.add("w-full", "h-12", "rounded-3xl", "mt-3", "mb-3");
       this.assignButtonColor(button, b.isDanger);
       button.addEventListener("click", b.callback);
       container.appendChild(button);
@@ -347,8 +335,7 @@ export default class Dialog {
         ul.appendChild(outerLi);
         if (point.subPoints && point.subPoints.length > 0) {
           const ol = document.createElement("ol");
-          ol.classList.add("list-decimal");
-          ol.classList.add("ml-5");
+          ol.classList.add("list-decimal", "ml-5");
           outerLi.appendChild(ol);
           for (const subPoint of point.subPoints) {
             const innerLi = document.createElement("li");
@@ -361,14 +348,16 @@ export default class Dialog {
   }
 
   private static assignTextClassNames(container: HTMLDivElement) {
-    container.classList.add("w-11/12");
-    container.classList.add("m-auto");
-    container.classList.add("mt-3");
-    container.classList.add("mb-3");
-    container.classList.add("grid");
-    container.classList.add("gap-3");
-    container.classList.add("max-h-screen-1/4");
-    container.classList.add("overflow-y-auto");
+    container.classList.add(
+      "w-11/12",
+      "m-auto",
+      "mt-3",
+      "mb-3",
+      "grid",
+      "gap-3",
+      "max-h-screen-1/4",
+      "overflow-y-auto"
+    );
   }
 
   private static assignButtonColor(
@@ -378,8 +367,7 @@ export default class Dialog {
     if (isDanger) {
       button.classList.add("bg-red-600");
     } else {
-      button.classList.add("bg-theme-color");
-      button.classList.add("dark:bg-dark-theme-color");
+      button.classList.add("bg-theme-color", "dark:bg-dark-theme-color");
     }
   }
 

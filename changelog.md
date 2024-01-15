@@ -24,3 +24,6 @@
 * Included dialog library used in Daniel's Connect4
 * Installed and configured Tailwind
 * Some general styling improvements
+
+#0.0.7 Preview -
+* Code cleanup in dialog class
