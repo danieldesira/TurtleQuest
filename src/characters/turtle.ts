@@ -8,8 +8,8 @@ class Turtle implements Character {
 
   private bgStartX: number;
   private bgStartY: number;
-  private limitX: number;
   private limitY: number;
+  private static step: number = 3;
 
   constructor() {
     this.resetPosition();
@@ -30,37 +30,34 @@ class Turtle implements Character {
     this.bgStartY = y;
   }
 
-  setLimits(x: number, y: number) {
-    this.limitX = x;
+  setYLimit(y: number) {
     this.limitY = y;
   }
 
   moveUp() {
     this.rotate(angles.up);
     if (this.y > 0) {
-      --this.y;
+      this.y -= Turtle.step;
     }
   }
 
   moveDown() {
     this.rotate(angles.down);
     if (this.y < this.limitY) {
-      ++this.y;
+      this.y += Turtle.step;
     }
   }
 
   moveLeft() {
     this.rotate(angles.left);
     if (this.x > 0) {
-      --this.x;
+      this.x -= Turtle.step;
     }
   }
 
   moveRight() {
     this.rotate(angles.right);
-    if (this.x < this.limitX) {
-      ++this.x;
-    }
+    this.x += Turtle.step;
   }
 
   private rotate(angle: number) {

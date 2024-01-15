@@ -14,19 +14,23 @@ let currentLevel: number = 1;
 
 bindControls(canvas, turtle);
 
-function render() {
+async function render() {
   const level = selectLvl(currentLevel);
 
   if (level === true) {
-    alert("Game complete! Demo for now.. Replace later.");
+    Dialog.notify({
+      id: "game-over-dialog",
+      title: "Game complete",
+      text: ["Game complete. Congratulations!"],
+    });
   } else {
-    const background = paintBackground({
+    const background = await paintBackground({
       canvas,
       context,
       mainCharacter: turtle,
       level,
     });
-    turtle.setLimits(background.width, background.height);
+    turtle.setYLimit(background.height);
     turtle.paint(context);
     currentLevel = checkTurtle(turtle, {
       bgWidth: background.width,

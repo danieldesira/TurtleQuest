@@ -7,3 +7,4 @@
 - Lenka Portelli
 - Corinne Wood
 - Marcos Méndez
+- Yazan Enayeh

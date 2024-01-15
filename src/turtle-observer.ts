@@ -1,5 +1,6 @@
 import Turtle from "./characters/turtle";
 import Dialog from "./dialog/dialog";
+import levels from "./levels/levels";
 
 interface Options {
   bgWidth: number;
@@ -7,14 +8,16 @@ interface Options {
 }
 
 function checkTurtle(mainCharacter: Turtle, options: Options): number {
-  if (mainCharacter.getX() === options.bgWidth) {
+  if (mainCharacter.getX() >= options.bgWidth) {
     options.currentLvl++;
     mainCharacter.resetPosition();
-    Dialog.notify({
-      id: "new-level",
-      title: "New Level",
-      text: [`Welcome to level ${options.currentLvl}`]
-    });
+    if (options.currentLvl <= levels.length) {
+      Dialog.notify({
+        id: "new-level",
+        title: "New Level",
+        text: [`Welcome to level ${options.currentLvl}`],
+      });
+    }
   }
   return options.currentLvl;
 }

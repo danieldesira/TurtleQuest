@@ -8,42 +8,47 @@ interface Options {
   level: Level;
 }
 
-function paintBackground(options: Options) {
-  const backgroundImage = document.createElement("img");
-  backgroundImage.src = options.level.getBgImg();
-  const horizontalSegments = calculateScreenCutOffPoints(
-    backgroundImage.width,
-    options.canvas.width
-  );
-  const verticalSegments = calculateScreenCutOffPoints(
-    backgroundImage.height,
-    options.canvas.height
-  );
-  const x =
-    options.mainCharacter.getX() < options.canvas.width
-      ? 0
-      : horizontalSegments[
-          Math.floor(backgroundImage.width / options.mainCharacter.getX()) - 1
-        ];
-  const y =
-    options.mainCharacter.getY() < options.canvas.height
-      ? 0
-      : verticalSegments[
-          Math.floor(backgroundImage.height / options.mainCharacter.getY()) - 1
-        ];
-  backgroundImage.onload = () =>
-    options.context.drawImage(
-      backgroundImage,
-      x,
-      y,
-      options.canvas.width,
-      options.canvas.height,
-      0,
-      0,
-      options.canvas.width,
+function paintBackground(options: Options): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const backgroundImage = document.createElement("img");
+    backgroundImage.src = options.level.getBgImg();
+    const horizontalSegments = calculateScreenCutOffPoints(
+      backgroundImage.width,
+      options.canvas.width
+    );
+    const verticalSegments = calculateScreenCutOffPoints(
+      backgroundImage.height,
       options.canvas.height
     );
-  return backgroundImage;
+    const x =
+      options.mainCharacter.getX() < options.canvas.width
+        ? 0
+        : horizontalSegments[
+            Math.floor(backgroundImage.width / options.mainCharacter.getX()) - 1
+          ];
+    const y =
+      options.mainCharacter.getY() < options.canvas.height
+        ? 0
+        : verticalSegments[
+            Math.floor(backgroundImage.height / options.mainCharacter.getY()) -
+              1
+          ];
+    backgroundImage.onload = () => {
+      options.context.drawImage(
+        backgroundImage,
+        x,
+        y,
+        options.canvas.width,
+        options.canvas.height,
+        0,
+        0,
+        options.canvas.width,
+        options.canvas.height
+      );
+      resolve(backgroundImage);
+    };
+    backgroundImage.onerror = () => reject(new Error("Could not load level background"));
+  });
 }
 
 function calculateScreenCutOffPoints(

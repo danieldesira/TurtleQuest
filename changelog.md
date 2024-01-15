@@ -26,4 +26,6 @@
 * Some general styling improvements
 
 #0.0.7 Preview -
-* Code cleanup in dialog class
+* Code cleanup
+* Tripled turtle speed
+* Solved issue where level was sometimes automatically "completed" due to fetching background width prematurely
