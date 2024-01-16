@@ -29,3 +29,4 @@
 * Code cleanup
 * Tripled turtle speed
 * Solved issue where level was sometimes automatically "completed" due to fetching background width prematurely
+* Introduced onscreen controls

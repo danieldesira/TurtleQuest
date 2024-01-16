@@ -12,7 +12,14 @@ const turtle = new Turtle();
 
 let currentLevel: number = 1;
 
-bindControls(canvas, turtle);
+bindControls({
+  canvas,
+  mainCharacter: turtle,
+  upBtnId: "upBtn",
+  leftBtnId: "leftBtn",
+  rightBtnId: "rightBtn",
+  downBtnId: "downBtn",
+});
 
 async function render() {
   const level = selectLvl(currentLevel);
@@ -24,19 +31,27 @@ async function render() {
       text: ["Game complete. Congratulations!"],
     });
   } else {
-    const background = await paintBackground({
-      canvas,
-      context,
-      mainCharacter: turtle,
-      level,
-    });
-    turtle.setYLimit(background.height);
-    turtle.paint(context);
-    currentLevel = checkTurtle(turtle, {
-      bgWidth: background.width,
-      currentLvl: currentLevel,
-    });
-    requestAnimationFrame(render);
+    try {
+      const background = await paintBackground({
+        canvas,
+        context,
+        mainCharacter: turtle,
+        level,
+      });
+      turtle.setYLimit(background.height);
+      turtle.paint(context);
+      currentLevel = checkTurtle(turtle, {
+        bgWidth: background.width,
+        currentLvl: currentLevel,
+      });
+      requestAnimationFrame(render);
+    } catch (error) {
+      Dialog.notify({
+        id: "game-error",
+        title: "Error",
+        text: [error],
+      });
+    }
   }
 }
 
