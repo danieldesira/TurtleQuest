@@ -7,34 +7,35 @@ interface Options {
   downBtnId: string;
 }
 
-let upIsHeld = false;
+let timer = 0;
 
-function moveUp(mainCharacter: Turtle) {
-  if (upIsHeld) {
-    mainCharacter.moveUp();
-  }
+function mousedown(mainCharacter: Turtle, callback: Function) {
+    callback();
+    timer = requestAnimationFrame(() => mousedown(mainCharacter, callback));
 }
 
-function mousedownUp(mainCharacter: Turtle) {console.log("mousedown")
-    upIsHeld = true;
-    moveUp(mainCharacter);
-}
-
-function mouseupUp() {
-    upIsHeld = false;
+function mouseup() {
+  cancelAnimationFrame(timer);
 }
 
 function bindOnscreenControls(mainCharacter: Turtle, options: Options) {
-  const upBtn = document.getElementById(options.upBtnId);
-  const leftBtn = document.getElementById(options.leftBtnId);
-  const rightBtn = document.getElementById(options.rightBtnId);
-  const downBtn = document.getElementById(options.downBtnId);
+  const upBtn = document.getElementById(options.upBtnId) as HTMLButtonElement;
+  const leftBtn = document.getElementById(options.leftBtnId) as HTMLButtonElement;
+  const rightBtn = document.getElementById(options.rightBtnId) as HTMLButtonElement;
+  const downBtn = document.getElementById(options.downBtnId) as HTMLButtonElement;
 
-  upBtn.addEventListener("mousedown", () => mousedownUp(mainCharacter));
-  upBtn.addEventListener("mouseup", mouseupUp);
-  leftBtn.addEventListener("click", () => mainCharacter.moveLeft());
-  rightBtn.addEventListener("click", () => mainCharacter.moveRight());
-  downBtn.addEventListener("click", () => mainCharacter.moveDown());
+  bindControl(mainCharacter, upBtn, () => mainCharacter.moveUp());
+  bindControl(mainCharacter, leftBtn, () => mainCharacter.moveLeft());
+  bindControl(mainCharacter, rightBtn, () => mainCharacter.moveRight());
+  bindControl(mainCharacter, downBtn, () => mainCharacter.moveDown());
+}
+
+function bindControl(mainCharacter: Turtle, btn: HTMLButtonElement, callback: Function) {
+  btn.addEventListener("mousedown", () => mousedown(mainCharacter, callback));
+  btn.addEventListener("mouseup", mouseup);
+  btn.addEventListener("mouseleave", mouseup);
+  btn.addEventListener("touchstart", () => mousedown(mainCharacter, callback));
+  btn.addEventListener("touchend", mouseup);
 }
 
 export default bindOnscreenControls;
