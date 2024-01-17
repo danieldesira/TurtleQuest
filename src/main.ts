@@ -60,8 +60,20 @@ function resizeCanvas() {
   canvas.width = window.innerWidth;
 }
 
+function detectOrientation() {
+  if (screen.orientation.type.startsWith("portrait")) {
+    Dialog.notify({
+      id: "orientation-msg",
+      title: "Device settings",
+      text: ["Please make sure that you hold your device in landscape mode for the best game experience."]
+    });
+  }
+}
+
 window.addEventListener("resize", resizeCanvas);
+window.addEventListener("orientationchange", detectOrientation);
 resizeCanvas();
+detectOrientation();
 
 const versionAnchor = document.getElementById("version");
 versionAnchor.innerText = version;

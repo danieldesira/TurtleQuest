@@ -30,3 +30,7 @@
 * Tripled turtle speed
 * Solved issue where level was sometimes automatically "completed" due to fetching background width prematurely
 * Introduced onscreen controls
+
+#0.0.8 Preview - 17/01/2024 17:05 UTC+1
+* Detection of device orientation and asking users to play in landscape mode
+* Increased size for onscreen controls
