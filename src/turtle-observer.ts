@@ -1,5 +1,8 @@
+import Background from "./background";
 import Turtle from "./characters/turtle";
 import Dialog from "./dialog/dialog";
+import Level from "./levels/level";
+import selectLvl from "./levels/level-selector";
 import levels from "./levels/levels";
 
 interface Options {
@@ -7,7 +10,7 @@ interface Options {
   currentLvl: number;
 }
 
-function checkTurtle(mainCharacter: Turtle, options: Options): number {
+async function checkTurtle(mainCharacter: Turtle, options: Options): Promise<HTMLImageElement> {
   if (mainCharacter.getX() >= options.bgWidth) {
     options.currentLvl++;
     mainCharacter.resetPosition();
@@ -17,9 +20,12 @@ function checkTurtle(mainCharacter: Turtle, options: Options): number {
         title: "New Level",
         text: [`Welcome to level ${options.currentLvl}`],
       });
+      const level = selectLvl(options.currentLvl) as Level;
+      const background = await Background.load({ level });
+      return background;
     }
   }
-  return options.currentLvl;
+  return null;
 }
 
 export default checkTurtle;

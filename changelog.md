@@ -34,3 +34,10 @@
 #0.0.8 Preview - 17/01/2024 17:05 UTC+1
 * Detection of device orientation and asking users to play in landscape mode
 * Increased size for onscreen controls
+
+#0.0.9 Preview - 18/01/2024 17:45 UTC+1
+* Removed orientation check
+* Added web app manifest.json
+* Optimized image rendering for backgrounds and turtle
+* Onscreen controls are now much larger
+* Code cleanup

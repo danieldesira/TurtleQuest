@@ -11,6 +11,8 @@ class Turtle implements Character {
   private limitY: number;
   private static step: number = 3;
 
+  private image: HTMLImageElement;
+
   constructor() {
     this.resetPosition();
     this.angle = angles.right;
@@ -70,20 +72,29 @@ class Turtle implements Character {
     context.translate(-this.x, -this.y);
   }
 
+  loadImage(): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const turtleImage = document.createElement("img");
+      turtleImage.src = "./images/turtle.png";
+      turtleImage.onload = () => {
+        this.image = turtleImage;
+        resolve(turtleImage);
+      };
+      turtleImage.onerror = () =>
+        reject(new Error("Failed to load turtle image"));
+    });
+  }
+
   paint(context: CanvasRenderingContext2D) {
-    const turtleImage = document.createElement("img");
-    turtleImage.src = "./images/turtle.png";
-    turtleImage.onload = () => {
-      this.applyRotation(context);
-      context.drawImage(
-        turtleImage,
-        this.x - this.bgStartX,
-        this.y - this.bgStartY,
-        turtleImage.width / 4,
-        turtleImage.height / 4
-      );
-      context.resetTransform();
-    };
+    this.applyRotation(context);
+    context.drawImage(
+      this.image,
+      this.x - this.bgStartX,
+      this.y - this.bgStartY,
+      this.image.width / 4,
+      this.image.height / 4
+    );
+    context.resetTransform();
   }
 }
 
