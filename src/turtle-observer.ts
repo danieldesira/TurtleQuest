@@ -1,13 +1,18 @@
 import Turtle from "./characters/turtle";
 import Dialog from "./dialog/dialog";
-import levels, { Levels } from "./levels/levels";
+import levels, { LevelChangeTypes } from "./levels/levels";
 
 interface Options {
   bgWidth: number;
   currentLvl: number;
 }
 
-function checkTurtle(mainCharacter: Turtle, options: Options): Levels {
+interface ReturnValue {
+  levelChangeType: LevelChangeTypes;
+  newLevel?: number;
+}
+
+function checkTurtle(mainCharacter: Turtle, options: Options): ReturnValue {
   if (mainCharacter.getX() >= options.bgWidth) {
     options.currentLvl++;
     mainCharacter.resetPosition();
@@ -17,12 +22,15 @@ function checkTurtle(mainCharacter: Turtle, options: Options): Levels {
         title: "New Level",
         text: [`Welcome to level ${options.currentLvl}`],
       });
-      return options.currentLvl as Levels;
+      return {
+        levelChangeType: LevelChangeTypes.NewLevel,
+        newLevel: options.currentLvl,
+      };
     } else {
-      return Levels.GameComplete;
+      return { levelChangeType: LevelChangeTypes.GameComplete };
     }
   }
-  return Levels.SameLevel;
+  return { levelChangeType: LevelChangeTypes.SameLevel };
 }
 
 export default checkTurtle;

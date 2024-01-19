@@ -7,7 +7,7 @@ import Dialog from "./dialog/dialog";
 import Background from "./background";
 import Level1 from "./levels/level1";
 import Level from "./levels/level";
-import { Levels } from "./levels/levels";
+import { LevelChangeTypes } from "./levels/levels";
 
 (async () => {
   const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -38,12 +38,12 @@ import { Levels } from "./levels/levels";
 
   async function render() {
     try {
-      const newLevel = checkTurtle(turtle, {
+      const { levelChangeType, newLevel } = checkTurtle(turtle, {
         bgWidth: background.width,
         currentLvl: currentLevel,
       });
-      if (newLevel !== Levels.GameComplete) {
-        if (newLevel !== Levels.SameLevel) {
+      if (levelChangeType === LevelChangeTypes.SameLevel || levelChangeType === LevelChangeTypes.NewLevel) {
+        if (levelChangeType === LevelChangeTypes.NewLevel) {
           currentLevel = newLevel;
         }
         level = selectLvl(currentLevel);
@@ -58,11 +58,17 @@ import { Levels } from "./levels/levels";
         turtle.paint(context);
 
         requestAnimationFrame(render);
-      } else {
+      } else if (levelChangeType === LevelChangeTypes.GameComplete) {
         Dialog.notify({
           id: "game-over-dialog",
           title: "Game complete",
           text: ["Game complete. Congratulations!"],
+        });
+      } else {
+        Dialog.notify({
+          id: "game-over-dialog",
+          title: "You lose",
+          text: ["Better luck next time!"],
         });
       }
     } catch (error) {
@@ -94,4 +100,7 @@ import { Levels } from "./levels/levels";
     title: "Welcome",
     text: ["Welcome to Turtle Escape!"],
   });
+
+  //@ts-ignore
+  await screen.orientation.lock("landscape-primary");
 })();
