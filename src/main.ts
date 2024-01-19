@@ -7,13 +7,14 @@ import Dialog from "./dialog/dialog";
 import Background from "./background";
 import Level1 from "./levels/level1";
 import Level from "./levels/level";
+import { Levels } from "./levels/levels";
 
 (async () => {
   const canvas = document.getElementById("canvas") as HTMLCanvasElement;
   const context = canvas.getContext("2d");
   const turtle = new Turtle();
   await turtle.loadImage();
-  
+
   let currentLevel: number = 1;
 
   bindControls({
@@ -33,26 +34,20 @@ import Level from "./levels/level";
     level,
   });
 
+  Background.readjustCanvasForBg(canvas, background);
+
   async function render() {
-    level = selectLvl(currentLevel);
-
-    if (level === true) {
-      Dialog.notify({
-        id: "game-over-dialog",
-        title: "Game complete",
-        text: ["Game complete. Congratulations!"],
+    try {
+      const newLevel = checkTurtle(turtle, {
+        bgWidth: background.width,
+        currentLvl: currentLevel,
       });
-    } else {
-      try {
-        const newBackground = await checkTurtle(turtle, {
-          bgWidth: background.width,
-          currentLvl: currentLevel,
-        });
-        if (newBackground) {
-          background = newBackground;
-          Background.readjustCanvasForBg(canvas, background);
+      if (newLevel !== Levels.GameComplete) {
+        if (newLevel !== Levels.SameLevel) {
+          currentLevel = newLevel;
         }
-
+        level = selectLvl(currentLevel);
+        background = await Background.load({ level });
         Background.paint(background, {
           canvas,
           context,
@@ -63,19 +58,26 @@ import Level from "./levels/level";
         turtle.paint(context);
 
         requestAnimationFrame(render);
-      } catch (error) {
+      } else {
         Dialog.notify({
-          id: "game-error",
-          title: "Error",
-          text: [error],
+          id: "game-over-dialog",
+          title: "Game complete",
+          text: ["Game complete. Congratulations!"],
         });
       }
+    } catch (error) {
+      Dialog.notify({
+        id: "game-error",
+        title: "Error",
+        text: [error],
+      });
     }
   }
 
   function resizeCanvas() {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
+    Background.readjustCanvasForBg(canvas, background);
   }
 
   window.addEventListener("resize", resizeCanvas);

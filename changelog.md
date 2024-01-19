@@ -41,3 +41,6 @@
 * Optimized image rendering for backgrounds and turtle
 * Onscreen controls are now much larger
 * Code cleanup
+
+#0.0.10 Preview -
+* Resolved regression not completing the last level and code cleanup making the flow more readable

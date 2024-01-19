@@ -1,16 +1,13 @@
-import Background from "./background";
 import Turtle from "./characters/turtle";
 import Dialog from "./dialog/dialog";
-import Level from "./levels/level";
-import selectLvl from "./levels/level-selector";
-import levels from "./levels/levels";
+import levels, { Levels } from "./levels/levels";
 
 interface Options {
   bgWidth: number;
   currentLvl: number;
 }
 
-async function checkTurtle(mainCharacter: Turtle, options: Options): Promise<HTMLImageElement> {
+function checkTurtle(mainCharacter: Turtle, options: Options): Levels {
   if (mainCharacter.getX() >= options.bgWidth) {
     options.currentLvl++;
     mainCharacter.resetPosition();
@@ -20,12 +17,12 @@ async function checkTurtle(mainCharacter: Turtle, options: Options): Promise<HTM
         title: "New Level",
         text: [`Welcome to level ${options.currentLvl}`],
       });
-      const level = selectLvl(options.currentLvl) as Level;
-      const background = await Background.load({ level });
-      return background;
+      return options.currentLvl as Levels;
+    } else {
+      return Levels.GameComplete;
     }
   }
-  return null;
+  return Levels.SameLevel;
 }
 
 export default checkTurtle;
