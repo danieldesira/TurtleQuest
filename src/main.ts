@@ -42,7 +42,10 @@ import { LevelChangeTypes } from "./levels/levels";
         bgWidth: background.width,
         currentLvl: currentLevel,
       });
-      if (levelChangeType === LevelChangeTypes.SameLevel || levelChangeType === LevelChangeTypes.NewLevel) {
+      if (
+        levelChangeType === LevelChangeTypes.SameLevel ||
+        levelChangeType === LevelChangeTypes.NewLevel
+      ) {
         if (levelChangeType === LevelChangeTypes.NewLevel) {
           currentLevel = newLevel;
         }
@@ -56,6 +59,8 @@ import { LevelChangeTypes } from "./levels/levels";
 
         turtle.setYLimit(background.height);
         turtle.paint(context);
+
+        updateFoodMeter();
 
         requestAnimationFrame(render);
       } else if (levelChangeType === LevelChangeTypes.GameComplete) {
@@ -84,6 +89,11 @@ import { LevelChangeTypes } from "./levels/levels";
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
     Background.readjustCanvasForBg(canvas, background);
+  }
+
+  function updateFoodMeter() {
+    const foodMeter = document.getElementById("foodMeter") as HTMLMeterElement;
+    foodMeter.value = turtle.getFoodValue();
   }
 
   window.addEventListener("resize", resizeCanvas);

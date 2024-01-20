@@ -13,10 +13,13 @@ class Turtle implements Character {
 
   private image: HTMLImageElement;
 
+  private foodValue: number;
+
   constructor() {
     this.resetPosition();
     this.angle = angles.right;
     this.setBgStart(0, 0);
+    this.resetFoodValue();
   }
 
   getX = () => this.x;
@@ -26,6 +29,20 @@ class Turtle implements Character {
     this.x = 50;
     this.y = 10;
   }
+
+  resetFoodValue() {
+    this.foodValue = 100;
+  }
+
+  increaseFoodValue(foodValue: number) {
+    this.foodValue += foodValue;
+  }
+
+  decreaseFoodValue() {
+    this.foodValue -= 0.01;
+  }
+
+  getFoodValue = () => this.foodValue;
 
   setBgStart(x: number, y: number) {
     this.bgStartX = x;

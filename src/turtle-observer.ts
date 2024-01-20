@@ -13,24 +13,36 @@ interface ReturnValue {
 }
 
 function checkTurtle(mainCharacter: Turtle, options: Options): ReturnValue {
+  mainCharacter.decreaseFoodValue();
+  if (mainCharacter.getFoodValue() <= 0) {
+    return { levelChangeType: LevelChangeTypes.GameOver };
+  }
+
   if (mainCharacter.getX() >= options.bgWidth) {
-    options.currentLvl++;
-    mainCharacter.resetPosition();
-    if (options.currentLvl <= levels.length) {
-      Dialog.notify({
-        id: "new-level",
-        title: "New Level",
-        text: [`Welcome to level ${options.currentLvl}`],
-      });
-      return {
-        levelChangeType: LevelChangeTypes.NewLevel,
-        newLevel: options.currentLvl,
-      };
-    } else {
-      return { levelChangeType: LevelChangeTypes.GameComplete };
-    }
+    return handleOffBgWidth(mainCharacter, options);
   }
   return { levelChangeType: LevelChangeTypes.SameLevel };
+}
+
+function handleOffBgWidth(
+  mainCharacter: Turtle,
+  options: Options
+): ReturnValue {
+  options.currentLvl++;
+  mainCharacter.resetPosition();
+  if (options.currentLvl <= levels.length) {
+    Dialog.notify({
+      id: "new-level",
+      title: "New Level",
+      text: [`Welcome to level ${options.currentLvl}`],
+    });
+    return {
+      levelChangeType: LevelChangeTypes.NewLevel,
+      newLevel: options.currentLvl,
+    };
+  } else {
+    return { levelChangeType: LevelChangeTypes.GameComplete };
+  }
 }
 
 export default checkTurtle;

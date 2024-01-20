@@ -46,3 +46,6 @@
 * Resolved regression not completing the last level and code cleanup making the flow more readable
 * Attempt to disable zoom when tapping controls on mobile
 * Attempt to lock orientation to landscape on mobile
+
+#0.1.0 Preview -
+* Food meter
