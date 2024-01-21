@@ -1,10 +1,10 @@
 {
-    "compilerOptions": {
-        "sourceMap": true,
-        "module": "CommonJS",
-        "target": "ES5",
-        "allowJs": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-    }
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "CommonJS",
+    "target": "ES5",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  }
 }

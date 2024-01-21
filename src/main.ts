@@ -60,7 +60,7 @@ import { LevelChangeTypes } from "./levels/levels";
         turtle.setYLimit(background.height);
         turtle.paint(context);
 
-        updateFoodMeter();
+        updateMeters();
 
         requestAnimationFrame(render);
       } else if (levelChangeType === LevelChangeTypes.GameComplete) {
@@ -91,9 +91,12 @@ import { LevelChangeTypes } from "./levels/levels";
     Background.readjustCanvasForBg(canvas, background);
   }
 
-  function updateFoodMeter() {
+  function updateMeters() {
     const foodMeter = document.getElementById("foodMeter") as HTMLMeterElement;
     foodMeter.value = turtle.getFoodValue();
+
+    const lifeMeter = document.getElementById("lifeMeter") as HTMLMeterElement;
+    lifeMeter.value = turtle.getLifeValue();
   }
 
   window.addEventListener("resize", resizeCanvas);

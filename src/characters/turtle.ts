@@ -1,9 +1,13 @@
 import angles from "../constants/angles";
 import Character from "./character";
 
-class Turtle implements Character {
-  private x: number;
-  private y: number;
+class Turtle extends Character {
+  static scientificName: string = "Carretta carretta";
+  protected isMain: boolean = true;
+  protected isFood: boolean = false;
+  protected isObstacle: boolean = false;
+  protected imagePath: string = "./images/turtle.png"; 
+
   private angle: number;
 
   private bgStartX: number;
@@ -11,19 +15,17 @@ class Turtle implements Character {
   private limitY: number;
   private static step: number = 3;
 
-  private image: HTMLImageElement;
-
   private foodValue: number;
+  private lifeValue: number;
 
   constructor() {
+    super();
     this.resetPosition();
     this.angle = angles.right;
     this.setBgStart(0, 0);
     this.resetFoodValue();
+    this.resetLifeValue();
   }
-
-  getX = () => this.x;
-  getY = () => this.y;
 
   resetPosition() {
     this.x = 50;
@@ -34,6 +36,10 @@ class Turtle implements Character {
     this.foodValue = 100;
   }
 
+  resetLifeValue() {
+    this.lifeValue = 100;
+  }
+
   increaseFoodValue(foodValue: number) {
     this.foodValue += foodValue;
   }
@@ -42,7 +48,12 @@ class Turtle implements Character {
     this.foodValue -= 0.01;
   }
 
+  applyDamage(damage: number) {
+    this.lifeValue -= damage;
+  }
+
   getFoodValue = () => this.foodValue;
+  getLifeValue = () => this.lifeValue;
 
   setBgStart(x: number, y: number) {
     this.bgStartX = x;
@@ -87,19 +98,6 @@ class Turtle implements Character {
     context.translate(this.x, this.y);
     context.rotate(this.angle);
     context.translate(-this.x, -this.y);
-  }
-
-  loadImage(): Promise<HTMLImageElement> {
-    return new Promise((resolve, reject) => {
-      const turtleImage = document.createElement("img");
-      turtleImage.src = "./images/turtle.png";
-      turtleImage.onload = () => {
-        this.image = turtleImage;
-        resolve(turtleImage);
-      };
-      turtleImage.onerror = () =>
-        reject(new Error("Failed to load turtle image"));
-    });
   }
 
   paint(context: CanvasRenderingContext2D) {
