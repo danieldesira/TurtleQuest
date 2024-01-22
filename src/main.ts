@@ -26,15 +26,16 @@ import { LevelChangeTypes } from "./levels/levels";
     downBtnId: "downBtn",
   });
 
-  let level: Level | true = new Level1();
-  let background: HTMLImageElement = await Background.load({
-    canvas,
-    context,
-    mainCharacter: turtle,
-    level,
-  });
+  let level: Level = new Level1();
+  let background = await loadLevel();
 
   Background.readjustCanvasForBg(canvas, background);
+
+  async function loadLevel(): Promise<HTMLImageElement> {
+    const background = await level.loadBgImg();
+    level.setInitialCharacterPositions();
+    return background;
+  }
 
   async function render() {
     try {
@@ -48,9 +49,10 @@ import { LevelChangeTypes } from "./levels/levels";
       ) {
         if (levelChangeType === LevelChangeTypes.NewLevel) {
           currentLevel = newLevel;
+          level = selectLvl(currentLevel);
+          background = await loadLevel();
         }
-        level = selectLvl(currentLevel);
-        background = await Background.load({ level });
+
         Background.paint(background, {
           canvas,
           context,

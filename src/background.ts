@@ -1,24 +1,12 @@
 import Turtle from "./characters/turtle";
-import Level from "./levels/level";
 
 interface Options {
-  canvas?: HTMLCanvasElement;
-  context?: CanvasRenderingContext2D;
-  mainCharacter?: Turtle;
-  level?: Level;
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+  mainCharacter: Turtle;
 }
 
 class Background {
-  static load(options: Options): Promise<HTMLImageElement> {
-    return new Promise((resolve, reject) => {
-      const backgroundImage = document.createElement("img");
-      backgroundImage.src = options.level.getBgImg();
-      backgroundImage.onload = () => resolve(backgroundImage);
-      backgroundImage.onerror = () =>
-        reject(new Error("Could not load level background"));
-    });
-  }
-
   static paint(backgroundImage: HTMLImageElement, options: Options) {
     const horizontalSegments = Background.calculateScreenCutOffPoints(
       backgroundImage.width,

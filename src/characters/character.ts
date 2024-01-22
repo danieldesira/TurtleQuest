@@ -31,6 +31,11 @@ abstract class Character implements ICharacter {
   getIsMain = () => this.isMain;
   getIsFood = () => this.isFood;
   getIsObstacle = () => this.isObstacle;
+
+  setPosition(x: number, y: number): void {
+    this.x = x;
+    this.y = y;
+  }
 }
 
 export default Character;
