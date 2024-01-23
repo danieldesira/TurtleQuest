@@ -1,9 +1,11 @@
 import Turtle from "./characters/turtle";
+import ILevel from "./levels/ilevel";
 
 interface Options {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
   mainCharacter: Turtle;
+  level: ILevel;
 }
 
 class Background {
@@ -40,6 +42,8 @@ class Background {
       options.canvas.width,
       options.canvas.height
     );
+    options.mainCharacter.setBgStart(x, y);
+    options.level.setBgOffset(x, y);
   }
 
   private static calculateScreenCutOffPoints(

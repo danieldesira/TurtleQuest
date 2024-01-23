@@ -3,7 +3,6 @@ import Shrimp from "../characters/shrimp";
 import Level from "./level";
 
 class Level1 extends Level {
-  protected backgroundImage: HTMLImageElement;
   protected backgroundImagePath: string = "./images/bg-lvl1.png";
   protected characters: Set<ICharacter> = new Set([
     new Shrimp(),

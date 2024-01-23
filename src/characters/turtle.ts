@@ -101,7 +101,7 @@ class Turtle extends Character {
   }
 
   paint(context: CanvasRenderingContext2D) {
-    this.applyRotation(context);
+    this.applyRotation(context);console.log(`bg start: ${this.bgStartX}, ${this.bgStartY}`)
     context.drawImage(
       this.image,
       this.x - this.bgStartX,

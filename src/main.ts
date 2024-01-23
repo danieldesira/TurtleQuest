@@ -34,9 +34,11 @@ import { LevelChangeTypes } from "./levels/levels";
   async function loadLevel(): Promise<HTMLImageElement> {
     const background = await level.loadBgImg();
     level.setInitialCharacterPositions();
+    await level.loadCharacters();
+    turtle.setYLimit(background.height);
     return background;
   }
-
+  
   async function render() {
     try {
       const { levelChangeType, newLevel } = checkTurtle(turtle, {
@@ -52,16 +54,18 @@ import { LevelChangeTypes } from "./levels/levels";
           level = selectLvl(currentLevel);
           background = await loadLevel();
         }
-
+        
         Background.paint(background, {
           canvas,
           context,
           mainCharacter: turtle,
+          level,
         });
-
-        turtle.setYLimit(background.height);
+        
         turtle.paint(context);
 
+        level.paintCharacters(context);
+        
         updateMeters();
 
         requestAnimationFrame(render);
