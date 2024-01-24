@@ -1,8 +1,6 @@
 const angles = {
-  up: 0,
-  right: Math.PI / 2,
-  down: Math.PI,
-  left: Math.PI + Math.PI / 2,
+  right: 0,
+  left: Math.PI,
 };
 
 export default angles;

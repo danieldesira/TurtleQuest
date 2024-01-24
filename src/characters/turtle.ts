@@ -65,14 +65,12 @@ class Turtle extends Character {
   }
 
   moveUp() {
-    this.rotate(angles.up);
     if (this.y > 0) {
       this.y -= Turtle.step;
     }
   }
 
   moveDown() {
-    this.rotate(angles.down);
     if (this.y < this.limitY) {
       this.y += Turtle.step;
     }
@@ -100,14 +98,14 @@ class Turtle extends Character {
     context.translate(-this.x, -this.y);
   }
 
-  paint(context: CanvasRenderingContext2D) {
-    this.applyRotation(context);console.log(`bg start: ${this.bgStartX}, ${this.bgStartY}`)
+  paint(context: CanvasRenderingContext2D) {console.log(`bg start: ${this.bgStartX}, ${this.bgStartY}\nturtle: ${this.x}, ${this.y}`)
+    this.applyRotation(context);
     context.drawImage(
       this.image,
       this.x - this.bgStartX,
       this.y - this.bgStartY,
-      this.image.width / 4,
-      this.image.height / 4
+      this.image.width,
+      this.image.height
     );
     context.resetTransform();
   }
