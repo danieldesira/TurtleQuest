@@ -34,7 +34,7 @@ abstract class Level implements ILevel {
     for (const character of this.characters) {
       const x = Math.random() * this.backgroundImage.width;
       const y = Math.random() * this.backgroundImage.height;
-      character.setPosition(x, y);
+      character.setPosition(x, y);console.log(`set position for character: ${character.x}, ${character.y}`)
     }
   }
 

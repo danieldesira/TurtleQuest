@@ -1,5 +1,7 @@
+import ICharacter from "./characters/icharacter";
 import Turtle from "./characters/turtle";
 import Dialog from "./dialog/dialog";
+import selectLvl from "./levels/level-selector";
 import levels, { LevelChangeTypes } from "./levels/levels";
 
 interface Options {
@@ -18,9 +20,12 @@ function checkTurtle(mainCharacter: Turtle, options: Options): ReturnValue {
     return { levelChangeType: LevelChangeTypes.GameOver };
   }
 
-  if (mainCharacter.getX() >= options.bgWidth) {
+  if (mainCharacter.x >= options.bgWidth) {
     return handleOffBgWidth(mainCharacter, options);
   }
+
+  checkIfTurtleMeetsCharacters(mainCharacter, options.currentLvl);
+
   return { levelChangeType: LevelChangeTypes.SameLevel };
 }
 
@@ -43,6 +48,27 @@ function handleOffBgWidth(
   } else {
     return { levelChangeType: LevelChangeTypes.GameComplete };
   }
+}
+
+function checkIfTurtleMeetsCharacters(mainCharacter: Turtle, currentLvl: number) {
+  const level = selectLvl(currentLvl);
+  for (const character of level.getCharacters()) {
+    if (areTurtleCharacterIntersecting(mainCharacter, character)) {
+      if (character.isFood) {
+        mainCharacter.increaseFoodValue(character.foodValue);
+        
+      }
+    }
+  }
+}
+
+function areTurtleCharacterIntersecting(mainCharacter: Turtle, otherCharacter: ICharacter): boolean {
+  const turtleXStart = mainCharacter.x;
+  const turtleXEnd = turtleXStart + mainCharacter.image.width;
+  const turtleYStart = mainCharacter.y;
+  const turtleYEnd = turtleYStart + mainCharacter.image.height;
+  console.log(`Other character: ${otherCharacter.x}, ${otherCharacter.y}`);console.table(otherCharacter)
+  return turtleXStart <= otherCharacter.x && otherCharacter.x <= turtleXEnd && turtleYStart <= otherCharacter.y && otherCharacter.y <= turtleYEnd;
 }
 
 export default checkTurtle;

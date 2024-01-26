@@ -1,5 +1,6 @@
 import ICharacter from "../characters/icharacter";
 import Shrimp from "../characters/shrimp";
+import SmallFish from "../characters/small-fish";
 import Level from "./level";
 
 class Level1 extends Level {
@@ -12,6 +13,8 @@ class Level1 extends Level {
     new Shrimp(),
     new Shrimp(),
     new Shrimp(),
+    new SmallFish(),
+    new SmallFish(),
   ]);
 }
 

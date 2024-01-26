@@ -3,10 +3,10 @@ import Character from "./character";
 
 class Turtle extends Character {
   static scientificName: string = "Carretta carretta";
-  protected isMain: boolean = true;
-  protected isFood: boolean = false;
-  protected isObstacle: boolean = false;
-  protected imagePath: string = "./images/turtle.png"; 
+  protected _isMain: boolean = true;
+  protected _isFood: boolean = false;
+  protected _isObstacle: boolean = false;
+  protected _imagePath: string = "./images/turtle.png"; 
 
   private angle: number;
 
@@ -15,7 +15,7 @@ class Turtle extends Character {
   private limitY: number;
   private static step: number = 3;
 
-  private foodValue: number;
+  protected _foodValue: number;
   private lifeValue: number;
 
   constructor() {
@@ -28,12 +28,12 @@ class Turtle extends Character {
   }
 
   resetPosition() {
-    this.x = 50;
-    this.y = 10;
+    this._x = 50;
+    this._y = 10;
   }
 
   resetFoodValue() {
-    this.foodValue = 100;
+    this._foodValue = 100;
   }
 
   resetLifeValue() {
@@ -41,11 +41,11 @@ class Turtle extends Character {
   }
 
   increaseFoodValue(foodValue: number) {
-    this.foodValue += foodValue;
+    this._foodValue += foodValue;
   }
 
   decreaseFoodValue() {
-    this.foodValue -= 0.01;
+    this._foodValue -= 0.01;
   }
 
   applyDamage(damage: number) {
@@ -66,26 +66,26 @@ class Turtle extends Character {
 
   moveUp() {
     if (this.y > 0) {
-      this.y -= Turtle.step;
+      this._y -= Turtle.step;
     }
   }
 
   moveDown() {
     if (this.y < this.limitY) {
-      this.y += Turtle.step;
+      this._y += Turtle.step;
     }
   }
 
   moveLeft() {
     this.rotate(angles.left);
     if (this.x > 0) {
-      this.x -= Turtle.step;
+      this._x -= Turtle.step;
     }
   }
 
   moveRight() {
     this.rotate(angles.right);
-    this.x += Turtle.step;
+    this._x += Turtle.step;
   }
 
   private rotate(angle: number) {
@@ -98,7 +98,7 @@ class Turtle extends Character {
     context.translate(-this.x, -this.y);
   }
 
-  paint(context: CanvasRenderingContext2D) {console.log(`bg start: ${this.bgStartX}, ${this.bgStartY}\nturtle: ${this.x}, ${this.y}`)
+  paint(context: CanvasRenderingContext2D) {
     this.applyRotation(context);
     context.drawImage(
       this.image,

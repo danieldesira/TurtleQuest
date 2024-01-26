@@ -1,14 +1,12 @@
 import Character from "./character";
 
 class Shrimp extends Character {
-  protected isMain: boolean = false;
-  protected isFood: boolean = true;
-  protected isObstacle: boolean = false;
-  protected imagePath: string = "./images/shrimp.png";
+  protected _isMain: boolean = false;
+  protected _isFood: boolean = true;
+  protected _isObstacle: boolean = false;
+  protected _imagePath: string = "./images/shrimp.png";
 
-  private foodValue: number = 0.01;
-
-  getFoodValue = () => this.foodValue;
+  protected _foodValue: number = 0.01;
 
   paint(context: CanvasRenderingContext2D, bgXOffset: number = 0, bgYOffset: number = 0): void {
     context.drawImage(

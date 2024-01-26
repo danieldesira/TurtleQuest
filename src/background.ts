@@ -19,16 +19,16 @@ class Background {
       options.canvas.height
     );
     const x =
-      options.mainCharacter.getX() < options.canvas.width
+      options.mainCharacter.x < options.canvas.width
         ? 0
         : horizontalSegments[
-            Math.floor(backgroundImage.width / options.mainCharacter.getX()) - 1
+            Math.floor(backgroundImage.width / options.mainCharacter.x) - 1
           ];
     const y =
-      options.mainCharacter.getY() < options.canvas.height
+      options.mainCharacter.y < options.canvas.height
         ? 0
         : verticalSegments[
-            Math.floor(backgroundImage.height / options.mainCharacter.getY()) -
+            Math.floor(backgroundImage.height / options.mainCharacter.y) -
               1
           ];
     options.context.drawImage(
