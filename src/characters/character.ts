@@ -7,18 +7,19 @@ abstract class Character implements ICharacter {
   protected abstract _isFood: boolean;
   protected abstract _isObstacle: boolean;
   protected _image: HTMLImageElement;
-  protected abstract _imagePath: string;
+  protected _baseImagePath: string = "./images/";
+  protected abstract _imageFilename: string;
   protected abstract _foodValue: number;
 
   loadImage(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const image = document.createElement("img");
-      image.src = this._imagePath;
+      image.src = this._baseImagePath + this._imageFilename;
       image.onload = () => {
         this._image = image;
         resolve(image);
       };
-      image.onerror = () => reject(new Error("Failed to load character image"));
+      image.onerror = () => reject(new Error(`Failed to load character image: ${this._imageFilename}`));
     });
   }
 

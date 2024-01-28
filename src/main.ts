@@ -32,9 +32,17 @@ import { LevelChangeTypes } from "./levels/levels";
   Background.readjustCanvasForBg(canvas, background);
 
   async function loadLevel(): Promise<HTMLImageElement> {
-    const background = await level.init();
-    turtle.setYLimit(background.height);
-    return background;
+    try {
+      const background = await level.init();
+      turtle.setYLimit(background.height);
+      return background;
+    } catch (error) {
+      Dialog.notify({
+        id: "game-error",
+        title: "Error",
+        text: [error],
+      });
+    }
   }
 
   async function render() {

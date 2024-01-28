@@ -9,12 +9,16 @@ abstract class Level implements ILevel {
   protected _bgOffsetY: number;
 
   async init(): Promise<HTMLImageElement> {
-    await this.loadBgImg();
-    await this.loadCharacters();
-    this.setInitialCharacterPositions();
-    return this._backgroundImage;
+    try {
+      await this.loadBgImg();
+      await this.loadCharacters();
+      this.setInitialCharacterPositions();
+      return this._backgroundImage;
+    } catch (error) {
+      throw error;
+    }
   }
-  
+
   loadBgImg(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
@@ -24,7 +28,7 @@ abstract class Level implements ILevel {
         resolve(backgroundImage);
       };
       backgroundImage.onerror = () =>
-      reject(new Error("Could not load level background"));
+        reject(new Error("Could not load level background"));
     });
   }
 
@@ -32,13 +36,13 @@ abstract class Level implements ILevel {
     this._bgOffsetX = offsetX;
     this._bgOffsetY = offsetY;
   }
-  
+
   get bgImgPath() {
     return this._backgroundImagePath;
   }
-  
+
   getBgImg = () => this._backgroundImage;
-  
+
   get characters() {
     return this._characters;
   }
@@ -58,8 +62,12 @@ abstract class Level implements ILevel {
   }
 
   paintCharacters(context: CanvasRenderingContext2D): void {
-    for (const character of this.characters) {
-      character.paint(context, this._bgOffsetX, this._bgOffsetY);
+    try {
+      for (const character of this.characters) {
+        character.paint(context, this._bgOffsetX, this._bgOffsetY);
+      }
+    } catch (error) {
+      throw error;
     }
   }
 }

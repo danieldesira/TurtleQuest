@@ -4,7 +4,7 @@ class Shrimp extends Character {
   protected _isMain: boolean = false;
   protected _isFood: boolean = true;
   protected _isObstacle: boolean = false;
-  protected _imagePath: string = "./images/shrimp.png";
+  protected _imageFilename: string = "shrimp.png";
 
   protected _foodValue: number = 0.01;
 

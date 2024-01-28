@@ -6,7 +6,7 @@ class Turtle extends Character {
   protected _isMain: boolean = true;
   protected _isFood: boolean = false;
   protected _isObstacle: boolean = false;
-  protected _imagePath: string = "./images/turtle.png"; 
+  protected _imageFilename: string = "turtle.png"; 
 
   private angle: number;
 

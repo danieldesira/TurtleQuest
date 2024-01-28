@@ -51,3 +51,7 @@
 * Food and damage meters
 * Shrimp and small fish as additional characters
 * Code cleanup and ability to "eat"
+
+#0.1.1 Preview - 28/01/2024 13:45 UTC+1
+* Fix: Could not load small fish image on GH Pages environment
+* Improved error and character image handling
