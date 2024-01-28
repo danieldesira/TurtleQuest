@@ -32,18 +32,17 @@ import { LevelChangeTypes } from "./levels/levels";
   Background.readjustCanvasForBg(canvas, background);
 
   async function loadLevel(): Promise<HTMLImageElement> {
-    const background = await level.loadBgImg();
-    level.setInitialCharacterPositions();
-    await level.loadCharacters();
+    const background = await level.init();
     turtle.setYLimit(background.height);
     return background;
   }
-  
+
   async function render() {
     try {
       const { levelChangeType, newLevel } = checkTurtle(turtle, {
         bgWidth: background.width,
-        currentLvl: currentLevel,
+        levelNo: currentLevel,
+        level,
       });
       if (
         levelChangeType === LevelChangeTypes.SameLevel ||
@@ -54,18 +53,18 @@ import { LevelChangeTypes } from "./levels/levels";
           level = selectLvl(currentLevel);
           background = await loadLevel();
         }
-        
+
         Background.paint(background, {
           canvas,
           context,
           mainCharacter: turtle,
           level,
         });
-        
+
         turtle.paint(context);
 
         level.paintCharacters(context);
-        
+
         updateMeters();
 
         requestAnimationFrame(render);
@@ -112,7 +111,7 @@ import { LevelChangeTypes } from "./levels/levels";
   versionAnchor.innerText = version;
 
   canvas.focus();
-  render();
+  await render();
 
   Dialog.notify({
     id: "dialog-game-welcome",
@@ -121,5 +120,5 @@ import { LevelChangeTypes } from "./levels/levels";
   });
 
   //@ts-ignore
-  await screen.orientation.lock("landscape-primary");
+  //await screen.orientation.lock("landscape-primary");
 })();

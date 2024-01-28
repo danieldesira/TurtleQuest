@@ -1,12 +1,13 @@
 import ICharacter from "./characters/icharacter";
 import Turtle from "./characters/turtle";
 import Dialog from "./dialog/dialog";
-import selectLvl from "./levels/level-selector";
+import ILevel from "./levels/ilevel";
 import levels, { LevelChangeTypes } from "./levels/levels";
 
 interface Options {
   bgWidth: number;
-  currentLvl: number;
+  levelNo: number;
+  level: ILevel;
 }
 
 interface ReturnValue {
@@ -24,7 +25,7 @@ function checkTurtle(mainCharacter: Turtle, options: Options): ReturnValue {
     return handleOffBgWidth(mainCharacter, options);
   }
 
-  checkIfTurtleMeetsCharacters(mainCharacter, options.currentLvl);
+  checkIfTurtleMeetsCharacters(mainCharacter, options.level);
 
   return { levelChangeType: LevelChangeTypes.SameLevel };
 }
@@ -33,30 +34,29 @@ function handleOffBgWidth(
   mainCharacter: Turtle,
   options: Options
 ): ReturnValue {
-  options.currentLvl++;
+  options.levelNo++;
   mainCharacter.resetPosition();
-  if (options.currentLvl <= levels.length) {
+  if (options.levelNo <= levels.length) {
     Dialog.notify({
       id: "new-level",
       title: "New Level",
-      text: [`Welcome to level ${options.currentLvl}`],
+      text: [`Welcome to level ${options.levelNo}`],
     });
     return {
       levelChangeType: LevelChangeTypes.NewLevel,
-      newLevel: options.currentLvl,
+      newLevel: options.levelNo,
     };
   } else {
     return { levelChangeType: LevelChangeTypes.GameComplete };
   }
 }
 
-function checkIfTurtleMeetsCharacters(mainCharacter: Turtle, currentLvl: number) {
-  const level = selectLvl(currentLvl);
-  for (const character of level.getCharacters()) {
+function checkIfTurtleMeetsCharacters(mainCharacter: Turtle, level: ILevel) {
+  for (const character of level.characters) {
     if (areTurtleCharacterIntersecting(mainCharacter, character)) {
       if (character.isFood) {
         mainCharacter.increaseFoodValue(character.foodValue);
-        
+        level.characters.delete(character);
       }
     }
   }
@@ -67,7 +67,7 @@ function areTurtleCharacterIntersecting(mainCharacter: Turtle, otherCharacter: I
   const turtleXEnd = turtleXStart + mainCharacter.image.width;
   const turtleYStart = mainCharacter.y;
   const turtleYEnd = turtleYStart + mainCharacter.image.height;
-  console.log(`Other character: ${otherCharacter.x}, ${otherCharacter.y}`);console.table(otherCharacter)
+  console.log(`Other character: ${otherCharacter.x}, ${otherCharacter.y}`);
   return turtleXStart <= otherCharacter.x && otherCharacter.x <= turtleXEnd && turtleYStart <= otherCharacter.y && otherCharacter.y <= turtleYEnd;
 }
 

@@ -4,8 +4,8 @@ import SmallFish from "../characters/small-fish";
 import Level from "./level";
 
 class Level1 extends Level {
-  protected backgroundImagePath: string = "./images/bg-lvl1.png";
-  protected characters: Set<ICharacter> = new Set([
+  protected _backgroundImagePath: string = "./images/bg-lvl1.png";
+  protected _characters: Set<ICharacter> = new Set([
     new Shrimp(),
     new Shrimp(),
     new Shrimp(),

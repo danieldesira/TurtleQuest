@@ -47,5 +47,7 @@
 * Attempt to disable zoom when tapping controls on mobile
 * Attempt to lock orientation to landscape on mobile
 
-#0.1.0 Preview -
-* Food meter
+#0.1.0 Preview - 28/01/2024 12:30 UTC+1
+* Food and damage meters
+* Shrimp and small fish as additional characters
+* Code cleanup and ability to "eat"

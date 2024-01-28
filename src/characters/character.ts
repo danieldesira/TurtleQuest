@@ -18,7 +18,7 @@ abstract class Character implements ICharacter {
         this._image = image;
         resolve(image);
       };
-      image.onerror = () => reject(new Error("Failed to load turtle image"));
+      image.onerror = () => reject(new Error("Failed to load character image"));
     });
   }
 
