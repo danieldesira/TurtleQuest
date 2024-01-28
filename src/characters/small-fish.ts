@@ -2,7 +2,7 @@ import Character from "./character";
 
 class SmallFish extends Character {
   protected _isMain: boolean = false;
-  protected _isFood: boolean = true;
+  protected _isPrey: boolean = true;
   protected _isObstacle: boolean = false;
   protected _imageFilename: string = "small-fish.png";
   protected _foodValue: number = 0.6;

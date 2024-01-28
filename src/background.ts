@@ -28,8 +28,7 @@ class Background {
       options.mainCharacter.y < options.canvas.height
         ? 0
         : verticalSegments[
-            Math.floor(backgroundImage.height / options.mainCharacter.y) -
-              1
+            Math.floor(backgroundImage.height / options.mainCharacter.y) - 1
           ];
     options.context.drawImage(
       backgroundImage,
@@ -42,8 +41,7 @@ class Background {
       options.canvas.width,
       options.canvas.height
     );
-    options.mainCharacter.setBgStart(x, y);
-    options.level.setBgOffset(x, y);
+    Background.updateBgRelatedProperties(options, x, y);
   }
 
   private static calculateScreenCutOffPoints(
@@ -69,6 +67,17 @@ class Background {
     if (bgImg.width < canvas.width) {
       canvas.width = bgImg.width;
     }
+  }
+
+  private static updateBgRelatedProperties(
+    options: Options,
+    x: number,
+    y: number
+  ) {
+    options.mainCharacter.bgStartX = x;
+    options.mainCharacter.bgStartY = y;
+    options.level.bgOffsetX = x;
+    options.level.bgOffsetY = y;
   }
 }
 

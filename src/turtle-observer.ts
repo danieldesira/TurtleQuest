@@ -17,7 +17,7 @@ interface ReturnValue {
 
 function checkTurtle(mainCharacter: Turtle, options: Options): ReturnValue {
   mainCharacter.decreaseFoodValue();
-  if (mainCharacter.getFoodValue() <= 0) {
+  if (mainCharacter.foodValue <= 0) {
     return { levelChangeType: LevelChangeTypes.GameOver };
   }
 
@@ -54,7 +54,7 @@ function handleOffBgWidth(
 function checkIfTurtleMeetsCharacters(mainCharacter: Turtle, level: ILevel) {
   for (const character of level.characters) {
     if (areTurtleCharacterIntersecting(mainCharacter, character)) {
-      if (character.isFood) {
+      if (character.isPrey) {
         mainCharacter.increaseFoodValue(character.foodValue);
         level.characters.delete(character);
       }

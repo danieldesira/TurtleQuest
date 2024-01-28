@@ -3,9 +3,10 @@ interface ICharacter {
   paint(context: CanvasRenderingContext2D, bgOffsetX?: number, bgOffsetY?: number): void;
   get x(): number;
   get y(): number;
-  setPosition(x: number, y: number): void;
+  set x(x: number);
+  set y(y: number);
   get isMain(): boolean;
-  get isFood(): boolean;
+  get isPrey(): boolean;
   get isObstacle(): boolean;
   get foodValue(): number;
   get image(): HTMLImageElement;

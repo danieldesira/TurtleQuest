@@ -4,7 +4,7 @@ abstract class Character implements ICharacter {
   protected _x: number;
   protected _y: number;
   protected abstract _isMain: boolean;
-  protected abstract _isFood: boolean;
+  protected abstract _isPrey: boolean;
   protected abstract _isObstacle: boolean;
   protected _image: HTMLImageElement;
   protected _baseImagePath: string = "./images/";
@@ -33,12 +33,20 @@ abstract class Character implements ICharacter {
     return this._y;
   }
 
+  set x(x: number) {
+    this._x = x;
+  }
+
+  set y(y: number) {
+    this._y = y;
+  }
+
   get isMain() {
     return this._isMain;
   }
 
-  get isFood() {
-    return this._isFood;
+  get isPrey() {
+    return this._isPrey;
   }
 
   get isObstacle() {
@@ -51,11 +59,6 @@ abstract class Character implements ICharacter {
 
   get image() {
     return this._image;
-  }
-
-  setPosition(x: number, y: number): void {
-    this._x = x;
-    this._y = y;
   }
 }
 

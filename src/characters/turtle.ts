@@ -4,25 +4,26 @@ import Character from "./character";
 class Turtle extends Character {
   static scientificName: string = "Carretta carretta";
   protected _isMain: boolean = true;
-  protected _isFood: boolean = false;
+  protected _isPrey: boolean = false;
   protected _isObstacle: boolean = false;
-  protected _imageFilename: string = "turtle.png"; 
+  protected _imageFilename: string = "turtle.png";
 
-  private angle: number;
+  private _angle: number;
 
-  private bgStartX: number;
-  private bgStartY: number;
-  private limitY: number;
-  private static step: number = 3;
+  private _bgStartX: number;
+  private _bgStartY: number;
+  private _limitY: number;
+  private static _step: number = 3;
 
   protected _foodValue: number;
-  private lifeValue: number;
+  private _lifeValue: number;
 
   constructor() {
     super();
     this.resetPosition();
-    this.angle = angles.right;
-    this.setBgStart(0, 0);
+    this._angle = angles.right;
+    this._bgStartX = 0;
+    this._bgStartY = 0;
     this.resetFoodValue();
     this.resetLifeValue();
   }
@@ -37,7 +38,7 @@ class Turtle extends Character {
   }
 
   resetLifeValue() {
-    this.lifeValue = 100;
+    this._lifeValue = 100;
   }
 
   increaseFoodValue(foodValue: number) {
@@ -49,63 +50,67 @@ class Turtle extends Character {
   }
 
   applyDamage(damage: number) {
-    this.lifeValue -= damage;
+    this._lifeValue -= damage;
   }
 
-  getFoodValue = () => this.foodValue;
-  getLifeValue = () => this.lifeValue;
-
-  setBgStart(x: number, y: number) {
-    this.bgStartX = x;
-    this.bgStartY = y;
+  get lifeValue() {
+    return this._lifeValue;
   }
 
-  setYLimit(y: number) {
-    this.limitY = y;
+  set bgStartX(x: number) {
+    this._bgStartX = x;
+  }
+
+  set bgStartY(y: number) {
+    this._bgStartY = y;
+  }
+
+  set limitY(y: number) {
+    this._limitY = y;
   }
 
   moveUp() {
-    if (this.y > 0) {
-      this._y -= Turtle.step;
+    if (this._y > 0) {
+      this._y -= Turtle._step;
     }
   }
 
   moveDown() {
-    if (this.y < this.limitY) {
-      this._y += Turtle.step;
+    if (this._y < this._limitY) {
+      this._y += Turtle._step;
     }
   }
 
   moveLeft() {
     this.rotate(angles.left);
-    if (this.x > 0) {
-      this._x -= Turtle.step;
+    if (this._x > 0) {
+      this._x -= Turtle._step;
     }
   }
 
   moveRight() {
     this.rotate(angles.right);
-    this._x += Turtle.step;
+    this._x += Turtle._step;
   }
 
   private rotate(angle: number) {
-    this.angle = angle;
+    this._angle = angle;
   }
 
   private applyRotation(context: CanvasRenderingContext2D) {
-    context.translate(this.x, this.y);
-    context.rotate(this.angle);
-    context.translate(-this.x, -this.y);
+    context.translate(this._x, this._y);
+    context.rotate(this._angle);
+    context.translate(-this._x, -this._y);
   }
 
   paint(context: CanvasRenderingContext2D) {
     this.applyRotation(context);
     context.drawImage(
-      this.image,
-      this.x - this.bgStartX,
-      this.y - this.bgStartY,
-      this.image.width,
-      this.image.height
+      this._image,
+      this._x - this._bgStartX,
+      this._y - this._bgStartY,
+      this._image.width,
+      this._image.height
     );
     context.resetTransform();
   }

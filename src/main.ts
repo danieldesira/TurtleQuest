@@ -34,7 +34,7 @@ import { LevelChangeTypes } from "./levels/levels";
   async function loadLevel(): Promise<HTMLImageElement> {
     try {
       const background = await level.init();
-      turtle.setYLimit(background.height);
+      turtle.limitY = background.height;
       return background;
     } catch (error) {
       Dialog.notify({
@@ -106,10 +106,10 @@ import { LevelChangeTypes } from "./levels/levels";
 
   function updateMeters() {
     const foodMeter = document.getElementById("foodMeter") as HTMLMeterElement;
-    foodMeter.value = turtle.getFoodValue();
+    foodMeter.value = turtle.foodValue;
 
     const lifeMeter = document.getElementById("lifeMeter") as HTMLMeterElement;
-    lifeMeter.value = turtle.getLifeValue();
+    lifeMeter.value = turtle.lifeValue;
   }
 
   window.addEventListener("resize", resizeCanvas);

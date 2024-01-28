@@ -19,7 +19,7 @@ abstract class Level implements ILevel {
     }
   }
 
-  loadBgImg(): Promise<HTMLImageElement> {
+  private loadBgImg(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
       backgroundImage.src = this._backgroundImagePath;
@@ -32,8 +32,11 @@ abstract class Level implements ILevel {
     });
   }
 
-  setBgOffset(offsetX: number, offsetY: number): void {
+  set bgOffsetX(offsetX: number) {
     this._bgOffsetX = offsetX;
+  }
+
+  set bgOffsetY(offsetY: number) {
     this._bgOffsetY = offsetY;
   }
 
@@ -41,21 +44,22 @@ abstract class Level implements ILevel {
     return this._backgroundImagePath;
   }
 
-  getBgImg = () => this._backgroundImage;
+  get bgImg() {
+    return this._backgroundImage;
+  }
 
   get characters() {
     return this._characters;
   }
 
-  setInitialCharacterPositions(): void {
+  private setInitialCharacterPositions(): void {
     for (const character of this._characters) {
-      const x = Math.random() * this._backgroundImage.width;
-      const y = Math.random() * this._backgroundImage.height;
-      character.setPosition(x, y);
+      character.x = Math.random() * this._backgroundImage.width;
+      character.y = Math.random() * this._backgroundImage.height;
     }
   }
 
-  async loadCharacters(): Promise<void> {
+  private async loadCharacters(): Promise<void> {
     for (const character of this.characters) {
       await character.loadImage();
     }

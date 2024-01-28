@@ -55,3 +55,6 @@
 #0.1.1 Preview - 28/01/2024 13:45 UTC+1
 * Fix: Could not load small fish image on GH Pages environment
 * Improved error and character image handling
+
+#0.1.2 Preview - 
+* Massive refactor
