@@ -17,8 +17,15 @@ interface ReturnValue {
 
 function checkTurtle(mainCharacter: Turtle, options: Options): ReturnValue {
   mainCharacter.decreaseFoodValue();
-  if (mainCharacter.foodValue <= 0) {
+  
+  if (mainCharacter.foodValue <= 0 || mainCharacter.oxygenValue <= 0) {
     return { levelChangeType: LevelChangeTypes.GameOver };
+  }
+
+  if (mainCharacter.y <= 0) {
+    mainCharacter.breath();
+  } else {
+    mainCharacter.useOxygen();
   }
 
   if (mainCharacter.x >= options.bgWidth) {
@@ -62,13 +69,20 @@ function checkIfTurtleMeetsCharacters(mainCharacter: Turtle, level: ILevel) {
   }
 }
 
-function areTurtleCharacterIntersecting(mainCharacter: Turtle, otherCharacter: ICharacter): boolean {
+function areTurtleCharacterIntersecting(
+  mainCharacter: Turtle,
+  otherCharacter: ICharacter
+): boolean {
   const turtleXStart = mainCharacter.x;
   const turtleXEnd = turtleXStart + mainCharacter.image.width;
   const turtleYStart = mainCharacter.y;
   const turtleYEnd = turtleYStart + mainCharacter.image.height;
-  console.log(`Other character: ${otherCharacter.x}, ${otherCharacter.y}`);
-  return turtleXStart <= otherCharacter.x && otherCharacter.x <= turtleXEnd && turtleYStart <= otherCharacter.y && otherCharacter.y <= turtleYEnd;
+  return (
+    turtleXStart <= otherCharacter.x &&
+    otherCharacter.x <= turtleXEnd &&
+    turtleYStart <= otherCharacter.y &&
+    otherCharacter.y <= turtleYEnd
+  );
 }
 
 export default checkTurtle;

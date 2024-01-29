@@ -17,6 +17,7 @@ class Turtle extends Character {
 
   protected _foodValue: number;
   private _lifeValue: number;
+  private _oxygenValue: number;
 
   constructor() {
     super();
@@ -26,6 +27,7 @@ class Turtle extends Character {
     this._bgStartY = 0;
     this.resetFoodValue();
     this.resetLifeValue();
+    this._oxygenValue = 100;
   }
 
   resetPosition() {
@@ -49,12 +51,24 @@ class Turtle extends Character {
     this._foodValue -= 0.01;
   }
 
+  breath() {
+    this._oxygenValue += 0.5;
+  }
+
+  useOxygen() {
+    this._oxygenValue -= 0.001;
+  }
+
   applyDamage(damage: number) {
     this._lifeValue -= damage;
   }
 
   get lifeValue() {
     return this._lifeValue;
+  }
+
+  get oxygenValue() {
+    return this._oxygenValue;
   }
 
   set bgStartX(x: number) {

@@ -56,5 +56,6 @@
 * Fix: Could not load small fish image on GH Pages environment
 * Improved error and character image handling
 
-#0.1.2 Preview - 
+#0.1.2 Preview - 29/01/2024 19:40 UTC+1
 * Massive refactor
+* Introduced breathing and oxygen level

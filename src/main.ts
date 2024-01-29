@@ -110,6 +110,9 @@ import { LevelChangeTypes } from "./levels/levels";
 
     const lifeMeter = document.getElementById("lifeMeter") as HTMLMeterElement;
     lifeMeter.value = turtle.lifeValue;
+
+    const oxygenMeter = document.getElementById("oxygenMeter") as HTMLMeterElement;
+    oxygenMeter.value = turtle.oxygenValue;
   }
 
   window.addEventListener("resize", resizeCanvas);
