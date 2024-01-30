@@ -18,6 +18,7 @@ class Turtle extends Character {
   protected _foodValue: number;
   private _lifeValue: number;
   private _oxygenValue: number;
+  protected _damage: number; 
 
   constructor() {
     super();

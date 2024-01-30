@@ -7,8 +7,13 @@ class Shrimp extends Character {
   protected _imageFilename: string = "shrimp.png";
 
   protected _foodValue: number = 0.01;
+  protected _damage: number;
 
-  paint(context: CanvasRenderingContext2D, bgXOffset: number = 0, bgYOffset: number = 0): void {
+  paint(
+    context: CanvasRenderingContext2D,
+    bgXOffset: number = 0,
+    bgYOffset: number = 0
+  ): void {
     context.drawImage(
       this.image,
       this.x - bgXOffset,

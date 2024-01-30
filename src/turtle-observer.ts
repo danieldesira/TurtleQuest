@@ -18,7 +18,7 @@ interface ReturnValue {
 function checkTurtle(mainCharacter: Turtle, options: Options): ReturnValue {
   mainCharacter.decreaseFoodValue();
   
-  if (mainCharacter.foodValue <= 0 || mainCharacter.oxygenValue <= 0) {
+  if (mainCharacter.foodValue <= 0 || mainCharacter.oxygenValue <= 0 || mainCharacter.lifeValue <= 0) {
     return { levelChangeType: LevelChangeTypes.GameOver };
   }
 
@@ -64,23 +64,24 @@ function checkIfTurtleMeetsCharacters(mainCharacter: Turtle, level: ILevel) {
       if (character.isPrey) {
         mainCharacter.increaseFoodValue(character.foodValue);
         level.characters.delete(character);
+      } else if (character.isObstacle) {
+        mainCharacter.applyDamage(character.damage);
+        level.characters.delete(character);
       }
     }
   }
 }
 
 function areTurtleCharacterIntersecting(
-  mainCharacter: Turtle,
+  turtle: Turtle,
   otherCharacter: ICharacter
 ): boolean {
-  const turtleXStart = mainCharacter.x;
-  const turtleXEnd = turtleXStart + mainCharacter.image.width;
-  const turtleYStart = mainCharacter.y;
-  const turtleYEnd = turtleYStart + mainCharacter.image.height;
+  const turtleXEnd = turtle.x + turtle.image.width;
+  const turtleYEnd = turtle.y + turtle.image.height;
   return (
-    turtleXStart <= otherCharacter.x &&
+    turtle.x <= otherCharacter.x &&
     otherCharacter.x <= turtleXEnd &&
-    turtleYStart <= otherCharacter.y &&
+    turtle.y <= otherCharacter.y &&
     otherCharacter.y <= turtleYEnd
   );
 }

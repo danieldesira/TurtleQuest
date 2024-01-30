@@ -1,12 +1,12 @@
 import Character from "./character";
 
-class SmallFish extends Character {
+class PlasticBag extends Character {
   protected _isMain: boolean = false;
-  protected _isPrey: boolean = true;
-  protected _isObstacle: boolean = false;
-  protected _imageFilename: string = "small-fish.png";
-  protected _foodValue: number = 0.6;
-  protected _damage: number;
+  protected _isPrey: boolean = false;
+  protected _isObstacle: boolean = true;
+  protected _imageFilename: string = "plastic-bag.png";
+  protected _foodValue: number;
+  protected _damage: number = 8;
 
   paint(
     context: CanvasRenderingContext2D,
@@ -23,4 +23,4 @@ class SmallFish extends Character {
   }
 }
 
-export default SmallFish;
+export default PlasticBag;

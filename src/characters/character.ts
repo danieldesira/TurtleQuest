@@ -10,6 +10,7 @@ abstract class Character implements ICharacter {
   protected _baseImagePath: string = "./images/";
   protected abstract _imageFilename: string;
   protected abstract _foodValue: number;
+  protected abstract _damage: number;
 
   loadImage(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
@@ -19,7 +20,10 @@ abstract class Character implements ICharacter {
         this._image = image;
         resolve(image);
       };
-      image.onerror = () => reject(new Error(`Failed to load character image: ${this._imageFilename}`));
+      image.onerror = () =>
+        reject(
+          new Error(`Failed to load character image: ${this._imageFilename}`)
+        );
     });
   }
 
@@ -55,6 +59,10 @@ abstract class Character implements ICharacter {
 
   get foodValue() {
     return this._foodValue;
+  }
+
+  get damage() {
+    return this._damage;
   }
 
   get image() {
