@@ -2,11 +2,13 @@ import ICharacter from "../characters/icharacter";
 import ILevel from "./ilevel";
 
 abstract class Level implements ILevel {
-  protected abstract _backgroundImagePath: string;
+  protected readonly _backgroundImagePath: string = "./images/backgrounds/";  
+  protected readonly abstract _backgroundImageFilename: string;
   protected _backgroundImage: HTMLImageElement;
   protected abstract _characters: Set<ICharacter>;
   protected _bgOffsetX: number;
   protected _bgOffsetY: number;
+  protected readonly abstract _benthicOffsetY: number;
 
   async init(): Promise<HTMLImageElement> {
     try {
@@ -22,7 +24,7 @@ abstract class Level implements ILevel {
   private loadBgImg(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
-      backgroundImage.src = this._backgroundImagePath;
+      backgroundImage.src = this._backgroundImagePath + this._backgroundImageFilename;
       backgroundImage.onload = () => {
         this._backgroundImage = backgroundImage;
         resolve(backgroundImage);
@@ -55,7 +57,11 @@ abstract class Level implements ILevel {
   private setInitialCharacterPositions(): void {
     for (const character of this._characters) {
       character.x = Math.random() * this._backgroundImage.width;
-      character.y = Math.random() * this._backgroundImage.height;
+      if (character.isBenthic) {
+        character.y = (Math.random() * (this._backgroundImage.height - this._benthicOffsetY)) + this._benthicOffsetY;
+      } else {
+        character.y = Math.random() * this._backgroundImage.height;
+      }
     }
   }
 

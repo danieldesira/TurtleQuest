@@ -3,10 +3,11 @@ import Character from "./character";
 
 class Turtle extends Character {
   static scientificName: string = "Carretta carretta";
-  protected _isMain: boolean = true;
-  protected _isPrey: boolean = false;
-  protected _isObstacle: boolean = false;
-  protected _imageFilename: string = "turtle.png";
+  protected readonly _isMain: boolean = true;
+  protected readonly _isPrey: boolean = false;
+  protected readonly _isObstacle: boolean = false;
+  protected readonly _isBenthic: boolean;
+  protected readonly _imageFilename: string = "turtle.png";
 
   private _angle: number;
 

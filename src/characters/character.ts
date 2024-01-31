@@ -3,14 +3,15 @@ import ICharacter from "./icharacter";
 abstract class Character implements ICharacter {
   protected _x: number;
   protected _y: number;
-  protected abstract _isMain: boolean;
-  protected abstract _isPrey: boolean;
-  protected abstract _isObstacle: boolean;
+  protected readonly abstract _isMain: boolean;
+  protected readonly abstract _isPrey: boolean;
+  protected readonly abstract _isObstacle: boolean;
+  protected readonly abstract _isBenthic: boolean;
   protected _image: HTMLImageElement;
-  protected _baseImagePath: string = "./images/";
-  protected abstract _imageFilename: string;
-  protected abstract _foodValue: number;
-  protected abstract _damage: number;
+  protected readonly _baseImagePath: string = "./images/characters/";
+  protected readonly abstract _imageFilename: string;
+  protected readonly abstract _foodValue: number;
+  protected readonly abstract _damage: number;
 
   loadImage(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
@@ -27,7 +28,19 @@ abstract class Character implements ICharacter {
     });
   }
 
-  abstract paint(context: CanvasRenderingContext2D): void;
+  paint(
+    context: CanvasRenderingContext2D,
+    bgXOffset: number = 0,
+    bgYOffset: number = 0
+  ): void {
+    context.drawImage(
+      this.image,
+      this.x - bgXOffset,
+      this.y - bgYOffset,
+      this.image.width,
+      this.image.height
+    );
+  }
 
   get x() {
     return this._x;
@@ -55,6 +68,10 @@ abstract class Character implements ICharacter {
 
   get isObstacle() {
     return this._isObstacle;
+  }
+
+  get isBenthic() {
+    return this._isBenthic;
   }
 
   get foodValue() {

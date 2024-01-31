@@ -1,27 +1,13 @@
 import Character from "./character";
 
 class Shrimp extends Character {
-  protected _isMain: boolean = false;
-  protected _isPrey: boolean = true;
-  protected _isObstacle: boolean = false;
-  protected _imageFilename: string = "shrimp.png";
-
-  protected _foodValue: number = 0.01;
-  protected _damage: number;
-
-  paint(
-    context: CanvasRenderingContext2D,
-    bgXOffset: number = 0,
-    bgYOffset: number = 0
-  ): void {
-    context.drawImage(
-      this.image,
-      this.x - bgXOffset,
-      this.y - bgYOffset,
-      this.image.width,
-      this.image.height
-    );
-  }
+  protected readonly _isMain: boolean = false;
+  protected readonly _isPrey: boolean = true;
+  protected readonly _isObstacle: boolean = false;
+  protected readonly _isBenthic: boolean = false;
+  protected readonly _imageFilename: string = "shrimp.png";
+  protected readonly _foodValue: number = 0.01;
+  protected readonly _damage: number;
 }
 
 export default Shrimp;

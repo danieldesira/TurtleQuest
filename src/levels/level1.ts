@@ -5,7 +5,7 @@ import SmallFish from "../characters/small-fish";
 import Level from "./level";
 
 class Level1 extends Level {
-  protected _backgroundImagePath: string = "./images/bg-lvl1.png";
+  protected readonly _backgroundImageFilename: string = "bg-lvl1.png";
   protected _characters: Set<ICharacter> = new Set([
     new Shrimp(),
     new Shrimp(),
@@ -21,6 +21,7 @@ class Level1 extends Level {
     new PlasticBag(),
     new PlasticBag(),
   ]);
+  protected readonly _benthicOffsetY: number = 9999;
 }
 
 export default Level1;
