@@ -1,0 +1,110 @@
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./components/App";
+
+(async () => {
+  // const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  // const context = canvas.getContext("2d");
+  // const turtle = new Turtle();
+  // await turtle.loadImage();
+  // let currentLevel: number = 1;
+  // bindControls({
+  //   canvas,
+  //   mainCharacter: turtle,
+  //   upBtnId: "upBtn",
+  //   leftBtnId: "leftBtn",
+  //   rightBtnId: "rightBtn",
+  //   downBtnId: "downBtn",
+  // });
+  // let level: Level = new Level1();
+  // let background = await loadLevel();
+  // Background.readjustCanvasForBg(canvas, background);
+  // async function loadLevel(): Promise<HTMLImageElement> {
+  //   try {
+  //     const background = await level.init();
+  //     turtle.limitY = background.height;
+  //     return background;
+  //   } catch (error) {
+  //     Dialog.notify({
+  //       id: "game-error",
+  //       title: "Error",
+  //       text: [error],
+  //     });
+  //   }
+  // }
+  // async function render() {
+  //   try {
+  //     const { levelChangeType, newLevel } = checkTurtle(turtle, {
+  //       bgWidth: background.width,
+  //       levelNo: currentLevel,
+  //       level,
+  //     });
+  //     if (
+  //       levelChangeType === LevelChangeTypes.SameLevel ||
+  //       levelChangeType === LevelChangeTypes.NewLevel
+  //     ) {
+  //       if (levelChangeType === LevelChangeTypes.NewLevel) {
+  //         currentLevel = newLevel;
+  //         level = selectLvl(currentLevel);
+  //         background = await loadLevel();
+  //       }
+  //       Background.paint(background, {
+  //         canvas,
+  //         context,
+  //         mainCharacter: turtle,
+  //         level,
+  //       });
+  //       turtle.paint(context);
+  //       level.paintCharacters(context);
+  //       updateMeters();
+  //       requestAnimationFrame(render);
+  //     } else if (levelChangeType === LevelChangeTypes.GameComplete) {
+  //       Dialog.notify({
+  //         id: "game-over-dialog",
+  //         title: "Game complete",
+  //         text: ["Game complete. Congratulations!"],
+  //       });
+  //     } else {
+  //       Dialog.notify({
+  //         id: "game-over-dialog",
+  //         title: "You lose",
+  //         text: ["Better luck next time!"],
+  //       });
+  //     }
+  //   } catch (error) {
+  //     Dialog.notify({
+  //       id: "game-error",
+  //       title: "Error",
+  //       text: [error],
+  //     });
+  //   }
+  // }
+  // function resizeCanvas() {
+  //   canvas.height = window.innerHeight;
+  //   canvas.width = window.innerWidth;
+  //   Background.readjustCanvasForBg(canvas, background);
+  // }
+  // function updateMeters() {
+  //   const foodMeter = document.getElementById("foodMeter") as HTMLMeterElement;
+  //   foodMeter.value = turtle.foodValue;
+  //   const lifeMeter = document.getElementById("lifeMeter") as HTMLMeterElement;
+  //   lifeMeter.value = turtle.lifeValue;
+  //   const oxygenMeter = document.getElementById("oxygenMeter") as HTMLMeterElement;
+  //   oxygenMeter.value = turtle.oxygenValue;
+  // }
+  // window.addEventListener("resize", resizeCanvas);
+  // resizeCanvas();
+  // const versionAnchor = document.getElementById("version");
+  // versionAnchor.innerText = version;
+  // canvas.focus();
+  // await render();
+  // Dialog.notify({
+  //   id: "dialog-game-welcome",
+  //   title: "Welcome",
+  //   text: ["Welcome to Turtle Escape!"],
+  // });
+  //@ts-ignore
+  //await screen.orientation.lock("landscape-primary");
+})();
+const root = createRoot(document.getElementById("app") as HTMLElement);
+root.render(<App />);

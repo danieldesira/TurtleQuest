@@ -6,10 +6,10 @@ import bindWheel from "./touchpad";
 interface Options {
   canvas: HTMLCanvasElement;
   mainCharacter: Turtle;
-  upBtnId: string;
-  leftBtnId: string;
-  rightBtnId: string;
-  downBtnId: string;
+  upBtnId?: string;
+  leftBtnId?: string;
+  rightBtnId?: string;
+  downBtnId?: string;
 }
 
 function bindControls(options: Options) {

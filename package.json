@@ -1,6 +1,8 @@
 {
   "version": "0.2.0",
   "devDependencies": {
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
     "concurrently": "^8.2.2",
     "postcss": "^8.4.33",
     "serve": "^14.2.1",
@@ -16,5 +18,9 @@
     "tailwind": "npx tailwindcss -i ./src/main.css -o ./dist/bundle.css --watch --minify",
     "dev": "npx concurrently \"npm run webpack\" \"npm run serve\" \"npm run tailwind\"",
     "start": "npm run dev"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
