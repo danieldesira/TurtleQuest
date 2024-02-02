@@ -1,6 +1,6 @@
 import Turtle from "../characters/turtle";
 
-function handleKeyDown(event: KeyboardEvent, mainCharacter: Turtle) {
+function handleKeyDown(event: React.KeyboardEvent, mainCharacter: Turtle) {
   const upKeys = ["w", "W", "ArrowUp"];
   const downKeys = ["s", "S", "ArrowDown"];
   const leftKeys = ["a", "A", "ArrowLeft"];
@@ -23,10 +23,4 @@ function handleKeyDown(event: KeyboardEvent, mainCharacter: Turtle) {
   }
 }
 
-function bindKeyboard(canvas: HTMLCanvasElement, mainCharacter: Turtle) {
-  canvas.addEventListener("keydown", (event) =>
-    handleKeyDown(event, mainCharacter)
-  );
-}
-
-export default bindKeyboard;
+export default handleKeyDown;

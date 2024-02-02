@@ -1,6 +1,6 @@
 import Turtle from "../characters/turtle";
 
-function handleWheel(event: WheelEvent, mainCharacter: Turtle) {
+const handleWheel = (event: React.WheelEvent, mainCharacter: Turtle) => {
   event.preventDefault();
   if (event.deltaX < 0) {
     mainCharacter.moveLeft();
@@ -16,10 +16,4 @@ function handleWheel(event: WheelEvent, mainCharacter: Turtle) {
   }
 }
 
-function bindWheel(canvas: HTMLCanvasElement, mainCharacter: Turtle) {
-  canvas.addEventListener("wheel", (event) =>
-    handleWheel(event, mainCharacter)
-  );
-}
-
-export default bindWheel;
+export default handleWheel;

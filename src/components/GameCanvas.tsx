@@ -7,7 +7,8 @@ import Dialog from "../dialog/dialog";
 import Background from "../background";
 import selectLvl from "../levels/level-selector";
 import checkTurtle from "../turtle-observer";
-import bindControls from "../controls/controls";
+import handleKeyDown from "../controls/handleKeyDown";
+import handleWheel from "../controls/handleWheel";
 
 interface Props {
   turtle: Turtle;
@@ -20,7 +21,7 @@ function GameCanvas({ turtle }: Props) {
 
   let level: Level = new Level1();
   let background: HTMLImageElement;
-  
+
   const loadLevel = async (): Promise<HTMLImageElement> => {
     try {
       const background = await level.init();
@@ -34,8 +35,11 @@ function GameCanvas({ turtle }: Props) {
       });
     }
   };
-  
-  const render = async (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) => {
+
+  const render = async (
+    canvas: HTMLCanvasElement,
+    context: CanvasRenderingContext2D
+  ) => {
     try {
       const { levelChangeType, newLevel } = checkTurtle(turtle, {
         bgWidth: background.width,
@@ -51,18 +55,18 @@ function GameCanvas({ turtle }: Props) {
           level = selectLvl(currentLevel);
           background = await loadLevel();
         }
-        
+
         Background.paint(background, {
           canvas,
           context,
           mainCharacter: turtle,
           level,
         });
-        
+
         turtle.paint(context);
-        
+
         level.paintCharacters(context);
-        
+
         requestAnimationFrame(() => render(canvas, context));
       } else if (levelChangeType === LevelChangeTypes.GameComplete) {
         Dialog.notify({
@@ -85,13 +89,13 @@ function GameCanvas({ turtle }: Props) {
       });
     }
   };
-  
+
   const resizeCanvas = (canvas: HTMLCanvasElement) => {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
     Background.readjustCanvasForBg(canvas, background);
   };
-  
+
   useEffect(() => {
     (async () => {
       await turtle.loadImage();
@@ -100,20 +104,22 @@ function GameCanvas({ turtle }: Props) {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
       render(canvas, context);
-      
+
       resizeCanvas(canvas);
       window.addEventListener("resize", () => resizeCanvas(canvas));
       canvas.focus();
-
-      bindControls({
-        canvas,
-        mainCharacter: turtle
-      });
     })();
   }, []);
 
   return (
-    <canvas height="400" width="700" tabIndex={1} ref={canvasRef}></canvas>
+    <canvas
+      height="400"
+      width="700"
+      tabIndex={1}
+      ref={canvasRef}
+      onKeyDown={(event: React.KeyboardEvent) => handleKeyDown(event, turtle)}
+      onWheel={(event: React.WheelEvent) => handleWheel(event, turtle)}
+    ></canvas>
   );
 }
 
