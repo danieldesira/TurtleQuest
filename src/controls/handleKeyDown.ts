@@ -1,6 +1,6 @@
 import Turtle from "../characters/turtle";
 
-function handleKeyDown(event: React.KeyboardEvent, mainCharacter: Turtle) {
+const handleKeyDown = (event: React.KeyboardEvent, mainCharacter: Turtle) => {
   const upKeys = ["w", "W", "ArrowUp"];
   const downKeys = ["s", "S", "ArrowDown"];
   const leftKeys = ["a", "A", "ArrowLeft"];
@@ -21,6 +21,6 @@ function handleKeyDown(event: React.KeyboardEvent, mainCharacter: Turtle) {
   if (rightKeys.includes(event.key)) {
     mainCharacter.moveRight();
   }
-}
+};
 
 export default handleKeyDown;

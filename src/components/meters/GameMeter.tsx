@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Turtle from "../../characters/turtle";
 
 interface Props {
-  value: number;
+  turtle: Turtle;
+  _key: string;
 }
 
-function GameMeter({ value }: Props) {
+function GameMeter({ turtle, _key }: Props) {
+  const [value, setValue] = useState<number>(100);
+  
+  const fetchCurrentValue = () => {
+    setValue(turtle[_key]);
+    requestAnimationFrame(fetchCurrentValue);
+  };
+
+  useEffect(() => {
+    if (turtle[_key]) {
+      fetchCurrentValue();
+    } else {
+      throw new Error(`GameMeter component: ${_key} does not exist`);
+    }
+  });
+
   return (
     <meter
       low={30}

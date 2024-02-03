@@ -14,6 +14,6 @@ const handleWheel = (event: React.WheelEvent, mainCharacter: Turtle) => {
   if (event.deltaY > 0) {
     mainCharacter.moveDown();
   }
-}
+};
 
 export default handleWheel;
