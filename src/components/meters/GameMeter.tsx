@@ -20,7 +20,7 @@ function GameMeter({ _key }: Props) {
     } else {
       throw new Error(`GameMeter component: ${_key} does not exist`);
     }
-  });
+  }, []);
 
   return (
     <meter

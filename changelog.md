@@ -59,3 +59,11 @@
 #0.1.2 Preview - 29/01/2024 19:40 UTC+1
 * Massive refactor
 * Introduced breathing and oxygen level
+
+#0.2.0 Preview -
+* Refactoring:
+ - Using React components and hooks
+ - Introduced `Game` singleton to share turtle and level data more easily
+* Introduced plastic bag
+* Introduced Neptune grass as a benthic character
+* Minor UI improvements

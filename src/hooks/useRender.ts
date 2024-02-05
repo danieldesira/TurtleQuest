@@ -1,5 +1,5 @@
 import Game from "../Game";
-import Background from "../background";
+import Background from "../Background";
 import Dialog from "../dialog/dialog";
 import { LevelChangeTypes } from "../levels/levels";
 import checkTurtle from "../checkTurtle";

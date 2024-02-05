@@ -1,4 +1,4 @@
-import Background from "../background";
+import Background from "../Background";
 
 const resizeCanvas = (canvas: HTMLCanvasElement) => {
   canvas.height = window.innerHeight;
