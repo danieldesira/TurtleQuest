@@ -1,5 +1,4 @@
 import React from "react";
-import Turtle from "../../characters/turtle";
 import ControlButton from "./ControlButton";
 import {
   GoArrowDown,
@@ -7,12 +6,10 @@ import {
   GoArrowRight,
   GoArrowUp,
 } from "react-icons/go";
+import Game from "../../Game";
 
-interface Props {
-  turtle: Turtle;
-}
-
-function ControlGroup({ turtle }: Props) {
+function ControlGroup() {
+  const turtle = Game.instance.turtle;
   return (
     <div className="fixed bottom-1 left-1 text-white dark:text-gray-950 touch-none">
       <div className="mb-1 flex justify-center">

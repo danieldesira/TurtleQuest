@@ -1,5 +1,5 @@
-import ICharacter from "../characters/icharacter";
-import ILevel from "./ilevel";
+import ICharacter from "../characters/ICharacter";
+import ILevel from "./ILevel";
 
 abstract class Level implements ILevel {
   protected readonly _backgroundImagePath: string = "./images/backgrounds/";  

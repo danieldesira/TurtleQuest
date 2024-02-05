@@ -1,4 +1,4 @@
-import ICharacter from "./icharacter";
+import ICharacter from "./ICharacter";
 
 abstract class Character implements ICharacter {
   protected _x: number;

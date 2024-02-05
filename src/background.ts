@@ -1,15 +1,13 @@
-import Turtle from "./characters/turtle";
-import ILevel from "./levels/ilevel";
+import Game from "./Game";
 
 interface Options {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
-  mainCharacter: Turtle;
-  level: ILevel;
 }
 
 class Background {
-  static paint(backgroundImage: HTMLImageElement, options: Options) {
+  static paint(options: Options) {
+    const backgroundImage = Game.instance.level.bgImg;
     const horizontalSegments = Background.calculateScreenCutOffPoints(
       backgroundImage.width,
       options.canvas.width
@@ -19,16 +17,16 @@ class Background {
       options.canvas.height
     );
     const x =
-      options.mainCharacter.x < options.canvas.width
+      Game.instance.turtle.x < options.canvas.width
         ? 0
         : horizontalSegments[
-            Math.floor(backgroundImage.width / options.mainCharacter.x) - 1
+            Math.floor(backgroundImage.width / Game.instance.turtle.x) - 1
           ];
     const y =
-      options.mainCharacter.y < options.canvas.height
+      Game.instance.turtle.y < options.canvas.height
         ? 0
         : verticalSegments[
-            Math.floor(backgroundImage.height / options.mainCharacter.y) - 1
+            Math.floor(backgroundImage.height / Game.instance.turtle.y) - 1
           ];
     options.context.drawImage(
       backgroundImage,
@@ -41,7 +39,7 @@ class Background {
       options.canvas.width,
       options.canvas.height
     );
-    Background.updateBgRelatedProperties(options, x, y);
+    Background.updateBgRelatedProperties(x, y);
   }
 
   private static calculateScreenCutOffPoints(
@@ -57,10 +55,8 @@ class Background {
     return points;
   }
 
-  static readjustCanvasForBg(
-    canvas: HTMLCanvasElement,
-    bgImg: HTMLImageElement
-  ) {
+  static readjustCanvasForBg(canvas: HTMLCanvasElement) {
+    const bgImg = Game.instance.level.bgImg;
     if (bgImg.height < canvas.height) {
       canvas.height = bgImg.height;
     }
@@ -70,14 +66,13 @@ class Background {
   }
 
   private static updateBgRelatedProperties(
-    options: Options,
     x: number,
     y: number
   ) {
-    options.mainCharacter.bgStartX = x;
-    options.mainCharacter.bgStartY = y;
-    options.level.bgOffsetX = x;
-    options.level.bgOffsetY = y;
+    Game.instance.turtle.bgStartX = x;
+    Game.instance.turtle.bgStartY = y;
+    Game.instance.level.bgOffsetX = x;
+    Game.instance.level.bgOffsetY = y;
   }
 }
 

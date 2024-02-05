@@ -1,5 +1,5 @@
 import angles from "../constants/angles";
-import Character from "./character";
+import Character from "./Character";
 
 class Turtle extends Character {
   static scientificName: string = "Carretta carretta";
@@ -27,9 +27,7 @@ class Turtle extends Character {
     this._angle = angles.right;
     this._bgStartX = 0;
     this._bgStartY = 0;
-    this.resetFoodValue();
-    this.resetLifeValue();
-    this._oxygenValue = 100;
+    this.reset();
   }
 
   resetPosition() {
@@ -37,12 +35,10 @@ class Turtle extends Character {
     this._y = 10;
   }
 
-  resetFoodValue() {
+  reset() {
     this._foodValue = 100;
-  }
-
-  resetLifeValue() {
     this._lifeValue = 100;
+    this._oxygenValue = 100;
   }
 
   increaseFoodValue(foodValue: number) {

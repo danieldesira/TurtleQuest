@@ -1,7 +1,11 @@
-import Turtle from "../characters/turtle";
+import Game from "../Game";
+import Turtle from "../characters/Turtle";
 
-const handleWheel = (event: React.WheelEvent, mainCharacter: Turtle) => {
+const handleWheel = (event: React.WheelEvent) => {
   event.preventDefault();
+
+  const mainCharacter = Game.instance.turtle;
+
   if (event.deltaX < 0) {
     mainCharacter.moveLeft();
   }

@@ -1,4 +1,4 @@
-import ICharacter from "../characters/icharacter";
+import ICharacter from "../characters/ICharacter";
 
 interface ILevel {
   init(): Promise<HTMLImageElement>;

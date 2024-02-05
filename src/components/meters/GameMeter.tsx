@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Turtle from "../../characters/turtle";
+import Game from "../../Game";
 
 interface Props {
-  turtle: Turtle;
   _key: string;
 }
 
-function GameMeter({ turtle, _key }: Props) {
+function GameMeter({ _key }: Props) {
   const [value, setValue] = useState<number>(100);
+  const turtle = Game.instance.turtle;
   
   const fetchCurrentValue = () => {
     setValue(turtle[_key]);
@@ -15,7 +15,7 @@ function GameMeter({ turtle, _key }: Props) {
   };
 
   useEffect(() => {
-    if (turtle[_key]) {
+    if (typeof turtle[_key] === "number") {
       fetchCurrentValue();
     } else {
       throw new Error(`GameMeter component: ${_key} does not exist`);

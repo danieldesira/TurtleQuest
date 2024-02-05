@@ -1,7 +1,7 @@
-import ICharacter from "../characters/icharacter";
-import NeptuneGrass from "../characters/neptune-grass";
-import PlasticBag from "../characters/plastic-bag";
-import Level from "./level";
+import ICharacter from "../characters/ICharacter";
+import NeptuneGrass from "../characters/NeptuneGrass";
+import PlasticBag from "../characters/PlasticBag";
+import Level from "./Level";
 
 class Level2 extends Level {
   protected readonly _backgroundImageFilename: string = "bg-demo-black.png";

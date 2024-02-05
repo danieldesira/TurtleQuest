@@ -1,5 +1,5 @@
-import Level1 from "./level1";
-import Level2 from "./level2";
+import Level1 from "./Level1";
+import Level2 from "./Level2";
 
 export enum LevelChangeTypes {
   GameOver = 0,

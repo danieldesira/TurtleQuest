@@ -1,4 +1,4 @@
-import Character from "./character";
+import Character from "./Character";
 
 class Shrimp extends Character {
   protected readonly _isMain: boolean = false;
