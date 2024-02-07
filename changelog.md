@@ -67,3 +67,4 @@
 * Introduced plastic bag
 * Introduced Neptune grass as a benthic character
 * Minor UI improvements
+* Randomised character movement and experimental prey movement

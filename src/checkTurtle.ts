@@ -30,6 +30,10 @@ async function checkTurtle(): Promise<LevelChangeTypes> {
 
   checkIfTurtleMeetsCharacters();
 
+  for (const character of Game.instance.level.characters) {
+    character.swim();
+  }
+
   return LevelChangeTypes.SameLevel;
 }
 

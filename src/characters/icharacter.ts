@@ -12,6 +12,7 @@ interface ICharacter {
   get foodValue(): number;
   get damage(): number;
   get image(): HTMLImageElement;
+  swim(): void;
 }
 
 export default ICharacter;

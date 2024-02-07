@@ -1,3 +1,4 @@
+import Game from "../Game";
 import angles from "../constants/angles";
 import Character from "./Character";
 
@@ -13,8 +14,7 @@ class Turtle extends Character {
 
   private _bgStartX: number;
   private _bgStartY: number;
-  private _limitY: number;
-  private static _step: number = 3;
+  protected readonly _speed: number = 1;
 
   protected _foodValue: number;
   private _lifeValue: number;
@@ -46,7 +46,7 @@ class Turtle extends Character {
   }
 
   decreaseFoodValue() {
-    this._foodValue -= 0.01;
+    this._foodValue -= 0.005;
   }
 
   breath() {
@@ -77,32 +77,32 @@ class Turtle extends Character {
     this._bgStartY = y;
   }
 
-  set limitY(y: number) {
-    this._limitY = y;
+  get direction() {
+    return this._angle;
   }
 
   moveUp() {
     if (this._y > 0) {
-      this._y -= Turtle._step;
+      this._y -= this._speed;
     }
   }
 
   moveDown() {
-    if (this._y < this._limitY) {
-      this._y += Turtle._step;
+    if (this._y < Game.instance.level.bgImg.height) {
+      this._y += this._speed;
     }
   }
 
   moveLeft() {
     this.rotate(angles.left);
     if (this._x > 0) {
-      this._x -= Turtle._step;
+      this._x -= this._speed;
     }
   }
 
   moveRight() {
     this.rotate(angles.right);
-    this._x += Turtle._step;
+    this._x += this._speed;
   }
 
   private rotate(angle: number) {

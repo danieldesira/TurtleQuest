@@ -7,7 +7,8 @@ class Shrimp extends Character {
   protected readonly _isBenthic: boolean = false;
   protected readonly _imageFilename: string = "shrimp.png";
   protected readonly _foodValue: number = 0.01;
-  protected readonly _damage: number;
+  protected readonly _damage: number = 0;
+  protected readonly _speed: number = 0.6;
 }
 
 export default Shrimp;

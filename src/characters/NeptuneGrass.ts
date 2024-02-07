@@ -8,6 +8,7 @@ class NeptuneGrass extends Character {
   protected readonly _imageFilename: string = "neptune-grass.png";
   protected readonly _foodValue: number = 5;
   protected readonly _damage: number = 0;
+  protected readonly _speed: number = 0;
 }
 
 export default NeptuneGrass;

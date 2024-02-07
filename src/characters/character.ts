@@ -1,17 +1,20 @@
+import Game from "../Game";
+import angles from "../constants/angles";
 import ICharacter from "./ICharacter";
 
 abstract class Character implements ICharacter {
   protected _x: number;
   protected _y: number;
-  protected readonly abstract _isMain: boolean;
-  protected readonly abstract _isPrey: boolean;
-  protected readonly abstract _isObstacle: boolean;
-  protected readonly abstract _isBenthic: boolean;
+  protected abstract readonly _isMain: boolean;
+  protected abstract readonly _isPrey: boolean;
+  protected abstract readonly _isObstacle: boolean;
+  protected abstract readonly _isBenthic: boolean;
   protected _image: HTMLImageElement;
   protected readonly _baseImagePath: string = "./images/characters/";
-  protected readonly abstract _imageFilename: string;
-  protected readonly abstract _foodValue: number;
-  protected readonly abstract _damage: number;
+  protected abstract readonly _imageFilename: string;
+  protected abstract readonly _foodValue: number;
+  protected abstract readonly _damage: number;
+  protected abstract readonly _speed: number;
 
   loadImage(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
@@ -84,6 +87,37 @@ abstract class Character implements ICharacter {
 
   get image() {
     return this._image;
+  }
+
+  swim(): void {
+    if (this._isPrey) {
+      const maxPreyDistance = 50;
+      const turtle = Game.instance.turtle;
+      const horizontalDistance = Math.abs(turtle._x - this._x);
+      const verticalDistance = Math.abs(turtle._y - this._y);
+      if (
+        horizontalDistance < maxPreyDistance &&
+        verticalDistance < maxPreyDistance
+      ) {
+        console.log(
+          `Turtle position: ${turtle._x}, ${turtle._y}\nPrey position: ${this._x}, ${this._y}`
+        );
+        if (turtle.direction === angles.left) {
+          this._x -= this._speed;
+        } else {
+          this._x += this._speed;
+        }
+      }
+    }
+
+    if (this._isObstacle) {
+      this._x -= this._speed;
+    }
+
+    const randomDirection = Math.round(Math.random());
+    const randomSpeed = this._speed / 3;
+    this._y += randomDirection ? randomSpeed : -randomSpeed;
+    this._x += randomDirection ? randomSpeed : -randomSpeed;
   }
 }
 

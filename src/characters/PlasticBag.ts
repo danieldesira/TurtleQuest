@@ -8,6 +8,7 @@ class PlasticBag extends Character {
   protected readonly _imageFilename: string = "plastic-bag.png";
   protected readonly _foodValue: number = 0;
   protected readonly _damage: number = 8;
+  protected readonly _speed: number = 0.1; 
 }
 
 export default PlasticBag;

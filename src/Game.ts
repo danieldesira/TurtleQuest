@@ -40,8 +40,7 @@ class Game {
 
   async loadNewLevel() {
     this._level = selectLvl(this._levelNo);
-    const background = await this._level.init();
-    this._turtle.limitY = background.height;
+    await this._level.init();
   }
 }
 
