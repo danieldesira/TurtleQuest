@@ -1,6 +1,7 @@
 import Game from "./Game";
 import ICharacter from "./characters/ICharacter";
 import Turtle from "./characters/Turtle";
+import angles from "./constants/angles";
 import Dialog from "./dialog/dialog";
 import levels, { LevelChangeTypes } from "./levels/levels";
 
@@ -73,14 +74,40 @@ function areTurtleCharacterIntersecting(
   turtle: Turtle,
   otherCharacter: ICharacter
 ): boolean {
-  const turtleXEnd = turtle.x + turtle.image.width;
-  const turtleYEnd = turtle.y + turtle.image.height;
-  return (
-    turtle.x <= otherCharacter.x &&
-    otherCharacter.x <= turtleXEnd &&
-    turtle.y <= otherCharacter.y &&
-    otherCharacter.y <= turtleYEnd
-  );
+  const collidedWithTurtleRight = (x: number, y: number) => {
+    const turtleXEnd = turtle.x + turtle.image.width;
+    const turtleYEnd = turtle.y + turtle.image.height;
+    return turtle.x <= x && x <= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
+  };
+
+  const collidedWithTurtleLeft = (x: number, y: number) => {
+    const turtleXEnd = turtle.x - turtle.image.width;
+    const turtleYEnd = turtle.y - turtle.image.height;
+    return turtle.x >= x && x >= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
+  };
+
+  let isCollision = false;
+
+  if (turtle.direction === angles.left) {
+    isCollision =
+      collidedWithTurtleLeft(
+        otherCharacter.x + otherCharacter.image.width,
+        otherCharacter.y
+      ) ||
+      collidedWithTurtleLeft(
+        otherCharacter.x + otherCharacter.image.width,
+        otherCharacter.y + otherCharacter.image.height
+      );
+  } else {
+    isCollision =
+      collidedWithTurtleRight(otherCharacter.x, otherCharacter.y) ||
+      collidedWithTurtleRight(
+        otherCharacter.x,
+        otherCharacter.y + otherCharacter.image.height
+      );
+  }
+
+  return isCollision;
 }
 
 export default checkTurtle;

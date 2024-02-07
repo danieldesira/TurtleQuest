@@ -114,10 +114,11 @@ abstract class Character implements ICharacter {
       this._x -= this._speed;
     }
 
-    const randomDirection = Math.round(Math.random());
+    const randomVeriticalDirection = Math.round(Math.random());
+    const randomHorizontalDirection = Math.round(Math.random());
     const randomSpeed = this._speed / 3;
-    this._y += randomDirection ? randomSpeed : -randomSpeed;
-    this._x += randomDirection ? randomSpeed : -randomSpeed;
+    this._y += randomVeriticalDirection ? randomSpeed : -randomSpeed;
+    this._x += randomHorizontalDirection ? randomSpeed : -randomSpeed;
   }
 }
 

@@ -21,13 +21,13 @@ abstract class Level implements ILevel {
     }
   }
 
-  private loadBgImg(): Promise<HTMLImageElement> {
+  private loadBgImg(): Promise<void> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
       backgroundImage.src = this._backgroundImagePath + this._backgroundImageFilename;
       backgroundImage.onload = () => {
         this._backgroundImage = backgroundImage;
-        resolve(backgroundImage);
+        resolve();
       };
       backgroundImage.onerror = () =>
         reject(new Error("Could not load level background"));
