@@ -42,6 +42,14 @@ abstract class Level implements ILevel {
     this._bgOffsetY = offsetY;
   }
 
+  get bgOffsetX(): number {
+    return this._bgOffsetX;
+  }
+
+  get bgOffsetY(): number {
+    return this._bgOffsetY;
+  }
+
   get bgImgPath() {
     return this._backgroundImagePath;
   }
@@ -66,18 +74,24 @@ abstract class Level implements ILevel {
   }
 
   private async loadCharacters(): Promise<void> {
-    for (const character of this.characters) {
+    for (const character of this._characters) {
       await character.loadImage();
     }
   }
 
   paintCharacters(context: CanvasRenderingContext2D): void {
     try {
-      for (const character of this.characters) {
+      for (const character of this._characters) {
         character.paint(context, this._bgOffsetX, this._bgOffsetY);
       }
     } catch (error) {
       throw error;
+    }
+  }
+
+  moveCharacters(): void {
+    for (const character of this._characters) {
+      character.swim();
     }
   }
 }

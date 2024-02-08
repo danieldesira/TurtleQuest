@@ -9,13 +9,8 @@ class Turtle extends Character {
   protected readonly _isObstacle: boolean = false;
   protected readonly _isBenthic: boolean;
   protected readonly _imageFilename: string = "turtle.png";
-
-  private _angle: number;
-
-  private _bgStartX: number;
-  private _bgStartY: number;
   protected readonly _speed: number = 1;
-
+  private _angle: number;
   protected _foodValue: number;
   private _lifeValue: number;
   private _oxygenValue: number;
@@ -25,8 +20,6 @@ class Turtle extends Character {
     super();
     this.resetPosition();
     this._angle = angles.right;
-    this._bgStartX = 0;
-    this._bgStartY = 0;
     this.reset();
   }
 
@@ -67,14 +60,6 @@ class Turtle extends Character {
 
   get oxygenValue() {
     return this._oxygenValue;
-  }
-
-  set bgStartX(x: number) {
-    this._bgStartX = x;
-  }
-
-  set bgStartY(y: number) {
-    this._bgStartY = y;
   }
 
   get direction() {
@@ -119,8 +104,8 @@ class Turtle extends Character {
     this.applyRotation(context);
     context.drawImage(
       this._image,
-      this._x - this._bgStartX,
-      this._y - this._bgStartY,
+      this._x - Game.instance.level.bgOffsetX,
+      this._y - Game.instance.level.bgOffsetY,
       this._image.width,
       this._image.height
     );

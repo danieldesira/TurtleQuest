@@ -39,7 +39,7 @@ class Background {
       options.canvas.width,
       options.canvas.height
     );
-    Background.updateBgRelatedProperties(x, y);
+    Background.updateBgOffset(x, y);
   }
 
   private static calculateScreenCutOffPoints(
@@ -65,12 +65,10 @@ class Background {
     }
   }
 
-  private static updateBgRelatedProperties(
+  private static updateBgOffset(
     x: number,
     y: number
   ) {
-    Game.instance.turtle.bgStartX = x;
-    Game.instance.turtle.bgStartY = y;
     Game.instance.level.bgOffsetX = x;
     Game.instance.level.bgOffsetY = y;
   }
