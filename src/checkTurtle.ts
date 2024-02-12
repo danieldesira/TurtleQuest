@@ -3,7 +3,9 @@ import ICharacter from "./characters/ICharacter";
 import Turtle from "./characters/Turtle";
 import angles from "./constants/angles";
 import Dialog from "./dialog/dialog";
+import { levelUp } from "./features/levels/levelReducer";
 import levels, { LevelChangeTypes } from "./levels/levels";
+import store from "./store";
 
 async function checkTurtle(): Promise<LevelChangeTypes> {
   const mainCharacter = Game.instance.turtle;
@@ -38,13 +40,14 @@ async function checkTurtle(): Promise<LevelChangeTypes> {
 
 async function handleOffBgWidth(): Promise<LevelChangeTypes> {
   Game.instance.incrementLevel();
+  store.dispatch(levelUp());
   Game.instance.turtle.resetPosition();
   if (Game.instance.levelNo <= levels.length) {
     await Game.instance.loadNewLevel();
     Dialog.notify({
       id: "new-level",
       title: "New Level",
-      text: [`Welcome to level ${Game.instance.levelNo}`],
+      text: [`Welcome to level ${store.getState().levels.level.value}`],
     });
     return LevelChangeTypes.NewLevel;
   } else {
