@@ -1,8 +1,9 @@
 import Game from "../Game";
 import Background from "../Background";
-import Dialog from "../dialog/dialog";
 import { LevelChangeTypes } from "../levels/levels";
 import checkTurtle from "../checkTurtle";
+import store from "../store";
+import { updateDialogContent } from "../features/dialogs/dialogReducer";
 
 interface Options {
   canvas: HTMLCanvasElement;
@@ -24,24 +25,27 @@ const render = async ({ canvas, context }: Options) => {
 
       requestAnimationFrame(() => render({ canvas, context }));
     } else if (levelChangeType === LevelChangeTypes.GameComplete) {
-      Dialog.notify({
-        id: "game-over-dialog",
-        title: "Game complete",
-        text: ["Game complete. Congratulations!"],
-      });
+      store.dispatch(
+        updateDialogContent({
+          dialog: {
+            title: "Game Complete",
+            text: ["Game complete. Congratulations!"],
+          },
+        })
+      );
     } else {
-      Dialog.notify({
-        id: "game-over-dialog",
-        title: "You lose",
-        text: ["Better luck next time!"],
-      });
+      store.dispatch(
+        updateDialogContent({
+          dialog: { title: "You lose", text: ["Better luck next time!"] },
+        })
+      );
     }
   } catch (error) {
-    Dialog.notify({
-      id: "game-error",
-      title: "Error",
-      text: [error],
-    });
+    store.dispatch(
+      updateDialogContent({
+        dialog: { title: "Unhandled Error", text: [error] },
+      })
+    );
     throw error;
   }
 };

@@ -2,8 +2,15 @@ import Game from "./Game";
 import ICharacter from "./characters/ICharacter";
 import Turtle from "./characters/Turtle";
 import angles from "./constants/angles";
-import Dialog from "./dialog/dialog";
+import { updateDialogContent } from "./features/dialogs/dialogReducer";
 import { levelUp } from "./features/levels/levelReducer";
+import {
+  breath,
+  eat,
+  respire,
+  takeDamage,
+  useFood,
+} from "./features/turtleMonitor/turtleReducers";
 import levels, { LevelChangeTypes } from "./levels/levels";
 import store from "./store";
 
@@ -11,20 +18,22 @@ async function checkTurtle(): Promise<LevelChangeTypes> {
   const mainCharacter = Game.instance.turtle;
   const bgWidth = Game.instance.level.bgImg.width;
 
-  mainCharacter.decreaseFoodValue();
+  store.dispatch(useFood());
+
+  const turtleState = store.getState().turtleMonitor.turtle;
 
   if (
-    mainCharacter.foodValue <= 0 ||
-    mainCharacter.oxygenValue <= 0 ||
-    mainCharacter.lifeValue <= 0
+    turtleState.food.value <= 0 ||
+    turtleState.oxygen.value <= 0 ||
+    turtleState.life.value <= 0
   ) {
     return LevelChangeTypes.GameOver;
   }
 
   if (mainCharacter.y <= 0) {
-    mainCharacter.breath();
+    store.dispatch(breath());
   } else {
-    mainCharacter.useOxygen();
+    store.dispatch(respire());
   }
 
   if (mainCharacter.x >= bgWidth) {
@@ -39,16 +48,18 @@ async function checkTurtle(): Promise<LevelChangeTypes> {
 }
 
 async function handleOffBgWidth(): Promise<LevelChangeTypes> {
-  Game.instance.incrementLevel();
   store.dispatch(levelUp());
   Game.instance.turtle.resetPosition();
-  if (Game.instance.levelNo <= levels.length) {
+  if (store.getState().levels.level.value <= levels.length) {
     await Game.instance.loadNewLevel();
-    Dialog.notify({
-      id: "new-level",
-      title: "New Level",
-      text: [`Welcome to level ${store.getState().levels.level.value}`],
-    });
+    store.dispatch(
+      updateDialogContent({
+        dialog: {
+          title: "Level Up",
+          text: [`Welcome to level ${store.getState().levels.level.value}`],
+        },
+      })
+    );
     return LevelChangeTypes.NewLevel;
   } else {
     return LevelChangeTypes.GameComplete;
@@ -61,10 +72,10 @@ function checkIfTurtleMeetsCharacters() {
   for (const character of level.characters) {
     if (areTurtleCharacterIntersecting(mainCharacter, character)) {
       if (character.isPrey) {
-        mainCharacter.increaseFoodValue(character.foodValue);
+        store.dispatch(eat({ turtle: { foodValue: character.foodValue } }));
         level.characters.delete(character);
       } else if (character.isObstacle) {
-        mainCharacter.applyDamage(character.damage);
+        store.dispatch(takeDamage({ turtle: { lifeValue: character.damage } }));
         level.characters.delete(character);
       }
     }

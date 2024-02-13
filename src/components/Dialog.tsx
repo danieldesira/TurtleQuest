@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import RootState from "../features/RootState";
+import { updateDialogContent } from "../features/dialogs/dialogReducer";
 
-interface Props {
-  title: string;
-  text: string[];
-}
+function Dialog() {
+  const { title, text } = useSelector(
+    (state: RootState) => state.dialogs.dialog
+  );
 
-function Dialog({ title, text }: Props) {
-  const [show, setShow] = useState<boolean>(true);
+  const dispatch = useDispatch();
 
-  const handleOk = () => setShow(false);
+  const handleOk = () =>
+    dispatch(updateDialogContent({ dialog: { title: "", text: [] } }));
 
   const dialogJsx = (
     <div
@@ -34,7 +37,7 @@ function Dialog({ title, text }: Props) {
     </div>
   );
 
-  return <>{show ? dialogJsx : null}</>;
+  return <>{title ? dialogJsx : null}</>;
 }
 
 export default Dialog;

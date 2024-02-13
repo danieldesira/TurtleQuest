@@ -11,55 +11,18 @@ class Turtle extends Character {
   protected readonly _imageFilename: string = "turtle.png";
   protected readonly _speed: number = 1;
   private _angle: number;
-  protected _foodValue: number;
-  private _lifeValue: number;
-  private _oxygenValue: number;
-  protected _damage: number; 
+  protected readonly _foodValue: number = 0;
+  protected readonly _damage: number = 0; 
 
   constructor() {
     super();
     this.resetPosition();
     this._angle = angles.right;
-    this.reset();
   }
 
   resetPosition() {
     this._x = 50;
     this._y = 10;
-  }
-
-  reset() {
-    this._foodValue = 100;
-    this._lifeValue = 100;
-    this._oxygenValue = 100;
-  }
-
-  increaseFoodValue(foodValue: number) {
-    this._foodValue += foodValue;
-  }
-
-  decreaseFoodValue() {
-    this._foodValue -= 0.005;
-  }
-
-  breath() {
-    this._oxygenValue += 0.5;
-  }
-
-  useOxygen() {
-    this._oxygenValue -= 0.001;
-  }
-
-  applyDamage(damage: number) {
-    this._lifeValue -= damage;
-  }
-
-  get lifeValue() {
-    return this._lifeValue;
-  }
-
-  get oxygenValue() {
-    return this._oxygenValue;
   }
 
   get direction() {

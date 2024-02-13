@@ -1,18 +1,18 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./components/App";
+import store from "./store";
+import { updateDialogContent } from "./features/dialogs/dialogReducer";
 
-(async () => {
-
-  // function updateMeters() {
-  //   const foodMeter = document.getElementById("foodMeter") as HTMLMeterElement;
-  //   foodMeter.value = turtle.foodValue;
-  //   const lifeMeter = document.getElementById("lifeMeter") as HTMLMeterElement;
-  //   lifeMeter.value = turtle.lifeValue;
-  //   const oxygenMeter = document.getElementById("oxygenMeter") as HTMLMeterElement;
-  //   oxygenMeter.value = turtle.oxygenValue;
-  // }
-})();
 const appRootElement = document.getElementById("app") as HTMLElement;
 const root = createRoot(appRootElement);
 root.render(<App />);
+
+store.dispatch(
+  updateDialogContent({
+    dialog: {
+      title: "Welcome",
+      text: ["Welcome to Turtle Escape!"],
+    },
+  })
+);

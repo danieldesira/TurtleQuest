@@ -1,13 +1,13 @@
 import Turtle from "./characters/Turtle";
 import ILevel from "./levels/ILevel";
 import selectLvl from "./levels/selectLvl";
+import store from "./store";
 
 class Game {
   private static _instance: Game;
 
   private constructor() {
     this._turtle = new Turtle();
-    this._levelNo = 1;
     this.loadNewLevel();
   }
 
@@ -19,19 +19,10 @@ class Game {
   }
 
   private _turtle: Turtle;
-  private _levelNo: number;
   private _level: ILevel;
-
-  incrementLevel() {
-    this._levelNo++;
-  }
 
   get turtle() {
     return this._turtle;
-  }
-
-  get levelNo() {
-    return this._levelNo;
   }
 
   get level() {
@@ -39,7 +30,7 @@ class Game {
   }
 
   async loadNewLevel() {
-    this._level = selectLvl(this._levelNo);
+    this._level = selectLvl(store.getState().levels.level.value);
     await this._level.init();
   }
 }

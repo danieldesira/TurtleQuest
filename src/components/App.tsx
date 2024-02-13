@@ -13,7 +13,7 @@ function App() {
       <Header />
       <GameCanvas />
       <ControlGroup />
-      <Dialog title="Welcome" text={["Welcome to Turtle Escape!"]} />
+      <Dialog />
       <Footer />
     </Provider>
   );
