@@ -8,6 +8,7 @@ class Turtle extends Character {
   protected readonly _isPrey: boolean = false;
   protected readonly _isObstacle: boolean = false;
   protected readonly _isBenthic: boolean;
+  protected readonly _isSolitary: boolean = true;
   protected readonly _imageFilename: string = "turtle.png";
   protected readonly _speed: number = 1;
   private _angle: number;

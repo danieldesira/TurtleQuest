@@ -9,6 +9,7 @@ interface ICharacter {
   get isPrey(): boolean;
   get isObstacle(): boolean;
   get isBenthic(): boolean;
+  get isSolitary(): boolean;
   get foodValue(): number;
   get damage(): number;
   get image(): HTMLImageElement;

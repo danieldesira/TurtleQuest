@@ -13,8 +13,14 @@ const slice = createSlice({
   initialState,
   reducers: {
     breath: (state) => {
-      if (state.turtle.oxygen.value < 100) {
-        state.turtle.oxygen.value += 0.5;
+      const increment = 0.5;
+      if (
+        state.turtle.oxygen.value + increment <
+        initialState.turtle.oxygen.value
+      ) {
+        state.turtle.oxygen.value += increment;
+      } else {
+        state.turtle.oxygen.value = initialState.turtle.oxygen.value;
       }
     },
     respire: (state) => {
@@ -24,8 +30,14 @@ const slice = createSlice({
       state.turtle.food.value -= 0.005;
     },
     eat: (state, action) => {
-      if (state.turtle.food.value < 100) {
-        state.turtle.food.value += action.payload.turtle.foodValue;
+      const increment = action.payload.turtle.foodValue;
+      if (
+        state.turtle.food.value + increment <
+        initialState.turtle.food.value
+      ) {
+        state.turtle.food.value += increment;
+      } else {
+        state.turtle.food.value = initialState.turtle.food.value;
       }
     },
     takeDamage: (state, action) => {

@@ -9,6 +9,7 @@ abstract class Character implements ICharacter {
   protected abstract readonly _isPrey: boolean;
   protected abstract readonly _isObstacle: boolean;
   protected abstract readonly _isBenthic: boolean;
+  protected abstract readonly _isSolitary: boolean;
   protected _image: HTMLImageElement;
   protected readonly _baseImagePath: string = "./images/characters/";
   protected abstract readonly _imageFilename: string;
@@ -75,6 +76,10 @@ abstract class Character implements ICharacter {
 
   get isBenthic() {
     return this._isBenthic;
+  }
+
+  get isSolitary() {
+    return this._isSolitary;
   }
 
   get foodValue() {

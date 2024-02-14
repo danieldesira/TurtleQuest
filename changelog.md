@@ -64,6 +64,7 @@
 * Refactoring:
  - Using React components and hooks
  - Introduced `Game` singleton to share turtle and level data more easily
+ - Using Redux for global state management
 * Introduced plastic bag
 * Introduced Neptune grass as a benthic character
 * Minor UI improvements

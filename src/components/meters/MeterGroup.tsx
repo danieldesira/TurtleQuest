@@ -6,12 +6,12 @@ import { useSelector } from "react-redux";
 import RootState from "../../features/RootState";
 
 function MeterGroup() {
-  const values = useSelector((state: RootState) => state.turtleMonitor.turtle);
+  const turtleState = useSelector((state: RootState) => state.turtleMonitor.turtle);
   return (
     <>
-      <MeterContainer icon={<FaFishFins />} value={values.food.value} />
-      <MeterContainer icon={<FaHeartbeat />} value={values.life.value} />
-      <MeterContainer icon={<FaLungs />} value={values.oxygen.value} />
+      <MeterContainer icon={<FaFishFins />} value={turtleState.food.value} />
+      <MeterContainer icon={<FaHeartbeat />} value={turtleState.life.value} />
+      <MeterContainer icon={<FaLungs />} value={turtleState.oxygen.value} />
     </>
   );
 }
