@@ -10,6 +10,7 @@ class Shrimp extends Character {
   protected readonly _foodValue: number = 0.01;
   protected readonly _damage: number = 0;
   protected readonly _speed: number = 0.6;
+  protected readonly _stomachImpact: number = 0.05;
 }
 
 export default Shrimp;

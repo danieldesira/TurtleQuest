@@ -11,6 +11,7 @@ interface ICharacter {
   get isBenthic(): boolean;
   get isSolitary(): boolean;
   get foodValue(): number;
+  get stomachImpact(): number;
   get damage(): number;
   get image(): HTMLImageElement;
   swim(): void;

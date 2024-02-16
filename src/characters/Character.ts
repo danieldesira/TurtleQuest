@@ -16,6 +16,7 @@ abstract class Character implements ICharacter {
   protected abstract readonly _foodValue: number;
   protected abstract readonly _damage: number;
   protected abstract readonly _speed: number;
+  protected abstract readonly _stomachImpact: number;
 
   loadImage(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
@@ -92,6 +93,10 @@ abstract class Character implements ICharacter {
 
   get image() {
     return this._image;
+  }
+
+  get stomachImpact() {
+    return this._stomachImpact;
   }
 
   swim(): void {

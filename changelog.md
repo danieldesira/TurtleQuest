@@ -60,7 +60,7 @@
 * Massive refactor
 * Introduced breathing and oxygen level
 
-#0.2.0 Preview -
+#0.2.0 Preview - 16/02/2024 17:00 UTC+1
 * Refactoring:
  - Using React components and hooks
  - Introduced `Game` singleton to share turtle and level data more easily
@@ -70,3 +70,4 @@
 * Minor UI improvements
 * Randomised character movement and experimental prey movement
 * Improved collision detection
+* Introduced stomach capacity meter

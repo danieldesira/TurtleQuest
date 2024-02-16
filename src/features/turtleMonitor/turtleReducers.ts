@@ -5,6 +5,7 @@ const initialState = {
     life: { value: 100 },
     food: { value: 100 },
     oxygen: { value: 100 },
+    stomachCapacity: { value: 100 },
   },
 };
 
@@ -46,6 +47,26 @@ const slice = createSlice({
     resetTurtle: (state) => {
       state.turtle = initialState.turtle;
     },
+    decrementStomachCapacity: (state, action) => {
+      const decrement = action.payload.turtle.stomachValue;
+      if (state.turtle.stomachCapacity.value - decrement > 0) {
+        state.turtle.stomachCapacity.value -= decrement;
+      } else {
+        state.turtle.stomachCapacity.value = 0;
+      }
+    },
+    recoverStomachCapacity: (state) => {
+      const increment = 0.00000000000000000000005;
+      if (
+        state.turtle.stomachCapacity.value + increment <
+        initialState.turtle.stomachCapacity.value
+      ) {
+        state.turtle.stomachCapacity.value += increment;
+      } else {
+        state.turtle.stomachCapacity.value =
+          initialState.turtle.stomachCapacity.value;
+      }
+    },
   },
 });
 
@@ -56,6 +77,8 @@ export const {
   eat,
   takeDamage,
   resetTurtle,
+  decrementStomachCapacity,
+  recoverStomachCapacity,
 } = slice.actions;
 
 export default slice.reducer;

@@ -6,7 +6,9 @@ import { updateDialogContent } from "./features/dialogs/dialogReducer";
 import { levelUp } from "./features/levels/levelReducer";
 import {
   breath,
+  decrementStomachCapacity,
   eat,
+  recoverStomachCapacity,
   respire,
   takeDamage,
   useFood,
@@ -19,6 +21,7 @@ async function checkTurtle(): Promise<LevelChangeTypes> {
   const bgWidth = Game.instance.level.bgImg.width;
 
   store.dispatch(useFood());
+  store.dispatch(recoverStomachCapacity());
 
   const turtleState = store.getState().turtleMonitor.turtle;
 
@@ -69,14 +72,30 @@ async function handleOffBgWidth(): Promise<LevelChangeTypes> {
 function checkIfTurtleMeetsCharacters() {
   const mainCharacter = Game.instance.turtle;
   const level = Game.instance.level;
+
+  const handleCommonConsequencies = (character: ICharacter) => {
+    store.dispatch(
+      decrementStomachCapacity({
+        turtle: { stomachValue: character.stomachImpact },
+      })
+    );
+    level.characters.delete(character);
+  };
+
   for (const character of level.characters) {
     if (areTurtleCharacterIntersecting(mainCharacter, character)) {
       if (character.isPrey) {
-        store.dispatch(eat({ turtle: { foodValue: character.foodValue } }));
-        level.characters.delete(character);
+        const canEatCharacter =
+          store.getState().turtleMonitor.turtle.stomachCapacity.value -
+            character.stomachImpact >
+          0;
+        if (canEatCharacter) {
+          store.dispatch(eat({ turtle: { foodValue: character.foodValue } }));
+          handleCommonConsequencies(character);
+        }
       } else if (character.isObstacle) {
         store.dispatch(takeDamage({ turtle: { lifeValue: character.damage } }));
-        level.characters.delete(character);
+        handleCommonConsequencies(character);
       }
     }
   }
