@@ -14,7 +14,8 @@ class Turtle extends Character {
   private _angle: number;
   protected readonly _foodValue: number = 0;
   protected readonly _damage: number = 0;
-  protected readonly _stomachImpact: number= 0;
+  protected readonly _stomachImpact: number = 0;
+  protected readonly _points: number = 0;
 
   constructor() {
     super();

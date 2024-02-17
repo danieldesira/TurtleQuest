@@ -71,3 +71,6 @@
 * Randomised character movement and experimental prey movement
 * Improved collision detection
 * Introduced stomach capacity meter
+
+#0.2.1 Preview - 
+* Introduced point system

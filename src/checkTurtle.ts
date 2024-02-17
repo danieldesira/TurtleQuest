@@ -8,6 +8,7 @@ import {
   breath,
   decrementStomachCapacity,
   eat,
+  gainPoints,
   recoverStomachCapacity,
   respire,
   takeDamage,
@@ -79,6 +80,7 @@ function checkIfTurtleMeetsCharacters() {
         turtle: { stomachValue: character.stomachImpact },
       })
     );
+    store.dispatch(gainPoints({ turtle: { xpValue: character.points } }));
     level.characters.delete(character);
   };
 

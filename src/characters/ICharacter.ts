@@ -14,6 +14,7 @@ interface ICharacter {
   get stomachImpact(): number;
   get damage(): number;
   get image(): HTMLImageElement;
+  get points(): number;
   swim(): void;
 }
 

@@ -4,6 +4,7 @@ interface TurtleState {
     life: { value: number };
     food: { value: number };
     stomachCapacity: { value: number };
+    xp: { value: number };
   };
 }
 

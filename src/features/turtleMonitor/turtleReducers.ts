@@ -6,6 +6,7 @@ const initialState = {
     food: { value: 100 },
     oxygen: { value: 100 },
     stomachCapacity: { value: 100 },
+    xp: { value: 0 },
   },
 };
 
@@ -67,6 +68,10 @@ const slice = createSlice({
           initialState.turtle.stomachCapacity.value;
       }
     },
+    gainPoints: (state, action) => {
+      const increment = action.payload.turtle.xpValue;
+      state.turtle.xp.value += increment;
+    },
   },
 });
 
@@ -79,6 +84,7 @@ export const {
   resetTurtle,
   decrementStomachCapacity,
   recoverStomachCapacity,
+  gainPoints,
 } = slice.actions;
 
 export default slice.reducer;
