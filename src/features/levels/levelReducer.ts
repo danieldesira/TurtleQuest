@@ -9,9 +9,12 @@ const levelSlice = createSlice({
     levelUp: (state) => {
       state.level.value++;
     },
+    resetLevel: (state) => {
+      state.level.value = 1;
+    },
   },
 });
 
-export const { levelUp } = levelSlice.actions;
+export const { levelUp, resetLevel } = levelSlice.actions;
 
 export default levelSlice.reducer;

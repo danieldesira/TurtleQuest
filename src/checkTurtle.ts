@@ -3,6 +3,7 @@ import ICharacter from "./characters/ICharacter";
 import Turtle from "./characters/Turtle";
 import angles from "./constants/angles";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
+import { stopGame } from "./features/gameState/gameStateReducer";
 import { levelUp } from "./features/levels/levelReducer";
 import {
   breath,
@@ -31,6 +32,7 @@ async function checkTurtle(): Promise<LevelChangeTypes> {
     turtleState.oxygen.value <= 0 ||
     turtleState.life.value <= 0
   ) {
+    store.dispatch(stopGame());
     return LevelChangeTypes.GameOver;
   }
 
@@ -66,6 +68,7 @@ async function handleOffBgWidth(): Promise<LevelChangeTypes> {
     );
     return LevelChangeTypes.NewLevel;
   } else {
+    store.dispatch(stopGame());
     return LevelChangeTypes.GameComplete;
   }
 }

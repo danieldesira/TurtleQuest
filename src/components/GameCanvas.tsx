@@ -4,6 +4,7 @@ import handleWheel from "../controls/handleWheel";
 import useRender from "../hooks/useRender";
 import useResizeCanvas from "../hooks/useResizeCanvas";
 import Game from "../Game";
+import PlayAgainButton from "./PlayAgainButton";
 
 function GameCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -27,14 +28,24 @@ function GameCanvas() {
   }, []);
 
   return (
-    <canvas
-      height="400"
-      width="700"
-      tabIndex={1}
-      ref={canvasRef}
-      onKeyDown={handleKeyDown}
-      onWheel={handleWheel}
-    ></canvas>
+    <>
+      <PlayAgainButton
+        render={async () =>
+          await render({
+            canvas: canvasRef.current,
+            context: canvasRef.current.getContext("2d"),
+          })
+        }
+      />
+      <canvas
+        height="400"
+        width="700"
+        tabIndex={1}
+        ref={canvasRef}
+        onKeyDown={handleKeyDown}
+        onWheel={handleWheel}
+      ></canvas>
+    </>
   );
 }
 

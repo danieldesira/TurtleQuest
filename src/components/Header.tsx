@@ -2,6 +2,7 @@ import React from "react";
 import LevelText from "./LevelText";
 import MeterGroup from "./meters/MeterGroup";
 import XPText from "./XPText";
+import NextLevelIndication from "./NextLevelIndication";
 
 function Header() {
   return (
@@ -9,6 +10,7 @@ function Header() {
       <MeterGroup />
       <XPText />
       <LevelText />
+      <NextLevelIndication />
     </div>
   );
 }
