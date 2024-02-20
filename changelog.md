@@ -72,5 +72,9 @@
 * Improved collision detection
 * Introduced stomach capacity meter
 
-#0.2.1 Preview - 
+#0.2.1 Preview - 20/02/2024 17:45 UTC+1
 * Introduced point system
+* Realigned header components
+* Added Play Again button when game ends
+* Vastly sped up stomach recovery
+* Show direction to the next level

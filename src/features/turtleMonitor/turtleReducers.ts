@@ -57,7 +57,7 @@ const slice = createSlice({
       }
     },
     recoverStomachCapacity: (state) => {
-      const increment = 0.00000000000000000000005;
+      const increment = 0.00005;
       if (
         state.turtle.stomachCapacity.value + increment <
         initialState.turtle.stomachCapacity.value

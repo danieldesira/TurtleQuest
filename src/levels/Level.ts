@@ -4,8 +4,9 @@ import ILevel from "./ILevel";
 abstract class Level implements ILevel {
   protected readonly _backgroundImagePath: string = "./images/backgrounds/";  
   protected readonly abstract _backgroundImageFilename: string;
+  protected readonly abstract _initialCharacters: Set<ICharacter>;
   protected _backgroundImage: HTMLImageElement;
-  protected abstract _characters: Set<ICharacter>;
+  protected _characters: Set<ICharacter> = new Set();
   protected _bgOffsetX: number;
   protected _bgOffsetY: number;
   protected readonly abstract _benthicOffsetY: number;
@@ -13,6 +14,7 @@ abstract class Level implements ILevel {
   async init(): Promise<HTMLImageElement> {
     try {
       await this.loadBgImg();
+      this.deepCopyCharacters();
       await this.loadCharacters();
       this.setInitialCharacterPositions();
       return this._backgroundImage;
@@ -70,6 +72,12 @@ abstract class Level implements ILevel {
       } else {
         character.y = Math.random() * this._backgroundImage.height;
       }
+    }
+  }
+
+  private deepCopyCharacters(): void {
+    for (const character of this._initialCharacters) {
+      this._characters.add(character);
     }
   }
 

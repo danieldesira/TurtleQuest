@@ -6,7 +6,7 @@ import Level from "./Level";
 
 class Level1 extends Level {
   protected readonly _backgroundImageFilename: string = "bg-lvl1.png";
-  protected _characters: Set<ICharacter> = new Set([
+  protected readonly _initialCharacters: Set<ICharacter> = new Set([
     new Shrimp(),
     new Shrimp(),
     new Shrimp(),

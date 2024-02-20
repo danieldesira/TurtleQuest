@@ -6,7 +6,7 @@ import NextLevelIndication from "./NextLevelIndication";
 
 function Header() {
   return (
-    <div className="fixed top-1 left-1 flex text-white gap-5">
+    <div className="fixed top-1 left-1 flex text-white gap-5 items-center">
       <MeterGroup />
       <XPText />
       <LevelText />
