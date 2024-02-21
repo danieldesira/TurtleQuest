@@ -1,5 +1,5 @@
 import Game from "../Game";
-import angles from "../constants/angles";
+import directions from "../constants/directions";
 import Character from "./Character";
 
 class Turtle extends Character {
@@ -20,7 +20,7 @@ class Turtle extends Character {
   constructor() {
     super();
     this.resetPosition();
-    this._angle = angles.right;
+    this._angle = directions.right;
   }
 
   resetPosition() {
@@ -33,26 +33,28 @@ class Turtle extends Character {
   }
 
   moveUp() {
+    this.rotate(directions.up);
     if (this._y > 0) {
       this._y -= this._speed;
     }
   }
 
   moveDown() {
+    this.rotate(directions.down);
     if (this._y < Game.instance.level.bgImg.height) {
       this._y += this._speed;
     }
   }
 
   moveLeft() {
-    this.rotate(angles.left);
+    this.rotate(directions.left);
     if (this._x > 0) {
       this._x -= this._speed;
     }
   }
 
   moveRight() {
-    this.rotate(angles.right);
+    this.rotate(directions.right);
     this._x += this._speed;
   }
 
@@ -61,9 +63,11 @@ class Turtle extends Character {
   }
 
   private applyRotation(context: CanvasRenderingContext2D) {
-    context.translate(this._x, this._y);
+    const x = this._x - Game.instance.level.bgOffsetX;
+    const y = this._y - Game.instance.level.bgOffsetY;
+    context.translate(x, y);
     context.rotate(this._angle);
-    context.translate(-this._x, -this._y);
+    context.translate(-x, -y);
   }
 
   paint(context: CanvasRenderingContext2D) {

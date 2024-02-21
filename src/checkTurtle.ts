@@ -1,7 +1,7 @@
 import Game from "./Game";
 import ICharacter from "./characters/ICharacter";
 import Turtle from "./characters/Turtle";
-import angles from "./constants/angles";
+import directions from "./constants/directions";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
 import { stopGame } from "./features/gameState/gameStateReducer";
 import { levelUp } from "./features/levels/levelReducer";
@@ -122,25 +122,41 @@ function areTurtleCharacterIntersecting(
     return turtle.x >= x && x >= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
   };
 
+  const collidedWithTurtleUp = (x: number, y: number) => {
+    const turtleXEnd = turtle.x - turtle.image.height;
+    const turtleYEnd = turtle.y - turtle.image.width;
+    return turtle.x <= x && x <= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
+  };
+
   let isCollision = false;
 
-  if (turtle.direction === angles.left) {
-    isCollision =
-      collidedWithTurtleLeft(
-        otherCharacter.x + otherCharacter.image.width,
-        otherCharacter.y
-      ) ||
-      collidedWithTurtleLeft(
-        otherCharacter.x + otherCharacter.image.width,
-        otherCharacter.y + otherCharacter.image.height
-      );
-  } else {
-    isCollision =
-      collidedWithTurtleRight(otherCharacter.x, otherCharacter.y) ||
-      collidedWithTurtleRight(
-        otherCharacter.x,
-        otherCharacter.y + otherCharacter.image.height
-      );
+  switch (turtle.direction) {
+    case directions.left:
+      isCollision =
+        collidedWithTurtleLeft(
+          otherCharacter.x + otherCharacter.image.width,
+          otherCharacter.y
+        ) ||
+        collidedWithTurtleLeft(
+          otherCharacter.x + otherCharacter.image.width,
+          otherCharacter.y + otherCharacter.image.height
+        );
+      break;
+    case directions.right:
+      isCollision =
+        collidedWithTurtleRight(otherCharacter.x, otherCharacter.y) ||
+        collidedWithTurtleRight(
+          otherCharacter.x,
+          otherCharacter.y + otherCharacter.image.height
+        );
+      break;
+    case directions.up:
+      isCollision =
+        collidedWithTurtleUp(otherCharacter.x, otherCharacter.y) ||
+        collidedWithTurtleUp(
+          otherCharacter.x + otherCharacter.image.width,
+          otherCharacter.y + otherCharacter.image.height
+        );
   }
 
   return isCollision;

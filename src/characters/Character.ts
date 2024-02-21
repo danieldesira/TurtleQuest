@@ -1,5 +1,5 @@
 import Game from "../Game";
-import angles from "../constants/angles";
+import directions from "../constants/directions";
 import ICharacter from "./ICharacter";
 
 abstract class Character implements ICharacter {
@@ -117,9 +117,9 @@ abstract class Character implements ICharacter {
         console.log(
           `Turtle position: ${turtle._x}, ${turtle._y}\nPrey position: ${this._x}, ${this._y}`
         );
-        if (turtle.direction === angles.left) {
+        if (turtle.direction === directions.left) {
           this._x -= this._speed;
-        } else {
+        } else if (turtle.direction === directions.right) {
           this._x += this._speed;
         }
       }

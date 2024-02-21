@@ -78,3 +78,5 @@
 * Added Play Again button when game ends
 * Vastly sped up stomach recovery
 * Show direction to the next level
+
+#0.2.2 Preview -

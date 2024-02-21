@@ -8,3 +8,4 @@
 - Corinne Wood
 - Marcos Méndez
 - Yazan Enayeh
+- Pierre Borg
