@@ -1,4 +1,4 @@
-import ICharacter from "../characters/ICharacter";
+import ICharacter from "../characters/interfaces/ICharacter";
 import NeptuneGrass from "../characters/NeptuneGrass";
 import PlasticBag from "../characters/PlasticBag";
 import Level from "./Level";

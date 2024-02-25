@@ -1,10 +1,6 @@
-import Character from "./Character";
+import Obstacle from "./abstract/Obstacle";
 
-class PlasticBag extends Character {
-  protected readonly _isMain: boolean = false;
-  protected readonly _isPrey: boolean = false;
-  protected readonly _isObstacle: boolean = true;
-  protected readonly _isBenthic: boolean = false;
+class PlasticBag extends Obstacle {
   protected readonly _isSolitary: boolean = true;
   protected readonly _imageFilename: string = "plastic-bag.png";
   protected readonly _foodValue: number = 0;

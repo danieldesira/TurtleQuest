@@ -1,10 +1,6 @@
-import Character from "./Character";
+import Prey from "./abstract/Prey";
 
-class Sardine extends Character {
-  protected readonly _isMain: boolean = false;
-  protected readonly _isPrey: boolean = true;
-  protected readonly _isObstacle: boolean = false;
-  protected readonly _isBenthic: boolean = false;
+class Sardine extends Prey {
   protected readonly _isSolitary: boolean = false;
   protected readonly _imageFilename: string = "sardine.png";
   protected readonly _foodValue: number = 0.6;

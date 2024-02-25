@@ -1,4 +1,4 @@
-import ICharacter from "../characters/ICharacter";
+import ICharacter from "../characters/interfaces/ICharacter";
 
 interface ILevel {
   init(): Promise<HTMLImageElement>;
@@ -9,6 +9,7 @@ interface ILevel {
   get bgOffsetX(): number;
   get bgOffsetY(): number;
   get characters(): Set<ICharacter>;
+  get benthicOffsetY(): number;
   paintCharacters(context: CanvasRenderingContext2D): void;
   moveCharacters(): void;
 }

@@ -1,11 +1,7 @@
-import Character from "./Character";
+import BenthicPrey from "./abstract/BenthicPrey";
 
-class NeptuneGrass extends Character {
-  protected readonly _isMain: boolean = false;
-  protected readonly _isPrey: boolean = true;
-  protected readonly _isObstacle: boolean = false;
-  protected readonly _isBenthic: boolean = true;
-  protected readonly _isSolitary: boolean = false;
+class NeptuneGrass extends BenthicPrey {
+  protected _isSolitary: boolean;
   protected readonly _imageFilename: string = "neptune-grass.png";
   protected readonly _foodValue: number = 5;
   protected readonly _damage: number = 0;

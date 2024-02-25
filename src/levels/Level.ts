@@ -1,15 +1,15 @@
-import ICharacter from "../characters/ICharacter";
+import ICharacter from "../characters/interfaces/ICharacter";
 import ILevel from "./ILevel";
 
 abstract class Level implements ILevel {
-  protected readonly _backgroundImagePath: string = "./images/backgrounds/";  
-  protected readonly abstract _backgroundImageFilename: string;
-  protected readonly abstract _initialCharacters: Set<ICharacter>;
+  protected readonly _backgroundImagePath: string = "./images/backgrounds/";
+  protected abstract readonly _backgroundImageFilename: string;
+  protected abstract readonly _initialCharacters: Set<ICharacter>;
   protected _backgroundImage: HTMLImageElement;
   protected _characters: Set<ICharacter> = new Set();
   protected _bgOffsetX: number;
   protected _bgOffsetY: number;
-  protected readonly abstract _benthicOffsetY: number;
+  protected abstract readonly _benthicOffsetY: number;
 
   async init(): Promise<HTMLImageElement> {
     try {
@@ -26,7 +26,8 @@ abstract class Level implements ILevel {
   private loadBgImg(): Promise<void> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
-      backgroundImage.src = this._backgroundImagePath + this._backgroundImageFilename;
+      backgroundImage.src =
+        this._backgroundImagePath + this._backgroundImageFilename;
       backgroundImage.onload = () => {
         this._backgroundImage = backgroundImage;
         resolve();
@@ -64,14 +65,13 @@ abstract class Level implements ILevel {
     return this._characters;
   }
 
+  get benthicOffsetY() {
+    return this._benthicOffsetY;
+  }
+
   private setInitialCharacterPositions(): void {
     for (const character of this._characters) {
-      character.x = Math.random() * this._backgroundImage.width;
-      if (character.isBenthic) {
-        character.y = (Math.random() * (this._backgroundImage.height - this._benthicOffsetY)) + this._benthicOffsetY;
-      } else {
-        character.y = Math.random() * this._backgroundImage.height;
-      }
+      character.setInitialPosition();
     }
   }
 

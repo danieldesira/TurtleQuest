@@ -1,17 +1,14 @@
 import Game from "../Game";
-import directions from "../constants/directions";
-import Character from "./Character";
+import Directions from "../enums/Directions";
+import Character from "./abstract/Character";
+import IMainCharacter from "./interfaces/IMainCharacter";
 
-class Turtle extends Character {
+class Turtle extends Character implements IMainCharacter {
   static scientificName: string = "Carretta carretta";
-  protected readonly _isMain: boolean = true;
-  protected readonly _isPrey: boolean = false;
-  protected readonly _isObstacle: boolean = false;
-  protected readonly _isBenthic: boolean;
   protected readonly _isSolitary: boolean = true;
   protected readonly _imageFilename: string = "turtle.png";
   protected readonly _speed: number = 1;
-  private _angle: number;
+  private _angle: Directions;
   protected readonly _foodValue: number = 0;
   protected readonly _damage: number = 0;
   protected readonly _stomachImpact: number = 0;
@@ -20,7 +17,7 @@ class Turtle extends Character {
   constructor() {
     super();
     this.resetPosition();
-    this._angle = directions.right;
+    this._angle = Directions.Right;
   }
 
   resetPosition() {
@@ -33,28 +30,28 @@ class Turtle extends Character {
   }
 
   moveUp() {
-    this.rotate(directions.up);
+    this.rotate(Directions.Up);
     if (this._y > 0) {
       this._y -= this._speed;
     }
   }
 
   moveDown() {
-    this.rotate(directions.down);
+    this.rotate(Directions.Down);
     if (this._y < Game.instance.level.bgImg.height) {
       this._y += this._speed;
     }
   }
 
   moveLeft() {
-    this.rotate(directions.left);
+    this.rotate(Directions.Left);
     if (this._x > 0) {
       this._x -= this._speed;
     }
   }
 
   moveRight() {
-    this.rotate(directions.right);
+    this.rotate(Directions.Right);
     this._x += this._speed;
   }
 

@@ -1,4 +1,4 @@
-import ICharacter from "../characters/ICharacter";
+import ICharacter from "../characters/interfaces/ICharacter";
 import PlasticBag from "../characters/PlasticBag";
 import Shrimp from "../characters/Shrimp";
 import Sardine from "../characters/Sardine";

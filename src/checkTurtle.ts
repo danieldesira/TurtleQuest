@@ -1,18 +1,14 @@
 import Game from "./Game";
-import ICharacter from "./characters/ICharacter";
+import ICharacter from "./characters/interfaces/ICharacter";
 import Turtle from "./characters/Turtle";
-import directions from "./constants/directions";
+import Directions from "./enums/Directions";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
 import { stopGame } from "./features/gameState/gameStateReducer";
 import { levelUp } from "./features/levels/levelReducer";
 import {
   breath,
-  decrementStomachCapacity,
-  eat,
-  gainPoints,
   recoverStomachCapacity,
   respire,
-  takeDamage,
   useFood,
 } from "./features/turtleMonitor/turtleReducers";
 import levels, { LevelChangeTypes } from "./levels/levels";
@@ -77,31 +73,9 @@ function checkIfTurtleMeetsCharacters() {
   const mainCharacter = Game.instance.turtle;
   const level = Game.instance.level;
 
-  const handleCommonConsequencies = (character: ICharacter) => {
-    store.dispatch(
-      decrementStomachCapacity({
-        turtle: { stomachValue: character.stomachImpact },
-      })
-    );
-    store.dispatch(gainPoints({ turtle: { xpValue: character.points } }));
-    level.characters.delete(character);
-  };
-
   for (const character of level.characters) {
     if (areTurtleCharacterIntersecting(mainCharacter, character)) {
-      if (character.isPrey) {
-        const canEatCharacter =
-          store.getState().turtleMonitor.turtle.stomachCapacity.value -
-            character.stomachImpact >
-          0;
-        if (canEatCharacter) {
-          store.dispatch(eat({ turtle: { foodValue: character.foodValue } }));
-          handleCommonConsequencies(character);
-        }
-      } else if (character.isObstacle) {
-        store.dispatch(takeDamage({ turtle: { lifeValue: character.damage } }));
-        handleCommonConsequencies(character);
-      }
+      character.handleTurtleCollision();
     }
   }
 }
@@ -137,7 +111,7 @@ function areTurtleCharacterIntersecting(
   let isCollision = false;
 
   switch (turtle.direction) {
-    case directions.left:
+    case Directions.Left:
       isCollision =
         collidedWithTurtleLeft(
           otherCharacter.x + otherCharacter.image.width,
@@ -148,7 +122,7 @@ function areTurtleCharacterIntersecting(
           otherCharacter.y + otherCharacter.image.height
         );
       break;
-    case directions.right:
+    case Directions.Right:
       isCollision =
         collidedWithTurtleRight(otherCharacter.x, otherCharacter.y) ||
         collidedWithTurtleRight(
@@ -156,7 +130,7 @@ function areTurtleCharacterIntersecting(
           otherCharacter.y + otherCharacter.image.height
         );
       break;
-    case directions.up:
+    case Directions.Up:
       isCollision =
         collidedWithTurtleUp(
           otherCharacter.x,
@@ -165,9 +139,9 @@ function areTurtleCharacterIntersecting(
         collidedWithTurtleUp(
           otherCharacter.x + otherCharacter.image.width,
           otherCharacter.y + otherCharacter.image.height
-        );console.log(isCollision)
+        );
       break;
-    case directions.down:
+    case Directions.Down:
       isCollision =
         collidedWithTurtleDown(otherCharacter.x, otherCharacter.y) ||
         collidedWithTurtleDown(
