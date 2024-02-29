@@ -1,26 +1,13 @@
-import ICharacter from "../characters/interfaces/ICharacter";
-import PlasticBag from "../characters/PlasticBag";
-import Shrimp from "../characters/Shrimp";
-import Sardine from "../characters/Sardine";
 import Level from "./Level";
+import LevelCharacter from "./LevelCharacter";
 
 class Level1 extends Level {
   protected readonly _backgroundImageFilename: string = "bg-lvl1.png";
-  protected readonly _initialCharacters: Set<ICharacter> = new Set([
-    new Shrimp(),
-    new Shrimp(),
-    new Shrimp(),
-    new Shrimp(),
-    new Shrimp(),
-    new Shrimp(),
-    new Shrimp(),
-    new Sardine(),
-    new Sardine(),
-    new PlasticBag(),
-    new PlasticBag(),
-    new PlasticBag(),
-    new PlasticBag(),
-  ]);
+  protected readonly _initialCharacters: LevelCharacter[] = [
+    { type: "shrimp", amount: 20 },
+    { type: "sardine", amount: 10 },
+    { type: "plasticBag", amount: 8 },
+  ];
   protected readonly _benthicOffsetY: number = 9999;
 }
 

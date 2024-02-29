@@ -1,7 +1,7 @@
-import Level from "./Level";
+import ILevel from "./ILevel";
 import levels from "./levels";
 
-function selectLvl(currentLevel: number): Level {
+function selectLvl(currentLevel: number): ILevel {
   if (currentLevel <= levels.length) {
     return levels[currentLevel - 1];
   } else {

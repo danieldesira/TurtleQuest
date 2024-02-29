@@ -1,10 +1,15 @@
+import NeptuneGrass from "../characters/NeptuneGrass";
+import PlasticBag from "../characters/PlasticBag";
+import Sardine from "../characters/Sardine";
+import Shrimp from "../characters/Shrimp";
 import ICharacter from "../characters/interfaces/ICharacter";
 import ILevel from "./ILevel";
+import LevelCharacter, { CharacterType } from "./LevelCharacter";
 
 abstract class Level implements ILevel {
   protected readonly _backgroundImagePath: string = "./images/backgrounds/";
   protected abstract readonly _backgroundImageFilename: string;
-  protected abstract readonly _initialCharacters: Set<ICharacter>;
+  protected abstract readonly _initialCharacters: LevelCharacter[];
   protected _backgroundImage: HTMLImageElement;
   protected _characters: Set<ICharacter> = new Set();
   protected _bgOffsetX: number;
@@ -14,7 +19,7 @@ abstract class Level implements ILevel {
   async init(): Promise<HTMLImageElement> {
     try {
       await this.loadBgImg();
-      this.deepCopyCharacters();
+      this.createCharacters();
       await this.loadCharacters();
       this.setInitialCharacterPositions();
       return this._backgroundImage;
@@ -75,10 +80,33 @@ abstract class Level implements ILevel {
     }
   }
 
-  private deepCopyCharacters(): void {
-    for (const character of this._initialCharacters) {
-      this._characters.add(character);
+  private createCharacters(): void {
+    this._characters.clear();
+    for (const characterInfo of this._initialCharacters) {console.log(characterInfo);
+      for (let i = 0; i < characterInfo.amount; i++) {
+        const character = this.instantiateCharacter(characterInfo.type);
+        this._characters.add(character);
+      }
     }
+  }
+
+  private instantiateCharacter(type: CharacterType): ICharacter {
+    let character: ICharacter;
+    switch (type) {
+      case "shrimp":
+        character = new Shrimp();
+        break;
+      case "sardine":
+        character = new Sardine();
+        break;
+      case "neptuneGrass":
+        character = new NeptuneGrass();
+        break;
+      case "plasticBag":
+        character = new PlasticBag();
+        break;
+    }
+    return character;
   }
 
   private async loadCharacters(): Promise<void> {

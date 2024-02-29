@@ -82,3 +82,5 @@
 #0.2.2 Preview - 23/02/2024 19:10 UTC+1
 * Bug fix: Turtle visible when changing direction outside screen boundaries
 * Reintroduced **up** and **down** directions and updated collision detection for such directions
+
+#0.3 Preview -
