@@ -1,7 +1,7 @@
 import ICharacter from "../characters/interfaces/ICharacter";
 
 interface ILevel {
-  init(): Promise<HTMLImageElement>;
+  init(): Promise<void>;
   get bgImgPath(): string;
   get bgImg(): HTMLImageElement;
   set bgOffsetX(offsetX: number);

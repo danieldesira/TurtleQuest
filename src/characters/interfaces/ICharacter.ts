@@ -13,7 +13,7 @@ interface ICharacter {
   get points(): number;
   swim(): void;
   handleTurtleCollision(): void;
-  setInitialPosition(): void;
+  setInitialPosition(options: { xFrom: number, xTo: number, yFrom: number, yTo: number }): void;
 }
 
 export default ICharacter;

@@ -8,7 +8,6 @@ class Game {
 
   private constructor() {
     this._turtle = new Turtle();
-    this.loadNewLevel();
   }
 
   static get instance(): Game {

@@ -2,6 +2,8 @@ import NeptuneGrass from "../characters/NeptuneGrass";
 import PlasticBag from "../characters/PlasticBag";
 import Sardine from "../characters/Sardine";
 import Shrimp from "../characters/Shrimp";
+import BenthicPrey from "../characters/abstract/BenthicPrey";
+import PackPrey from "../characters/abstract/PackPrey";
 import ICharacter from "../characters/interfaces/ICharacter";
 import ILevel from "./ILevel";
 import LevelCharacter, { CharacterType } from "./LevelCharacter";
@@ -16,13 +18,10 @@ abstract class Level implements ILevel {
   protected _bgOffsetY: number;
   protected abstract readonly _benthicOffsetY: number;
 
-  async init(): Promise<HTMLImageElement> {
+  async init(): Promise<void> {
     try {
       await this.loadBgImg();
-      this.createCharacters();
-      await this.loadCharacters();
-      this.setInitialCharacterPositions();
-      return this._backgroundImage;
+      await this.createCharacters();
     } catch (error) {
       throw error;
     }
@@ -74,17 +73,47 @@ abstract class Level implements ILevel {
     return this._benthicOffsetY;
   }
 
-  private setInitialCharacterPositions(): void {
-    for (const character of this._characters) {
-      character.setInitialPosition();
-    }
-  }
-
-  private createCharacters(): void {
+  private async createCharacters(): Promise<void> {
     this._characters.clear();
-    for (const characterInfo of this._initialCharacters) {console.log(characterInfo);
+    let lastPackCharacter: PackPrey = null;
+    for (const characterInfo of this._initialCharacters) {
       for (let i = 0; i < characterInfo.amount; i++) {
         const character = this.instantiateCharacter(characterInfo.type);
+        await character.loadImage();
+        if (character instanceof BenthicPrey) {
+          character.setInitialPosition({
+            xFrom: 0,
+            xTo: this._backgroundImage.width,
+            yFrom: this.benthicOffsetY,
+            yTo: this._backgroundImage.height,
+          });
+        } else if (character instanceof PackPrey) {
+          if (lastPackCharacter) {
+            const maxDistance = 20;
+            character.setInitialPosition({
+              xFrom: lastPackCharacter.x - maxDistance,
+              xTo: lastPackCharacter.x + maxDistance,
+              yFrom: lastPackCharacter.y - maxDistance,
+              yTo: lastPackCharacter.y + maxDistance,
+            });
+          } else {
+            character.setInitialPosition({
+              xFrom: 0,
+              xTo: this._backgroundImage.width,
+              yFrom: 0,
+              yTo: this._backgroundImage.height,
+            });
+          }
+          lastPackCharacter = character;
+          console.count("Sardines")
+        } else {
+          character.setInitialPosition({
+            xFrom: 0,
+            xTo: this._backgroundImage.width,
+            yFrom: 0,
+            yTo: this._backgroundImage.height,
+          });
+        }
         this._characters.add(character);
       }
     }
@@ -107,12 +136,6 @@ abstract class Level implements ILevel {
         break;
     }
     return character;
-  }
-
-  private async loadCharacters(): Promise<void> {
-    for (const character of this._characters) {
-      await character.loadImage();
-    }
   }
 
   paintCharacters(context: CanvasRenderingContext2D): void {

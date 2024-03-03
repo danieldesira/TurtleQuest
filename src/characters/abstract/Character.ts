@@ -1,5 +1,8 @@
 import Game from "../../Game";
-import { decrementStomachCapacity, gainPoints } from "../../features/turtleMonitor/turtleReducers";
+import {
+  decrementStomachCapacity,
+  gainPoints,
+} from "../../features/turtleMonitor/turtleReducers";
 import store from "../../store";
 import ICharacter from "../interfaces/ICharacter";
 
@@ -103,9 +106,14 @@ abstract class Character implements ICharacter {
     Game.instance.level.characters.delete(this);
   }
 
-  setInitialPosition(): void {
-    this._x = Math.random() * Game.instance.level.bgImg.width;
-    this._y = Math.random() * Game.instance.level.bgImg.height;
+  setInitialPosition(options: {
+    xFrom: number;
+    xTo: number;
+    yFrom: number;
+    yTo: number;
+  }): void {
+    this._x = Math.random() * (options.xTo - options.xFrom) + options.xFrom;
+    this._y = Math.random() * (options.yTo - options.yFrom) + options.yFrom;
   }
 }
 
