@@ -2,9 +2,9 @@ import Game from "../../Game";
 import directions from "../../enums/Directions";
 import { eat } from "../../features/turtleMonitor/turtleReducers";
 import store from "../../store";
-import Character from "./Character";
+import NonMain from "./NonMain";
 
-abstract class Prey extends Character {
+abstract class Prey extends NonMain {
   handleTurtleCollision(): void {
     const canTurtleEatCharacter =
       store.getState().turtleMonitor.turtle.stomachCapacity.value -

@@ -2,9 +2,8 @@ import NeptuneGrass from "../characters/NeptuneGrass";
 import PlasticBag from "../characters/PlasticBag";
 import Sardine from "../characters/Sardine";
 import Shrimp from "../characters/Shrimp";
-import BenthicPrey from "../characters/abstract/BenthicPrey";
+import NonMain from "../characters/abstract/NonMain";
 import PackPrey from "../characters/abstract/PackPrey";
-import ICharacter from "../characters/interfaces/ICharacter";
 import ILevel from "./ILevel";
 import LevelCharacter, { CharacterType } from "./LevelCharacter";
 
@@ -13,7 +12,7 @@ abstract class Level implements ILevel {
   protected abstract readonly _backgroundImageFilename: string;
   protected abstract readonly _initialCharacters: LevelCharacter[];
   protected _backgroundImage: HTMLImageElement;
-  protected _characters: Set<ICharacter> = new Set();
+  protected _characters: Set<NonMain> = new Set();
   protected _bgOffsetX: number;
   protected _bgOffsetY: number;
   protected abstract readonly _benthicOffsetY: number;
@@ -80,47 +79,21 @@ abstract class Level implements ILevel {
       for (let i = 0; i < characterInfo.amount; i++) {
         const character = this.instantiateCharacter(characterInfo.type);
         await character.loadImage();
-        if (character instanceof BenthicPrey) {
-          character.setInitialPosition({
-            xFrom: 0,
-            xTo: this._backgroundImage.width,
-            yFrom: this.benthicOffsetY,
-            yTo: this._backgroundImage.height,
-          });
-        } else if (character instanceof PackPrey) {
+        if (character instanceof PackPrey) {
           if (lastPackCharacter) {
-            const maxDistance = 20;
-            character.setInitialPosition({
-              xFrom: lastPackCharacter.x - maxDistance,
-              xTo: lastPackCharacter.x + maxDistance,
-              yFrom: lastPackCharacter.y - maxDistance,
-              yTo: lastPackCharacter.y + maxDistance,
-            });
-          } else {
-            character.setInitialPosition({
-              xFrom: 0,
-              xTo: this._backgroundImage.width,
-              yFrom: 0,
-              yTo: this._backgroundImage.height,
-            });
+            character.previousCharacterX = lastPackCharacter.x;
+            character.previousCharacterY = lastPackCharacter.y;
           }
           lastPackCharacter = character;
-          console.count("Sardines")
-        } else {
-          character.setInitialPosition({
-            xFrom: 0,
-            xTo: this._backgroundImage.width,
-            yFrom: 0,
-            yTo: this._backgroundImage.height,
-          });
         }
+        character.setInitialPosition();
         this._characters.add(character);
       }
     }
   }
 
-  private instantiateCharacter(type: CharacterType): ICharacter {
-    let character: ICharacter;
+  private instantiateCharacter(type: CharacterType): NonMain {
+    let character: NonMain;
     switch (type) {
       case "shrimp":
         character = new Shrimp();

@@ -1,4 +1,4 @@
-import ICharacter from "../characters/interfaces/ICharacter";
+import NonMain from "../characters/abstract/NonMain";
 
 interface ILevel {
   init(): Promise<void>;
@@ -8,7 +8,7 @@ interface ILevel {
   set bgOffsetY(offsetY: number);
   get bgOffsetX(): number;
   get bgOffsetY(): number;
-  get characters(): Set<ICharacter>;
+  get characters(): Set<NonMain>;
   get benthicOffsetY(): number;
   paintCharacters(context: CanvasRenderingContext2D): void;
   moveCharacters(): void;

@@ -1,8 +1,8 @@
 import { takeDamage } from "../../features/turtleMonitor/turtleReducers";
 import store from "../../store";
-import Character from "./Character";
+import NonMain from "./NonMain";
 
-abstract class Obstacle extends Character {
+abstract class Obstacle extends NonMain {
   handleTurtleCollision(): void {
     store.dispatch(takeDamage({ turtle: { lifeValue: this._damage } }));
     super.handleTurtleCollision();

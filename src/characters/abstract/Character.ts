@@ -1,9 +1,3 @@
-import Game from "../../Game";
-import {
-  decrementStomachCapacity,
-  gainPoints,
-} from "../../features/turtleMonitor/turtleReducers";
-import store from "../../store";
 import ICharacter from "../interfaces/ICharacter";
 
 abstract class Character implements ICharacter {
@@ -86,34 +80,6 @@ abstract class Character implements ICharacter {
 
   get points() {
     return this._points;
-  }
-
-  swim(): void {
-    const randomVeriticalDirection = Math.round(Math.random());
-    const randomHorizontalDirection = Math.round(Math.random());
-    const randomSpeed = this._speed / 3;
-    this._y += randomVeriticalDirection ? randomSpeed : -randomSpeed;
-    this._x += randomHorizontalDirection ? randomSpeed : -randomSpeed;
-  }
-
-  handleTurtleCollision(): void {
-    store.dispatch(
-      decrementStomachCapacity({
-        turtle: { stomachValue: this._stomachImpact },
-      })
-    );
-    store.dispatch(gainPoints({ turtle: { xpValue: this._points } }));
-    Game.instance.level.characters.delete(this);
-  }
-
-  setInitialPosition(options: {
-    xFrom: number;
-    xTo: number;
-    yFrom: number;
-    yTo: number;
-  }): void {
-    this._x = Math.random() * (options.xTo - options.xFrom) + options.xFrom;
-    this._y = Math.random() * (options.yTo - options.yFrom) + options.yFrom;
   }
 }
 
