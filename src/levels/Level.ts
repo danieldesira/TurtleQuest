@@ -16,6 +16,7 @@ abstract class Level implements ILevel {
   protected _bgOffsetX: number;
   protected _bgOffsetY: number;
   protected abstract readonly _benthicOffsetY: number;
+  protected abstract readonly _currentSpeed: number;
 
   async init(): Promise<void> {
     try {
@@ -125,6 +126,10 @@ abstract class Level implements ILevel {
     for (const character of this._characters) {
       character.swim();
     }
+  }
+
+  get currentSpeed(): number {
+    return this._currentSpeed;
   }
 }
 

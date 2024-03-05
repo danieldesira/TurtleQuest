@@ -43,13 +43,7 @@ abstract class NonMain extends Character implements INonMainCharacter {
     Game.instance.level.characters.delete(this);
   }
 
-  swim(): void {
-    const randomVeriticalDirection = Math.round(Math.random());
-    const randomHorizontalDirection = Math.round(Math.random());
-    const randomSpeed = this._speed / 3;
-    this._y += randomVeriticalDirection ? randomSpeed : -randomSpeed;
-    this._x += randomHorizontalDirection ? randomSpeed : -randomSpeed;
-  }
+  abstract swim(): void;
 }
 
 export default NonMain;

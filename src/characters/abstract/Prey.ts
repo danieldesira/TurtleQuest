@@ -17,7 +17,7 @@ abstract class Prey extends NonMain {
   }
 
   swim(): void {
-    const maxPreyDistance = 50;
+    const maxPreyDistance = 150;
     const turtle = Game.instance.turtle;
     const horizontalDistance = Math.abs(turtle.x - this._x);
     const verticalDistance = Math.abs(turtle.y - this._y);
@@ -25,16 +25,25 @@ abstract class Prey extends NonMain {
       horizontalDistance < maxPreyDistance &&
       verticalDistance < maxPreyDistance
     ) {
-      console.log(
-        `Turtle position: ${turtle.x}, ${turtle.y}\nPrey position: ${this._x}, ${this._y}`
-      );
-      if (turtle.direction === directions.Left) {
-        this._x -= this._speed;
-      } else if (turtle.direction === directions.Right) {
-        this._x += this._speed;
+      switch (turtle.direction) {
+        case directions.Left:
+          this._x -= this._speed;
+          break;
+        case directions.Right:
+          this._x += this._speed;
+          break;
+        case directions.Down:
+          if (this._y <= Game.instance.level.benthicOffsetY) {
+            this._y += this._speed;
+          }
+          break;
+        case directions.Up:
+          if (this._y > 0) {
+            this._y -= this._speed;
+          }
+          break;
       }
     }
-    super.swim();
   }
 }
 

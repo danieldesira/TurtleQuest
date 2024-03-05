@@ -9,6 +9,7 @@ class Level1 extends Level {
     { type: "plasticBag", amount: 8 },
   ];
   protected readonly _benthicOffsetY: number = 9999;
+  protected readonly _currentSpeed: number = 0.4;
 }
 
 export default Level1;

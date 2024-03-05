@@ -37,8 +37,6 @@ abstract class PackPrey extends Prey {
   set previousCharacterY(y: number) {
     this._previousCharacterY = y;
   }
-
-  swim(): void {}
 }
 
 export default PackPrey;

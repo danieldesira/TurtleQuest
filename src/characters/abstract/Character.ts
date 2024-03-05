@@ -3,7 +3,6 @@ import ICharacter from "../interfaces/ICharacter";
 abstract class Character implements ICharacter {
   protected _x: number;
   protected _y: number;
-  protected abstract readonly _isSolitary: boolean;
   protected _image: HTMLImageElement;
   protected readonly _baseImagePath: string = "./images/characters/";
   protected abstract readonly _imageFilename: string;
@@ -56,10 +55,6 @@ abstract class Character implements ICharacter {
 
   set y(y: number) {
     this._y = y;
-  }
-
-  get isSolitary() {
-    return this._isSolitary;
   }
 
   get foodValue() {

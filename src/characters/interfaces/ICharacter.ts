@@ -5,7 +5,6 @@ interface ICharacter {
   get y(): number;
   set x(x: number);
   set y(y: number);
-  get isSolitary(): boolean;
   get foodValue(): number;
   get stomachImpact(): number;
   get damage(): number;

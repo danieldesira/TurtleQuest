@@ -83,4 +83,10 @@
 * Bug fix: Turtle visible when changing direction outside screen boundaries
 * Reintroduced **up** and **down** directions and updated collision detection for such directions
 
-#0.3 Preview -
+#0.3 Preview - 05/03/2024 19:35 UTC+1
+* Game logic split in more and smaller classes
+* Level character specification is now in the declarative format ``[{ "type": string, "amount": number }]``
+* Adapt swim method for prey to respond to turtle **up** and **down** directions
+* Smaller dimensions for *sardine.png* and *shrimp.png*
+* Obstacle speed dependant on current speed for given level
+* Enlarge **Play again** button

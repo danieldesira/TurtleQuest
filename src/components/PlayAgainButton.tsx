@@ -28,7 +28,7 @@ function PlayAgainButton({ render }: Props) {
     <>
       {!gameInProgress ? (
         <a href="#" onClick={handleClick} className="fixed top-20 left-20">
-          <span className="text-white flex gap-2 items-center">
+          <span className="text-white flex gap-2 items-center text-xl">
             <RiRestartLine /> Play again
           </span>
         </a>

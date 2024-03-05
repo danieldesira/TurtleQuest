@@ -12,6 +12,7 @@ interface ILevel {
   get benthicOffsetY(): number;
   paintCharacters(context: CanvasRenderingContext2D): void;
   moveCharacters(): void;
+  get currentSpeed(): number;
 }
 
 export default ILevel;
