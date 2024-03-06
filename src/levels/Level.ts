@@ -2,8 +2,8 @@ import NeptuneGrass from "../characters/NeptuneGrass";
 import PlasticBag from "../characters/PlasticBag";
 import Sardine from "../characters/Sardine";
 import Shrimp from "../characters/Shrimp";
-import NonMain from "../characters/abstract/NonMain";
 import PackPrey from "../characters/abstract/PackPrey";
+import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
 import ILevel from "./ILevel";
 import LevelCharacter, { CharacterType } from "./LevelCharacter";
 
@@ -12,7 +12,7 @@ abstract class Level implements ILevel {
   protected abstract readonly _backgroundImageFilename: string;
   protected abstract readonly _initialCharacters: LevelCharacter[];
   protected _backgroundImage: HTMLImageElement;
-  protected _characters: Set<NonMain> = new Set();
+  protected _characters: Set<INonMainCharacter> = new Set();
   protected _bgOffsetX: number;
   protected _bgOffsetY: number;
   protected abstract readonly _benthicOffsetY: number;
@@ -93,8 +93,8 @@ abstract class Level implements ILevel {
     }
   }
 
-  private instantiateCharacter(type: CharacterType): NonMain {
-    let character: NonMain;
+  private instantiateCharacter(type: CharacterType): INonMainCharacter {
+    let character: INonMainCharacter;
     switch (type) {
       case "shrimp":
         character = new Shrimp();

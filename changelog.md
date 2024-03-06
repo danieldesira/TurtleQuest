@@ -90,3 +90,7 @@
 * Smaller dimensions for *sardine.png* and *shrimp.png*
 * Obstacle speed dependant on current speed for given level
 * Enlarge **Play again** button
+
+#0.3.1 Preview -
+* Cleanup character code
+* Slow down currents and plastic bag movement

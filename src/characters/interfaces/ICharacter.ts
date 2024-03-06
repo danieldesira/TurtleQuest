@@ -5,11 +5,7 @@ interface ICharacter {
   get y(): number;
   set x(x: number);
   set y(y: number);
-  get foodValue(): number;
-  get stomachImpact(): number;
-  get damage(): number;
   get image(): HTMLImageElement;
-  get points(): number;
 }
 
 export default ICharacter;

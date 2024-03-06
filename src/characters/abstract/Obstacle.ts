@@ -13,9 +13,7 @@ abstract class Obstacle extends NonMain {
     const speed = Game.instance.level.currentSpeed;
     this._x -= speed;
     const randomVeriticalDirection = Math.round(Math.random());
-    const randomHorizontalDirection = Math.round(Math.random());
     this._y += randomVeriticalDirection ? speed : -speed;
-    this._x += randomHorizontalDirection ? speed : -speed;
   }
 }
 

@@ -9,7 +9,7 @@ class Level2 extends Level {
     { type: "shrimp", amount: 30 },
   ];
   protected readonly _benthicOffsetY: number = 600;
-  protected readonly _currentSpeed: number = 0.5;
+  protected readonly _currentSpeed: number = 0.15;
 }
 
 export default Level2;

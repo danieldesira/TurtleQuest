@@ -6,11 +6,6 @@ abstract class Character implements ICharacter {
   protected _image: HTMLImageElement;
   protected readonly _baseImagePath: string = "./images/characters/";
   protected abstract readonly _imageFilename: string;
-  protected abstract readonly _foodValue: number;
-  protected abstract readonly _damage: number;
-  protected abstract readonly _speed: number;
-  protected abstract readonly _stomachImpact: number;
-  protected abstract readonly _points: number;
 
   loadImage(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
@@ -57,24 +52,8 @@ abstract class Character implements ICharacter {
     this._y = y;
   }
 
-  get foodValue() {
-    return this._foodValue;
-  }
-
-  get damage() {
-    return this._damage;
-  }
-
   get image() {
     return this._image;
-  }
-
-  get stomachImpact() {
-    return this._stomachImpact;
-  }
-
-  get points() {
-    return this._points;
   }
 }
 

@@ -1,4 +1,4 @@
-import NonMain from "../characters/abstract/NonMain";
+import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
 
 interface ILevel {
   init(): Promise<void>;
@@ -8,7 +8,7 @@ interface ILevel {
   set bgOffsetY(offsetY: number);
   get bgOffsetX(): number;
   get bgOffsetY(): number;
-  get characters(): Set<NonMain>;
+  get characters(): Set<INonMainCharacter>;
   get benthicOffsetY(): number;
   paintCharacters(context: CanvasRenderingContext2D): void;
   moveCharacters(): void;
