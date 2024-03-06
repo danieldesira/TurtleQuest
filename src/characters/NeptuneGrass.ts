@@ -1,7 +1,6 @@
 import BenthicPrey from "./abstract/BenthicPrey";
 
 class NeptuneGrass extends BenthicPrey {
-  protected _isSolitary: boolean;
   protected readonly _imageFilename: string = "neptune-grass.png";
   protected readonly _foodValue: number = 5;
   protected readonly _damage: number = 0;

@@ -1,3 +1,4 @@
+import Crab from "../characters/Crab";
 import NeptuneGrass from "../characters/NeptuneGrass";
 import PlasticBag from "../characters/PlasticBag";
 import Sardine from "../characters/Sardine";
@@ -112,6 +113,9 @@ abstract class Level implements ILevel {
         break;
       case "plasticBag":
         character = new PlasticBag();
+        break;
+      case "crab":
+        character = new Crab();
         break;
     }
     return character;

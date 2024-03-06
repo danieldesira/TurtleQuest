@@ -1,7 +1,6 @@
 import Prey from "./abstract/Prey";
 
 class Shrimp extends Prey {
-  protected readonly _isSolitary: boolean = true;
   protected readonly _imageFilename: string = "shrimp.png";
   protected readonly _foodValue: number = 0.01;
   protected readonly _damage: number = 0;

@@ -5,6 +5,11 @@ abstract class BenthicPrey extends Prey {
   protected get initialPositionYFrom(): number {
     return Game.instance.level.benthicOffsetY;
   }
+
+  swim() {
+    const randomHorizontalDirection = Math.round(Math.random());
+    this._x += randomHorizontalDirection ? this._speed : -this._speed;
+  }
 }
 
 export default BenthicPrey;

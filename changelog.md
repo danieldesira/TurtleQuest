@@ -91,7 +91,8 @@
 * Obstacle speed dependant on current speed for given level
 * Enlarge **Play again** button
 
-#0.3.1 Preview -
+#0.3.1 Preview - 06/03/2024 23:05 UTC+1
 * Cleanup character code
 * Slow down currents and plastic bag movement
-* Points gained when completing a level
+* Points gained when completing a Level
+* Introduced benthic crab

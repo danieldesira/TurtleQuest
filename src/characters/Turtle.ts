@@ -5,14 +5,9 @@ import IMainCharacter from "./interfaces/IMainCharacter";
 
 class Turtle extends Character implements IMainCharacter {
   static scientificName: string = "Carretta carretta";
-  protected readonly _isSolitary: boolean = true;
   protected readonly _imageFilename: string = "turtle.png";
   protected readonly _speed: number = 1;
   private _angle: Directions;
-  protected readonly _foodValue: number = 0;
-  protected readonly _damage: number = 0;
-  protected readonly _stomachImpact: number = 0;
-  protected readonly _points: number = 0;
 
   constructor() {
     super();
