@@ -13,6 +13,7 @@ interface ILevel {
   paintCharacters(context: CanvasRenderingContext2D): void;
   moveCharacters(): void;
   get currentSpeed(): number;
+  get points(): number;
 }
 
 export default ILevel;

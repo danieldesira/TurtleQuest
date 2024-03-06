@@ -17,6 +17,7 @@ abstract class Level implements ILevel {
   protected _bgOffsetY: number;
   protected abstract readonly _benthicOffsetY: number;
   protected abstract readonly _currentSpeed: number;
+  protected abstract readonly _points: number;
 
   async init(): Promise<void> {
     try {
@@ -71,6 +72,10 @@ abstract class Level implements ILevel {
 
   get benthicOffsetY() {
     return this._benthicOffsetY;
+  }
+
+  get points() {
+    return this._points;
   }
 
   private async createCharacters(): Promise<void> {

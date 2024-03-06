@@ -10,6 +10,7 @@ class Level2 extends Level {
   ];
   protected readonly _benthicOffsetY: number = 600;
   protected readonly _currentSpeed: number = 0.15;
+  protected readonly _points: number = 10;
 }
 
 export default Level2;

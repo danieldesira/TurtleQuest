@@ -94,3 +94,4 @@
 #0.3.1 Preview -
 * Cleanup character code
 * Slow down currents and plastic bag movement
+* Points gained when completing a level

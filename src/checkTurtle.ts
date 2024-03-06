@@ -7,6 +7,7 @@ import { stopGame } from "./features/gameState/gameStateReducer";
 import { levelUp } from "./features/levels/levelReducer";
 import {
   breath,
+  gainPoints,
   recoverStomachCapacity,
   respire,
   useFood,
@@ -50,6 +51,9 @@ async function checkTurtle(): Promise<LevelChangeTypes> {
 }
 
 async function handleOffBgWidth(): Promise<LevelChangeTypes> {
+  store.dispatch(
+    gainPoints({ turtle: { xpValue: Game.instance.level.points } })
+  );
   store.dispatch(levelUp());
   Game.instance.turtle.resetPosition();
   if (store.getState().levels.level.value <= levels.length) {
