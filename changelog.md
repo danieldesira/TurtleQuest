@@ -96,3 +96,9 @@
 * Slow down currents and plastic bag movement
 * Points gained when completing a Level
 * Introduced benthic crab
+
+#0.3.2 Preview -
+* Increased font size for **Play again** button and **Next level** arrow
+* Centered **Play again** button and **Next level** arrow appropriately
+* Stopped canvas being put on focus by default
+* Reset turtle position and direction when **Play again** button is clicked

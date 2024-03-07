@@ -31,6 +31,7 @@ class Game {
   async loadNewLevel() {
     this._level = selectLvl(store.getState().levels.level.value);
     await this._level.init();
+    this.turtle.resetPosition();
   }
 }
 

@@ -5,6 +5,7 @@ import useRender from "../hooks/useRender";
 import useResizeCanvas from "../hooks/useResizeCanvas";
 import Game from "../Game";
 import PlayAgainButton from "./PlayAgainButton";
+import NextLevelIndication from "./NextLevelIndication";
 
 function GameCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -22,8 +23,6 @@ function GameCanvas() {
 
       window.addEventListener("resize", () => resizeCanvas(canvas));
       resizeCanvas(canvas);
-
-      canvas.focus();
     })();
   }, []);
 
@@ -37,6 +36,7 @@ function GameCanvas() {
           })
         }
       />
+      <NextLevelIndication />
       <canvas
         height="400"
         width="700"

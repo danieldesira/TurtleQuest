@@ -18,6 +18,7 @@ class Turtle extends Character implements IMainCharacter {
   resetPosition() {
     this._x = 50;
     this._y = 10;
+    this._angle = Directions.Right;
   }
 
   get direction() {

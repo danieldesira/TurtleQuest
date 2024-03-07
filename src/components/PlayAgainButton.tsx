@@ -27,11 +27,13 @@ function PlayAgainButton({ render }: Props) {
   return (
     <>
       {!gameInProgress ? (
-        <a href="#" onClick={handleClick} className="fixed top-20 left-20">
-          <span className="text-white flex gap-2 items-center text-xl">
-            <RiRestartLine /> Play again
-          </span>
-        </a>
+        <div className="fixed h-full flex items-center justify-center w-full">
+          <a href="#" onClick={handleClick}>
+            <span className="text-white flex gap-2 text-5xl">
+              <RiRestartLine /> Play again
+            </span>
+          </a>
+        </div>
       ) : null}
     </>
   );
