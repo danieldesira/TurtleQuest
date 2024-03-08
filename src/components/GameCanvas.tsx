@@ -6,11 +6,16 @@ import useResizeCanvas from "../hooks/useResizeCanvas";
 import Game from "../Game";
 import PlayAgainButton from "./PlayAgainButton";
 import NextLevelIndication from "./NextLevelIndication";
+import { useSelector } from "react-redux";
+import RootState from "../features/RootState";
 
 function GameCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const render = useRender();
   const resizeCanvas = useResizeCanvas();
+  const inProgress = useSelector(
+    (state: RootState) => state.game.inProgress.value
+  );
 
   useEffect(() => {
     (async () => {
@@ -28,23 +33,36 @@ function GameCanvas() {
 
   return (
     <>
-      <PlayAgainButton
-        render={async () =>
-          await render({
-            canvas: canvasRef.current,
-            context: canvasRef.current.getContext("2d"),
-          })
-        }
-      />
-      <NextLevelIndication />
-      <canvas
-        height="400"
-        width="700"
-        tabIndex={1}
-        ref={canvasRef}
-        onKeyDown={handleKeyDown}
-        onWheel={handleWheel}
-      ></canvas>
+      {inProgress ? (
+        <>
+          <canvas
+            height="400"
+            width="700"
+            tabIndex={1}
+            ref={canvasRef}
+            onKeyDown={handleKeyDown}
+            onWheel={handleWheel}
+          ></canvas>
+          <NextLevelIndication />
+        </>
+      ) : (
+        <>
+          <video
+            className="max-h-screen max-w-screen m-auto"
+            src="./static/videos/baby-turtles.mp4"
+            autoPlay
+            loop
+          />
+          <PlayAgainButton
+            render={async () =>
+              await render({
+                canvas: canvasRef.current,
+                context: canvasRef.current.getContext("2d"),
+              })
+            }
+          />
+        </>
+      )}
     </>
   );
 }
