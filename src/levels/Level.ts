@@ -9,7 +9,7 @@ import ILevel from "./ILevel";
 import LevelCharacter, { CharacterType } from "./LevelCharacter";
 
 abstract class Level implements ILevel {
-  protected readonly _backgroundImagePath: string = "./images/backgrounds/";
+  protected readonly _backgroundImagePath: string = "./static/images/backgrounds/";
   protected abstract readonly _backgroundImageFilename: string;
   protected abstract readonly _initialCharacters: LevelCharacter[];
   protected _backgroundImage: HTMLImageElement;

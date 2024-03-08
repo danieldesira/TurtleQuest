@@ -8,6 +8,6 @@ export enum LevelChangeTypes {
   GameComplete = 3,
 }
 
-const levels = [new Level1(), new Level2()];
+const levels = [new Level1()];
 
 export default levels;

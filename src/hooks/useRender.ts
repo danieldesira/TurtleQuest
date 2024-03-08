@@ -10,35 +10,38 @@ interface Options {
   context: CanvasRenderingContext2D;
 }
 
+let levelChangeType: LevelChangeTypes;
+
 const render = async ({ canvas, context }: Options) => {
   try {
-    const levelChangeType = await checkTurtle();
-    if (
-      levelChangeType === LevelChangeTypes.SameLevel ||
-      levelChangeType === LevelChangeTypes.NewLevel
-    ) {
-      Background.paint({ canvas, context });
-
-      Game.instance.turtle.paint(context);
-
-      Game.instance.level.paintCharacters(context);
-
-      requestAnimationFrame(() => render({ canvas, context }));
-    } else if (levelChangeType === LevelChangeTypes.GameComplete) {
-      store.dispatch(
-        updateDialogContent({
-          dialog: {
-            title: "Game Complete",
-            text: ["Game complete. Congratulations!"],
-          },
-        })
-      );
+    if (store.getState().game.inProgress.value) {
+      levelChangeType = await checkTurtle();
+      if (
+        levelChangeType === LevelChangeTypes.SameLevel ||
+        levelChangeType === LevelChangeTypes.NewLevel
+      ) {
+        Background.paint({ canvas, context });
+        Game.instance.turtle.paint(context);
+        Game.instance.level.paintCharacters(context);
+      }
     } else {
-      store.dispatch(
-        updateDialogContent({
-          dialog: { title: "You lose", text: ["Better luck next time!"] },
-        })
-      );
+      if (levelChangeType === LevelChangeTypes.GameComplete) {
+        store.dispatch(
+          updateDialogContent({
+            dialog: {
+              title: "Game Complete",
+              text: ["Game complete. Congratulations!"],
+            },
+          })
+        );
+        Game.instance.showWinVideo(context);
+      } else {
+        store.dispatch(
+          updateDialogContent({
+            dialog: { title: "You lose", text: ["Better luck next time!"] },
+          })
+        );
+      }
     }
   } catch (error) {
     store.dispatch(
@@ -48,6 +51,7 @@ const render = async ({ canvas, context }: Options) => {
     );
     throw error;
   }
+  requestAnimationFrame(() => render({ canvas, context }));
 };
 
 const useRender = () => render;

@@ -4,7 +4,7 @@ abstract class Character implements ICharacter {
   protected _x: number;
   protected _y: number;
   protected _image: HTMLImageElement;
-  protected readonly _baseImagePath: string = "./images/characters/";
+  protected readonly _baseImagePath: string = "./static/images/characters/";
   protected abstract readonly _imageFilename: string;
 
   loadImage(): Promise<HTMLImageElement> {

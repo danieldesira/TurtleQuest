@@ -33,6 +33,16 @@ class Game {
     await this._level.init();
     this.turtle.resetPosition();
   }
+
+  showWinVideo(context: CanvasRenderingContext2D) {
+    const video = document.createElement("video");
+    video.src = "./static/videos/baby-turtles.mp4";
+    video.onloadeddata = () => {
+      video.loop = true;
+      video.play();
+      context.drawImage(video, 0, 0, video.width, video.height);
+    };
+  }
 }
 
 export default Game;
