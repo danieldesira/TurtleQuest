@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 interface Props {
   icon: React.ReactElement;
@@ -12,6 +12,9 @@ function ControlButton({ icon, callback }: Props) {
     timer = requestAnimationFrame(handleMousedown);
   };
   const handleMouseup = () => cancelAnimationFrame(timer);
+
+  useEffect(() => () => handleMouseup());
+
   return (
     <button
       type="button"

@@ -97,8 +97,9 @@
 * Points gained when completing a Level
 * Introduced benthic crab
 
-#0.3.2 Preview -
+#0.3.2 Preview - 08/03/2024 19:45 UTC+1
 * Increased font size for **Play again** button and **Next level** arrow
 * Centered **Play again** button and **Next level** arrow appropriately
 * Stopped canvas being put on focus by default
 * Reset turtle position and direction when **Play again** button is clicked
+* Show baby turtles hatching video after game ends
