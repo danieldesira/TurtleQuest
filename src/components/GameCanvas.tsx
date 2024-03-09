@@ -17,19 +17,22 @@ function GameCanvas() {
     (state: RootState) => state.game.inProgress.value
   );
 
+  const startGame = async () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    await render({ canvas, context });
+    resizeCanvas(canvas);
+  };
+
   useEffect(() => {
     (async () => {
       await Game.instance.turtle.loadImage();
       await Game.instance.loadNewLevel();
+      await startGame();
 
-      const canvas = canvasRef.current;
-      const context = canvas.getContext("2d");
-      await render({ canvas, context });
-
-      window.addEventListener("resize", () => resizeCanvas(canvas));
-      resizeCanvas(canvas);
+      window.addEventListener("resize", () => resizeCanvas(canvasRef.current));
     })();
-  }, []);
+  });
 
   return (
     <>
@@ -53,14 +56,7 @@ function GameCanvas() {
             autoPlay
             loop
           />
-          <PlayAgainButton
-            render={async () =>
-              await render({
-                canvas: canvasRef.current,
-                context: canvasRef.current.getContext("2d"),
-              })
-            }
-          />
+          <PlayAgainButton render={async () => await startGame()} />
         </>
       )}
     </>
