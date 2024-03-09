@@ -1,9 +1,16 @@
 import Game from "../../Game";
 import { takeDamage } from "../../features/turtleMonitor/turtleReducers";
 import store from "../../store";
+import IObstacle from "../interfaces/IObstacle";
 import NonMain from "./NonMain";
 
-abstract class Obstacle extends NonMain {
+abstract class Obstacle extends NonMain implements IObstacle {
+  protected abstract readonly _damage: number;
+
+  get damage() {
+    return this._damage;
+  }
+
   handleTurtleCollision(): void {
     store.dispatch(takeDamage({ turtle: { lifeValue: this._damage } }));
     super.handleTurtleCollision();

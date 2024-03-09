@@ -1,5 +1,4 @@
 import Game from "./Game";
-import ICharacter from "./characters/interfaces/ICharacter";
 import Turtle from "./characters/Turtle";
 import Directions from "./enums/Directions";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
@@ -14,6 +13,7 @@ import {
 } from "./features/turtleMonitor/turtleReducers";
 import levels, { LevelChangeTypes } from "./levels/levels";
 import store from "./store";
+import INonMainCharacter from "./characters/interfaces/INonMainCharacter";
 
 async function checkTurtle(): Promise<LevelChangeTypes> {
   const mainCharacter = Game.instance.turtle;
@@ -85,7 +85,7 @@ function checkIfTurtleMeetsCharacters() {
 
 function areTurtleCharacterIntersecting(
   turtle: Turtle,
-  otherCharacter: ICharacter
+  otherCharacter: INonMainCharacter
 ): boolean {
   const collidedWithTurtleRight = (x: number, y: number) => {
     const turtleXEnd = turtle.x + turtle.image.width;
