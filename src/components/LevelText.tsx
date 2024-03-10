@@ -5,7 +5,7 @@ import levels from "../levels/levels";
 
 function LevelText() {
   const level = useSelector((state: RootState) => state.levels.level.value);
-  const showText = level <= levels.length;
+  const showText = levels.has(level);
   return (
     <>
       {showText ? <span className="font-extrabold">Level {level}</span> : null}

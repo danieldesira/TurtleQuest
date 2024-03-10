@@ -1,3 +1,6 @@
+#0.3.4 Preview -
+* Refactoring described in ticket #10
+
 #0.3.3 Preview - 09/03/2024 18:00 UTC+1
 * Further characters cleanup
 * Fix 0.3.2 regression: Canvas size does not restore after restarting the game

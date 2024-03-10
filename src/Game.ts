@@ -1,6 +1,6 @@
 import Turtle from "./characters/Turtle";
 import ILevel from "./levels/ILevel";
-import selectLvl from "./levels/selectLvl";
+import levels from "./levels/levels";
 import store from "./store";
 
 class Game {
@@ -29,9 +29,11 @@ class Game {
   }
 
   async loadNewLevel() {
-    this._level = selectLvl(store.getState().levels.level.value);
-    await this._level.init();
-    this.turtle.resetPosition();
+    this._level = levels.get(store.getState().levels.level.value);
+    if (this._level) {
+      await this._level.init();
+      this.turtle.resetPosition();
+    }
   }
 }
 

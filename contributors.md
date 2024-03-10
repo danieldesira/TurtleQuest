@@ -1,6 +1,7 @@
 # Contributors
 ## Developers
 - Daniel Desira
+- Sergiu Nimat (Code review)
 
 ## Testers
 - Liza Sountsova

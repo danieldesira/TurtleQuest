@@ -1,3 +1,4 @@
+import ILevel from "./ILevel";
 import Level1 from "./Level1";
 import Level2 from "./Level2";
 
@@ -8,6 +9,9 @@ export enum LevelChangeTypes {
   GameComplete = 3,
 }
 
-const levels = [new Level1(), new Level2()];
+const levels: Map<number, ILevel> = new Map([
+  [1, new Level1() as ILevel],
+  [2, new Level2() as ILevel],
+]);
 
 export default levels;

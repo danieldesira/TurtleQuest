@@ -55,7 +55,7 @@ async function handleOffBgWidth(): Promise<LevelChangeTypes> {
     gainPoints({ turtle: { xpValue: Game.instance.level.points } })
   );
   store.dispatch(levelUp());
-  if (store.getState().levels.level.value <= levels.length) {
+  if (levels.has(store.getState().levels.level.value)) {
     await Game.instance.loadNewLevel();
     store.dispatch(
       updateDialogContent({
