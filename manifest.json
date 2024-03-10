@@ -2,7 +2,7 @@
     "manifest_version": 1,
     "name": "Turtle Escape",
     "short_name": "Turtle Escape",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "display": "fullscreen",
     "orientation": "landscape",
     "start_url": "./index.html",
