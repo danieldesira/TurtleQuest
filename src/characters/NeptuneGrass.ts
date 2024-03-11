@@ -4,7 +4,7 @@ import CharacterOptions from "./interfaces/CharacterOptions";
 class NeptuneGrass extends BenthicPrey {
   protected readonly _imageFilename: string;
   protected readonly _foodValue: number;
-  protected readonly _speed: number;
+  protected readonly _speed: number = 0;
   protected readonly _stomachImpact: number;
   protected readonly _points: number;
 

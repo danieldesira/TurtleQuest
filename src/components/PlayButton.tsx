@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import { resetLevel } from "../features/levels/levelReducer";
 import { resetTurtle } from "../features/turtleMonitor/turtleReducers";
 import { startGame } from "../features/gameState/gameStateReducer";
-import { RiRestartLine } from "react-icons/ri";
+import { GiSeaTurtle } from "react-icons/gi";
 
 interface Props {
   render: Function;
 }
 
-function PlayAgainButton({ render }: Props) {
+function PlayButton({ render }: Props) {
   const dispatch = useDispatch();
   const handleClick = async (event: React.MouseEvent) => {
     event.preventDefault();
@@ -24,11 +24,11 @@ function PlayAgainButton({ render }: Props) {
     <div className="fixed top-0 left-0 h-full flex items-center justify-center w-full">
       <a href="#" onClick={handleClick}>
         <span className="text-white flex gap-2 text-5xl">
-          <RiRestartLine /> Play again
+          <GiSeaTurtle /> Play
         </span>
       </a>
     </div>
   );
 }
 
-export default PlayAgainButton;
+export default PlayButton;

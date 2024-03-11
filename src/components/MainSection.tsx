@@ -4,12 +4,12 @@ import handleWheel from "../controls/handleWheel";
 import useRender from "../hooks/useRender";
 import useResizeCanvas from "../hooks/useResizeCanvas";
 import Game from "../Game";
-import PlayAgainButton from "./PlayAgainButton";
 import NextLevelIndication from "./NextLevelIndication";
 import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
+import PlayButton from "./PlayButton";
 
-function GameCanvas() {
+function MainSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const render = useRender();
   const resizeCanvas = useResizeCanvas();
@@ -20,18 +20,14 @@ function GameCanvas() {
   const startGame = async () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
+    await Game.instance.turtle.loadImage();
+    await Game.instance.loadNewLevel();
     await render({ canvas, context });
     resizeCanvas(canvas);
   };
 
   useEffect(() => {
-    (async () => {
-      await Game.instance.turtle.loadImage();
-      await Game.instance.loadNewLevel();
-      await startGame();
-
-      window.addEventListener("resize", () => resizeCanvas(canvasRef.current));
-    })();
+    window.addEventListener("resize", () => resizeCanvas(canvasRef.current));
   });
 
   return (
@@ -56,11 +52,11 @@ function GameCanvas() {
             autoPlay
             loop
           />
-          <PlayAgainButton render={async () => await startGame()} />
+          <PlayButton render={async () => await startGame()} />
         </>
       )}
     </>
   );
 }
 
-export default GameCanvas;
+export default MainSection;

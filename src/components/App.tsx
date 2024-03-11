@@ -1,5 +1,5 @@
 import React from "react";
-import GameCanvas from "./GameCanvas";
+import MainSection from "./MainSection";
 import Footer from "./Footer";
 import ControlGroup from "./controls/ControlGroup";
 import Header from "./Header";
@@ -11,7 +11,7 @@ function App() {
   return (
     <Provider store={store}>
       <Header />
-      <GameCanvas />
+      <MainSection />
       <ControlGroup />
       <Dialog />
       <Footer />

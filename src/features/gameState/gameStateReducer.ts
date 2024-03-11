@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  inProgress: { value: true },
+  inProgress: { value: false },
 };
 
 const slice = createSlice({
