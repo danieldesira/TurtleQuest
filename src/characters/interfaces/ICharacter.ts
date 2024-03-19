@@ -6,6 +6,8 @@ interface ICharacter {
   set x(x: number);
   set y(y: number);
   get image(): HTMLImageElement;
+  get height(): number;
+  get width(): number;
 }
 
 export default ICharacter;

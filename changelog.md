@@ -1,3 +1,8 @@
+#0.4.0 Preview -
+* Redesign characters
+* Code cleanup:
+    - Introduced width and height properties for characters which control character image
+
 #0.3.4 Preview - 11/03/2024 20:00 UTC+1
 * Refactoring described in ticket #10
 * Game menu shown by default

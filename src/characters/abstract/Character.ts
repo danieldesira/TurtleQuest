@@ -59,6 +59,14 @@ abstract class Character implements ICharacter {
   get image() {
     return this._image;
   }
+
+  get height() {
+    return this._height;
+  }
+  
+  get width() {
+    return this._width;
+  }
 }
 
 export default Character;

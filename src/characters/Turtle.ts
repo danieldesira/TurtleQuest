@@ -1,6 +1,7 @@
 import Game from "../Game";
 import Directions from "../enums/Directions";
 import Character from "./abstract/Character";
+import CharacterOptions from "./interfaces/CharacterOptions";
 import IMainCharacter from "./interfaces/IMainCharacter";
 
 class Turtle extends Character implements IMainCharacter {
@@ -11,12 +12,13 @@ class Turtle extends Character implements IMainCharacter {
   protected readonly _width: number;
   protected readonly _height: number;
 
-  constructor() {
+  constructor({ speed, width, height }: CharacterOptions = {}) {
     super();
     this.resetPosition();
     this._angle = Directions.Right;
-    this._width = 130;
-    this._height = 80;
+    this._speed = speed ?? 1;
+    this._width = width ?? 130;
+    this._height = height ?? 80;
   }
 
   resetPosition() {
@@ -73,8 +75,8 @@ class Turtle extends Character implements IMainCharacter {
       this._image,
       this._x - Game.instance.level.bgOffsetX,
       this._y - Game.instance.level.bgOffsetY,
-      this._image.width,
-      this._image.height
+      this._width,
+      this._height
     );
     context.resetTransform();
   }

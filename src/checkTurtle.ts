@@ -88,26 +88,26 @@ function areTurtleCharacterIntersecting(
   otherCharacter: INonMainCharacter
 ): boolean {
   const collidedWithTurtleRight = (x: number, y: number) => {
-    const turtleXEnd = turtle.x + turtle.image.width;
-    const turtleYEnd = turtle.y + turtle.image.height;
+    const turtleXEnd = turtle.x + turtle.width;
+    const turtleYEnd = turtle.y + turtle.height;
     return turtle.x <= x && x <= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
   };
 
   const collidedWithTurtleLeft = (x: number, y: number) => {
-    const turtleXEnd = turtle.x - turtle.image.width;
-    const turtleYEnd = turtle.y - turtle.image.height;
+    const turtleXEnd = turtle.x - turtle.width;
+    const turtleYEnd = turtle.y - turtle.height;
     return turtle.x >= x && x >= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
   };
 
   const collidedWithTurtleUp = (x: number, y: number) => {
-    const turtleXEnd = turtle.x + turtle.image.height;
-    const turtleYEnd = turtle.y - turtle.image.width;
+    const turtleXEnd = turtle.x + turtle.height;
+    const turtleYEnd = turtle.y - turtle.width;
     return turtle.x <= x && x <= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
   };
 
   const collidedWithTurtleDown = (x: number, y: number) => {
-    const turtleXEnd = turtle.x - turtle.image.height;
-    const turtleYEnd = turtle.y + turtle.image.width;
+    const turtleXEnd = turtle.x - turtle.height;
+    const turtleYEnd = turtle.y + turtle.width;
     return turtle.x >= x && x >= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
   };
 
@@ -117,12 +117,12 @@ function areTurtleCharacterIntersecting(
     case Directions.Left:
       isCollision =
         collidedWithTurtleLeft(
-          otherCharacter.x + otherCharacter.image.width,
+          otherCharacter.x + otherCharacter.width,
           otherCharacter.y
         ) ||
         collidedWithTurtleLeft(
-          otherCharacter.x + otherCharacter.image.width,
-          otherCharacter.y + otherCharacter.image.height
+          otherCharacter.x + otherCharacter.width,
+          otherCharacter.y + otherCharacter.height
         );
       break;
     case Directions.Right:
@@ -130,25 +130,25 @@ function areTurtleCharacterIntersecting(
         collidedWithTurtleRight(otherCharacter.x, otherCharacter.y) ||
         collidedWithTurtleRight(
           otherCharacter.x,
-          otherCharacter.y + otherCharacter.image.height
+          otherCharacter.y + otherCharacter.height
         );
       break;
     case Directions.Up:
       isCollision =
         collidedWithTurtleUp(
           otherCharacter.x,
-          otherCharacter.y + otherCharacter.image.height
+          otherCharacter.y + otherCharacter.height
         ) ||
         collidedWithTurtleUp(
-          otherCharacter.x + otherCharacter.image.width,
-          otherCharacter.y + otherCharacter.image.height
+          otherCharacter.x + otherCharacter.width,
+          otherCharacter.y + otherCharacter.height
         );
       break;
     case Directions.Down:
       isCollision =
         collidedWithTurtleDown(otherCharacter.x, otherCharacter.y) ||
         collidedWithTurtleDown(
-          otherCharacter.x + otherCharacter.image.width,
+          otherCharacter.x + otherCharacter.width,
           otherCharacter.y
         );
       break;
