@@ -7,6 +7,8 @@ class Sardine extends PackPrey {
   protected readonly _speed: number;
   protected readonly _stomachImpact: number;
   protected readonly _points: number;
+  protected readonly _width: number;
+  protected readonly _height: number;
 
   constructor({
     imageFilename,
@@ -14,6 +16,8 @@ class Sardine extends PackPrey {
     speed,
     stomachImpact,
     points,
+    width,
+    height,
   }: CharacterOptions = {}) {
     super();
     this._imageFilename = imageFilename ?? "sardine.png";
@@ -21,6 +25,8 @@ class Sardine extends PackPrey {
     this._speed = speed ?? 1.3;
     this._stomachImpact = stomachImpact ?? 1;
     this._points = points ?? 10;
+    this._width = width ?? 5;
+    this._height = height ?? 2;
   }
 }
 

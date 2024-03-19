@@ -5,14 +5,18 @@ import IMainCharacter from "./interfaces/IMainCharacter";
 
 class Turtle extends Character implements IMainCharacter {
   static scientificName: string = "Carretta carretta";
-  protected readonly _imageFilename: string = "turtle.png";
+  protected readonly _imageFilename: string = "turtle.svg";
   protected readonly _speed: number = 1;
   private _angle: Directions;
+  protected readonly _width: number;
+  protected readonly _height: number;
 
   constructor() {
     super();
     this.resetPosition();
     this._angle = Directions.Right;
+    this._width = 130;
+    this._height = 80;
   }
 
   resetPosition() {

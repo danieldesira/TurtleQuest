@@ -7,18 +7,24 @@ class PlasticBag extends Obstacle {
   protected readonly _speed: number;
   protected readonly _stomachImpact: number;
   protected readonly _points: number;
+  protected readonly _width: number;
+  protected readonly _height: number;
 
   constructor({
     imageFilename,
     damage,
     stomachImpact,
     points,
+    width,
+    height,
   }: CharacterOptions = {}) {
     super();
     this._imageFilename = imageFilename ?? "plastic-bag.png";
     this._damage = damage ?? 8;
     this._stomachImpact = stomachImpact ?? 20;
     this._points = points ?? -20;
+    this._width = width ?? 25;
+    this._height = height ?? 20;
   }
 }
 

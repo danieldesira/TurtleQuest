@@ -5,6 +5,8 @@ interface CharacterOptions {
   points?: number;
   damage?: number;
   foodValue?: number;
+  width?: number;
+  height?: number;
 }
 
 export default CharacterOptions;

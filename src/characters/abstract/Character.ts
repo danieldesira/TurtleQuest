@@ -6,10 +6,14 @@ abstract class Character implements ICharacter {
   protected _image: HTMLImageElement;
   protected readonly _baseImagePath: string = "./static/images/characters/";
   protected abstract readonly _imageFilename: string;
+  protected abstract readonly _width: number;
+  protected abstract readonly _height: number;
 
   loadImage(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const image = document.createElement("img");
+      image.width = this._width;
+      image.height = this._height;
       image.src = this._baseImagePath + this._imageFilename;
       image.onload = () => {
         this._image = image;

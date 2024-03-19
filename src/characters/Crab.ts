@@ -7,6 +7,8 @@ class Crab extends BenthicPrey {
   protected readonly _speed: number;
   protected readonly _stomachImpact: number;
   protected readonly _points: number;
+  protected readonly _width: number;
+  protected readonly _height: number;
 
   constructor({
     imageFilename,
@@ -14,6 +16,8 @@ class Crab extends BenthicPrey {
     speed,
     stomachImpact,
     points,
+    width,
+    height,
   }: CharacterOptions = {}) {
     super();
     this._imageFilename = imageFilename ?? "crab.png";
@@ -21,6 +25,8 @@ class Crab extends BenthicPrey {
     this._speed = speed ?? 0.6;
     this._stomachImpact = stomachImpact ?? 10;
     this._points = points ?? 20;
+    this._width = width ?? 10;
+    this._height = height ?? 10;
   }
 }
 
