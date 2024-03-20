@@ -4,7 +4,7 @@ import CharacterOptions from "./interfaces/CharacterOptions";
 class NeptuneGrass extends BenthicPrey {
   protected readonly _imageFilename: string;
   protected readonly _foodValue: number;
-  protected readonly _speed: number = 0;
+  protected readonly _speed: number;
   protected readonly _stomachImpact: number;
   protected readonly _points: number;
   protected readonly _width: number;
@@ -17,14 +17,16 @@ class NeptuneGrass extends BenthicPrey {
     points,
     width,
     height,
+    speed,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? "neptune-grass.png";
+    this._imageFilename = imageFilename ?? "neptuneGrass.svg";
     this._foodValue = foodValue ?? 5;
     this._stomachImpact = stomachImpact ?? 10;
     this._points = points ?? 1;
-    this._width = width ?? 35;
-    this._height = height ?? 20;
+    this._width = width ?? 70;
+    this._height = height ?? 55;
+    this._speed = speed ?? 0;
   }
 }
 
