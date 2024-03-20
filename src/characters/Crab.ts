@@ -20,13 +20,13 @@ class Crab extends BenthicPrey {
     height,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? "crab.png";
+    this._imageFilename = imageFilename ?? "benthicCrab.svg";
     this._foodValue = foodValue ?? 20;
     this._speed = speed ?? 0.6;
     this._stomachImpact = stomachImpact ?? 10;
     this._points = points ?? 20;
-    this._width = width ?? 10;
-    this._height = height ?? 10;
+    this._width = width ?? 50;
+    this._height = height ?? 50;
   }
 }
 
