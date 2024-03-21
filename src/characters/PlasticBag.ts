@@ -19,12 +19,12 @@ class PlasticBag extends Obstacle {
     height,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? "plastic-bag.png";
+    this._imageFilename = imageFilename ?? "plasticBag.svg";
     this._damage = damage ?? 8;
     this._stomachImpact = stomachImpact ?? 20;
     this._points = points ?? -20;
-    this._width = width ?? 25;
-    this._height = height ?? 20;
+    this._width = width ?? 45;
+    this._height = height ?? 45;
   }
 }
 

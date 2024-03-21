@@ -20,13 +20,13 @@ class Sardine extends PackPrey {
     height,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? "sardine.png";
+    this._imageFilename = imageFilename ?? "sardine.svg";
     this._foodValue = foodValue ?? 0.6;
     this._speed = speed ?? 1.3;
     this._stomachImpact = stomachImpact ?? 1;
     this._points = points ?? 10;
-    this._width = width ?? 5;
-    this._height = height ?? 2;
+    this._width = width ?? 15;
+    this._height = height ?? 6;
   }
 }
 
