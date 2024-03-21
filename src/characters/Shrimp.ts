@@ -20,13 +20,13 @@ class Shrimp extends Prey {
     height,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? "shrimp.png";
+    this._imageFilename = imageFilename ?? "shrimp.svg";
     this._foodValue = foodValue ?? 0.01;
     this._speed = speed ?? 0.6;
     this._stomachImpact = stomachImpact ?? 0.05;
     this._points = points ?? 4;
-    this._width = width ?? 3;
-    this._height = height ?? 3;
+    this._width = width ?? 11;
+    this._height = height ?? 4;
   }
 }
 
