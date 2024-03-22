@@ -2,8 +2,14 @@
 * Redesign characters
 * Code cleanup:
     - Introduced width and height properties for characters which control character image
+    - Refactor ``MainSection`` component as 2 possible child components
 * Rebrand to Turtle Quest
 * Added instructions to welcome dialog
+* UI changes:
+    - Background colour and header text colour follow system theme scheme (dark/light)
+    - Header is hidden in menu
+    - Canvas centered on bigger screens
+    - Video in menu background muted
 
 #0.3.4 Preview - 11/03/2024 20:00 UTC+1
 * Refactoring described in ticket #10

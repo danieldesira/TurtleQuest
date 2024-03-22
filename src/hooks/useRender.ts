@@ -5,23 +5,20 @@ import checkTurtle from "../checkTurtle";
 import store from "../store";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 
-interface Options {
-  canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;
-}
-
-const render = async ({ canvas, context }: Options) => {
+const render = async (canvas: HTMLCanvasElement) => {
   try {
     const levelChangeType = await checkTurtle();
     if (
       levelChangeType === LevelChangeTypes.SameLevel ||
       levelChangeType === LevelChangeTypes.NewLevel
     ) {
+      const context = canvas.getContext("2d");
+
       Background.paint({ canvas, context });
       Game.instance.turtle.paint(context);
       Game.instance.level.paintCharacters(context);
 
-      requestAnimationFrame(() => render({ canvas, context }));
+      requestAnimationFrame(() => render(canvas));
     } else if (levelChangeType === LevelChangeTypes.GameComplete) {
       store.dispatch(
         updateDialogContent({

@@ -1,11 +1,25 @@
 import React from "react";
 import PlayButton from "./PlayButton";
+import Game from "../Game";
+import useRender from "../hooks/useRender";
+import useResizeCanvas from "../hooks/useResizeCanvas";
 
 interface Props {
-  startGame: Function;
+  canvasRef: React.RefObject<HTMLCanvasElement>;
 }
 
-function Menu({ startGame }: Props) {
+function Menu({ canvasRef }: Props) {
+  const render = useRender();
+  const resizeCanvas = useResizeCanvas();
+
+  const startGame = async () => {
+    const canvas = canvasRef.current;
+    await Game.instance.turtle.loadImage();
+    await Game.instance.loadNewLevel();
+    await render(canvas);
+    resizeCanvas(canvas);
+  };
+
   return (
     <>
       <video
