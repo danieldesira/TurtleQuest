@@ -7,7 +7,7 @@ import Game from "../Game";
 import NextLevelIndication from "./NextLevelIndication";
 import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
-import PlayButton from "./PlayButton";
+import Menu from "./Menu";
 
 function MainSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -44,17 +44,7 @@ function MainSection() {
           ></canvas>
           <NextLevelIndication />
         </>
-      ) : (
-        <>
-          <video
-            className="max-h-screen max-w-screen m-auto"
-            src="./static/videos/baby-turtles.mp4"
-            autoPlay
-            loop
-          />
-          <PlayButton render={async () => await startGame()} />
-        </>
-      )}
+      ) : <Menu startGame={startGame} />}
     </>
   );
 }

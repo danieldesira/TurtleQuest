@@ -2,6 +2,8 @@
 * Redesign characters
 * Code cleanup:
     - Introduced width and height properties for characters which control character image
+* Rebrand to Turtle Quest
+* Added instructions to welcome dialog
 
 #0.3.4 Preview - 11/03/2024 20:00 UTC+1
 * Refactoring described in ticket #10

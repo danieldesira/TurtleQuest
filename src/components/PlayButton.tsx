@@ -21,13 +21,11 @@ function PlayButton({ render }: Props) {
     await render();
   };
   return (
-    <div className="fixed top-0 left-0 h-full flex items-center justify-center w-full">
-      <a href="#" onClick={handleClick}>
-        <span className="text-white flex gap-2 text-5xl">
-          <GiSeaTurtle /> Play
-        </span>
-      </a>
-    </div>
+    <a href="#" onClick={handleClick}>
+      <span className="text-white flex gap-2 text-5xl">
+        <GiSeaTurtle /> Play
+      </span>
+    </a>
   );
 }
 

@@ -12,7 +12,13 @@ store.dispatch(
   updateDialogContent({
     dialog: {
       title: "Welcome",
-      text: ["Welcome to Turtle Escape!"],
+      text: [
+        "Welcome to Turtle Quest!",
+        "Bring Peppa the loggerhead turtle to her nesting grounds. Use the provided on-screen arrows to move the turtle.",
+        "Move Peppa to the right end of the screen in order to pass each level. Eat prey and avoid obstacles.",
+        "Good luck!",
+        "Turtley yours, Daniel the game developer",
+      ],
     },
   })
 );
