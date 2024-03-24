@@ -1,7 +1,11 @@
 import Turtle from "./characters/Turtle";
+import { resetLevel } from "./features/levels/levelReducer";
+import { resetTurtle } from "./features/turtleMonitor/turtleReducers";
 import ILevel from "./levels/ILevel";
 import levels from "./levels/levels";
 import store from "./store";
+import animate from "./utils/animate";
+import resizeCanvas from "./utils/resizeCanvas";
 
 class Game {
   private static _instance: Game;
@@ -34,6 +38,15 @@ class Game {
       await this._level.init();
       this.turtle.resetPosition();
     }
+  }
+
+  async start(canvas: HTMLCanvasElement) {
+    store.dispatch(resetLevel());
+    store.dispatch(resetTurtle());
+    await Game.instance.turtle.loadImage();
+    await Game.instance.loadNewLevel();
+    await animate(canvas);
+    resizeCanvas(canvas);
   }
 }
 

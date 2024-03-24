@@ -11,13 +11,13 @@ root.render(<App />);
 store.dispatch(
   updateDialogContent({
     dialog: {
-      title: "Welcome",
+      title: "Welcome to Turtle Quest!",
       text: [
-        "Welcome to Turtle Quest!",
-        "Bring Peppa the loggerhead turtle to her nesting grounds. Use the provided on-screen arrows to move the turtle.",
+        "Help Peppa the loggerhead turtle to her nesting grounds. Use the provided on-screen arrows to move the turtle.",
         "Move Peppa to the right end of the screen in order to pass each level. Eat prey and avoid obstacles.",
         "Good luck!",
-        "Turtley yours, Daniel the game developer",
+        "Yours turtley,",
+        "Daniel the game developer",
       ],
     },
   })
