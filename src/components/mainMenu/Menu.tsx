@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { startGame } from "../../features/gameState/gameStateReducer";
 import { useDispatch } from "react-redux";
 import MenuButton from "./MenuButton";
 import { GiSeaTurtle } from "react-icons/gi";
+import { FcAbout } from "react-icons/fc";
+import AboutDialog from "../dialog/AboutDialog";
 
 function Menu() {
   const dispatch = useDispatch();
+  const [showAbout, setShowAbout] = useState<boolean>(false);
 
   const handleNewGame = () => dispatch(startGame());
+  const handleAbout = () => setShowAbout(true);
 
   return (
     <>
@@ -28,7 +32,9 @@ function Menu() {
           icon={<GiSeaTurtle />}
           text="New Game"
         />
+        <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
       </div>
+      {showAbout ? <AboutDialog setShowAbout={setShowAbout} /> : null}
     </>
   );
 }
