@@ -1,12 +1,13 @@
 import React from "react";
-import StartGameButton from "./StartGameButton";
 import { startGame } from "../../features/gameState/gameStateReducer";
 import { useDispatch } from "react-redux";
+import MenuButton from "./MenuButton";
+import { GiSeaTurtle } from "react-icons/gi";
 
 function Menu() {
   const dispatch = useDispatch();
 
-  const loadGame = () => dispatch(startGame());
+  const handleNewGame = () => dispatch(startGame());
 
   return (
     <>
@@ -17,12 +18,16 @@ function Menu() {
         loop
         muted
       />
-      <div className="fixed top-0 left-0 h-full flex flex-col items-center justify-center w-full gap-2">
-        <h1>
+      <div className="fixed top-0 left-0 h-full flex flex-col items-center justify-center w-full gap-5">
+        <h1 className="text-5xl">
           <span className="text-emerald-300">Turtle</span>{" "}
           <span className="text-cyan-500">Quest</span>
         </h1>
-        <StartGameButton callback={loadGame} text="New Game" />
+        <MenuButton
+          callback={handleNewGame}
+          icon={<GiSeaTurtle />}
+          text="New Game"
+        />
       </div>
     </>
   );
