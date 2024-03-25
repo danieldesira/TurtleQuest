@@ -13,7 +13,7 @@ function AboutDialog({ setShowAbout }: Props) {
       title="About"
       content={
         <>
-          <div className="block text-center">
+          <div className="flex justify-center gap-2">
             <a
               href="https://github.com/danieldesira/TurtleEscape/blob/master/changelog.md"
               target="_blank"
@@ -29,7 +29,7 @@ function AboutDialog({ setShowAbout }: Props) {
               Credits
             </a>
           </div>
-          <div className="flex">
+          <div className="flex gap-5 justify-center">
             <a
               href="https://www.instagram.com/turtleescape.game/"
               target="_blank"

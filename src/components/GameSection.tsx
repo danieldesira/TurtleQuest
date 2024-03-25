@@ -17,7 +17,7 @@ function GameSection() {
 
   return (
     <>
-      <div className="flex h-full items-center justify-center">
+      <div className="flex h-screen items-center justify-center">
         <canvas
           height="400"
           width="700"

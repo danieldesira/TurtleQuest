@@ -1,4 +1,4 @@
-#0.4.0 Preview -
+#0.4.0 Preview - 25/03/2024 19:35 UTC+1
 * Redesign characters
 * Code cleanup:
     - Introduced width and height properties for characters which control character image
@@ -10,6 +10,7 @@
     - Header is hidden in menu
     - Canvas centered on bigger screens
     - Video in menu background muted
+    - Replaced text in footer by About dialog
 
 #0.3.4 Preview - 11/03/2024 20:00 UTC+1
 * Refactoring described in ticket #10
