@@ -5,15 +5,22 @@ import resizeCanvas from "../utils/resizeCanvas";
 import handleKeyDown from "../controls/handleKeyDown";
 import handleWheel from "../controls/handleWheel";
 import Game from "../Game";
+import LoadingIndicator from "./LoadingIndicator";
+import { useSelector } from "react-redux";
+import RootState from "../features/RootState";
 
 function GameSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const isLevelLoading = useSelector(
+    (state: RootState) => state.game.isLevelLoading.value
+  );
 
   useEffect(() => {
     window.addEventListener("resize", () => resizeCanvas(canvasRef.current));
 
     (async () => await Game.instance.start(canvasRef.current))();
-  });
+  }, []);
 
   return (
     <>
@@ -27,6 +34,7 @@ function GameSection() {
           onWheel={handleWheel}
         ></canvas>
       </div>
+      {isLevelLoading ? <LoadingIndicator /> : null}
       <GameHeader />
       <NextLevelIndication />
     </>

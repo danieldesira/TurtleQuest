@@ -1,4 +1,8 @@
 import Turtle from "./characters/Turtle";
+import {
+  startLoadingLevel,
+  stopLoadingLevel,
+} from "./features/gameState/gameStateReducer";
 import { resetLevel } from "./features/levels/levelReducer";
 import { resetTurtle } from "./features/turtleMonitor/turtleReducers";
 import ILevel from "./levels/ILevel";
@@ -35,7 +39,9 @@ class Game {
   async loadNewLevel() {
     this._level = levels.get(store.getState().levels.level.value);
     if (this._level) {
+      store.dispatch(startLoadingLevel());
       await this._level.init();
+      store.dispatch(stopLoadingLevel());
       this.turtle.resetPosition();
     }
   }

@@ -7,13 +7,15 @@ interface Props {
 
 function ControlButton({ icon, callback }: Props) {
   let timer = 0;
+
   const handleMousedown = () => {
     callback();
     timer = requestAnimationFrame(handleMousedown);
   };
+
   const handleMouseup = () => cancelAnimationFrame(timer);
 
-  useEffect(() => () => handleMouseup());
+  useEffect(() => () => handleMouseup(), []);
 
   return (
     <button

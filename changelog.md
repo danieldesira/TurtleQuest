@@ -1,4 +1,7 @@
-#0.4.0 Preview - 25/03/2024 19:35 UTC+1
+#0.4.1 Alpha -
+* **Loading Level** message
+
+#0.4.0 Alpha - 25/03/2024 19:35 UTC+1
 * Redesign characters
 * Code cleanup:
     - Introduced width and height properties for characters which control character image
