@@ -1,7 +1,7 @@
 {
     "manifest_version": 1,
-    "name": "Turtle Escape",
-    "short_name": "Turtle Escape",
+    "name": "Turtle Quest",
+    "short_name": "Turtle Quest",
     "version": "0.4.1",
     "display": "fullscreen",
     "orientation": "landscape",
