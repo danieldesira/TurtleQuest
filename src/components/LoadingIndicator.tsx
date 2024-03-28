@@ -7,7 +7,7 @@ function LoadingIndicator() {
 
   return (
     <div className="fixed top-0 left-0 flex h-screen w-full items-center justify-center">
-      <span className="text-5xl text-white">Loading Level {levelNo} ...</span>
+      <span className="text-5xl dark:text-white">Loading Level {levelNo} ...</span>
     </div>
   );
 }
