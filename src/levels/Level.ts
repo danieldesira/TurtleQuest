@@ -20,8 +20,6 @@ abstract class Level implements ILevel {
   protected abstract readonly _benthicOffsetY: number;
   protected abstract readonly _currentSpeed: number;
   protected abstract readonly _points: number;
-  protected abstract readonly _width: number;
-  protected abstract readonly _height: number;
 
   async init(): Promise<void> {
     try {
@@ -35,8 +33,6 @@ abstract class Level implements ILevel {
   private loadBgImg(): Promise<void> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
-      backgroundImage.height = this._height;
-      backgroundImage.width = this._width;
       backgroundImage.src =
         this._backgroundImagePath + this._backgroundImageFilename;
       backgroundImage.onload = () => {
