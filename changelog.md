@@ -1,5 +1,7 @@
-#0.4.1 Alpha -
+#0.4.1 Alpha (Easter Edition) - 31/03/2024
 * **Loading Level** message
+* New backgrounds for Level 1 and 2
+* Added link to License and game logo in About dialog
 
 #0.4.0 Alpha - 25/03/2024 19:35 UTC+1
 * Redesign characters

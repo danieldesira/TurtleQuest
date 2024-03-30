@@ -10,24 +10,34 @@ interface Props {
 function AboutDialog({ setShowAbout }: Props) {
   return (
     <Dialog
-      title="About"
+      title="About Turtle Quest"
       content={
         <>
           <div className="flex justify-center gap-2">
             <a
-              href="https://github.com/danieldesira/TurtleEscape/blob/master/changelog.md"
+              href="https://github.com/danieldesira/TurtleQuest/blob/master/changelog.md"
               target="_blank"
               title="Changelog"
             >
               {version}
             </a>
             <a
-              href="https://github.com/danieldesira/TurtleEscape/blob/master/contributors.md"
+              href="https://github.com/danieldesira/TurtleQuest/blob/master/contributors.md"
               target="_blank"
               title="Credits"
             >
               Credits
             </a>
+            <a
+              href="https://github.com/danieldesira/TurtleQuest/blob/master/license.md"
+              target="_blank"
+              title="License"
+            >
+              License
+            </a>
+          </div>
+          <div className="flex justify-center">
+            <img src="./favicon.svg" alt="" width={130} />
           </div>
           <div className="flex gap-5 justify-center">
             <a

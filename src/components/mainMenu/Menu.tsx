@@ -27,13 +27,17 @@ function Menu() {
           <span className="text-emerald-300">Turtle</span>{" "}
           <span className="text-cyan-500">Quest</span>
         </h1>
-        <span className="text-white">Alpha release</span>
+        <span className="text-white">Alpha release - Easter Edition</span>
         <MenuButton
           callback={handleNewGame}
           icon={<GiSeaTurtle />}
           text="New Game"
         />
         <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
+        <img src="./static/images/editions/easter.svg" alt="" width={200} />
+        <span className="text-white">
+          Happy Easter to you and your loved ones!
+        </span>
       </div>
       {showAbout ? <AboutDialog setShowAbout={setShowAbout} /> : null}
     </>
