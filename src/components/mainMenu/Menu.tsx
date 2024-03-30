@@ -5,6 +5,8 @@ import MenuButton from "./MenuButton";
 import { GiSeaTurtle } from "react-icons/gi";
 import { FcAbout } from "react-icons/fc";
 import AboutDialog from "../dialog/AboutDialog";
+import DedicationsSection from "../DedicationsSection";
+import EditionSection from "../EditionSection";
 
 function Menu() {
   const dispatch = useDispatch();
@@ -34,10 +36,8 @@ function Menu() {
           text="New Game"
         />
         <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
-        <img src="./static/images/editions/easter.svg" alt="" width={200} />
-        <span className="text-white">
-          Happy Easter to you and your loved ones!
-        </span>
+        <DedicationsSection />
+        <EditionSection />
       </div>
       {showAbout ? <AboutDialog setShowAbout={setShowAbout} /> : null}
     </>

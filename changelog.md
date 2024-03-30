@@ -1,7 +1,8 @@
-#0.4.1 Alpha (Easter Edition) - 31/03/2024
+#0.4.1 Alpha (Easter Edition) - 31/03/2024 00:50 UTC+1
 * **Loading Level** message
 * New backgrounds for Level 1 and 2
 * Added link to License and game logo in About dialog
+* Added dedications section in menu
 
 #0.4.0 Alpha - 25/03/2024 19:35 UTC+1
 * Redesign characters
@@ -12,7 +13,7 @@
 * Added instructions to welcome dialog
 * UI changes:
     - Background colour and header text colour follow system theme scheme (dark/light)
-    - Header is hidden in menu
+    - Header is hidden in menu;
     - Canvas centered on bigger screens
     - Video in menu background muted
     - Replaced text in footer by About dialog
