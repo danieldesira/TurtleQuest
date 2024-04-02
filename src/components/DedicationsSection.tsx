@@ -2,7 +2,7 @@ import React from "react";
 
 function DedicationsSection() {
   return (
-    <span className="text-white">
+    <span>
       Dedicated to our coordinator Angelique and countless turtle watch
       volunteers!
     </span>

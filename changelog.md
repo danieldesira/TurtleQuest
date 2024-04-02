@@ -1,3 +1,7 @@
+#0.4.2 Alpha - 02/04/2024 23:15 UTC+1
+* SEO
+* Moved dedications to About dialog
+
 #0.4.1 Alpha (Easter Edition) - 31/03/2024 00:50 UTC+1
 * **Loading Level** message
 * New backgrounds for Level 1 and 2

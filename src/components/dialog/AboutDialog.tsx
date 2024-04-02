@@ -2,6 +2,7 @@ import React from "react";
 import Dialog from "./Dialog";
 import { version } from "../../../package.json";
 import { FaGithub, FaInstagram } from "react-icons/fa6";
+import DedicationsSection from "../DedicationsSection";
 
 interface Props {
   setShowAbout: Function;
@@ -55,6 +56,7 @@ function AboutDialog({ setShowAbout }: Props) {
               <FaGithub />
             </a>
           </div>
+          <DedicationsSection />
         </>
       }
       handleOk={() => setShowAbout(false)}

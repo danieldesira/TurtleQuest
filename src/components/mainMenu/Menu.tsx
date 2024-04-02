@@ -36,7 +36,6 @@ function Menu() {
           text="New Game"
         />
         <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
-        <DedicationsSection />
         <EditionSection />
       </div>
       {showAbout ? <AboutDialog setShowAbout={setShowAbout} /> : null}
