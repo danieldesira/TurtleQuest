@@ -1,6 +1,7 @@
-#0.4.3 Alpha -
+#0.4.3 Alpha - 03/04/2024 18:15 UTC+1
 * Added a thumbnail for sharing on social media
 * Locked app to landscape mode on mobile devices
+* Enabled Vercel analytics
 
 #0.4.2 Alpha - 02/04/2024 23:15 UTC+1
 * SEO
