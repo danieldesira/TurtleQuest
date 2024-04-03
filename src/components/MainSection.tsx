@@ -10,9 +10,9 @@ function MainSection() {
   );
 
   return (
-    <>
+    <div className="portrait:rotate-90">
       {inProgress ? <GameSection /> : <Menu />}
-    </>
+    </div>
   );
 }
 

@@ -29,7 +29,7 @@ function Menu() {
           <span className="text-emerald-300">Turtle</span>{" "}
           <span className="text-cyan-500">Quest</span>
         </h1>
-        <span className="text-white">Alpha release - Easter Edition</span>
+        <span className="text-white">Alpha release</span>
         <MenuButton
           callback={handleNewGame}
           icon={<GiSeaTurtle />}
