@@ -1,4 +1,4 @@
-import React, {  } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import Menu from "./mainMenu/Menu";
@@ -10,7 +10,7 @@ function MainSection() {
   );
 
   return (
-    <div className="portrait:rotate-90">
+    <div className="portrait:rotate-90 max-w-screen max-h-screen">
       {inProgress ? <GameSection /> : <Menu />}
     </div>
   );

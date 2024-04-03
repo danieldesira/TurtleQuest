@@ -1,3 +1,8 @@
+#0.5.0 Alpha -
+* Mobile:
+    - Correct orientation for onscreen controls
+    - Fit canvas and menu in the screen when device is in landscape mode
+
 #0.4.3 Alpha - 03/04/2024 18:15 UTC+1
 * Added a thumbnail for sharing on social media
 * Locked app to landscape mode on mobile devices

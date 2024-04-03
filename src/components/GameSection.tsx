@@ -8,6 +8,7 @@ import Game from "../Game";
 import LoadingIndicator from "./LoadingIndicator";
 import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
+import ControlGroup from "./controls/ControlGroup";
 
 function GameSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,6 +38,7 @@ function GameSection() {
       {isLevelLoading ? <LoadingIndicator /> : null}
       <GameHeader />
       <NextLevelIndication />
+      <ControlGroup />
     </>
   );
 }
