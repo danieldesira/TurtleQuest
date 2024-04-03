@@ -1,3 +1,6 @@
+#0.4.3 Alpha -
+* Added a thumbnail for sharing on social media
+
 #0.4.2 Alpha - 02/04/2024 23:15 UTC+1
 * SEO
 * Moved dedications to About dialog
