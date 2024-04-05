@@ -15,7 +15,7 @@ function ControlButton({ icon, callback }: Props) {
 
   const handleMouseup = () => cancelAnimationFrame(timer);
 
-  useEffect(() => () => handleMouseup(), []);
+  useEffect(() => () => handleMouseup());
 
   return (
     <button

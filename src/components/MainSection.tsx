@@ -10,7 +10,10 @@ function MainSection() {
   );
 
   return (
-    <div className="portrait:rotate-90 max-w-screen max-h-screen">
+    <div
+      className="portrait:rotate-90 max-w-screen max-h-screen"
+      onContextMenu={(e) => e.preventDefault()}
+    >
       {inProgress ? <GameSection /> : <Menu />}
     </div>
   );
