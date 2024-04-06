@@ -8,6 +8,7 @@ export type CharacterType =
   | "shrimp"
   | "plasticBag"
   | "neptuneGrass"
-  | "crab";
+  | "crab"
+  | "boat";
 
 export default LevelCharacter;

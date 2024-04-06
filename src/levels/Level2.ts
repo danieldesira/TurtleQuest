@@ -8,6 +8,7 @@ class Level2 extends Level {
     { type: "neptuneGrass", amount: 4 },
     { type: "shrimp", amount: 30 },
     { type: "crab", amount: 5 },
+    { type: "boat", amount: 1 },
   ];
   protected readonly _benthicOffsetY: number = 550;
   protected readonly _currentSpeed: number = 0.15;
