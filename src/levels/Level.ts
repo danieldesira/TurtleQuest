@@ -145,6 +145,14 @@ abstract class Level implements ILevel {
   get currentSpeed(): number {
     return this._currentSpeed;
   }
+
+  checkIfTurtleMeetsCharacters(): void {
+    for (const character of this._characters) {
+      if (character.isCollidingWithTurtle()) {
+        character.handleTurtleCollision();
+      }
+    }
+  }
 }
 
 export default Level;

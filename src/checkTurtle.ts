@@ -1,6 +1,4 @@
 import Game from "./Game";
-import Turtle from "./characters/Turtle";
-import Directions from "./enums/Directions";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
 import { stopGame } from "./features/gameState/gameStateReducer";
 import { levelUp } from "./features/levels/levelReducer";
@@ -13,9 +11,8 @@ import {
 } from "./features/turtleMonitor/turtleReducers";
 import levels, { LevelChangeTypes } from "./levels/levels";
 import store from "./store";
-import INonMainCharacter from "./characters/interfaces/INonMainCharacter";
 
-async function checkTurtle(): Promise<LevelChangeTypes> {
+const checkTurtle = async (): Promise<LevelChangeTypes> => {
   const mainCharacter = Game.instance.turtle;
   const bgWidth = Game.instance.level.bgImg.width;
 
@@ -43,14 +40,14 @@ async function checkTurtle(): Promise<LevelChangeTypes> {
     return await handleOffBgWidth();
   }
 
-  checkIfTurtleMeetsCharacters();
+  Game.instance.level.checkIfTurtleMeetsCharacters();
 
   Game.instance.level.moveCharacters();
 
   return LevelChangeTypes.SameLevel;
-}
+};
 
-async function handleOffBgWidth(): Promise<LevelChangeTypes> {
+const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
   store.dispatch(
     gainPoints({ turtle: { xpValue: Game.instance.level.points } })
   );
@@ -70,91 +67,6 @@ async function handleOffBgWidth(): Promise<LevelChangeTypes> {
     store.dispatch(stopGame());
     return LevelChangeTypes.GameComplete;
   }
-}
-
-function checkIfTurtleMeetsCharacters() {
-  const mainCharacter = Game.instance.turtle;
-  const level = Game.instance.level;
-
-  for (const character of level.characters) {
-    if (areTurtleCharacterIntersecting(mainCharacter, character)) {
-      character.handleTurtleCollision();
-    }
-  }
-}
-
-function areTurtleCharacterIntersecting(
-  turtle: Turtle,
-  otherCharacter: INonMainCharacter
-): boolean {
-  const collidedWithTurtleRight = (x: number, y: number) => {
-    const turtleXEnd = turtle.x + turtle.width;
-    const turtleYEnd = turtle.y + turtle.height;
-    return turtle.x <= x && x <= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
-  };
-
-  const collidedWithTurtleLeft = (x: number, y: number) => {
-    const turtleXEnd = turtle.x - turtle.width;
-    const turtleYEnd = turtle.y - turtle.height;
-    return turtle.x >= x && x >= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
-  };
-
-  const collidedWithTurtleUp = (x: number, y: number) => {
-    const turtleXEnd = turtle.x + turtle.height;
-    const turtleYEnd = turtle.y - turtle.width;
-    return turtle.x <= x && x <= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
-  };
-
-  const collidedWithTurtleDown = (x: number, y: number) => {
-    const turtleXEnd = turtle.x - turtle.height;
-    const turtleYEnd = turtle.y + turtle.width;
-    return turtle.x >= x && x >= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
-  };
-
-  let isCollision = false;
-
-  switch (turtle.direction) {
-    case Directions.Left:
-      isCollision =
-        collidedWithTurtleLeft(
-          otherCharacter.x + otherCharacter.width,
-          otherCharacter.y
-        ) ||
-        collidedWithTurtleLeft(
-          otherCharacter.x + otherCharacter.width,
-          otherCharacter.y + otherCharacter.height
-        );
-      break;
-    case Directions.Right:
-      isCollision =
-        collidedWithTurtleRight(otherCharacter.x, otherCharacter.y) ||
-        collidedWithTurtleRight(
-          otherCharacter.x,
-          otherCharacter.y + otherCharacter.height
-        );
-      break;
-    case Directions.Up:
-      isCollision =
-        collidedWithTurtleUp(
-          otherCharacter.x,
-          otherCharacter.y + otherCharacter.height
-        ) ||
-        collidedWithTurtleUp(
-          otherCharacter.x + otherCharacter.width,
-          otherCharacter.y + otherCharacter.height
-        );
-      break;
-    case Directions.Down:
-      isCollision =
-        collidedWithTurtleDown(otherCharacter.x, otherCharacter.y) ||
-        collidedWithTurtleDown(
-          otherCharacter.x + otherCharacter.width,
-          otherCharacter.y
-        );
-      break;
-  }
-
-  return isCollision;
-}
+};
 
 export default checkTurtle;

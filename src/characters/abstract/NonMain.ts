@@ -1,4 +1,5 @@
 import Game from "../../Game";
+import Directions from "../../enums/Directions";
 import {
   decrementStomachCapacity,
   gainPoints,
@@ -56,6 +57,69 @@ abstract class NonMain extends Character implements INonMainCharacter {
   }
 
   abstract swim(): void;
+
+  isCollidingWithTurtle(): boolean {
+    const turtle = Game.instance.turtle;
+
+    const collidedWithTurtleRight = (x: number, y: number) => {
+      const turtleXEnd = turtle.x + turtle.width;
+      const turtleYEnd = turtle.y + turtle.height;
+      return (
+        turtle.x <= x && x <= turtleXEnd && turtle.y <= y && y <= turtleYEnd
+      );
+    };
+
+    const collidedWithTurtleLeft = (x: number, y: number) => {
+      const turtleXEnd = turtle.x - turtle.width;
+      const turtleYEnd = turtle.y - turtle.height;
+      return (
+        turtle.x >= x && x >= turtleXEnd && turtle.y >= y && y >= turtleYEnd
+      );
+    };
+
+    const collidedWithTurtleUp = (x: number, y: number) => {
+      const turtleXEnd = turtle.x + turtle.height;
+      const turtleYEnd = turtle.y - turtle.width;
+      return (
+        turtle.x <= x && x <= turtleXEnd && turtle.y >= y && y >= turtleYEnd
+      );
+    };
+
+    const collidedWithTurtleDown = (x: number, y: number) => {
+      const turtleXEnd = turtle.x - turtle.height;
+      const turtleYEnd = turtle.y + turtle.width;
+      return (
+        turtle.x >= x && x >= turtleXEnd && turtle.y <= y && y <= turtleYEnd
+      );
+    };
+
+    let isCollision = false;
+
+    switch (turtle.direction) {
+      case Directions.Left:
+        isCollision =
+          collidedWithTurtleLeft(this._x + this._width, this._y) ||
+          collidedWithTurtleLeft(this._x + this._width, this._y + this._height);
+        break;
+      case Directions.Right:
+        isCollision =
+          collidedWithTurtleRight(this._x, this._y) ||
+          collidedWithTurtleRight(this._x, this._y + this._height);
+        break;
+      case Directions.Up:
+        isCollision =
+          collidedWithTurtleUp(this._x, this._y + this._height) ||
+          collidedWithTurtleUp(this._x + this._width, this._y + this._height);
+        break;
+      case Directions.Down:
+        isCollision =
+          collidedWithTurtleDown(this._x, this._y) ||
+          collidedWithTurtleDown(this._x + this._width, this._y);
+        break;
+    }
+
+    return isCollision;
+  }
 }
 
 export default NonMain;
