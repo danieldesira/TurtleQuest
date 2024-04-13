@@ -1,4 +1,10 @@
 import Game from "../../Game";
+import {
+  collidedWithTurtleDown,
+  collidedWithTurtleLeft,
+  collidedWithTurtleRight,
+  collidedWithTurtleUp,
+} from "../../checkTurtle";
 import Directions from "../../enums/Directions";
 import { generateRandomBit } from "../../utils/generic";
 import Obstacle from "./Obstacle";
@@ -30,6 +36,37 @@ abstract class FloatingGuidedObstacle extends Obstacle {
         this._direction = Directions.Left;
       }
     }
+  }
+
+  isCollidingWithTurtle(): boolean {
+    const turtle = Game.instance.turtle;
+    let isCollision = false;
+    switch (turtle.direction) {
+      case Directions.Left:
+        isCollision =
+          collidedWithTurtleLeft(this._x, this._y + this._height) ||
+          collidedWithTurtleLeft(this._x + this._width, this._y + this._height);
+        break;
+      case Directions.Right:
+        isCollision =
+          collidedWithTurtleRight(this._x, this._y + this._height) ||
+          collidedWithTurtleRight(
+            this._x + this._width,
+            this._y + this._height
+          );
+        break;
+      case Directions.Up:
+        isCollision =
+          collidedWithTurtleUp(this._x, this._y + this._height) ||
+          collidedWithTurtleUp(this._x + this._width, this._y + this._height);
+        break;
+      case Directions.Down:
+        isCollision =
+          collidedWithTurtleDown(this._x, this._y + this._height) ||
+          collidedWithTurtleDown(this._x + this._width, this._y + this._height);
+        break;
+    }
+    return isCollision;
   }
 }
 

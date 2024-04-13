@@ -69,4 +69,39 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
   }
 };
 
+const collidedWithTurtleRight = (x: number, y: number) => {
+  const turtle = Game.instance.turtle;
+  const turtleXEnd = turtle.x + turtle.width;
+  const turtleYEnd = turtle.y + turtle.height;
+  return turtle.x <= x && x <= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
+};
+
+const collidedWithTurtleLeft = (x: number, y: number) => {
+  const turtle = Game.instance.turtle;
+  const turtleXEnd = turtle.x - turtle.width;
+  const turtleYEnd = turtle.y - turtle.height;
+  return turtle.x >= x && x >= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
+};
+
+const collidedWithTurtleUp = (x: number, y: number) => {
+  const turtle = Game.instance.turtle;
+  const turtleXEnd = turtle.x + turtle.height;
+  const turtleYEnd = turtle.y - turtle.width;
+  return turtle.x <= x && x <= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
+};
+
+const collidedWithTurtleDown = (x: number, y: number) => {
+  const turtle = Game.instance.turtle;
+  const turtleXEnd = turtle.x - turtle.height;
+  const turtleYEnd = turtle.y + turtle.width;
+  return turtle.x >= x && x >= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
+};
+
 export default checkTurtle;
+
+export {
+  collidedWithTurtleUp,
+  collidedWithTurtleDown,
+  collidedWithTurtleLeft,
+  collidedWithTurtleRight,
+};

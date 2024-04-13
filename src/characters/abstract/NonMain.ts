@@ -1,4 +1,10 @@
 import Game from "../../Game";
+import {
+  collidedWithTurtleDown,
+  collidedWithTurtleLeft,
+  collidedWithTurtleRight,
+  collidedWithTurtleUp,
+} from "../../checkTurtle";
 import Directions from "../../enums/Directions";
 import {
   decrementStomachCapacity,
@@ -59,43 +65,8 @@ abstract class NonMain extends Character implements INonMainCharacter {
   abstract swim(): void;
 
   isCollidingWithTurtle(): boolean {
-    const turtle = Game.instance.turtle;
-
-    const collidedWithTurtleRight = (x: number, y: number) => {
-      const turtleXEnd = turtle.x + turtle.width;
-      const turtleYEnd = turtle.y + turtle.height;
-      return (
-        turtle.x <= x && x <= turtleXEnd && turtle.y <= y && y <= turtleYEnd
-      );
-    };
-
-    const collidedWithTurtleLeft = (x: number, y: number) => {
-      const turtleXEnd = turtle.x - turtle.width;
-      const turtleYEnd = turtle.y - turtle.height;
-      return (
-        turtle.x >= x && x >= turtleXEnd && turtle.y >= y && y >= turtleYEnd
-      );
-    };
-
-    const collidedWithTurtleUp = (x: number, y: number) => {
-      const turtleXEnd = turtle.x + turtle.height;
-      const turtleYEnd = turtle.y - turtle.width;
-      return (
-        turtle.x <= x && x <= turtleXEnd && turtle.y >= y && y >= turtleYEnd
-      );
-    };
-
-    const collidedWithTurtleDown = (x: number, y: number) => {
-      const turtleXEnd = turtle.x - turtle.height;
-      const turtleYEnd = turtle.y + turtle.width;
-      return (
-        turtle.x >= x && x >= turtleXEnd && turtle.y <= y && y <= turtleYEnd
-      );
-    };
-
     let isCollision = false;
-
-    switch (turtle.direction) {
+    switch (Game.instance.turtle.direction) {
       case Directions.Left:
         isCollision =
           collidedWithTurtleLeft(this._x + this._width, this._y) ||
