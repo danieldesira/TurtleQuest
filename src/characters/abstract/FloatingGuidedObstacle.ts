@@ -41,29 +41,30 @@ abstract class FloatingGuidedObstacle extends Obstacle {
   isCollidingWithTurtle(): boolean {
     const turtle = Game.instance.turtle;
     let isCollision = false;
+
+    const checkCollision = (collisionMethod: Function) => {
+      for (let x = this._x; x <= this._x + this._width; x++) {
+        for (let y = this._y; y <= this._y + this._height; y++) {
+          if (collisionMethod(x, y)) {
+            isCollision = true;
+            break;
+          }
+        }
+      }
+    };
+
     switch (turtle.direction) {
       case Directions.Left:
-        isCollision =
-          collidedWithTurtleLeft(this._x, this._y + this._height) ||
-          collidedWithTurtleLeft(this._x + this._width, this._y + this._height);
+        checkCollision(collidedWithTurtleLeft);
         break;
       case Directions.Right:
-        isCollision =
-          collidedWithTurtleRight(this._x, this._y + this._height) ||
-          collidedWithTurtleRight(
-            this._x + this._width,
-            this._y + this._height
-          );
+        checkCollision(collidedWithTurtleRight);
         break;
       case Directions.Up:
-        isCollision =
-          collidedWithTurtleUp(this._x, this._y + this._height) ||
-          collidedWithTurtleUp(this._x + this._width, this._y + this._height);
+        checkCollision(collidedWithTurtleUp);
         break;
       case Directions.Down:
-        isCollision =
-          collidedWithTurtleDown(this._x, this._y + this._height) ||
-          collidedWithTurtleDown(this._x + this._width, this._y + this._height);
+        checkCollision(collidedWithTurtleDown);
         break;
     }
     return isCollision;
