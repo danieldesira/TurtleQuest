@@ -12,6 +12,11 @@ import Obstacle from "./Obstacle";
 abstract class FloatingGuidedObstacle extends Obstacle {
   private _direction: Directions;
 
+  /**
+   * Sets initial position of this obstact along the top of the screen. (Floating)
+   * @override
+   * @author @danieldesira
+   */
   setInitialPosition(): void {
     this._x =
       Math.random() * (this.initialPositionXTo - this.initialPositionXFrom) +
@@ -24,6 +29,11 @@ abstract class FloatingGuidedObstacle extends Obstacle {
     this._direction = generateRandomBit() ? Directions.Left : Directions.Right;
   }
 
+  /**
+   * Moves obstacle to and fro along the top of the screen.
+   * @override
+   * @author @danieldesira
+   */
   swim(): void {
     if (this._direction === Directions.Left) {
       this._x -= this._speed;
@@ -38,6 +48,12 @@ abstract class FloatingGuidedObstacle extends Obstacle {
     }
   }
 
+  /**
+   * Checks whether obstacle collided with turtle. Adapted for larger obstacles.
+   * @returns Flag showing collision.
+   * @override
+   * @author @danieldesira
+   */
   isCollidingWithTurtle(): boolean {
     const turtle = Game.instance.turtle;
     let isCollision = false;

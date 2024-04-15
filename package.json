@@ -8,6 +8,7 @@
     "serve": "^14.2.1",
     "tailwindcss": "^3.4.1",
     "ts-loader": "^9.5.1",
+    "typedoc": "^0.25.13",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
@@ -17,7 +18,8 @@
     "serve": "npx serve -l 5000",
     "tailwind": "npx tailwindcss -i ./src/main.css -o ./dist/bundle.css --watch --minify",
     "dev": "npx concurrently \"npm run webpack\" \"npm run serve\" \"npm run tailwind\"",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "docs": "npx typedoc src/main.tsx"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",

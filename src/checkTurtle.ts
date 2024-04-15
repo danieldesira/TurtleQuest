@@ -12,6 +12,11 @@ import {
 import levels, { LevelChangeTypes } from "./levels/levels";
 import store from "./store";
 
+/**
+ * Fires checks regarding game status and reacts accordingly.
+ * @returns Promise to game status.
+ * @author @danieldesira
+ */
 const checkTurtle = async (): Promise<LevelChangeTypes> => {
   const mainCharacter = Game.instance.turtle;
   const bgWidth = Game.instance.level.bgImg.width;
@@ -69,6 +74,13 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
   }
 };
 
+/**
+ * Checks for collisions when turtle is facing right direction.
+ * @param x Point x to compare.
+ * @param y Point y to compare.
+ * @returns Flag showing collision.
+ * @author @danieldesira
+ */
 const collidedWithTurtleRight = (x: number, y: number) => {
   const turtle = Game.instance.turtle;
   const turtleXEnd = turtle.x + turtle.width;
@@ -76,6 +88,13 @@ const collidedWithTurtleRight = (x: number, y: number) => {
   return turtle.x <= x && x <= turtleXEnd && turtle.y <= y && y <= turtleYEnd;
 };
 
+/**
+ * Checks for collisions when turtle is facing left direction.
+ * @param x Point x to compare.
+ * @param y Point y to compare.
+ * @returns Flag showing collision.
+ * @author @danieldesira
+ */
 const collidedWithTurtleLeft = (x: number, y: number) => {
   const turtle = Game.instance.turtle;
   const turtleXEnd = turtle.x - turtle.width;
@@ -83,6 +102,13 @@ const collidedWithTurtleLeft = (x: number, y: number) => {
   return turtle.x >= x && x >= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
 };
 
+/**
+ * Checks for collisions when turtle is facing upwards direction.
+ * @param x Point x to compare.
+ * @param y Point y to compare.
+ * @returns Flag showing collision.
+ * @author @danieldesira
+ */
 const collidedWithTurtleUp = (x: number, y: number) => {
   const turtle = Game.instance.turtle;
   const turtleXEnd = turtle.x + turtle.height;
@@ -90,6 +116,13 @@ const collidedWithTurtleUp = (x: number, y: number) => {
   return turtle.x <= x && x <= turtleXEnd && turtle.y >= y && y >= turtleYEnd;
 };
 
+/**
+ * Checks for collisions when turtle is facing downwards direction.
+ * @param x Point x to compare.
+ * @param y Point y to compare.
+ * @returns Flag showing collision.
+ * @author @danieldesira
+ */
 const collidedWithTurtleDown = (x: number, y: number) => {
   const turtle = Game.instance.turtle;
   const turtleXEnd = turtle.x - turtle.height;
