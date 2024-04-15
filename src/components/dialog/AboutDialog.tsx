@@ -2,7 +2,6 @@ import React from "react";
 import Dialog from "./Dialog";
 import { version } from "../../../package.json";
 import { FaGithub, FaInstagram } from "react-icons/fa6";
-import DedicationsSection from "../DedicationsSection";
 
 interface Props {
   setShowAbout: Function;
@@ -36,9 +35,16 @@ function AboutDialog({ setShowAbout }: Props) {
             >
               License
             </a>
+            <a
+              href="https://github.com/danieldesira/TurtleQuest/blob/master/dedications.md"
+              target="_blank"
+              title="License"
+            >
+              Dedications
+            </a>
           </div>
           <div className="flex justify-center">
-            <img src="./favicon.svg" alt="" width={130} />
+            <img src="./favicon.svg" alt="" width={30} />
           </div>
           <div className="flex gap-5 justify-center">
             <a
@@ -56,7 +62,6 @@ function AboutDialog({ setShowAbout }: Props) {
               <FaGithub />
             </a>
           </div>
-          <DedicationsSection />
         </>
       }
       handleOk={() => setShowAbout(false)}

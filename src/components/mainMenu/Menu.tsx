@@ -5,7 +5,6 @@ import MenuButton from "./MenuButton";
 import { GiSeaTurtle } from "react-icons/gi";
 import { FcAbout } from "react-icons/fc";
 import AboutDialog from "../dialog/AboutDialog";
-import DedicationsSection from "../DedicationsSection";
 import EditionSection from "../EditionSection";
 
 function Menu() {

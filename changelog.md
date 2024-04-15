@@ -4,7 +4,8 @@
     - Fit canvas and menu in the screen when device is in landscape mode
 * Disabled context menu (right click)
 * Fixed bug causing control buttons to stay activated after finishing a level
-* Introduced boat
+* Introduced boat and associated collision detection improvements
+* Moved dedications to a .md file on Github and made the logo take much less screen space
 
 #0.4.3 Alpha - 03/04/2024 18:15 UTC+1
 * Added a thumbnail for sharing on social media
