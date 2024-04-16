@@ -11,7 +11,7 @@ function MainSection() {
 
   return (
     <div
-      className="portrait:rotate-90 max-w-screen max-h-screen"
+      className="portrait:rotate-90 max-w-screen max-h-screen select-none"
       onContextMenu={(e) => e.preventDefault()}
     >
       {inProgress ? <GameSection /> : <Menu />}
