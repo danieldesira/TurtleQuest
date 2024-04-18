@@ -12,6 +12,13 @@ abstract class Prey extends NonMain implements IPrey {
     return this._foodValue;
   }
 
+  /**
+   * Implements prey behaviour for collision with turtle.
+   * i.e.: check if turtle has enough stomach capacity,
+   * increase food value and apply default behaviour
+   * @override
+   * @author Daniel Desira
+   */
   handleTurtleCollision(): void {
     const canTurtleEatCharacter =
       store.getState().turtleMonitor.turtle.stomachCapacity.value -
@@ -23,6 +30,11 @@ abstract class Prey extends NonMain implements IPrey {
     }
   }
 
+  /**
+   * Swim and respond to turtle approaching. Keeps to the same direction of the turtle.
+   * @override
+   * @author Daniel Desira
+   */
   swim(): void {
     const maxPreyDistance = 150;
     const turtle = Game.instance.turtle;

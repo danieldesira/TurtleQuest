@@ -12,11 +12,22 @@ abstract class Obstacle extends NonMain implements IObstacle {
     return this._damage;
   }
 
+  /**
+   * Responds to collision with turtle.
+   * i.e.: decrease health and apply default behaviour
+   * @override
+   * @author Daniel Desira
+   */
   handleTurtleCollision(): void {
     store.dispatch(takeDamage({ turtle: { lifeValue: this._damage } }));
     super.handleTurtleCollision();
   }
 
+  /**
+   * Moves towards the left and apply random movement up and down.
+   * @override
+   * @author Daniel Desira
+   */
   swim(): void {
     const speed = Game.instance.level.currentSpeed;
     this._x -= speed;

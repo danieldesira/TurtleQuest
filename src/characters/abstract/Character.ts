@@ -12,7 +12,7 @@ abstract class Character implements ICharacter {
   /**
    * Loads image for character.
    * @returns Promise for loaded image object.
-   * @author @danieldesira
+   * @author Daniel Desira
    */
   loadImage(): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
@@ -36,7 +36,7 @@ abstract class Character implements ICharacter {
    * @param context Canvas context.
    * @param bgXOffset Horizontal offset on canvas.
    * @param bgYOffset Vertical offset on canvas.
-   * @author @danieldesira
+   * @author Daniel Desira
    */
   paint(
     context: CanvasRenderingContext2D,

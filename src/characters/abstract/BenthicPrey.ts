@@ -9,7 +9,7 @@ abstract class BenthicPrey extends Prey {
   /**
    * Moves randomly along the x axis.
    * @override
-   * @author @danieldesira
+   * @author Daniel Desira
    */
   swim() {
     const randomHorizontalDirection = Math.round(Math.random());

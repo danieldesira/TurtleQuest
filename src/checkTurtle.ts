@@ -15,7 +15,7 @@ import store from "./store";
 /**
  * Fires checks regarding game status and reacts accordingly.
  * @returns Promise to game status.
- * @author @danieldesira
+ * @author Daniel Desira
  */
 const checkTurtle = async (): Promise<LevelChangeTypes> => {
   const mainCharacter = Game.instance.turtle;
@@ -79,7 +79,7 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
  * @param x Point x to compare.
  * @param y Point y to compare.
  * @returns Flag showing collision.
- * @author @danieldesira
+ * @author Daniel Desira
  */
 const collidedWithTurtleRight = (x: number, y: number) => {
   const turtle = Game.instance.turtle;
@@ -93,7 +93,7 @@ const collidedWithTurtleRight = (x: number, y: number) => {
  * @param x Point x to compare.
  * @param y Point y to compare.
  * @returns Flag showing collision.
- * @author @danieldesira
+ * @author Daniel Desira
  */
 const collidedWithTurtleLeft = (x: number, y: number) => {
   const turtle = Game.instance.turtle;
@@ -107,7 +107,7 @@ const collidedWithTurtleLeft = (x: number, y: number) => {
  * @param x Point x to compare.
  * @param y Point y to compare.
  * @returns Flag showing collision.
- * @author @danieldesira
+ * @author Daniel Desira
  */
 const collidedWithTurtleUp = (x: number, y: number) => {
   const turtle = Game.instance.turtle;
@@ -121,7 +121,7 @@ const collidedWithTurtleUp = (x: number, y: number) => {
  * @param x Point x to compare.
  * @param y Point y to compare.
  * @returns Flag showing collision.
- * @author @danieldesira
+ * @author Daniel Desira
  */
 const collidedWithTurtleDown = (x: number, y: number) => {
   const turtle = Game.instance.turtle;

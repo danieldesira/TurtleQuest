@@ -18,8 +18,7 @@
     "serve": "npx serve -l 5000",
     "tailwind": "npx tailwindcss -i ./src/main.css -o ./dist/bundle.css --watch --minify",
     "dev": "npx concurrently \"npm run webpack\" \"npm run serve\" \"npm run tailwind\"",
-    "start": "npm run dev",
-    "docs": "npx typedoc src/main.tsx"
+    "start": "npm run dev"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",

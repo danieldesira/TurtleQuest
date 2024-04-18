@@ -15,7 +15,7 @@ abstract class FloatingGuidedObstacle extends Obstacle {
   /**
    * Sets initial position of this obstact along the top of the screen. (Floating)
    * @override
-   * @author @danieldesira
+   * @author Daniel Desira
    */
   setInitialPosition(): void {
     this._x =
@@ -32,7 +32,7 @@ abstract class FloatingGuidedObstacle extends Obstacle {
   /**
    * Moves obstacle to and fro along the top of the screen.
    * @override
-   * @author @danieldesira
+   * @author Daniel Desira
    */
   swim(): void {
     if (this._direction === Directions.Left) {
@@ -52,7 +52,7 @@ abstract class FloatingGuidedObstacle extends Obstacle {
    * Checks whether obstacle collided with turtle. Adapted for larger obstacles.
    * @returns Flag showing collision.
    * @override
-   * @author @danieldesira
+   * @author Daniel Desira
    */
   isCollidingWithTurtle(): boolean {
     const turtle = Game.instance.turtle;

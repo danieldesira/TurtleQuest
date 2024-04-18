@@ -43,6 +43,10 @@ abstract class NonMain extends Character implements INonMainCharacter {
     return this._points;
   }
 
+  /**
+   * Randomises initial position for character.
+   * @author Daniel Desira
+   */
   setInitialPosition(): void {
     this._x =
       Math.random() * (this.initialPositionXTo - this.initialPositionXFrom) +
@@ -52,6 +56,12 @@ abstract class NonMain extends Character implements INonMainCharacter {
       this.initialPositionYFrom;
   }
 
+  /**
+   * Default response to collision with turtle.
+   * i.e.: decrementing stomach capacity,
+   * applying points (+ve/-ve) and deleting character from set
+   * @author Daniel Desira
+   */
   handleTurtleCollision(): void {
     store.dispatch(
       decrementStomachCapacity({
