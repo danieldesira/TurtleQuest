@@ -9,6 +9,7 @@
 * Prevent text selection in game and menu
 * Internal:
     - Document methods for abstract classes and interfaces
+    - Refactored collision detection
 
 #0.4.3 Alpha - 03/04/2024 18:15 UTC+1
 * Added a thumbnail for sharing on social media

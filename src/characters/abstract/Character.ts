@@ -1,3 +1,4 @@
+import Directions from "../../enums/Directions";
 import ICharacter from "../interfaces/ICharacter";
 
 abstract class Character implements ICharacter {
@@ -8,6 +9,7 @@ abstract class Character implements ICharacter {
   protected abstract readonly _imageFilename: string;
   protected abstract readonly _width: number;
   protected abstract readonly _height: number;
+  protected _direction: Directions = Directions.Right;
 
   /**
    * Loads image for character.
@@ -75,9 +77,13 @@ abstract class Character implements ICharacter {
   get height() {
     return this._height;
   }
-  
+
   get width() {
     return this._width;
+  }
+
+  get direction() {
+    return this._direction;
   }
 }
 

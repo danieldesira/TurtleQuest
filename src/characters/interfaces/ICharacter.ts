@@ -1,3 +1,5 @@
+import Directions from "../../enums/Directions";
+
 interface ICharacter {
   loadImage(): Promise<HTMLImageElement>;
   paint(context: CanvasRenderingContext2D, bgOffsetX?: number, bgOffsetY?: number): void;
@@ -8,6 +10,7 @@ interface ICharacter {
   get image(): HTMLImageElement;
   get height(): number;
   get width(): number;
+  get direction(): Directions;
 }
 
 export default ICharacter;

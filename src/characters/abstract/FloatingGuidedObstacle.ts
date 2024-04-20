@@ -1,16 +1,13 @@
 import Game from "../../Game";
-import {
-  collidedWithTurtleDown,
-  collidedWithTurtleLeft,
-  collidedWithTurtleRight,
-  collidedWithTurtleUp,
-} from "../../checkTurtle";
 import Directions from "../../enums/Directions";
+import checkBoundingBoxCollision, {
+  getCharacterBoundingBox,
+} from "../../utils/checkCollision";
 import { generateRandomBit } from "../../utils/generic";
 import Obstacle from "./Obstacle";
 
 abstract class FloatingGuidedObstacle extends Obstacle {
-  private _direction: Directions;
+  protected _direction: Directions;
 
   /**
    * Sets initial position of this obstact along the top of the screen. (Floating)
@@ -49,41 +46,21 @@ abstract class FloatingGuidedObstacle extends Obstacle {
   }
 
   /**
-   * Checks whether obstacle collided with turtle. Adapted for larger obstacles.
+   * Checks whether obstacle collided with turtle. Adapted for objects that don't have a 
+   * change in coordinates for a left/right direction change.
    * @returns Flag showing collision.
    * @override
    * @author Daniel Desira
    */
   isCollidingWithTurtle(): boolean {
-    const turtle = Game.instance.turtle;
-    let isCollision = false;
-
-    const checkCollision = (collisionMethod: Function) => {
-      for (let x = this._x; x <= this._x + this._width; x++) {
-        for (let y = this._y; y <= this._y + this._height; y++) {
-          if (collisionMethod(x, y)) {
-            isCollision = true;
-            break;
-          }
-        }
-      }
+    const turtleBox = getCharacterBoundingBox(Game.instance.turtle);
+    const obstacleBox = {
+      minX: this._x,
+      maxX: this._x + this._width,
+      minY: this._y,
+      maxY: this._y + this._height,
     };
-
-    switch (turtle.direction) {
-      case Directions.Left:
-        checkCollision(collidedWithTurtleLeft);
-        break;
-      case Directions.Right:
-        checkCollision(collidedWithTurtleRight);
-        break;
-      case Directions.Up:
-        checkCollision(collidedWithTurtleUp);
-        break;
-      case Directions.Down:
-        checkCollision(collidedWithTurtleDown);
-        break;
-    }
-    return isCollision;
+    return checkBoundingBoxCollision(turtleBox, obstacleBox);
   }
 }
 

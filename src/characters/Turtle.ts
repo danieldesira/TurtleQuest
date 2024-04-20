@@ -8,14 +8,12 @@ class Turtle extends Character implements IMainCharacter {
   static scientificName: string = "Carretta carretta";
   protected readonly _imageFilename: string = "turtle.svg";
   protected readonly _speed: number = 1;
-  private _angle: Directions;
   protected readonly _width: number;
   protected readonly _height: number;
 
   constructor({ speed, width, height }: CharacterOptions = {}) {
     super();
     this.resetPosition();
-    this._angle = Directions.Right;
     this._speed = speed ?? 1;
     this._width = width ?? 130;
     this._height = height ?? 80;
@@ -24,11 +22,7 @@ class Turtle extends Character implements IMainCharacter {
   resetPosition() {
     this._x = 50;
     this._y = 10;
-    this._angle = Directions.Right;
-  }
-
-  get direction() {
-    return this._angle;
+    this._direction = Directions.Right;
   }
 
   moveUp() {
@@ -58,14 +52,14 @@ class Turtle extends Character implements IMainCharacter {
   }
 
   private rotate(angle: number) {
-    this._angle = angle;
+    this._direction = angle;
   }
 
   private applyRotation(context: CanvasRenderingContext2D) {
     const x = this._x - Game.instance.level.bgOffsetX;
     const y = this._y - Game.instance.level.bgOffsetY;
     context.translate(x, y);
-    context.rotate(this._angle);
+    context.rotate(this._direction);
     context.translate(-x, -y);
   }
 

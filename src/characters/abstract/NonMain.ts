@@ -1,16 +1,12 @@
 import Game from "../../Game";
 import {
-  collidedWithTurtleDown,
-  collidedWithTurtleLeft,
-  collidedWithTurtleRight,
-  collidedWithTurtleUp,
-} from "../../checkTurtle";
-import Directions from "../../enums/Directions";
-import {
   decrementStomachCapacity,
   gainPoints,
 } from "../../features/turtleMonitor/turtleReducers";
 import store from "../../store";
+import checkBoundingBoxCollision, {
+  getCharacterBoundingBox,
+} from "../../utils/checkCollision";
 import INonMainCharacter from "../interfaces/INonMainCharacter";
 import Character from "./Character";
 
@@ -75,31 +71,9 @@ abstract class NonMain extends Character implements INonMainCharacter {
   abstract swim(): void;
 
   isCollidingWithTurtle(): boolean {
-    let isCollision = false;
-    switch (Game.instance.turtle.direction) {
-      case Directions.Left:
-        isCollision =
-          collidedWithTurtleLeft(this._x + this._width, this._y) ||
-          collidedWithTurtleLeft(this._x + this._width, this._y + this._height);
-        break;
-      case Directions.Right:
-        isCollision =
-          collidedWithTurtleRight(this._x, this._y) ||
-          collidedWithTurtleRight(this._x, this._y + this._height);
-        break;
-      case Directions.Up:
-        isCollision =
-          collidedWithTurtleUp(this._x, this._y + this._height) ||
-          collidedWithTurtleUp(this._x + this._width, this._y + this._height);
-        break;
-      case Directions.Down:
-        isCollision =
-          collidedWithTurtleDown(this._x, this._y) ||
-          collidedWithTurtleDown(this._x + this._width, this._y);
-        break;
-    }
-
-    return isCollision;
+    const turtleBox = getCharacterBoundingBox(Game.instance.turtle);
+    const characterBox = getCharacterBoundingBox(this);
+    return checkBoundingBoxCollision(turtleBox, characterBox);
   }
 }
 
