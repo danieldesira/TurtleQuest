@@ -19,50 +19,64 @@ class Turtle extends Character implements IMainCharacter {
     this._height = height ?? 80;
   }
 
+  /**
+   * Resets position and direction for turtle.
+   * @author Daniel Desira
+   */
   resetPosition() {
     this._x = 50;
     this._y = 10;
     this._direction = Directions.Right;
   }
 
+  /**
+   * Decrements turtle y position and rotates it upwards.
+   * @author Daniel Desira
+   */
   moveUp() {
-    this.rotate(Directions.Up);
+    this._direction = Directions.Up;
     if (this._y > 0) {
       this._y -= this._speed;
     }
   }
 
+  /**
+   * Increments turtle y position and rotates it downwards.
+   * @author Daniel Desira
+   */
   moveDown() {
-    this.rotate(Directions.Down);
+    this._direction = Directions.Down;
     if (this._y < Game.instance.level.bgImg.height) {
       this._y += this._speed;
     }
   }
 
+  /**
+   * Decrements turtle x position and rotates it leftwards.
+   * @author Daniel Desira
+   */
   moveLeft() {
-    this.rotate(Directions.Left);
+    this._direction = Directions.Left;
     if (this._x > 0) {
       this._x -= this._speed;
     }
   }
 
+  /**
+   * Increments turtle x position and rotates it rightwards.
+   * @author Daniel Desira
+   */
   moveRight() {
-    this.rotate(Directions.Right);
+    this._direction = Directions.Right;
     this._x += this._speed;
   }
 
-  private rotate(angle: number) {
-    this._direction = angle;
-  }
-
-  private applyRotation(context: CanvasRenderingContext2D) {
-    const x = this._x - Game.instance.level.bgOffsetX;
-    const y = this._y - Game.instance.level.bgOffsetY;
-    context.translate(x, y);
-    context.rotate(this._direction);
-    context.translate(-x, -y);
-  }
-
+  /**
+   * Paints turtle while taking direction into account.
+   * @param context The canvas 2D context
+   * @override
+   * @author Daniel Desira
+   */
   paint(context: CanvasRenderingContext2D) {
     this.applyRotation(context);
     context.drawImage(

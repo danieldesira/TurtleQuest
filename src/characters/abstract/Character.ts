@@ -1,3 +1,4 @@
+import Game from "../../Game";
 import Directions from "../../enums/Directions";
 import ICharacter from "../interfaces/ICharacter";
 
@@ -84,6 +85,20 @@ abstract class Character implements ICharacter {
 
   get direction() {
     return this._direction;
+  }
+
+  /**
+   * Applies the respective character's rotation. To be called before 
+   * painting character.
+   * @param context The canvas 2D context
+   * @author Daniel Desira
+   */
+  protected applyRotation(context: CanvasRenderingContext2D) {
+    const x = this._x - Game.instance.level.bgOffsetX;
+    const y = this._y - Game.instance.level.bgOffsetY;
+    context.translate(x, y);
+    context.rotate(this._direction);
+    context.translate(-x, -y);
   }
 }
 

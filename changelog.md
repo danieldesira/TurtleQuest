@@ -7,8 +7,9 @@
 * Introduced boat and associated collision detection improvements
 * Moved dedications to a .md file on Github and made the logo take much less screen space
 * Prevent text selection in game and menu
+* Change prey direction accordingly
 * Internal:
-    - Document methods for abstract classes and interfaces
+    - Document methods for abstract classes and utility functions
     - Refactored collision detection
 
 #0.4.3 Alpha - 03/04/2024 18:15 UTC+1

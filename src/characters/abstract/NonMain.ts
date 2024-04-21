@@ -70,6 +70,10 @@ abstract class NonMain extends Character implements INonMainCharacter {
 
   abstract swim(): void;
 
+  /**
+   * Checks if character has just collided with turtle.
+   * @author Daniel Desira
+   */
   isCollidingWithTurtle(): boolean {
     const turtleBox = getCharacterBoundingBox(Game.instance.turtle);
     const characterBox = getCharacterBoundingBox(this);

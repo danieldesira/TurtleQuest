@@ -1,5 +1,5 @@
 import Game from "../../Game";
-import directions from "../../enums/Directions";
+import Directions from "../../enums/Directions";
 import { eat } from "../../features/turtleMonitor/turtleReducers";
 import store from "../../store";
 import IPrey from "../interfaces/IPrey";
@@ -45,24 +45,46 @@ abstract class Prey extends NonMain implements IPrey {
       verticalDistance < maxPreyDistance
     ) {
       switch (turtle.direction) {
-        case directions.Left:
+        case Directions.Left:
+          this._direction = Directions.Left;
           this._x -= this._speed;
           break;
-        case directions.Right:
+        case Directions.Right:
+          this._direction = Directions.Right;
           this._x += this._speed;
           break;
-        case directions.Down:
+        case Directions.Down:
+          this._direction = Directions.Down;
           if (this._y <= Game.instance.level.benthicOffsetY) {
             this._y += this._speed;
           }
           break;
-        case directions.Up:
+        case Directions.Up:
+          this._direction = Directions.Up;
           if (this._y > 0) {
             this._y -= this._speed;
           }
           break;
       }
     }
+  }
+
+  /**
+   * Paints prey while taking direction into account.
+   * @param context The canvas 2D context
+   * @override
+   * @author Daniel Desira
+   */
+  paint(context: CanvasRenderingContext2D) {
+    this.applyRotation(context);
+    context.drawImage(
+      this._image,
+      this._x - Game.instance.level.bgOffsetX,
+      this._y - Game.instance.level.bgOffsetY,
+      this._width,
+      this._height
+    );
+    context.resetTransform();
   }
 }
 

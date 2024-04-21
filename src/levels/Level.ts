@@ -126,6 +126,11 @@ abstract class Level implements ILevel {
     return character;
   }
 
+  /**
+   * Loops through characters and paints them accordingly.
+   * @param context The canvas 2D context
+   * @author Daniel Desira
+   */
   paintCharacters(context: CanvasRenderingContext2D): void {
     try {
       for (const character of this._characters) {
@@ -136,6 +141,10 @@ abstract class Level implements ILevel {
     }
   }
 
+  /**
+   * Loops through characters and applies respective moves.
+   * @author Daniel Desira
+   */
   moveCharacters(): void {
     for (const character of this._characters) {
       character.swim();
@@ -146,6 +155,10 @@ abstract class Level implements ILevel {
     return this._currentSpeed;
   }
 
+  /**
+   * Loops through characters and checks for collisions.
+   * @author Daniel Desira
+   */
   checkIfTurtleMeetsCharacters(): void {
     for (const character of this._characters) {
       if (character.isCollidingWithTurtle()) {
