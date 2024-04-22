@@ -16,8 +16,11 @@ The following is a list of useful ``npm`` commands which may be useful while deb
 * ``npm run webpack``: Compile Typescript files and combine them into a minified JS file as you code.
  Included in ``dev`` script.
 * ``npm install``: Install necessary packages. To be used when cloning the repository.
+* ``npm run docs``: Generate documentation using Typedoc.
 
 Please also consider installing the following Visual Studio Code extensions for a better development 
 experience:
 * [Prettier+](https://marketplace.visualstudio.com/items?itemName=svipas.prettier-plus)
 * [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+For developer documentation, please visit: https://danieldesira.github.io/TurtleQuest/docs/
