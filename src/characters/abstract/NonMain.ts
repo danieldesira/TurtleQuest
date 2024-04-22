@@ -40,7 +40,13 @@ abstract class NonMain extends Character implements INonMainCharacter {
   }
 
   /**
-   * Randomises initial position for character.
+   * Randomises initial position for character depending on the following properties:
+   * <ul>
+   *  <li><code>initialPositionXFrom</code></li>
+   *  <li><code>initialPositionXTo</code></li>
+   *  <li><code>initialPositionYFrom</code></li>
+   *  <li><code>initialPositionYTo</code></li>
+   * </ul>
    * @author Daniel Desira
    */
   setInitialPosition(): void {

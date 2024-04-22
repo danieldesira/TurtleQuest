@@ -5,6 +5,10 @@ import checkTurtle from "../checkTurtle";
 import store from "../store";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 
+/**
+ * Animates the game frame by frame depeding on outcomes of game logic.
+ * @author Daniel Desira
+ */
 const animate = async (canvas: HTMLCanvasElement) => {
   try {
     const levelChangeType = await checkTurtle();

@@ -22,6 +22,10 @@ abstract class Level implements ILevel {
   protected abstract readonly _currentSpeed: number;
   protected abstract readonly _points: number;
 
+  /**
+   * Initialises level.
+   * @author Daniel Desira
+   */
   async init(): Promise<void> {
     try {
       await this.loadBgImg();

@@ -1,6 +1,12 @@
 # Turtle Quest
 A simple educational game about loggerhead turtles.
 
+## Access
+[Test](https://turtle-quest.vercel.app/): Latest game updates
+
+[Dev Preview](https://danieldesira.github.io/TurtleQuest/):
+Latest changes merged to the ``develop`` branch
+
 ## Contributing code
 The following is a list of useful ``npm`` commands which may be useful while debugging the project:
 * ``npm run dev``: Runs a combination of commands to fire the development environment.
@@ -10,3 +16,8 @@ The following is a list of useful ``npm`` commands which may be useful while deb
 * ``npm run webpack``: Compile Typescript files and combine them into a minified JS file as you code.
  Included in ``dev`` script.
 * ``npm install``: Install necessary packages. To be used when cloning the repository.
+
+Please also consider installing the following Visual Studio Code extensions for a better development 
+experience:
+* [Prettier+](https://marketplace.visualstudio.com/items?itemName=svipas.prettier-plus)
+* [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)

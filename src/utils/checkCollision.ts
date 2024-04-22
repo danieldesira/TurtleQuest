@@ -8,6 +8,10 @@ interface BoundingBox {
   maxY: number;
 }
 
+/**
+ * Checks for collisions using the bounding box algorithm.
+ * @author GPT 3.5
+ */
 const checkBoundingBoxCollision = (
   boxA: BoundingBox,
   boxB: BoundingBox
@@ -26,6 +30,13 @@ const checkBoundingBoxCollision = (
   return true;
 };
 
+/**
+ * Calculates bounding box for a given character depending on its 
+ * current direction.
+ * @param character The character
+ * @returns Character bounding box
+ * @author Daniel Desira
+ */
 const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
   let box: BoundingBox = null;
   switch (character.direction) {
