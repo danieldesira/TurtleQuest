@@ -1,4 +1,4 @@
-#0.5.0 Alpha -
+#0.5.0 Alpha - 24/04/2024 22:30 UTC+1
 * Mobile:
     - Correct orientation for onscreen controls
     - Fit canvas and menu in the screen when device is in landscape mode
@@ -11,6 +11,7 @@
 * Internal:
     - Document methods for abstract classes and utility functions
     - Refactored collision detection
+    - Developer documentation made available at ``./dev/docs``
 
 #0.4.3 Alpha - 03/04/2024 18:15 UTC+1
 * Added a thumbnail for sharing on social media

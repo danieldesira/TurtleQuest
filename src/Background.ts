@@ -6,6 +6,11 @@ interface Options {
 }
 
 class Background {
+  /**
+   * Renders visible part of background.
+   * @param options Background painting options
+   * @author Daniel Desira
+   */
   static paint(options: Options) {
     const backgroundImage = Game.instance.level.bgImg;
     const horizontalSegments = Background.calculateScreenCutOffPoints(
@@ -55,6 +60,11 @@ class Background {
     return points;
   }
 
+  /**
+   * Adjusts canvas size according to background.
+   * @param canvas The canvas element
+   * @author Daniel Desira
+   */
   static readjustCanvasForBg(canvas: HTMLCanvasElement) {
     const bgImg = Game.instance.level.bgImg;
     if (bgImg.height < canvas.height) {

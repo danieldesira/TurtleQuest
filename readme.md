@@ -23,4 +23,4 @@ experience:
 * [Prettier+](https://marketplace.visualstudio.com/items?itemName=svipas.prettier-plus)
 * [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
-For developer documentation, please visit: https://danieldesira.github.io/TurtleQuest/docs/
+For internal API documentation, please visit: https://danieldesira.github.io/TurtleQuest/dev/docs/

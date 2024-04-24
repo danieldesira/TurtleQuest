@@ -36,6 +36,10 @@ class Game {
     return this._level;
   }
 
+  /**
+   * Loads the level currently indicated by the Redux store.
+   * @author Daniel Desira
+   */
   async loadNewLevel() {
     this._level = levels.get(store.getState().levels.level.value);
     if (this._level) {
@@ -46,6 +50,11 @@ class Game {
     }
   }
 
+  /**
+   * Initialises game.
+   * @param canvas The canvas element
+   * @author Daniel Desira
+   */
   async start(canvas: HTMLCanvasElement) {
     store.dispatch(resetLevel());
     store.dispatch(resetTurtle());

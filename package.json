@@ -19,7 +19,7 @@
     "tailwind": "npx tailwindcss -i ./src/main.css -o ./dist/bundle.css --watch --minify",
     "dev": "npx concurrently \"npm run webpack\" \"npm run serve\" \"npm run tailwind\"",
     "start": "npm run dev",
-    "docs": "npx typedoc src/characters/abstract/* src/levels/* src/utils/* src/enums/* --name TurtleQuest"
+    "docs": "npx typedoc src/characters/abstract/* src/characters/interfaces/* src/levels/* src/utils/* src/enums/* src/Background.ts src/checkTurtle.ts src/Game.ts --name TurtleQuest --out dev/docs/"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",
