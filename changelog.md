@@ -1,3 +1,7 @@
+#0.5.1 Alpha - 24/04/2024 22:45 UTC+1
+* Fix dedications link
+* Update packages
+
 #0.5.0 Alpha - 24/04/2024 22:30 UTC+1
 * Mobile:
     - Correct orientation for onscreen controls

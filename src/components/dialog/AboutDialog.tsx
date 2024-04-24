@@ -36,7 +36,7 @@ function AboutDialog({ setShowAbout }: Props) {
               License
             </a>
             <a
-              href="https://github.com/danieldesira/TurtleQuest/blob/master/dedications.md"
+              href="https://github.com/danieldesira/TurtleQuest/blob/master/DEDICATIONS.md"
               target="_blank"
               title="License"
             >
