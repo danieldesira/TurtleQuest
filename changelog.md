@@ -1,3 +1,6 @@
+#0.6.0 Beta -
+* Speed up keyboard controls and keep them applied when canvas not in focus
+
 #0.5.1 Alpha - 24/04/2024 22:45 UTC+1
 * Fix dedications link
 * Update packages

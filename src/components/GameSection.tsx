@@ -24,14 +24,13 @@ function GameSection() {
   }, []);
 
   return (
-    <>
+    <div onKeyDown={handleKeyDown}>
       <div className="flex h-screen items-center justify-center">
         <canvas
           height="400"
           width="700"
           tabIndex={1}
           ref={canvasRef}
-          onKeyDown={handleKeyDown}
           onWheel={handleWheel}
         ></canvas>
       </div>
@@ -39,7 +38,7 @@ function GameSection() {
       <GameHeader />
       <NextLevelIndication />
       <ControlGroup />
-    </>
+    </div>
   );
 }
 

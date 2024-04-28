@@ -8,20 +8,21 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
 
   const mainCharacter = Game.instance.turtle;
 
-  if (upKeys.includes(event.key)) {
-    mainCharacter.moveUp();
-  }
+  handleKeyGroup(upKeys, () => mainCharacter.moveUp(), event.key);
+  handleKeyGroup(downKeys, () => mainCharacter.moveDown(), event.key);
+  handleKeyGroup(leftKeys, () => mainCharacter.moveLeft(), event.key);
+  handleKeyGroup(rightKeys, () => mainCharacter.moveRight(), event.key);
+};
 
-  if (downKeys.includes(event.key)) {
-    mainCharacter.moveDown();
-  }
-
-  if (leftKeys.includes(event.key)) {
-    mainCharacter.moveLeft();
-  }
-
-  if (rightKeys.includes(event.key)) {
-    mainCharacter.moveRight();
+const handleKeyGroup = (
+  keyGroup: Array<string>,
+  action: Function,
+  pressedKey: string
+) => {
+  if (keyGroup.includes(pressedKey)) {
+    // Call the method twice to make up for slower triggering of keyboard events
+    action();
+    action();
   }
 };
 
