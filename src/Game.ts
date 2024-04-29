@@ -1,4 +1,5 @@
 import Turtle from "./characters/Turtle";
+import ICharacter from "./characters/interfaces/ICharacter";
 import {
   startLoadingLevel,
   stopLoadingLevel,
@@ -70,13 +71,29 @@ class Game {
    * @author Daniel Desira
    */
   stringifyInfo(): string {
-    const data = {
+    const data: GameData = {
       turtle: Game.instance.turtle,
       characters: Array.from(Game.instance.level.characters),
       levelNo: store.getState().levels.level.value,
     };
     return JSON.stringify(data);
   }
+
+  /**
+   * Sets game data from the given JSON string.
+   * @param json Game data in JSON format
+   * @author Daniel Desira
+   */
+  parseInfo(json: string) {
+    const data: GameData = JSON.parse(json);
+    this._turtle = data.turtle;
+  }
+}
+
+interface GameData {
+  turtle: Turtle;
+  characters: ICharacter[];
+  levelNo: number;
 }
 
 export default Game;
