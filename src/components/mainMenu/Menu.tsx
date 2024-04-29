@@ -12,6 +12,13 @@ function Menu() {
   const [showAbout, setShowAbout] = useState<boolean>(false);
 
   const handleNewGame = () => dispatch(startGame());
+
+  const handleContinueGame = () => {
+    dispatch(startGame());
+    const gameData = JSON.parse(localStorage.getItem("currentGame"));
+    
+  };
+
   const handleAbout = () => setShowAbout(true);
 
   return (
@@ -28,12 +35,19 @@ function Menu() {
           <span className="text-emerald-300">Turtle</span>{" "}
           <span className="text-cyan-500">Quest</span>
         </h1>
-        <span className="text-white">Alpha release</span>
+        <span className="text-white">Beta release</span>
         <MenuButton
           callback={handleNewGame}
           icon={<GiSeaTurtle />}
           text="New Game"
         />
+        {localStorage.getItem("currentGame") ? (
+          <MenuButton
+            callback={handleContinueGame}
+            icon={<GiSeaTurtle />}
+            text="Continue Game"
+          />
+        ) : null}
         <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
         <EditionSection />
       </div>

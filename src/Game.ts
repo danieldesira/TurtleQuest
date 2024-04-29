@@ -63,6 +63,20 @@ class Game {
     await animate(canvas);
     resizeCanvas(canvas);
   }
+
+  /**
+   * Returns a JSON representation of important game details.
+   * @returns JSON representation
+   * @author Daniel Desira
+   */
+  stringifyInfo(): string {
+    const data = {
+      turtle: Game.instance.turtle,
+      characters: Array.from(Game.instance.level.characters),
+      levelNo: store.getState().levels.level.value,
+    };
+    return JSON.stringify(data);
+  }
 }
 
 export default Game;

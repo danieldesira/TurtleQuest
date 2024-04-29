@@ -32,6 +32,7 @@ const checkTurtle = async (): Promise<LevelChangeTypes> => {
     turtleState.life.value <= 0
   ) {
     store.dispatch(stopGame());
+    deleteGameProgress();
     return LevelChangeTypes.GameOver;
   }
 
@@ -70,8 +71,11 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
     return LevelChangeTypes.NewLevel;
   } else {
     store.dispatch(stopGame());
+    deleteGameProgress();
     return LevelChangeTypes.GameComplete;
   }
 };
+
+const deleteGameProgress = () => localStorage.removeItem("currentGame");
 
 export default checkTurtle;
