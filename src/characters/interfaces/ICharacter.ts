@@ -11,6 +11,7 @@ interface ICharacter {
   get height(): number;
   get width(): number;
   get direction(): Directions;
+  set direction(direction: Directions);
 }
 
 export default ICharacter;

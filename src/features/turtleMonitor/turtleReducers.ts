@@ -72,6 +72,21 @@ const slice = createSlice({
       const increment = action.payload.turtle.xpValue;
       state.turtle.xp.value += increment;
     },
+    restoreFood: (state, action) => {
+      state.turtle.food.value = action.payload.turtle.foodValue;
+    },
+    restoreOxygen: (state, action) => {
+      state.turtle.oxygen.value = action.payload.turtle.oxygenValue;
+    },
+    restoreHealth: (state, action) => {
+      state.turtle.life.value = action.payload.turtle.lifeValue;
+    },
+    restoreStomachCapacity: (state, action) => {
+      state.turtle.stomachCapacity.value = action.payload.turtle.stomachValue;
+    },
+    restorePoints: (state, action) => {
+      state.turtle.xp.value = action.payload.turtle.xpValue;
+    },
   },
 });
 
@@ -85,6 +100,11 @@ export const {
   decrementStomachCapacity,
   recoverStomachCapacity,
   gainPoints,
+  restoreFood,
+  restoreHealth,
+  restoreOxygen,
+  restoreStomachCapacity,
+  restorePoints,
 } = slice.actions;
 
 export default slice.reducer;

@@ -87,8 +87,12 @@ abstract class Character implements ICharacter {
     return this._direction;
   }
 
+  set direction(direction: Directions) {
+    this._direction = direction;
+  }
+
   /**
-   * Applies the respective character's rotation. To be called before 
+   * Applies the respective character's rotation. To be called before
    * painting character.
    * @param context The canvas 2D context
    * @author Daniel Desira
