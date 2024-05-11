@@ -12,7 +12,10 @@ function Menu() {
   const dispatch = useDispatch();
   const [showAbout, setShowAbout] = useState<boolean>(false);
 
-  const handleNewGame = () => dispatch(startGame());
+  const handleNewGame = () => {
+    dispatch(startGame());
+    Game.instance.reset();
+  };
 
   const handleContinueGame = () => {
     dispatch(startGame());

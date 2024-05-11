@@ -64,12 +64,19 @@ class Game {
    * @author Daniel Desira
    */
   async start(canvas: HTMLCanvasElement) {
-    store.dispatch(resetLevel());
-    store.dispatch(resetTurtle());
     await Game.instance.turtle.loadImage();
     await Game.instance.loadNewLevel();
     await animate(canvas);
     resizeCanvas(canvas);
+  }
+
+  /**
+   * Resets game state. 
+   * @author Daniel Desira
+   */
+  reset() {
+    store.dispatch(resetLevel());
+    store.dispatch(resetTurtle());
   }
 
   /**
