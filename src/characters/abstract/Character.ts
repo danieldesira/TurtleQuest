@@ -17,7 +17,7 @@ abstract class Character implements ICharacter {
    * @returns Promise for loaded image object.
    * @author Daniel Desira
    */
-  loadImage(): Promise<HTMLImageElement> {
+  loadImage(): Promise<void> {
     return new Promise((resolve, reject) => {
       const image = document.createElement("img");
       image.width = this._width;
@@ -25,7 +25,7 @@ abstract class Character implements ICharacter {
       image.src = this._baseImagePath + this._imageFilename;
       image.onload = () => {
         this._image = image;
-        resolve(image);
+        resolve();
       };
       image.onerror = () =>
         reject(

@@ -1,7 +1,7 @@
 import Directions from "../../enums/Directions";
 
 interface ICharacter {
-  loadImage(): Promise<HTMLImageElement>;
+  loadImage(): Promise<void>;
   paint(context: CanvasRenderingContext2D, bgOffsetX?: number, bgOffsetY?: number): void;
   get x(): number;
   get y(): number;

@@ -88,10 +88,13 @@ abstract class Level implements ILevel {
   private async createCharacters(): Promise<void> {
     this._characters.clear();
     let lastPackCharacter: PackPrey = null;
+
+    const promises: Promise<void>[] = [];
+
     for (const characterInfo of this._initialCharacters) {
       for (let i = 0; i < characterInfo.amount; i++) {
         const character = this.instantiateCharacter(characterInfo.type);
-        await character.loadImage();
+        promises.push(character.loadImage());
         if (character instanceof PackPrey) {
           if (lastPackCharacter) {
             character.previousCharacterX = lastPackCharacter.x;
@@ -103,6 +106,8 @@ abstract class Level implements ILevel {
         this._characters.add(character);
       }
     }
+    
+    await Promise.all(promises);
   }
 
   private instantiateCharacter(type: CharacterType): INonMainCharacter {
