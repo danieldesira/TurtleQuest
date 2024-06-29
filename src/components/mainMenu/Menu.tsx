@@ -7,6 +7,7 @@ import { FcAbout } from "react-icons/fc";
 import AboutDialog from "../dialog/AboutDialog";
 import EditionSection from "../EditionSection";
 import Game from "../../Game";
+import parseGameData from "../../restoreGame/parseGameData";
 
 function Menu() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function Menu() {
 
   const handleContinueGame = () => {
     dispatch(startGame());
-    Game.instance.parseInfo(localStorage.getItem("currentGame") ?? "{}");
+    parseGameData(localStorage.getItem("currentGame") ?? "{}");
   };
 
   const handleAbout = () => setShowAbout(true);

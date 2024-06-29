@@ -1,5 +1,6 @@
 import Turtle from "./characters/Turtle";
 import ICharacter from "./characters/interfaces/ICharacter";
+import INonMainCharacter from "./characters/interfaces/INonMainCharacter";
 import {
   startLoadingLevel,
   stopLoadingLevel,
@@ -15,6 +16,7 @@ import {
 } from "./features/turtleMonitor/turtleReducers";
 import ILevel from "./levels/ILevel";
 import levels from "./levels/levels";
+import GameData from "./restoreGame/GameData";
 import store from "./store";
 import animate from "./utils/animate";
 import resizeCanvas from "./utils/resizeCanvas";
@@ -71,66 +73,13 @@ class Game {
   }
 
   /**
-   * Resets game state. 
+   * Resets game state.
    * @author Daniel Desira
    */
   reset() {
     store.dispatch(resetLevel());
     store.dispatch(resetTurtle());
   }
-
-  /**
-   * Returns a JSON representation of important game details.
-   * @returns JSON representation
-   * @author Daniel Desira
-   */
-  stringifyInfo(): string {
-    const data: GameData = {
-      turtle: Game.instance.turtle,
-      characters: Array.from(Game.instance.level.characters),
-      levelNo: store.getState().levels.level.value,
-      food: store.getState().turtleMonitor.turtle.food.value,
-      oxygen: store.getState().turtleMonitor.turtle.oxygen.value,
-      health: store.getState().turtleMonitor.turtle.life.value,
-      stomachCapacity: store.getState().turtleMonitor.turtle.stomachCapacity
-        .value,
-      xp: store.getState().turtleMonitor.turtle.xp.value,
-    };
-    return JSON.stringify(data);
-  }
-
-  /**
-   * Sets game data from the given JSON string.
-   * @param json Game data in JSON format
-   * @author Daniel Desira
-   */
-  parseInfo(json: string) {
-    const data: GameData = JSON.parse(json);
-    this._turtle.x = data.turtle.x;
-    this._turtle.y = data.turtle.y;
-    this._turtle.direction = data.turtle.direction;
-    store.dispatch(restoreFood({ turtle: { foodValue: data.food } }));
-    store.dispatch(restoreHealth({ turtle: { lifeValue: data.health } }));
-    store.dispatch(restoreOxygen({ turtle: { oxygenValue: data.oxygen } }));
-    store.dispatch(
-      restoreStomachCapacity({
-        turtle: { stomachValue: data.stomachCapacity },
-      })
-    );
-    store.dispatch(restorePoints({ turtle: { xpValue: data.xp } }));
-    store.dispatch(restoreLevel({ turtle: { levelValue: data.levelNo } }));
-  }
-}
-
-interface GameData {
-  turtle: Turtle;
-  characters: ICharacter[];
-  levelNo: number;
-  oxygen: number;
-  food: number;
-  health: number;
-  stomachCapacity: number;
-  xp: number;
 }
 
 export default Game;

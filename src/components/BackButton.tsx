@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { stopGame } from "../features/gameState/gameStateReducer";
-import Game from "../Game";
+import stringifyGameData from "../restoreGame/stringifyGameData";
 
 function BackButton() {
   const dispatch = useDispatch();
 
   const saveGame = () =>
-    localStorage.setItem("currentGame", Game.instance.stringifyInfo());
+    localStorage.setItem("currentGame", stringifyGameData());
 
   const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();

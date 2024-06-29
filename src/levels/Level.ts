@@ -6,6 +6,7 @@ import Sardine from "../characters/Sardine";
 import Shrimp from "../characters/Shrimp";
 import PackPrey from "../characters/abstract/PackPrey";
 import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
+import instantiateCharacter from "../utils/instantiateCharacter";
 import ILevel from "./ILevel";
 import LevelCharacter, { CharacterType } from "./LevelCharacter";
 
@@ -93,7 +94,7 @@ abstract class Level implements ILevel {
 
     for (const characterInfo of this._initialCharacters) {
       for (let i = 0; i < characterInfo.amount; i++) {
-        const character = this.instantiateCharacter(characterInfo.type);
+        const character = instantiateCharacter(characterInfo.type);
         promises.push(character.loadImage());
         if (character instanceof PackPrey) {
           if (lastPackCharacter) {
@@ -108,31 +109,6 @@ abstract class Level implements ILevel {
     }
     
     await Promise.all(promises);
-  }
-
-  private instantiateCharacter(type: CharacterType): INonMainCharacter {
-    let character: INonMainCharacter;
-    switch (type) {
-      case "shrimp":
-        character = new Shrimp();
-        break;
-      case "sardine":
-        character = new Sardine();
-        break;
-      case "neptuneGrass":
-        character = new NeptuneGrass();
-        break;
-      case "plasticBag":
-        character = new PlasticBag();
-        break;
-      case "crab":
-        character = new Crab();
-        break;
-      case "boat":
-        character = new Boat();
-        break;
-    }
-    return character;
   }
 
   /**
