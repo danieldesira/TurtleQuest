@@ -50,11 +50,16 @@ class Game {
    * Loads the level currently indicated by the Redux store.
    * @author Daniel Desira
    */
-  async loadNewLevel() {
+  async loadNewLevel(restoredCharacters: Set<INonMainCharacter> = null) {
     this._level = levels.get(store.getState().levels.level.value);
     if (this._level) {
       store.dispatch(startLoadingLevel());
-      await this._level.init();
+      await this._level.loadBgImg();
+      if (restoredCharacters) {
+        await this._level.restoreCharacters(restoredCharacters);
+      } else {
+        await this._level.loadCharacters();
+      }
       store.dispatch(stopLoadingLevel());
       this.turtle.resetPosition();
     }

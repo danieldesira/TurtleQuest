@@ -23,20 +23,7 @@ abstract class Level implements ILevel {
   protected abstract readonly _currentSpeed: number;
   protected abstract readonly _points: number;
 
-  /**
-   * Initialises level.
-   * @author Daniel Desira
-   */
-  async init(): Promise<void> {
-    try {
-      await this.loadBgImg();
-      await this.createCharacters();
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  private loadBgImg(): Promise<void> {
+  loadBgImg(): Promise<void> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
       backgroundImage.src =
@@ -86,7 +73,7 @@ abstract class Level implements ILevel {
     return this._points;
   }
 
-  private async createCharacters(): Promise<void> {
+  async loadCharacters(): Promise<void> {
     this._characters.clear();
     let lastPackCharacter: PackPrey = null;
 
@@ -107,7 +94,27 @@ abstract class Level implements ILevel {
         this._characters.add(character);
       }
     }
-    
+
+    await Promise.all(promises);
+  }
+
+  async restoreCharacters(characters: Set<INonMainCharacter>) {
+    let lastPackCharacter: PackPrey = null;
+
+    const promises: Promise<void>[] = [];
+
+    for (const character of characters) {
+      promises.push(character.loadImage());
+      if (character instanceof PackPrey) {
+        if (lastPackCharacter) {
+          character.previousCharacterX = lastPackCharacter.x;
+          character.previousCharacterY = lastPackCharacter.y;
+        }
+        lastPackCharacter = character;
+      }
+      character.setInitialPosition();
+    }
+
     await Promise.all(promises);
   }
 

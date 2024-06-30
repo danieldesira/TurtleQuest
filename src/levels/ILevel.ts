@@ -1,7 +1,9 @@
 import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
 
 interface ILevel {
-  init(): Promise<void>;
+  loadBgImg(): Promise<void>;
+  loadCharacters(): Promise<void>;
+  restoreCharacters(characters: Set<INonMainCharacter>): Promise<void>;
   get bgImgPath(): string;
   get bgImg(): HTMLImageElement;
   set bgOffsetX(offsetX: number);
