@@ -1,14 +1,8 @@
-import Boat from "../characters/Boat";
-import Crab from "../characters/Crab";
-import NeptuneGrass from "../characters/NeptuneGrass";
-import PlasticBag from "../characters/PlasticBag";
-import Sardine from "../characters/Sardine";
-import Shrimp from "../characters/Shrimp";
 import PackPrey from "../characters/abstract/PackPrey";
 import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
 import instantiateCharacter from "../utils/instantiateCharacter";
 import ILevel from "./ILevel";
-import LevelCharacter, { CharacterType } from "./LevelCharacter";
+import LevelCharacter from "./LevelCharacter";
 
 abstract class Level implements ILevel {
   protected readonly _backgroundImagePath: string =
@@ -99,22 +93,10 @@ abstract class Level implements ILevel {
   }
 
   async restoreCharacters(characters: Set<INonMainCharacter>) {
-    let lastPackCharacter: PackPrey = null;
-
     const promises: Promise<void>[] = [];
-
     for (const character of characters) {
       promises.push(character.loadImage());
-      if (character instanceof PackPrey) {
-        if (lastPackCharacter) {
-          character.previousCharacterX = lastPackCharacter.x;
-          character.previousCharacterY = lastPackCharacter.y;
-        }
-        lastPackCharacter = character;
-      }
-      character.setInitialPosition();
     }
-
     await Promise.all(promises);
   }
 

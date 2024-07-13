@@ -7,6 +7,12 @@ import Shrimp from "../characters/Shrimp";
 import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
 import { CharacterType } from "../levels/LevelCharacter";
 
+/**
+ * Instatiates a character object.
+ * @param type The type of character.
+ * @returns The new character instance.
+ * @author Daniel Desira
+ */
 const instantiateCharacter = (type: CharacterType): INonMainCharacter => {
   let character: INonMainCharacter;
   switch (type) {
@@ -32,4 +38,30 @@ const instantiateCharacter = (type: CharacterType): INonMainCharacter => {
   return character;
 };
 
+/**
+ * Returns character type depending on provided character object.
+ * @param character The character instance.
+ * @returns The character type.
+ * @author Daniel Desira
+ */
+const getCharacterType = (character: INonMainCharacter) => {
+  let type: CharacterType;
+  if (character instanceof Crab) {
+    type = "crab";
+  } else if (character instanceof Shrimp) {
+    type = "shrimp";
+  } else if (character instanceof Sardine) {
+    type = "sardine";
+  } else if (character instanceof NeptuneGrass) {
+    type = "neptuneGrass";
+  } else if (character instanceof PlasticBag) {
+    type = "plasticBag";
+  } else if (character instanceof Boat) {
+    type = "boat";
+  }
+  return type;
+};
+
 export default instantiateCharacter;
+
+export { getCharacterType };

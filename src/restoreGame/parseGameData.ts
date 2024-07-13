@@ -11,6 +11,11 @@ import store from "../store";
 import instantiateCharacter from "../utils/instantiateCharacter";
 import GameData from "./GameData";
 
+/**
+ * Restore game state from JSON string.
+ * @param json The game data as a JSON string.
+ * @author Daniel Desira
+ */
 const parseGameData = (json: string) => {
   const data: GameData = JSON.parse(json);
   restoreTurtle(data);

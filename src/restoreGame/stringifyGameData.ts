@@ -1,14 +1,13 @@
 import Game from "../Game";
-import Boat from "../characters/Boat";
-import Crab from "../characters/Crab";
-import NeptuneGrass from "../characters/NeptuneGrass";
-import PlasticBag from "../characters/PlasticBag";
-import Sardine from "../characters/Sardine";
-import Shrimp from "../characters/Shrimp";
-import { CharacterType } from "../levels/LevelCharacter";
 import store from "../store";
+import { getCharacterType } from "../utils/instantiateCharacter";
 import GameData from "./GameData";
 
+/**
+ * Gets game data as a JSON string.
+ * @returns JSON string represantation of game data.
+ * @author Daniel Desira
+ */
 const stringifyGameData = (): string => {
   const data: GameData = {
     turtle: {
@@ -26,23 +25,7 @@ const stringifyGameData = (): string => {
         x: c.x,
         y: c.y,
         direction: c.direction,
-        type: (() => {
-          let t: CharacterType;
-          if (c instanceof Crab) {
-            t = "crab";
-          } else if (c instanceof Shrimp) {
-            t = "shrimp";
-          } else if (c instanceof Sardine) {
-            t = "sardine";
-          } else if (c instanceof NeptuneGrass) {
-            t = "neptuneGrass";
-          } else if (c instanceof PlasticBag) {
-            t = "plasticBag";
-          } else if (c instanceof Boat) {
-            t = "boat";
-          }
-          return t;
-        })(),
+        type: getCharacterType(c),
       };
     }),
     levelNo: store.getState().levels.level.value,
