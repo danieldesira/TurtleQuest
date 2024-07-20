@@ -1,22 +1,12 @@
 import Turtle from "./characters/Turtle";
-import ICharacter from "./characters/interfaces/ICharacter";
-import INonMainCharacter from "./characters/interfaces/INonMainCharacter";
 import {
   startLoadingLevel,
   stopLoadingLevel,
 } from "./features/gameState/gameStateReducer";
-import { resetLevel, restoreLevel } from "./features/levels/levelReducer";
-import {
-  resetTurtle,
-  restoreFood,
-  restoreHealth,
-  restoreOxygen,
-  restorePoints,
-  restoreStomachCapacity,
-} from "./features/turtleMonitor/turtleReducers";
+import { resetLevel } from "./features/levels/levelReducer";
+import { resetTurtle } from "./features/turtleMonitor/turtleReducers";
 import ILevel from "./levels/ILevel";
 import levels from "./levels/levels";
-import GameData from "./restoreGame/GameData";
 import store from "./store";
 import animate from "./utils/animate";
 import resizeCanvas from "./utils/resizeCanvas";
@@ -48,19 +38,17 @@ class Game {
 
   /**
    * Loads the level currently indicated by the Redux store.
+   * @param isFreshLevel Flag used to determine whether level is fresh or restored.
    * @author Daniel Desira
    */
-  async loadNewLevel(restoredCharacters: Set<INonMainCharacter> = null) {
+  async loadNewLevel(isFreshLevel: boolean) {
     this._level = levels.get(store.getState().levels.level.value);
     if (this._level) {
       store.dispatch(startLoadingLevel());
-      await this._level.loadBgImg();
-      if (restoredCharacters) {
-        await this._level.restoreCharacters(restoredCharacters);
-      } else {
-        await this._level.loadCharacters();
-      }
+      await this._level.init(isFreshLevel);
       store.dispatch(stopLoadingLevel());
+    }
+    if (isFreshLevel) {
       this.turtle.resetPosition();
     }
   }
@@ -70,9 +58,9 @@ class Game {
    * @param canvas The canvas element
    * @author Daniel Desira
    */
-  async start(canvas: HTMLCanvasElement) {
+  async start({ canvas, isNewGame }: GameOptions) {
     await Game.instance.turtle.loadImage();
-    await Game.instance.loadNewLevel();
+    await Game.instance.loadNewLevel(isNewGame);
     await animate(canvas);
     resizeCanvas(canvas);
   }
@@ -86,5 +74,10 @@ class Game {
     store.dispatch(resetTurtle());
   }
 }
+
+type GameOptions = {
+  canvas: HTMLCanvasElement;
+  isNewGame: boolean;
+};
 
 export default Game;

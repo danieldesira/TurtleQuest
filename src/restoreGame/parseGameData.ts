@@ -41,10 +41,16 @@ const restoreState = (data: GameData) => {
     })
   );
   store.dispatch(restorePoints({ turtle: { xpValue: data.xp } }));
-  store.dispatch(restoreLevel({ turtle: { levelValue: data.levelNo } }));
+  setLevel(data);
+};
+
+const setLevel = (data: GameData) => {
+  store.dispatch(restoreLevel({ levelValue: data.levelNo  }));
+  Game.instance.loadNewLevel(false);
 };
 
 const restoreCharacters = (data: GameData) => {
+  Game.instance.level.characters.clear();
   for (const character of data.characters) {
     const temp = instantiateCharacter(character.type);
     temp.x = character.x;

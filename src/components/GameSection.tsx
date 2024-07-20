@@ -4,33 +4,36 @@ import GameHeader from "./GameHeader";
 import resizeCanvas from "../utils/resizeCanvas";
 import handleKeyDown from "../controls/handleKeyDown";
 import handleWheel from "../controls/handleWheel";
-import Game from "../Game";
 import LoadingIndicator from "./LoadingIndicator";
 import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import ControlGroup from "./controls/ControlGroup";
+import Game from "../Game";
 
-function GameSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+type Props = { isNewGame: boolean };
 
+function GameSection({ isNewGame }: Props) {
   const isLevelLoading = useSelector(
     (state: RootState) => state.game.isLevelLoading.value
   );
 
-  useEffect(() => {
-    window.addEventListener("resize", () => resizeCanvas(canvasRef.current));
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    (async () => await Game.instance.start(canvasRef.current))();
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    window.addEventListener("resize", () => resizeCanvas(canvas));
+    Game.instance.start({ canvas, isNewGame });
   }, []);
 
   return (
     <div onKeyDown={handleKeyDown}>
       <div className="flex h-screen items-center justify-center">
         <canvas
+          ref={canvasRef}
           height="400"
           width="700"
           tabIndex={1}
-          ref={canvasRef}
           onWheel={handleWheel}
         ></canvas>
       </div>
