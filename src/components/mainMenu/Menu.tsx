@@ -9,20 +9,20 @@ import EditionSection from "../EditionSection";
 import Game from "../../Game";
 import parseGameData from "../../restoreGame/parseGameData";
 
-type Props = { isNewGame: boolean };
+type Props = { setIsNewGame: Function };
 
-function Menu({ isNewGame }: Props) {
+function Menu({ setIsNewGame }: Props) {
   const dispatch = useDispatch();
   const [showAbout, setShowAbout] = useState<boolean>(false);
 
   const handleNewGame = () => {
-    isNewGame = true;
+    setIsNewGame(true);
     dispatch(startGame());
     Game.instance.reset();
   };
 
   const handleContinueGame = () => {
-    isNewGame = false;
+    setIsNewGame(false);
     dispatch(startGame());
     parseGameData(localStorage.getItem("currentGame") ?? "{}");
   };

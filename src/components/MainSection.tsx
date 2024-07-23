@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import Menu from "./mainMenu/Menu";
@@ -8,7 +8,7 @@ function MainSection() {
   const inProgress = useSelector(
     (state: RootState) => state.game.inProgress.value
   );
-  let isNewGame: boolean = false;
+  const [isNewGame, setIsNewGame] = useState<boolean>(false);
 
   return (
     <div
@@ -18,7 +18,7 @@ function MainSection() {
       {inProgress ? (
         <GameSection isNewGame={isNewGame} />
       ) : (
-        <Menu isNewGame={isNewGame} />
+        <Menu setIsNewGame={setIsNewGame} />
       )}
     </div>
   );

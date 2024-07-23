@@ -17,16 +17,20 @@ abstract class Level implements ILevel {
   protected abstract readonly _currentSpeed: number;
   protected abstract readonly _points: number;
 
+  /**
+   * Initialises level.
+   * @param isFreshLevel Determines whether the level is fresh or restored.
+   */
   async init(isFreshLevel: boolean): Promise<void> {
     await this.loadBgImg();
     if (isFreshLevel) {
-      await this.createCharacters();
+      await this.spawnCharacters();
     } else {
       await this.restoreCharacters();
     }
   }
 
-  loadBgImg(): Promise<void> {
+  private loadBgImg(): Promise<void> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
       backgroundImage.src =
@@ -76,7 +80,7 @@ abstract class Level implements ILevel {
     return this._points;
   }
 
-  async createCharacters(): Promise<void> {
+  private async spawnCharacters(): Promise<void> {
     this._characters.clear();
     let lastPackCharacter: PackPrey = null;
 
@@ -101,7 +105,7 @@ abstract class Level implements ILevel {
     await Promise.all(promises);
   }
 
-  async restoreCharacters() {
+  private async restoreCharacters() {
     const promises: Promise<void>[] = [];
     for (const character of this._characters) {
       promises.push(character.loadImage());
