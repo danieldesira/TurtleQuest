@@ -44,11 +44,6 @@ function Menu({ setIsNewGame }: Props) {
           <span className="text-cyan-500">Quest</span>
         </h1>
         <span className="text-white">Beta release</span>
-        <MenuButton
-          callback={handleNewGame}
-          icon={<GiSeaTurtle />}
-          text="New Game"
-        />
         {localStorage.getItem("currentGame") ? (
           <MenuButton
             callback={handleContinueGame}
@@ -56,6 +51,18 @@ function Menu({ setIsNewGame }: Props) {
             text="Continue Game"
           />
         ) : null}
+        <MenuButton
+          callback={handleNewGame}
+          icon={<GiSeaTurtle />}
+          text="New Game"
+        />
+        {localStorage.getItem("currentGame") ? (
+          <span className="text-blue-800 font-light">
+            Caution: Starting a new game will erase current game progress!
+          </span>
+        ) : (
+          <></>
+        )}
         <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
         <EditionSection />
       </div>

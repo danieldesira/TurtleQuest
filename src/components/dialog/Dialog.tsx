@@ -10,7 +10,7 @@ function Dialog({ title, content, handleOk }: Props) {
   const dialogJsx = (
     <div
       tabIndex={1}
-      className="dialog fixed text-white w-4/5 opacity-80 focus:opacity-95 bg-amber-500 dark:bg-gray-900 pt-5 pb-5 rounded-3xl max-w-xl"
+      className="dialog fixed text-white w-4/5 opacity-80 focus:opacity-95 bg-gray-900 pt-5 pb-5 rounded-3xl max-w-xl"
     >
       <h1 className="text-center text-xl">{title}</h1>
       <hr />
@@ -20,7 +20,7 @@ function Dialog({ title, content, handleOk }: Props) {
       <div className="w-fit m-auto">
         <button
           type="button"
-          className="rounded-3xl m-1 cursor-pointer bg-theme-color dark:bg-dark-theme-color"
+          className="rounded-3xl m-1 cursor-pointer bg-green-600"
           onClick={handleOk}
         >
           <span className="text-xl ml-2 mr-2">OK</span>

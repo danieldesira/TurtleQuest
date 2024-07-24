@@ -16,7 +16,7 @@ function ControlGroup() {
   return (
     <>
       {gameRunning ? (
-        <div className="fixed bottom-1 left-1 text-white dark:text-gray-950 touch-none">
+        <div className="fixed bottom-1 left-1 touch-none">
           <div className="mb-1 flex justify-center">
             <ControlButton
               icon={<GoArrowUp />}

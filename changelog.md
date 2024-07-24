@@ -1,6 +1,7 @@
 #0.6.0 Beta -
 * Speed up keyboard controls and keep them applied when canvas not in focus
 * Added button to close and save current game
+* Applied new theme regardless of OS options
 * Internal:
     - Optimised character loading with `` Promise.all() ``
 

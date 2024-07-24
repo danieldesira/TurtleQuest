@@ -20,7 +20,7 @@ function ControlButton({ icon, callback }: Props) {
   return (
     <button
       type="button"
-      className="rounded-7xl w-20 h-20 bg-theme-color dark:bg-dark-theme-color opacity-50 hover:opacity-70"
+      className="rounded-7xl w-20 h-20 bg-black opacity-50 hover:opacity-70 text-white"
       onMouseDown={handleMousedown}
       onMouseLeave={handleMouseup}
       onMouseUp={handleMouseup}
