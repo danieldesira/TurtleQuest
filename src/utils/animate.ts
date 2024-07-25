@@ -7,6 +7,7 @@ import { updateDialogContent } from "../features/dialogs/dialogReducer";
 
 /**
  * Animates the game frame by frame depeding on outcomes of game logic.
+ * @param canvas The canvas element.
  * @author Daniel Desira
  */
 const animate = async (canvas: HTMLCanvasElement) => {

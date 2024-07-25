@@ -20,6 +20,7 @@ abstract class Level implements ILevel {
   /**
    * Initialises level.
    * @param isFreshLevel Determines whether the level is fresh or restored.
+   * @author Daniel Desira
    */
   async init(isFreshLevel: boolean): Promise<void> {
     await this.loadBgImg();

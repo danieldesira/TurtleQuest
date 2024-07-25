@@ -10,6 +10,8 @@ interface BoundingBox {
 
 /**
  * Checks for collisions using the bounding box algorithm.
+ * @param boxA The first bounding box.
+ * @param boxB The second bounding box.
  * @author GPT 3.5
  */
 const checkBoundingBoxCollision = (

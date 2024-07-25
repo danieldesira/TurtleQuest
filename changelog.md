@@ -5,6 +5,7 @@
 * Boat now starts from middle of screen or beyond
 * Internal:
     - Optimised character loading with `` Promise.all() ``
+    - Code cleanups and documentation updates
 
 #0.5.1 Alpha - 24/04/2024 22:45 UTC+1
 * Fix dedications link

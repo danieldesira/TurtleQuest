@@ -55,7 +55,7 @@ class Game {
 
   /**
    * Initialises game.
-   * @param canvas The canvas element
+   * @param options The game options.
    * @author Daniel Desira
    */
   async start({ canvas, isNewGame }: GameOptions) {
