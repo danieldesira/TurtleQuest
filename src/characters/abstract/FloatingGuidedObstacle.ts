@@ -8,6 +8,10 @@ import Obstacle from "./Obstacle";
 
 abstract class FloatingGuidedObstacle extends Obstacle {
   protected _direction: Directions;
+  
+  protected get initialPositionXFrom(): number {
+    return Game.instance.level.bgImg.width / 2;
+  }
 
   /**
    * Sets initial position of this obstact along the top of the screen. (Floating)
@@ -46,7 +50,7 @@ abstract class FloatingGuidedObstacle extends Obstacle {
   }
 
   /**
-   * Checks whether obstacle collided with turtle. Adapted for objects that don't have a 
+   * Checks whether obstacle collided with turtle. Adapted for objects that don't have a
    * change in coordinates for a left/right direction change.
    * @returns Flag showing collision.
    * @override

@@ -2,6 +2,7 @@
 * Speed up keyboard controls and keep them applied when canvas not in focus
 * Added button to close and save current game
 * Applied new theme regardless of OS options
+* Boat now starts from middle of screen or beyond
 * Internal:
     - Optimised character loading with `` Promise.all() ``
 
