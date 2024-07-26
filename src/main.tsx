@@ -4,6 +4,17 @@ import App from "./components/App";
 import store from "./store";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
 
+if (navigator.serviceWorker) {
+  try {
+    window.addEventListener("load", async () => {
+      const worker = await navigator.serviceWorker.register("serviceWorker.js");
+      console.log(`Registered service worker ${worker}`);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const appRootElement = document.getElementById("app") as HTMLElement;
 const root = createRoot(appRootElement);
 root.render(<App />);
