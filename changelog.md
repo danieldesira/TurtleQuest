@@ -1,11 +1,14 @@
 #0.6.0 Beta -
-* Speed up keyboard controls and keep them applied when canvas not in focus
+* Speed up keyboard controls
 * Added button to close and save current game
 * Applied new theme regardless of OS options
 * Boat now starts from middle of screen or beyond
+* Dialogs now also forced to landscape mode on mobile
+* Moved controls to right hand side by default
 * Internal:
     - Optimised character loading with `` Promise.all() ``
     - Code cleanups and documentation updates
+    - Offline PWA
 
 #0.5.1 Alpha - 24/04/2024 22:45 UTC+1
 * Fix dedications link

@@ -36,7 +36,7 @@ self.addEventListener("fetch", (event) => {
   console.log("Fetch intercepted for:", event.request.url);
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
+      if (cachedResponse && !navigator.onLine) {
         return cachedResponse;
       }
       return fetch(event.request);
