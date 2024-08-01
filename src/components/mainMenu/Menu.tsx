@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { startGame } from "../../features/gameState/gameStateReducer";
 import { useDispatch } from "react-redux";
 import MenuButton from "./MenuButton";
@@ -64,6 +64,7 @@ function Menu({ setIsNewGame }: Props) {
     ),
     settings: <Settings />,
   };
+  
   return (
     <>
       <video

@@ -5,7 +5,7 @@ type Option = {
   label: string;
   name: string;
   value: string;
-  type: "text" | "radio" | "number";
+  type: "text" | "select" | "number";
   options?: string[];
 };
 
@@ -14,30 +14,31 @@ function Settings() {
     {
       label: "Control Position",
       name: "controlPosition",
-      value: "right",
-      type: "radio",
-      options: ["left", "right"],
+      value: "Right",
+      type: "select",
+      options: ["Left", "Right"],
     },
   ]);
 
   return (
-    <div className="text-white">
-      <h2>Settings</h2>
-      <div className="">
-        <form action="#" method="post">
-          {options.map(({ label, name, value, type, options }) => (
-            <div key={name}>
-              <SingleSetting
-                label={label}
-                name={name}
-                value={value}
-                type={type}
-                options={options}
-              />
-            </div>
-          ))}
-        </form>
-      </div>
+    <div className="flex flex-col text-white gap-3">
+      <h2 className="text-xl">Settings</h2>
+      <form action="#" method="post" className="flex flex-col gap-2">
+        {options.map(({ label, name, value, type, options }) => (
+          <div key={name} className="flex gap-2">
+            <SingleSetting
+              label={label}
+              name={name}
+              value={value}
+              type={type}
+              options={options}
+            />
+          </div>
+        ))}
+        <button type="submit" className="bg-cyan-950 rounded-sm">
+          Save
+        </button>
+      </form>
     </div>
   );
 }
