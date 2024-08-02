@@ -9,14 +9,27 @@ import {
 import Game from "../../Game";
 import { useSelector } from "react-redux";
 import RootState from "../../features/RootState";
+import { Setting } from "../settings/types";
 
 function ControlGroup() {
   const turtle = Game.instance.turtle;
-  const gameRunning = useSelector((state: RootState) => state.game.inProgress.value);
+  const gameRunning = useSelector(
+    (state: RootState) => state.game.inProgress.value
+  );
+  const settings = JSON.parse(
+    localStorage.getItem("gameSettings") || "[]"
+  ) as Setting[];
+  const controlPosition = settings.find((s) => s.name === "controlPosition");
   return (
     <>
       {gameRunning ? (
-        <div className="fixed bottom-1 right-1 touch-none">
+        <div
+          className={`fixed bottom-1 ${
+            !controlPosition || controlPosition.value === "Right"
+              ? "right-1"
+              : "left-1"
+          } touch-none`}
+        >
           <div className="mb-1 flex justify-center">
             <ControlButton
               icon={<GoArrowUp />}
