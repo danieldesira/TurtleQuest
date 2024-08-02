@@ -1,19 +1,26 @@
 import React from "react";
+import { Setting } from "./types";
 
-type Props = {
-  name: string;
-  label: string;
-  type: "text" | "number" | "select";
-  value: string;
-  options?: string[];
-};
+type Props = Setting & { handleChange: React.ChangeEventHandler };
 
-function SingleSetting({ name, label, type, value, options }: Props) {
+function SingleSetting({
+  name,
+  label,
+  type,
+  value,
+  options,
+  handleChange,
+}: Props) {
   return (
     <>
       <label htmlFor={name}>{label}</label>
       {type === "select" ? (
-        <select id={name} name={name} className="bg-cyan-950 rounded-sm">
+        <select
+          id={name}
+          name={name}
+          className="bg-cyan-950 rounded-sm"
+          onChange={handleChange}
+        >
           {options.map((o, index) => (
             <option key={index} selected={value === o} value={o}>
               {o}
@@ -27,6 +34,7 @@ function SingleSetting({ name, label, type, value, options }: Props) {
           name={name}
           value={value}
           className="bg-cyan-950 rounded-sm"
+          onChange={handleChange}
         />
       )}
     </>

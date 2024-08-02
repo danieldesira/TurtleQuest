@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import SingleSetting from "./SingleSetting";
+import { Setting } from "./types";
 
-type Option = {
-  label: string;
-  name: string;
-  value: string;
-  type: "text" | "select" | "number";
-  options?: string[];
+type Props = {
+  exit: Function;
 };
-
-function Settings() {
-  const [options, setOptions] = useState<Option[]>([
+function Settings({ exit }: Props) {
+  const [settings, setSettings] = useState<Setting[]>([
     {
       label: "Control Position",
       name: "controlPosition",
@@ -20,11 +16,35 @@ function Settings() {
     },
   ]);
 
+  const handleSettingChange = (event: React.ChangeEvent) => {
+    const { name, value } = event.target as HTMLInputElement;
+    setSettings((prev) => {
+      const setting = prev.find((s) => s.name === name);
+      setting.value = value;
+      return prev;
+    });
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    localStorage.setItem("gameSettings", JSON.stringify(settings));
+
+    exit();
+  };
+
+  const handleBack = () => exit();
+
   return (
     <div className="flex flex-col text-white gap-3">
-      <h2 className="text-xl">Settings</h2>
-      <form action="#" method="post" className="flex flex-col gap-2">
-        {options.map(({ label, name, value, type, options }) => (
+      <h2 className="text-3xl">Settings</h2>
+      <form
+        action="#"
+        method="post"
+        className="flex flex-col gap-2"
+        onSubmit={handleSubmit}
+      >
+        {settings.map(({ label, name, value, type, options }) => (
           <div key={name} className="flex gap-2">
             <SingleSetting
               label={label}
@@ -32,12 +52,22 @@ function Settings() {
               value={value}
               type={type}
               options={options}
+              handleChange={handleSettingChange}
             />
           </div>
         ))}
-        <button type="submit" className="bg-cyan-950 rounded-sm">
-          Save
-        </button>
+        <div className="flex gap-2">
+          <button type="submit" className="bg-cyan-950 rounded-sm w-1/2">
+            Save
+          </button>
+          <button
+            type="button"
+            className="bg-red-600 rounded-sm w-1/2"
+            onClick={handleBack}
+          >
+            Back
+          </button>
+        </div>
       </form>
     </div>
   );

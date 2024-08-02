@@ -62,9 +62,9 @@ function Menu({ setIsNewGame }: Props) {
         <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
       </>
     ),
-    settings: <Settings />,
+    settings: <Settings exit={() => setMode("main")} />,
   };
-  
+
   return (
     <>
       <video
