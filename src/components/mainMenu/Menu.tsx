@@ -67,12 +67,7 @@ function Menu({ setIsNewGame }: Props) {
 
   return (
     <>
-      <div
-        className="fixed top-0 left-0 h-full w-full flex flex-col gap-5 justify-center p-0 bg-no-repeat bg-center"
-        style={{
-          backgroundImage: `url("./static/images/backgrounds/nestingTurtle.svg")`,
-        }}
-      >
+      <div className="fixed top-0 left-0 h-full w-full flex flex-col gap-5 justify-center p-0 bg-cute bg-no-repeat bg-center">
         <h1 className="text-5xl">
           <span className="text-emerald-300">Turtle</span>{" "}
           <span className="text-cyan-500">Quest</span>

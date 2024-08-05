@@ -4,14 +4,17 @@ module.exports = {
   theme: {
     extend: {
       borderRadius: {
-        "7xl": "45px"
+        "7xl": "45px",
       },
       fontFamily: {
-        "sans-pro": "Source-Sans-Pro"
+        "sans-pro": "Source-Sans-Pro",
       },
       maxHeight: {
-        "screen-1/4": "25vh"
-      }
+        "screen-1/4": "25vh",
+      },
+      backgroundImage: {
+        cute: `url("/static/images/backgrounds/nestingTurtle.svg")`,
+      },
     },
   },
   plugins: ["postcss"],
