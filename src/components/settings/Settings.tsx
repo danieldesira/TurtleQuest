@@ -36,7 +36,7 @@ function Settings({ exit }: Props) {
   const handleBack = () => exit();
 
   return (
-    <div className="flex flex-col text-white gap-3">
+    <div className="flex flex-col text-slate-950 gap-5">
       <h2 className="text-3xl">Settings</h2>
       <form
         action="#"

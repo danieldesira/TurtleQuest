@@ -36,7 +36,7 @@ function Menu({ setIsNewGame }: Props) {
 
   const screens = {
     main: (
-      <div className="items-center">
+      <div className="flex flex-col items-center gap-5">
         {localStorage.getItem("currentGame") ? (
           <MenuButton
             callback={handleContinueGame}
@@ -67,12 +67,14 @@ function Menu({ setIsNewGame }: Props) {
 
   return (
     <>
-      <div className="fixed top-0 left-0 h-full w-full flex flex-col gap-5 justify-center p-0 bg-cute bg-no-repeat bg-center">
-        <h1 className="text-5xl">
-          <span className="text-emerald-300">Turtle</span>{" "}
-          <span className="text-cyan-500">Quest</span>
-        </h1>
-        <span className="text-white">Beta release</span>
+      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5">
+        <div className="flex flex-col gap-5">
+          <h1 className="text-5xl text-center">
+            <span className="text-emerald-300">Turtle</span>{" "}
+            <span className="text-cyan-500">Quest</span>
+          </h1>
+          <span className="text-slate-950 text-center">Beta release</span>
+        </div>
         {screens[mode]}
         <EditionSection />
       </div>

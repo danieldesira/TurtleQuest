@@ -14,7 +14,7 @@ function MenuButton({ callback, icon, text }: Props) {
   };
   return (
     <a href="#" onClick={handleClick}>
-      <span className="text-white flex gap-2 text-5xl">
+      <span className="text-slate-950 flex gap-2 text-5xl">
         {icon} {text}
       </span>
     </a>
