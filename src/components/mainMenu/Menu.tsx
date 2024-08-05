@@ -36,7 +36,7 @@ function Menu({ setIsNewGame }: Props) {
 
   const screens = {
     main: (
-      <>
+      <div className="items-center">
         {localStorage.getItem("currentGame") ? (
           <MenuButton
             callback={handleContinueGame}
@@ -60,21 +60,19 @@ function Menu({ setIsNewGame }: Props) {
           text="Settings"
         />
         <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
-      </>
+      </div>
     ),
     settings: <Settings exit={() => setMode("main")} />,
   };
 
   return (
     <>
-      <video
-        className="max-h-screen max-w-screen m-auto"
-        src="./static/videos/baby-turtles.mp4"
-        autoPlay
-        loop
-        muted
-      />
-      <div className="fixed top-0 left-0 h-full flex flex-col items-center justify-center w-full gap-5">
+      <div
+        className="fixed top-0 left-0 h-full w-full flex flex-col gap-5 justify-center p-0 bg-no-repeat bg-center"
+        style={{
+          backgroundImage: `url("./static/images/backgrounds/nestingTurtle.svg")`,
+        }}
+      >
         <h1 className="text-5xl">
           <span className="text-emerald-300">Turtle</span>{" "}
           <span className="text-cyan-500">Quest</span>

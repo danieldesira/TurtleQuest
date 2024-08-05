@@ -5,6 +5,7 @@
 * Boat now starts from middle of screen or beyond
 * Dialogs now also forced to landscape mode on mobile
 * Moved controls to right hand side by default
+* New cute background design
 * Internal:
     - Optimised character loading with `` Promise.all() ``
     - Code cleanups and documentation updates
