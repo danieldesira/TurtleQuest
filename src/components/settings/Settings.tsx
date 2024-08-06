@@ -39,7 +39,7 @@ function Settings({ exit }: Props) {
     <>
       <div className="flex flex-col gap-5">
         <h2 className="text-5xl text-center">Settings</h2>
-        <hr className="w-96" />
+        <hr className="w-96 m-auto" />
       </div>
       <div className="flex flex-col text-slate-950 gap-5">
         <form
