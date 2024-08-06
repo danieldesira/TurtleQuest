@@ -36,40 +36,45 @@ function Settings({ exit }: Props) {
   const handleBack = () => exit();
 
   return (
-    <div className="flex flex-col text-slate-950 gap-5">
-      <h2 className="text-3xl">Settings</h2>
-      <form
-        action="#"
-        method="post"
-        className="flex flex-col gap-2"
-        onSubmit={handleSubmit}
-      >
-        {settings.map(({ label, name, value, type, options }) => (
-          <div key={name} className="flex gap-2">
-            <SingleSetting
-              label={label}
-              name={name}
-              value={value}
-              type={type}
-              options={options}
-              handleChange={handleSettingChange}
-            />
+    <>
+      <div className="flex flex-col gap-5">
+        <h2 className="text-5xl text-center">Settings</h2>
+        <hr className="w-96" />
+      </div>
+      <div className="flex flex-col text-slate-950 gap-5">
+        <form
+          action="#"
+          method="post"
+          className="flex flex-col gap-5"
+          onSubmit={handleSubmit}
+        >
+          {settings.map(({ label, name, value, type, options }) => (
+            <div key={name} className="flex gap-5 justify-center">
+              <SingleSetting
+                label={label}
+                name={name}
+                value={value}
+                type={type}
+                options={options}
+                handleChange={handleSettingChange}
+              />
+            </div>
+          ))}
+          <div className="flex gap-5 justify-center">
+            <button type="submit" className="bg-cyan-950 rounded-sm h-16 w-52">
+              Save
+            </button>
+            <button
+              type="button"
+              className="bg-red-600 rounded-sm h-16 w-52"
+              onClick={handleBack}
+            >
+              Back
+            </button>
           </div>
-        ))}
-        <div className="flex gap-2">
-          <button type="submit" className="bg-cyan-950 rounded-sm w-1/2">
-            Save
-          </button>
-          <button
-            type="button"
-            className="bg-red-600 rounded-sm w-1/2"
-            onClick={handleBack}
-          >
-            Back
-          </button>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 }
 

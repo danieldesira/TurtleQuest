@@ -11,14 +11,18 @@ function SingleSetting({
   options,
   handleChange,
 }: Props) {
+  const fieldCssClasses = "bg-cyan-950 rounded-sm h-16 w-52";
+
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className="text-5xl">
+        {label}
+      </label>
       {type === "select" ? (
         <select
           id={name}
           name={name}
-          className="bg-cyan-950 rounded-sm"
+          className={fieldCssClasses}
           onChange={handleChange}
         >
           {options.map((o, index) => (
@@ -33,7 +37,7 @@ function SingleSetting({
           id={name}
           name={name}
           value={value}
-          className="bg-cyan-950 rounded-sm"
+          className={fieldCssClasses}
           onChange={handleChange}
         />
       )}

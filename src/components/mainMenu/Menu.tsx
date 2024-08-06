@@ -36,38 +36,7 @@ function Menu({ setIsNewGame }: Props) {
 
   const screens = {
     main: (
-      <div className="flex flex-col items-center gap-5">
-        {localStorage.getItem("currentGame") ? (
-          <MenuButton
-            callback={handleContinueGame}
-            icon={<GiSeaTurtle />}
-            text="Continue Game"
-          />
-        ) : null}
-        <MenuButton
-          callback={handleNewGame}
-          icon={<GiSeaTurtle />}
-          text="New Game"
-        />
-        {localStorage.getItem("currentGame") ? (
-          <span className="text-blue-800 font-light">
-            Caution: Starting a new game will erase current game progress!
-          </span>
-        ) : null}
-        <MenuButton
-          callback={handleSettings}
-          icon={<RiSettings5Fill />}
-          text="Settings"
-        />
-        <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
-      </div>
-    ),
-    settings: <Settings exit={() => setMode("main")} />,
-  };
-
-  return (
-    <>
-      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5">
+      <>
         <div className="flex flex-col gap-5">
           <h1 className="text-5xl text-center">
             <span className="text-emerald-300">Turtle</span>{" "}
@@ -75,6 +44,39 @@ function Menu({ setIsNewGame }: Props) {
           </h1>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
+        <div className="flex flex-col items-center gap-5">
+          {localStorage.getItem("currentGame") ? (
+            <MenuButton
+              callback={handleContinueGame}
+              icon={<GiSeaTurtle />}
+              text="Continue Game"
+            />
+          ) : null}
+          <MenuButton
+            callback={handleNewGame}
+            icon={<GiSeaTurtle />}
+            text="New Game"
+          />
+          {localStorage.getItem("currentGame") ? (
+            <span className="text-blue-800 font-light">
+              Caution: Starting a new game will erase current game progress!
+            </span>
+          ) : null}
+          <MenuButton
+            callback={handleSettings}
+            icon={<RiSettings5Fill />}
+            text="Settings"
+          />
+          <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
+        </div>
+      </>
+    ),
+    settings: <Settings exit={() => setMode("main")} />,
+  };
+
+  return (
+    <>
+      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5">
         {screens[mode]}
         <EditionSection />
       </div>
