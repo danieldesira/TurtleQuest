@@ -1,17 +1,26 @@
 import React, { useState } from "react";
 import SingleSetting from "./SingleSetting";
-import { Setting } from "./types";
+import { ControlsPositionValue, Setting, SettingsValue } from "./types";
 
 type Props = {
   exit: Function;
 };
+
 function Settings({ exit }: Props) {
+  const currentSettings = JSON.parse(
+    localStorage.getItem("gameSettings") ?? "[]"
+  ) as Setting[];
+
   const [settings, setSettings] = useState<Setting[]>([
     {
       label: "Control Position",
       name: "controlPosition",
-      value: "Right",
-      type: "select",
+      value:
+        currentSettings && currentSettings.length
+          ? (currentSettings.find((s) => s.name === "controlPosition")
+              .value as ControlsPositionValue)
+          : "Right",
+      type: "radio",
       options: ["Left", "Right"],
     },
   ]);
@@ -20,7 +29,7 @@ function Settings({ exit }: Props) {
     const { name, value } = event.target as HTMLInputElement;
     setSettings((prev) => {
       const setting = prev.find((s) => s.name === name);
-      setting.value = value;
+      setting.value = value as SettingsValue;
       return prev;
     });
   };
@@ -41,7 +50,7 @@ function Settings({ exit }: Props) {
         <h2 className="text-5xl text-center">Settings</h2>
         <hr className="w-96 m-auto" />
       </div>
-      <div className="flex flex-col text-slate-950 gap-5">
+      <div className="flex flex-col gap-5">
         <form
           action="#"
           method="post"
@@ -61,12 +70,15 @@ function Settings({ exit }: Props) {
             </div>
           ))}
           <div className="flex gap-5 justify-center">
-            <button type="submit" className="bg-cyan-950 rounded-sm h-16 w-52">
+            <button
+              type="submit"
+              className="bg-green-600 rounded-md h-16 w-52 text-3xl text-white"
+            >
               Save
             </button>
             <button
               type="button"
-              className="bg-red-600 rounded-sm h-16 w-52"
+              className="bg-red-600 rounded-md h-16 w-52 text-3xl text-white"
               onClick={handleBack}
             >
               Back

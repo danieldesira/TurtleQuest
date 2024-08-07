@@ -11,33 +11,35 @@ function SingleSetting({
   options,
   handleChange,
 }: Props) {
-  const fieldCssClasses = "bg-cyan-950 rounded-sm h-16 w-52";
-
   return (
     <>
-      <label htmlFor={name} className="text-5xl">
+      <label htmlFor={name} className="text-5xl text-slate-950">
         {label}
       </label>
-      {type === "select" ? (
-        <select
-          id={name}
-          name={name}
-          className={fieldCssClasses}
-          onChange={handleChange}
-        >
-          {options.map((o, index) => (
-            <option key={index} selected={value === o} value={o}>
+      {type === "radio" ? (
+        options.map((o, index) => (
+          <div className="flex gap-3">
+            <input
+              key={index}
+              type="radio"
+              id={`${name}-${o}`}
+              name={name}
+              value={o}
+              defaultChecked={o === value}
+              onChange={handleChange}
+            />
+            <label htmlFor={`${name}-${o}`} className="text-3xl text-slate-950">
               {o}
-            </option>
-          ))}
-        </select>
+            </label>
+          </div>
+        ))
       ) : (
         <input
           type={type}
           id={name}
           name={name}
           value={value}
-          className={fieldCssClasses}
+          className="bg-white rounded-sm h-16 w-52 p-10 text-slate-950"
           onChange={handleChange}
         />
       )}

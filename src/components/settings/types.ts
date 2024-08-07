@@ -1,7 +1,13 @@
 export type Setting = {
   label: string;
-  name: string;
-  value: string;
-  type: "text" | "select" | "number";
+  name: SettingsKey;
+  value: SettingsValue;
+  type: "text" | "radio" | "number";
   options?: string[];
 };
+
+export type SettingsKey = "controlPosition";
+
+export type SettingsValue = ControlsPositionValue;
+
+export type ControlsPositionValue = "Left" | "Right";

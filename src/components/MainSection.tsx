@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import Menu from "./mainMenu/Menu";
 import GameSection from "./GameSection";
+import CustomDialog from "./dialog/CustomDialog";
 
 function MainSection() {
   const inProgress = useSelector(
@@ -12,7 +13,7 @@ function MainSection() {
 
   return (
     <div
-      className="max-w-screen max-h-screen select-none"
+      className="max-w-screen max-h-screen select-none portrait:rotate-90"
       onContextMenu={(e) => e.preventDefault()}
     >
       {inProgress ? (
@@ -20,6 +21,7 @@ function MainSection() {
       ) : (
         <Menu setIsNewGame={setIsNewGame} />
       )}
+      <CustomDialog />
     </div>
   );
 }
