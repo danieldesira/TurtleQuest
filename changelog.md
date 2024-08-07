@@ -3,7 +3,7 @@
 * Added button to close and save current game
 * Applied new theme regardless of OS options
 * Boat now starts from middle of screen or beyond
-* Dialogs now also forced to landscape mode on mobile
+* User is now forced to play in landscape mode
 * Moved controls to right hand side by default
 * New cute background design
 * Internal:

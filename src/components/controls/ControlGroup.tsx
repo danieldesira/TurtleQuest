@@ -28,7 +28,7 @@ function ControlGroup() {
             !controlPosition || controlPosition.value === "Right"
               ? "right-1"
               : "left-1"
-          } touch-none`}
+          }`}
         >
           <div className="mb-1 flex justify-center">
             <ControlButton
