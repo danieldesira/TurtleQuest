@@ -19,11 +19,21 @@ function GameSection({ isNewGame }: Props) {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const handleBeforeUnload = (event: Event) => {
+    // Display default dialog before closing
+    event.preventDefault();
+    event.returnValue = false; // Required by Chrome
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
 
     window.addEventListener("resize", () => resizeCanvas(canvas));
     Game.instance.start({ canvas, isNewGame });
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
   return (

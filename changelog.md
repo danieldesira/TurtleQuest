@@ -6,6 +6,7 @@
 * User is now forced to play in landscape mode
 * Moved controls to right hand side by default
 * New cute background design
+* Prevent accidental game close
 * Internal:
     - Optimised character loading with `` Promise.all() ``
     - Code cleanups and documentation updates
