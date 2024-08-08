@@ -3,10 +3,12 @@
 * Added button to close and save current game
 * Applied new theme regardless of OS options
 * Boat now starts from middle of screen or beyond
-* User is now forced to play in landscape mode
-* Moved controls to right hand side by default
-* New cute background design
-* Prevent accidental game close
+* User Experience:
+    - User is now forced to play in landscape mode
+    - Moved controls to right hand side by default
+    - New cute background design
+    - Prevent accidental game close
+    - Prevent text selection or touch on mobile
 * Internal:
     - Optimised character loading with `` Promise.all() ``
     - Code cleanups and documentation updates

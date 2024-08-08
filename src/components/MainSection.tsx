@@ -13,7 +13,7 @@ function MainSection() {
   return (
     <>
       <div
-        className="max-w-screen max-h-screen select-none touch-none portrait:hidden"
+        className="max-w-screen max-h-screen portrait:hidden"
         onContextMenu={(e) => e.preventDefault()}
       >
         {inProgress ? (
