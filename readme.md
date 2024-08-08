@@ -23,4 +23,22 @@ experience:
 * [Prettier+](https://marketplace.visualstudio.com/items?itemName=svipas.prettier-plus)
 * [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
-For internal API documentation, please visit: https://danieldesira.github.io/TurtleQuest/dev/docs/
+### Adding new characters
+Please follow these steps:
+1. Place the image in the following path: ``/static/images/characters``.
+2. Add a class for the given character while extending the appropriate abstract class,
+placing it under ``/src/characters``.
+3. Implement the override the abstract class as desired.
+4. Add an entry for the image filepath in the ``precacheResources`` array in
+``serviceWorker.js`` located at the root.
+5. In ``/src/levels/LevelCharacter.ts``, add a string for the given character in the
+``CharacterType`` custom type.
+6. Instantiate the given character in the switch block inside
+``src/utils/instantiateCharacter.ts``, for example:
+```js
+case "tigerShark":
+    character = new TigerShark();
+    break;
+```
+7. Add the character with the desired quantity/ies in the level/s desired, by modifying
+the ``_initialCharacters`` field. Locate desired level/s at ``src/levels/Level<x>.ts``.
