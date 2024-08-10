@@ -9,6 +9,7 @@
     - New cute background design
     - Prevent accidental game close
     - Prevent text selection or touch on mobile
+    - Menu reorganisation
 * Internal:
     - Optimised character loading with `` Promise.all() ``
     - Code cleanups and documentation updates

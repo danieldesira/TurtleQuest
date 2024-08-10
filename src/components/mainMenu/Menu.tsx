@@ -46,7 +46,7 @@ function Menu({ setIsNewGame }: Props) {
           </h1>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
-        <div className="flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center gap-5 overflow-auto">
           {localStorage.getItem("currentGame") ? (
             <MenuButton
               callback={handleContinueGame}
@@ -78,7 +78,7 @@ function Menu({ setIsNewGame }: Props) {
 
   return (
     <>
-      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-16">
+      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5">
         {screens[mode]}
         <EditionSection />
       </div>
