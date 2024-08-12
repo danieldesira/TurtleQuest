@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SingleSetting from "./SingleSetting";
 import { ControlsPositionValue, Setting, SettingsValue } from "./types";
+import { RiSettings5Fill } from "react-icons/ri";
 
 type Props = {
   exit: Function;
@@ -46,9 +47,9 @@ function Settings({ exit }: Props) {
 
   return (
     <>
-      <div className="flex flex-col gap-5">
-        <h2 className="text-5xl text-center">Settings</h2>
-        <hr className="w-96 m-auto" />
+      <div className="flex gap-5 justify-center">
+        <RiSettings5Fill className="w-14 h-14" />
+        <h2 className="text-5xl">Settings</h2>
       </div>
       <div className="flex flex-col gap-5">
         <form

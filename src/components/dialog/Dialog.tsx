@@ -20,7 +20,8 @@ function Dialog({ title, content, handleOk }: Props) {
       <div className="w-fit m-auto">
         <button
           type="button"
-          className="rounded-3xl m-1 cursor-pointer bg-green-600"
+          role="button"
+          className="rounded-3xl m-1 bg-green-600"
           onClick={handleOk}
         >
           <span className="text-xl ml-2 mr-2">OK</span>

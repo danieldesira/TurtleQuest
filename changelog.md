@@ -10,6 +10,7 @@
     - Prevent accidental game close
     - Prevent text selection or touch on mobile
     - Menu reorganisation
+    - Game title now also about button
 * Internal:
     - Optimised character loading with `` Promise.all() ``
     - Code cleanups and documentation updates

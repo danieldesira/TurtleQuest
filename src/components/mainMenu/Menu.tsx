@@ -3,7 +3,6 @@ import { startGame } from "../../features/gameState/gameStateReducer";
 import { useDispatch } from "react-redux";
 import MenuButton from "./MenuButton";
 import { GiSeaTurtle } from "react-icons/gi";
-import { FcAbout } from "react-icons/fc";
 import AboutDialog from "../dialog/AboutDialog";
 import EditionSection from "../EditionSection";
 import Game from "../../Game";
@@ -40,13 +39,20 @@ function Menu({ setIsNewGame }: Props) {
     main: (
       <>
         <div className="flex flex-col gap-5">
-          <h1 className="text-5xl text-center">
-            <span className="text-emerald-300">Turtle</span>{" "}
-            <span className="text-cyan-500">Quest</span>
-          </h1>
+          <div className="flex gap-5 justify-center">
+            <h1 className="text-5xl" role="button" onClick={handleAbout}>
+              <span className="text-emerald-300">Turtle</span>{" "}
+              <span className="text-cyan-500">Quest</span>
+            </h1>
+            <RiSettings5Fill
+              className="w-14 h-14"
+              role="button"
+              onClick={handleSettings}
+            />
+          </div>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
-        <div className="flex flex-col items-center gap-5 overflow-auto">
+        <div className="flex flex-col items-center gap-5">
           {localStorage.getItem("currentGame") ? (
             <MenuButton
               callback={handleContinueGame}
@@ -64,12 +70,6 @@ function Menu({ setIsNewGame }: Props) {
               Caution: Starting a new game will erase current game progress!
             </span>
           ) : null}
-          <MenuButton
-            callback={handleSettings}
-            icon={<RiSettings5Fill />}
-            text="Settings"
-          />
-          <MenuButton callback={handleAbout} icon={<FcAbout />} text="About" />
         </div>
       </>
     ),
