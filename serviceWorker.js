@@ -7,7 +7,6 @@ const precacheResources = [
   "/dist/bundle.js",
   "/dist/bundle.css",
   "/favicon.svg",
-  "/static/videos/baby-turtles.mp4",
   "/static/images/backgrounds/level1.png",
   "/static/images/backgrounds/level2.png",
   "/static/images/characters/turtle.svg",
@@ -17,6 +16,7 @@ const precacheResources = [
   "/static/images/characters/plasticBag.svg",
   "/static/images/characters/sardine.svg",
   "/static/images/characters/shrimp.svg",
+  "/static/images/backgrounds/hatchingTurtles.svg",
 ];
 
 // When the service worker is installing, open the cache and add the precache resources to it
