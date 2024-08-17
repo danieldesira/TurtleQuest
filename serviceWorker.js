@@ -2,21 +2,21 @@
 const cacheName = "cache-v1";
 // List the files to precache
 const precacheResources = [
-  "/",
-  "/index.html",
-  "/dist/bundle.js",
-  "/dist/bundle.css",
-  "/favicon.svg",
-  "/static/images/backgrounds/level1.png",
-  "/static/images/backgrounds/level2.png",
-  "/static/images/characters/turtle.svg",
-  "/static/images/characters/benthicCrab.svg",
-  "/static/images/characters/boat.svg",
-  "/static/images/characters/neptuneGrass.svg",
-  "/static/images/characters/plasticBag.svg",
-  "/static/images/characters/sardine.svg",
-  "/static/images/characters/shrimp.svg",
-  "/static/images/backgrounds/hatchingTurtles.svg",
+  "",
+  "index.html",
+  "dist/bundle.js",
+  "dist/bundle.css",
+  "favicon.svg",
+  "static/images/backgrounds/level1.png",
+  "static/images/backgrounds/level2.png",
+  "static/images/characters/turtle.svg",
+  "static/images/characters/benthicCrab.svg",
+  "static/images/characters/boat.svg",
+  "static/images/characters/neptuneGrass.svg",
+  "static/images/characters/plasticBag.svg",
+  "static/images/characters/sardine.svg",
+  "static/images/characters/shrimp.svg",
+  "static/images/backgrounds/hatchingTurtles.svg",
 ];
 
 // When the service worker is installing, open the cache and add the precache resources to it
