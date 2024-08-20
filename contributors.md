@@ -10,3 +10,6 @@
 - Marcos Méndez
 - Yazan Enayeh
 - Pierre Borg
+- Zach Decelis
+- Juliane Wachsmann
+- Kamilla ..
