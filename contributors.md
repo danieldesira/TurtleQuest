@@ -12,4 +12,4 @@
 - Pierre Borg
 - Zach Decelis
 - Juliane Wachsmann
-- Kamilla ..
+- Kamilla Boross
