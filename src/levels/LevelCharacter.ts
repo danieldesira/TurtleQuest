@@ -1,14 +1,13 @@
+import CharacterOptions from "../characters/interfaces/CharacterOptions";
+import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
+
 interface LevelCharacter {
-  type: CharacterType;
+  constructor: CharacterConstructor;
   amount: number;
 }
 
-export type CharacterType =
-  | "sardine"
-  | "shrimp"
-  | "plasticBag"
-  | "neptuneGrass"
-  | "crab"
-  | "boat";
+interface CharacterConstructor {
+  new (options?: CharacterOptions): INonMainCharacter;
+}
 
 export default LevelCharacter;

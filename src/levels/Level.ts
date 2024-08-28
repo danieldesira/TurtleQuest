@@ -1,6 +1,5 @@
 import PackPrey from "../characters/abstract/PackPrey";
 import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
-import instantiateCharacter from "../utils/instantiateCharacter";
 import ILevel from "./ILevel";
 import LevelCharacter from "./LevelCharacter";
 
@@ -89,7 +88,7 @@ abstract class Level implements ILevel {
 
     for (const characterInfo of this._initialCharacters) {
       for (let i = 0; i < characterInfo.amount; i++) {
-        const character = instantiateCharacter(characterInfo.type);
+        const character = new characterInfo.constructor();
         promises.push(character.loadImage());
         if (character instanceof PackPrey) {
           if (lastPackCharacter) {

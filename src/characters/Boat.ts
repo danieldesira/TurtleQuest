@@ -9,6 +9,7 @@ class Boat extends FloatingGuidedObstacle {
   protected readonly _imageFilename: string;
   protected readonly _width: number;
   protected readonly _height: number;
+  protected readonly _type: string;
 
   constructor({
     damage,
@@ -27,6 +28,7 @@ class Boat extends FloatingGuidedObstacle {
     this._imageFilename = imageFilename ?? "boat.svg";
     this._width = width ?? 300;
     this._height = height ?? 100;
+    this._type = "Boat";
   }
 }
 

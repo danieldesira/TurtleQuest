@@ -1,6 +1,5 @@
 import Game from "../Game";
 import store from "../store";
-import { getCharacterType } from "../utils/instantiateCharacter";
 import GameData from "./GameData";
 
 /**
@@ -25,7 +24,7 @@ const stringifyGameData = (): string => {
         x: c.x,
         y: c.y,
         direction: c.direction,
-        type: getCharacterType(c),
+        type: c.type,
       };
     }),
     levelNo: store.getState().levels.level.value,

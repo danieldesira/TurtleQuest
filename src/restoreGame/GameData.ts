@@ -1,5 +1,4 @@
 import Directions from "../enums/Directions";
-import { CharacterType } from "../levels/LevelCharacter";
 
 interface GameData {
   turtle: TurtleData;
@@ -19,7 +18,7 @@ interface TurtleData {
 }
 
 interface CharacterData {
-  type: CharacterType;
+  type: string;
   x: number;
   y: number;
   direction: Directions;

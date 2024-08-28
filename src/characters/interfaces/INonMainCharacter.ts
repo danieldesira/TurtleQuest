@@ -6,6 +6,7 @@ interface INonMainCharacter extends ICharacter {
   setInitialPosition(): void;
   get stomachImpact(): number;
   get points(): number;
+  get type(): string;
   isCollidingWithTurtle(): boolean;
 }
 

@@ -17,6 +17,7 @@
     - Offline PWA
     - Excluded docs from Git repository
     - Added instructions on how to add characters in ``readme.md``
+    - Updated ``dedications.md`` and ``contributors.md``
 
 #0.5.1 Alpha - 24/04/2024 22:45 UTC+1
 * Fix dedications link

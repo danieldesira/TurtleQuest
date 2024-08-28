@@ -1,4 +1,5 @@
 import Game from "../Game";
+import createCharacterInstance from "../characters/createCharacterInstance";
 import { restoreLevel } from "../features/levels/levelReducer";
 import {
   restoreFood,
@@ -8,7 +9,6 @@ import {
   restoreStomachCapacity,
 } from "../features/turtleMonitor/turtleReducers";
 import store from "../store";
-import instantiateCharacter from "../utils/instantiateCharacter";
 import GameData from "./GameData";
 
 /**
@@ -45,14 +45,14 @@ const restoreState = (data: GameData) => {
 };
 
 const setLevel = (data: GameData) => {
-  store.dispatch(restoreLevel({ levelValue: data.levelNo  }));
+  store.dispatch(restoreLevel({ levelValue: data.levelNo }));
   Game.instance.loadNewLevel(false);
 };
 
 const restoreCharacters = (data: GameData) => {
   Game.instance.level.characters.clear();
   for (const character of data.characters) {
-    const temp = instantiateCharacter(character.type);
+    const temp = createCharacterInstance(character.type);
     temp.x = character.x;
     temp.y = character.y;
     Game.instance.level.characters.add(temp);

@@ -9,6 +9,7 @@ class NeptuneGrass extends BenthicPrey {
   protected readonly _points: number;
   protected readonly _width: number;
   protected readonly _height: number;
+  protected readonly _type: string;
 
   constructor({
     imageFilename,
@@ -27,6 +28,7 @@ class NeptuneGrass extends BenthicPrey {
     this._width = width ?? 70;
     this._height = height ?? 55;
     this._speed = speed ?? 0;
+    this._type = "NeptuneGrass";
   }
 }
 

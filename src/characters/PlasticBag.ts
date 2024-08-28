@@ -9,6 +9,7 @@ class PlasticBag extends Obstacle {
   protected readonly _points: number;
   protected readonly _width: number;
   protected readonly _height: number;
+  protected readonly _type: string;
 
   constructor({
     imageFilename,
@@ -25,6 +26,7 @@ class PlasticBag extends Obstacle {
     this._points = points ?? -20;
     this._width = width ?? 45;
     this._height = height ?? 45;
+    this._type = "PlasticBag";
   }
 }
 

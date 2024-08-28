@@ -9,6 +9,7 @@ class Shrimp extends Prey {
   protected readonly _points: number;
   protected readonly _width: number;
   protected readonly _height: number;
+  protected readonly _type: string;
 
   constructor({
     imageFilename,
@@ -27,6 +28,7 @@ class Shrimp extends Prey {
     this._points = points ?? 4;
     this._width = width ?? 11;
     this._height = height ?? 4;
+    this._type = "Shrimp";
   }
 }
 

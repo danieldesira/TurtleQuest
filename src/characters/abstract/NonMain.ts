@@ -14,6 +14,7 @@ abstract class NonMain extends Character implements INonMainCharacter {
   protected abstract readonly _speed: number;
   protected abstract readonly _stomachImpact: number;
   protected abstract readonly _points: number;
+  protected abstract readonly _type: string;
 
   protected get initialPositionXFrom(): number {
     return 0;
@@ -37,6 +38,10 @@ abstract class NonMain extends Character implements INonMainCharacter {
 
   get points() {
     return this._points;
+  }
+
+  get type() {
+    return this._type;
   }
 
   /**

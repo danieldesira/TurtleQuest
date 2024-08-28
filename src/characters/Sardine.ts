@@ -9,6 +9,7 @@ class Sardine extends PackPrey {
   protected readonly _points: number;
   protected readonly _width: number;
   protected readonly _height: number;
+  protected readonly _type: string;
 
   constructor({
     imageFilename,
@@ -27,6 +28,7 @@ class Sardine extends PackPrey {
     this._points = points ?? 10;
     this._width = width ?? 15;
     this._height = height ?? 6;
+    this._type = "Sardine";
   }
 }
 

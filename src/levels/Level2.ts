@@ -1,14 +1,19 @@
+import Boat from "../characters/Boat";
+import Crab from "../characters/Crab";
+import NeptuneGrass from "../characters/NeptuneGrass";
+import PlasticBag from "../characters/PlasticBag";
+import Shrimp from "../characters/Shrimp";
 import Level from "./Level";
 import LevelCharacter from "./LevelCharacter";
 
 class Level2 extends Level {
   protected readonly _backgroundImageFilename: string = "level2.png";
   protected readonly _initialCharacters: LevelCharacter[] = [
-    { type: "plasticBag", amount: 10 },
-    { type: "neptuneGrass", amount: 4 },
-    { type: "shrimp", amount: 30 },
-    { type: "crab", amount: 5 },
-    { type: "boat", amount: 1 },
+    { constructor: PlasticBag, amount: 10 },
+    { constructor: NeptuneGrass, amount: 4 },
+    { constructor: Shrimp, amount: 30 },
+    { constructor: Crab, amount: 5 },
+    { constructor: Boat, amount: 1 },
   ];
   protected readonly _benthicOffsetY: number = 550;
   protected readonly _currentSpeed: number = 0.15;
