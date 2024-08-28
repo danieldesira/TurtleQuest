@@ -15,6 +15,11 @@ const characterMap: { [key: string]: new () => NonMain } = {
   Shrimp: Shrimp,
 };
 
+/**
+ * Instantiates a character as indicated by a string.
+ * @param className The name of the class - to match with character's type property
+ * @returns The instance
+ */
 const createCharacterInstance = (className: string): NonMain => {
   const CharacterConstructor = characterMap[className];
   if (CharacterConstructor) {
