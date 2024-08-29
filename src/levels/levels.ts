@@ -1,4 +1,4 @@
-import ILevel from "./ILevel";
+import Level from "./Level";
 import Level1 from "./Level1";
 import Level2 from "./Level2";
 
@@ -9,9 +9,22 @@ export enum LevelChangeTypes {
   GameComplete = 3,
 }
 
-const levels: Map<number, ILevel> = new Map([
-  [1, new Level1() as ILevel],
-  [2, new Level2() as ILevel],
-]);
+export const levelMap: { [key: number]: new () => Level } = {
+  1: Level1,
+  2: Level2,
+};
 
-export default levels;
+/**
+ * Instantiates a level responding to a level number.
+ * @param levelNo The level number
+ * @returns The instance
+ * @author Daniel Desira
+ */
+export const createLevelInstance = (levelNo: number): Level => {
+  const LevelConstructor = levelMap[levelNo];
+  if (LevelConstructor) {
+    return new LevelConstructor();
+  } else {
+    throw new Error("Level undefined");
+  }
+};

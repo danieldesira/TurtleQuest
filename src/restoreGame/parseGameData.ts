@@ -20,7 +20,6 @@ const parseGameData = (json: string) => {
   const data: GameData = JSON.parse(json);
   restoreTurtle(data);
   restoreState(data);
-  restoreCharacters(data);
 };
 
 const restoreTurtle = (data: GameData) => {
@@ -41,16 +40,20 @@ const restoreState = (data: GameData) => {
     })
   );
   store.dispatch(restorePoints({ turtle: { xpValue: data.xp } }));
-  setLevel(data);
-};
-
-const setLevel = (data: GameData) => {
   store.dispatch(restoreLevel({ levelValue: data.levelNo }));
-  Game.instance.loadNewLevel(false);
 };
 
-const restoreCharacters = (data: GameData) => {
+/**
+ * Restores characters from localStorage
+ * @author Daniel Desira
+ */
+export const restoreCharacters = () => {
   Game.instance.level.characters.clear();
+
+  const data = JSON.parse(
+    localStorage.getItem("currentGame") ?? "{}"
+  ) as GameData;
+
   for (const character of data.characters) {
     const temp = createCharacterInstance(character.type);
     temp.x = character.x;

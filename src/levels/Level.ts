@@ -1,5 +1,6 @@
 import PackPrey from "../characters/abstract/PackPrey";
 import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
+import { restoreCharacters } from "../restoreGame/parseGameData";
 import ILevel from "./ILevel";
 import LevelCharacter from "./LevelCharacter";
 
@@ -106,6 +107,8 @@ abstract class Level implements ILevel {
   }
 
   private async restoreCharacters() {
+    restoreCharacters();
+
     const promises: Promise<void>[] = [];
     for (const character of this._characters) {
       promises.push(character.loadImage());

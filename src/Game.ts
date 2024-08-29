@@ -6,7 +6,7 @@ import {
 import { resetLevel } from "./features/levels/levelReducer";
 import { resetTurtle } from "./features/turtleMonitor/turtleReducers";
 import ILevel from "./levels/ILevel";
-import levels from "./levels/levels";
+import { createLevelInstance } from "./levels/levels";
 import store from "./store";
 import animate from "./utils/animate";
 import resizeCanvas from "./utils/resizeCanvas";
@@ -42,7 +42,7 @@ class Game {
    * @author Daniel Desira
    */
   async loadNewLevel(isFreshLevel: boolean) {
-    this._level = levels.get(store.getState().levels.level.value);
+    this._level = createLevelInstance(store.getState().levels.level.value);
     if (this._level) {
       store.dispatch(startLoadingLevel());
       await this._level.init(isFreshLevel);

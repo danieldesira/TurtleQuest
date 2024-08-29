@@ -39,7 +39,7 @@ abstract class, placing it under ``/src/characters``.
 5. In ``/src/levels/LevelCharacter.ts``, add a string for the given character 
 in the ``CharacterType`` custom type.
 6. Add a key and constructor for the respective character in the 
-``characterMap`` array located in ``createCharacterInstance.ts`` inside the 
+``characterMap`` object located in ``createCharacterInstance.ts`` inside the 
 ``characters`` folder like in the following snippet:
 ```js
 TigerShark: TigerShark, // Key to match the _type field in the character class

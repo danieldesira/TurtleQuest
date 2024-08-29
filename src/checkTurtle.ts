@@ -9,7 +9,7 @@ import {
   respire,
   useFood,
 } from "./features/turtleMonitor/turtleReducers";
-import levels, { LevelChangeTypes } from "./levels/levels";
+import { LevelChangeTypes, levelMap } from "./levels/levels";
 import store from "./store";
 
 /**
@@ -58,7 +58,7 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
     gainPoints({ turtle: { xpValue: Game.instance.level.points } })
   );
   store.dispatch(levelUp());
-  if (levels.has(store.getState().levels.level.value)) {
+  if (levelMap[store.getState().levels.level.value]) {
     await Game.instance.loadNewLevel(true);
     store.dispatch(
       updateDialogContent({

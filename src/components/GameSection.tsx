@@ -29,9 +29,9 @@ function GameSection({ isNewGame }: Props) {
     const canvas = canvasRef.current;
 
     window.addEventListener("resize", () => resizeCanvas(canvas));
-    Game.instance.start({ canvas, isNewGame });
-
     window.addEventListener("beforeunload", handleBeforeUnload);
+
+    (async () => await Game.instance.start({ canvas, isNewGame }))();
 
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
