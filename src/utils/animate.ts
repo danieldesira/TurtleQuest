@@ -23,7 +23,7 @@ const animate = async (canvas: HTMLCanvasElement) => {
       Game.instance.turtle.paint(context);
       Game.instance.level.paintCharacters(context);
 
-      requestAnimationFrame(() => animate(canvas));
+      requestAnimationFrame(async () => await animate(canvas));
     } else if (levelChangeType === LevelChangeTypes.GameComplete) {
       store.dispatch(
         updateDialogContent({

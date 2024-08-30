@@ -1,4 +1,4 @@
-#0.6.0 Beta -
+#0.6.0 Beta - 31/08/2024 0:15 UTC+1
 * Speed up keyboard controls
 * Added button to close and save current game
 * Applied new theme regardless of OS options
@@ -18,6 +18,7 @@
     - Excluded docs from Git repository
     - Added instructions on how to add characters in ``readme.md``
     - Updated ``dedications.md`` and ``contributors.md``
+    - Character and level constructors now properly mapped
 
 #0.5.1 Alpha - 24/04/2024 22:45 UTC+1
 * Fix dedications link

@@ -19,7 +19,6 @@ import store from "./store";
  */
 const checkTurtle = async (): Promise<LevelChangeTypes> => {
   const mainCharacter = Game.instance.turtle;
-  const bgWidth = Game.instance.level.bgImg.width;
 
   store.dispatch(useFood());
   store.dispatch(recoverStomachCapacity());
@@ -42,7 +41,8 @@ const checkTurtle = async (): Promise<LevelChangeTypes> => {
     store.dispatch(respire());
   }
 
-  if (mainCharacter.x >= bgWidth) {
+  const backgroundImage = Game.instance.level.bgImg;
+  if (backgroundImage && mainCharacter.x >= backgroundImage.width) {
     return await handleOffBgWidth();
   }
 

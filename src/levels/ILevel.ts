@@ -3,7 +3,7 @@ import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
 interface ILevel {
   init(isFreshLevel: boolean): Promise<void>;
   get bgImgPath(): string;
-  get bgImg(): HTMLImageElement;
+  get bgImg(): HTMLImageElement | null;
   set bgOffsetX(offsetX: number);
   set bgOffsetY(offsetY: number);
   get bgOffsetX(): number;

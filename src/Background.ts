@@ -13,38 +13,40 @@ class Background {
    */
   static paint(options: Options) {
     const backgroundImage = Game.instance.level.bgImg;
-    const horizontalSegments = Background.calculateScreenCutOffPoints(
-      backgroundImage.width,
-      options.canvas.width
-    );
-    const verticalSegments = Background.calculateScreenCutOffPoints(
-      backgroundImage.height,
-      options.canvas.height
-    );
-    const x =
-      Game.instance.turtle.x < options.canvas.width
-        ? 0
-        : horizontalSegments[
-            Math.floor(backgroundImage.width / Game.instance.turtle.x) - 1
-          ];
-    const y =
-      Game.instance.turtle.y < options.canvas.height
-        ? 0
-        : verticalSegments[
-            Math.floor(backgroundImage.height / Game.instance.turtle.y) - 1
-          ];
-    options.context.drawImage(
-      backgroundImage,
-      x,
-      y,
-      options.canvas.width,
-      options.canvas.height,
-      0,
-      0,
-      options.canvas.width,
-      options.canvas.height
-    );
-    Background.updateBgOffset(x, y);
+    if (backgroundImage) {
+      const horizontalSegments = Background.calculateScreenCutOffPoints(
+        backgroundImage.width,
+        options.canvas.width
+      );
+      const verticalSegments = Background.calculateScreenCutOffPoints(
+        backgroundImage.height,
+        options.canvas.height
+      );
+      const x =
+        Game.instance.turtle.x < options.canvas.width
+          ? 0
+          : horizontalSegments[
+              Math.floor(backgroundImage.width / Game.instance.turtle.x) - 1
+            ];
+      const y =
+        Game.instance.turtle.y < options.canvas.height
+          ? 0
+          : verticalSegments[
+              Math.floor(backgroundImage.height / Game.instance.turtle.y) - 1
+            ];
+      options.context.drawImage(
+        backgroundImage,
+        x,
+        y,
+        options.canvas.width,
+        options.canvas.height,
+        0,
+        0,
+        options.canvas.width,
+        options.canvas.height
+      );
+      Background.updateBgOffset(x, y);
+    }
   }
 
   private static calculateScreenCutOffPoints(
@@ -75,10 +77,7 @@ class Background {
     }
   }
 
-  private static updateBgOffset(
-    x: number,
-    y: number
-  ) {
+  private static updateBgOffset(x: number, y: number) {
     Game.instance.level.bgOffsetX = x;
     Game.instance.level.bgOffsetY = y;
   }

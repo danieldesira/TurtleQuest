@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import ControlGroup from "./controls/ControlGroup";
 import Game from "../Game";
+import animate from "../utils/animate";
 
 type Props = { isNewGame: boolean };
 
@@ -31,7 +32,9 @@ function GameSection({ isNewGame }: Props) {
     window.addEventListener("resize", () => resizeCanvas(canvas));
     window.addEventListener("beforeunload", handleBeforeUnload);
 
-    (async () => await Game.instance.start({ canvas, isNewGame }))();
+    Game.instance
+      .start({ canvas, isNewGame })
+      .then(async () => await animate(canvas));
 
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);

@@ -9,7 +9,7 @@ abstract class Level implements ILevel {
     "./static/images/backgrounds/";
   protected abstract readonly _backgroundImageFilename: string;
   protected abstract readonly _initialCharacters: LevelCharacter[];
-  protected _backgroundImage: HTMLImageElement;
+  protected _backgroundImage: HTMLImageElement | null;
   protected _characters: Set<INonMainCharacter> = new Set();
   protected _bgOffsetX: number;
   protected _bgOffsetY: number;
@@ -108,12 +108,7 @@ abstract class Level implements ILevel {
 
   private async restoreCharacters() {
     restoreCharacters();
-
-    const promises: Promise<void>[] = [];
-    for (const character of this._characters) {
-      promises.push(character.loadImage());
-    }
-    await Promise.all(promises);
+    await Promise.all([...this._characters].map((c) => c.loadImage()));
   }
 
   /**

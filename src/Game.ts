@@ -61,7 +61,6 @@ class Game {
   async start({ canvas, isNewGame }: GameOptions) {
     await Game.instance.turtle.loadImage();
     await Game.instance.loadNewLevel(isNewGame);
-    await animate(canvas);
     resizeCanvas(canvas);
   }
 
