@@ -1,7 +1,7 @@
 import React from "react";
 import Dialog from "./Dialog";
 import { version } from "../../../package.json";
-import { FaGithub, FaInstagram } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa6";
 
 interface Props {
   setShowAbout: Function;
@@ -47,13 +47,6 @@ function AboutDialog({ setShowAbout }: Props) {
             <img src="./favicon.svg" alt="" width={30} />
           </div>
           <div className="flex gap-5 justify-center">
-            <a
-              href="https://www.instagram.com/turtleescape.game/"
-              target="_blank"
-              title="Follow us on Instagram"
-            >
-              <FaInstagram />
-            </a>
             <a
               href="https://github.com/danieldesira/TurtleQuest"
               target="_blank"

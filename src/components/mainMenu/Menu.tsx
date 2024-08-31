@@ -9,6 +9,7 @@ import Game from "../../Game";
 import parseGameData from "../../restoreGame/parseGameData";
 import { RiSettings5Fill } from "react-icons/ri";
 import Settings from "../settings/Settings";
+import { FaInstagram } from "react-icons/fa6";
 
 type Props = { setIsNewGame: Function };
 
@@ -49,6 +50,13 @@ function Menu({ setIsNewGame }: Props) {
               role="button"
               onClick={handleSettings}
             />
+            <a
+              href="https://www.instagram.com/turtlequest.webgame/"
+              target="_blank"
+              title="Follow us on Instagram"
+            >
+              <FaInstagram className="w-14 h-14" />
+            </a>
           </div>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
