@@ -1,3 +1,6 @@
+#0.6.1 Beta - 31/08/2024 18:30
+* Attempt to fix Facebook and Twitter thumbnails
+
 #0.6.0 Beta - 31/08/2024 0:15 UTC+1
 * Speed up keyboard controls
 * Added button to close and save current game
