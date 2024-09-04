@@ -25,10 +25,11 @@ abstract class Level implements ILevel {
   async init(isFreshLevel: boolean): Promise<void> {
     await this.loadBgImg();
     if (isFreshLevel) {
-      await this.spawnCharacters();
+      this.spawnCharacters();
     } else {
-      await this.restoreCharacters();
+      this.restoreCharacters();
     }
+    await this.loadCharacterImages();
   }
 
   private loadBgImg(): Promise<void> {
@@ -81,16 +82,13 @@ abstract class Level implements ILevel {
     return this._points;
   }
 
-  private async spawnCharacters(): Promise<void> {
+  private spawnCharacters() {
     this._characters.clear();
     let lastPackCharacter: PackPrey = null;
-
-    const promises: Promise<void>[] = [];
 
     for (const characterInfo of this._initialCharacters) {
       for (let i = 0; i < characterInfo.amount; i++) {
         const character = new characterInfo.constructor();
-        promises.push(character.loadImage());
         if (character instanceof PackPrey) {
           if (lastPackCharacter) {
             character.previousCharacterX = lastPackCharacter.x;
@@ -102,12 +100,13 @@ abstract class Level implements ILevel {
         this._characters.add(character);
       }
     }
-
-    await Promise.all(promises);
   }
 
-  private async restoreCharacters() {
+  private restoreCharacters() {
     restoreCharacters();
+  }
+
+  private async loadCharacterImages() {
     await Promise.all([...this._characters].map((c) => c.loadImage()));
   }
 

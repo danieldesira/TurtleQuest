@@ -5,7 +5,7 @@ import ICharacter from "../interfaces/ICharacter";
 abstract class Character implements ICharacter {
   protected _x: number;
   protected _y: number;
-  protected _image: HTMLImageElement;
+  protected _image: HTMLImageElement | null;
   protected readonly _baseImagePath: string = "./static/images/characters/";
   protected abstract readonly _imageFilename: string;
   protected abstract readonly _width: number;
@@ -46,13 +46,15 @@ abstract class Character implements ICharacter {
     bgXOffset: number = 0,
     bgYOffset: number = 0
   ): void {
-    context.drawImage(
-      this.image,
-      this.x - bgXOffset,
-      this.y - bgYOffset,
-      this.image.width,
-      this.image.height
-    );
+    if (this._image) {
+      context.drawImage(
+        this._image,
+        this.x - bgXOffset,
+        this.y - bgYOffset,
+        this._image.width,
+        this._image.height
+      );
+    }
   }
 
   get x() {
