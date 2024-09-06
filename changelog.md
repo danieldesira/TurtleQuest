@@ -1,6 +1,6 @@
 # 0.6.2 Beta -
 * Organised md documents into sections
-* 
+* Fixed game play issues including level over-incrementing after restoring game
 
 # 0.6.1 Beta - 31/08/2024 19:15
 * Fix Facebook thumbnails

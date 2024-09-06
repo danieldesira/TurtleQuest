@@ -8,11 +8,11 @@ import { resetTurtle } from "./features/turtleMonitor/turtleReducers";
 import ILevel from "./levels/ILevel";
 import { createLevelInstance } from "./levels/levels";
 import store from "./store";
-import animate from "./utils/animate";
 import resizeCanvas from "./utils/resizeCanvas";
 
 class Game {
   private static _instance: Game;
+  private _animationTimer: number = 0;
 
   private constructor() {
     this._turtle = new Turtle();
@@ -34,6 +34,14 @@ class Game {
 
   get level() {
     return this._level;
+  }
+
+  set animationTimer(value: number) {
+    this._animationTimer = value;
+  }
+
+  get animationTimer() {
+    return this._animationTimer;
   }
 
   /**

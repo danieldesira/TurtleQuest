@@ -23,7 +23,9 @@ const animate = async (canvas: HTMLCanvasElement) => {
       Game.instance.turtle.paint(context);
       Game.instance.level.paintCharacters(context);
 
-      requestAnimationFrame(async () => await animate(canvas));
+      Game.instance.animationTimer = requestAnimationFrame(
+        async () => await animate(canvas)
+      );
     } else if (levelChangeType === LevelChangeTypes.GameComplete) {
       store.dispatch(
         updateDialogContent({
@@ -33,12 +35,16 @@ const animate = async (canvas: HTMLCanvasElement) => {
           },
         })
       );
+
+      cancelAnimationFrame(Game.instance.animationTimer);
     } else {
       store.dispatch(
         updateDialogContent({
           dialog: { title: "You lose", text: ["Better luck next time!"] },
         })
       );
+
+      cancelAnimationFrame(Game.instance.animationTimer);
     }
   } catch (error) {
     store.dispatch(
