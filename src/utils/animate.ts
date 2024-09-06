@@ -1,5 +1,5 @@
 import Game from "../Game";
-import Background from "../Background";
+import { paintLevelBg } from "../levels/background";
 import { LevelChangeTypes } from "../levels/levels";
 import checkTurtle from "../checkTurtle";
 import store from "../store";
@@ -19,7 +19,7 @@ const animate = async (canvas: HTMLCanvasElement) => {
     ) {
       const context = canvas.getContext("2d");
 
-      Background.paint({ canvas, context });
+      paintLevelBg({ canvas, context });
       Game.instance.turtle.paint(context);
       Game.instance.level.paintCharacters(context);
 

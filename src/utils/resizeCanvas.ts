@@ -1,7 +1,7 @@
-import Background from "../Background";
+import { readjustCanvasForBg } from "../levels/background";
 
 /**
- * Resizes canvas while taking the background size in 
+ * Resizes canvas while taking the background size in
  * consideration.
  * @param canvas The canvas element
  * @author Daniel Desira
@@ -10,7 +10,7 @@ const resizeCanvas = (canvas: HTMLCanvasElement) => {
   if (canvas) {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-    Background.readjustCanvasForBg(canvas);
+    readjustCanvasForBg(canvas);
   }
 };
 
