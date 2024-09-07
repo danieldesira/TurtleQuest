@@ -3,6 +3,11 @@ import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
 import { restoreCharacters } from "../restoreGame/parseGameData";
 import ILevel from "./ILevel";
 import LevelCharacter from "./LevelCharacter";
+import stringifyGameData from "../restoreGame/stringifyGameData";
+import store from "../store";
+import { stopGame } from "../features/gameState/gameStateReducer";
+import { updateDialogContent } from "../features/dialogs/dialogReducer";
+import Game from "../Game";
 
 abstract class Level implements ILevel {
   protected readonly _backgroundImagePath: string =
@@ -107,7 +112,23 @@ abstract class Level implements ILevel {
   }
 
   private async loadCharacterImages() {
-    await Promise.all([...this._characters].map((c) => c.loadImage()));
+    try {
+      await Promise.all([...this._characters].map((c) => c.loadImage()));
+    } catch {
+      localStorage.setItem("currentGame", stringifyGameData());
+      cancelAnimationFrame(Game.instance.animationTimer);
+      store.dispatch(stopGame());
+      store.dispatch(
+        updateDialogContent({
+          dialog: {
+            title: "Error",
+            text: [
+              `Unable to load level ${store.getState().levels.level.value}`,
+            ],
+          },
+        })
+      );
+    }
   }
 
   /**

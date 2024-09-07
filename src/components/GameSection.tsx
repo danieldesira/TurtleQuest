@@ -37,8 +37,11 @@ function GameSection({ isNewGame }: Props) {
       .then(async () => await animate(canvas));
 
     return () => {
+      //alert(`cleanup function ${Game.instance.animationTimer}`);
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      cancelAnimationFrame(Game.instance.animationTimer);
+      if (Game.instance.animationTimer) {
+        cancelAnimationFrame(Game.instance.animationTimer);
+      }
     };
   }, []);
 

@@ -77,13 +77,15 @@ abstract class Prey extends NonMain implements IPrey {
    */
   paint(context: CanvasRenderingContext2D) {
     this.applyRotation(context);
-    context.drawImage(
-      this._image,
-      this._x - Game.instance.level.bgOffsetX,
-      this._y - Game.instance.level.bgOffsetY,
-      this._width,
-      this._height
-    );
+    if (this._image) {
+      context.drawImage(
+        this._image,
+        this._x - Game.instance.level.bgOffsetX,
+        this._y - Game.instance.level.bgOffsetY,
+        this._width,
+        this._height
+      );
+    }
     context.resetTransform();
   }
 }
