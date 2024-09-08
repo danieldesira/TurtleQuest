@@ -10,12 +10,13 @@ experience and the people I've met through this journey, have inspired me to
 build this game from a mama turtle's perspective.
 
 Dedicated to our coordinators Angelique and Haley and countless turtle watch
-volunteers, including my dear friends Josette Darmenia, Stephen Spiteri, Ana
-Feder, Sheila Adams, Joanna Pullicino Kent, Rachel Doyle, Roberta Farrugia 
-Debono, Glenn Brough, Joe Conti, Corrine Wood, Liza Sountsova, Kamilla Boross 
-and Liz Gowland-Camilleri. And many others - it's impossible to list them all
-here! These people have selflessly dedicated their time for safeguarding
-biodiversity and for that I wish to thank them wholeheartedly.
+volunteers (past, present and future), including my dear friends Josette 
+Darmenia, Stephen Spiteri, Ana Feder, Sheila Adams, Joanna Pullicino Kent, 
+Rachel Doyle, Roberta Farrugia Debono, Glenn Brough, Joe Conti, Corrine Wood, 
+Liza Sountsova, Kamilla Boross and Liz Gowland-Camilleri. And many others - 
+it's impossible to list them all here! These people have selflessly dedicated 
+their time for safeguarding biodiversity and for that I wish to thank them 
+wholeheartedly.
 
 Of course, also dedicated to mama and baby turtles this amazing team, together
 with the team of professionals from ERA, has helped to safeguard throughout

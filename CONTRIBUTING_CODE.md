@@ -1,4 +1,16 @@
 # Contributing Code
+## Introduction
+Turtle Quest is primarily built using canvas 2D and ``requestAnimationFrame`` 
+which are technologies built into all major browsers. The codebase is written 
+in TypeScript and libraries like React and Redux are in use in order to 
+promote reuse of UI components and state sharing. The codebase however is 
+fairly small and alternative suggestions which may be more suitable for game 
+development are welcome.
+
+Please also make sure to read and abide by the 
+[Code of Conduct](CODE_OF_CONDUCT.md) for this community.
+
+## Project setup and startup
 The following is a list of useful ``npm`` commands which may be useful while 
 debugging the project:
 * ``npm run dev``: Runs a combination of commands to fire the development 
