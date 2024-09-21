@@ -28,13 +28,19 @@ abstract class Level implements ILevel {
    * @author Daniel Desira
    */
   async init(isFreshLevel: boolean): Promise<void> {
-    await this.loadBgImg();
-    if (isFreshLevel) {
-      this.spawnCharacters();
-    } else {
-      this.restoreCharacters();
+    try {
+      await this.loadBgImg();
+      if (isFreshLevel) {
+        this.spawnCharacters();
+      } else {
+        this.restoreCharacters();
+      }
+      await this.loadCharacterImages();
+    } catch {
+      throw new Error(
+        `Unable to load level ${store.getState().levels.level.value}`
+      );
     }
-    await this.loadCharacterImages();
   }
 
   private loadBgImg(): Promise<void> {
@@ -113,21 +119,9 @@ abstract class Level implements ILevel {
 
   private async loadCharacterImages() {
     try {
-      await Promise.all([...this._characters].map((c) => c.loadImage()));
-    } catch {
-      localStorage.setItem("currentGame", stringifyGameData());
-      cancelAnimationFrame(Game.instance.animationTimer);
-      store.dispatch(stopGame());
-      store.dispatch(
-        updateDialogContent({
-          dialog: {
-            title: "Error",
-            text: [
-              `Unable to load level ${store.getState().levels.level.value}`,
-            ],
-          },
-        })
-      );
+      Promise.all([...this._characters].map((c) => c.loadImage()));
+    } catch (error) {
+      throw new Error(error);
     }
   }
 
@@ -137,12 +131,8 @@ abstract class Level implements ILevel {
    * @author Daniel Desira
    */
   paintCharacters(context: CanvasRenderingContext2D): void {
-    try {
-      for (const character of this._characters) {
-        character.paint(context, this._bgOffsetX, this._bgOffsetY);
-      }
-    } catch (error) {
-      throw error;
+    for (const character of this._characters) {
+      character.paint(context, this._bgOffsetX, this._bgOffsetY);
     }
   }
 

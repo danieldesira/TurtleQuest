@@ -5,11 +5,13 @@ import resizeCanvas from "../utils/resizeCanvas";
 import handleKeyDown from "../controls/handleKeyDown";
 import handleWheel from "../controls/handleWheel";
 import LoadingIndicator from "./LoadingIndicator";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import RootState from "../features/RootState";
 import ControlGroup from "./controls/ControlGroup";
 import Game from "../Game";
 import animate from "../utils/animate";
+import { updateDialogContent } from "../features/dialogs/dialogReducer";
+import { stopGame } from "../features/gameState/gameStateReducer";
 
 type Props = { isNewGame: boolean };
 
@@ -17,6 +19,8 @@ function GameSection({ isNewGame }: Props) {
   const isLevelLoading = useSelector(
     (state: RootState) => state.game.isLevelLoading.value
   );
+
+  const dispatch = useDispatch();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -34,11 +38,17 @@ function GameSection({ isNewGame }: Props) {
 
     Game.instance
       .start({ canvas, isNewGame })
-      .then(async () => await animate(canvas));
+      .then(async () => await animate(canvas))
+      .catch((error) => {
+        dispatch(
+          updateDialogContent({ dialog: { title: "Error", text: [error] } })
+        );
+        dispatch(stopGame());
+      });
 
     return () => {
-      //alert(`cleanup function ${Game.instance.animationTimer}`);
       window.removeEventListener("beforeunload", handleBeforeUnload);
+
       if (Game.instance.animationTimer) {
         cancelAnimationFrame(Game.instance.animationTimer);
       }

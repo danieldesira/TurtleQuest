@@ -1,10 +1,10 @@
-# 0.6.2 Beta -
+# 0.6.2 Beta - 21/09/2024 17:00 UTC+1
 * Organised md documents into sections
 * Fixed game play issues including level over-incrementing after restoring game
 * Refactored static ``Background`` class into simple function exports
-* Applied check to make sure character image has loaded
+* Applied check to make sure character image has loaded before drawing it
 
-# 0.6.1 Beta - 31/08/2024 19:15
+# 0.6.1 Beta - 31/08/2024 19:15 UTC+1
 * Fix Facebook thumbnails
 * Move Instagram icon to main menu
 

@@ -50,14 +50,18 @@ class Game {
    * @author Daniel Desira
    */
   async loadNewLevel(isFreshLevel: boolean) {
-    this._level = createLevelInstance(store.getState().levels.level.value);
-    if (this._level) {
-      store.dispatch(startLoadingLevel());
-      await this._level.init(isFreshLevel);
-      store.dispatch(stopLoadingLevel());
-    }
-    if (isFreshLevel) {
-      this.turtle.resetPosition();
+    try {
+      this._level = createLevelInstance(store.getState().levels.level.value);
+      if (this._level) {
+        store.dispatch(startLoadingLevel());
+        await this._level.init(isFreshLevel);
+        store.dispatch(stopLoadingLevel());
+      }
+      if (isFreshLevel) {
+        this.turtle.resetPosition();
+      }
+    } catch (error) {
+      throw new Error(error);
     }
   }
 
@@ -67,9 +71,13 @@ class Game {
    * @author Daniel Desira
    */
   async start({ canvas, isNewGame }: GameOptions) {
-    await Game.instance.turtle.loadImage();
-    await Game.instance.loadNewLevel(isNewGame);
-    resizeCanvas(canvas);
+    try {
+      await Game.instance.turtle.loadImage();
+      await Game.instance.loadNewLevel(isNewGame);
+      resizeCanvas(canvas);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   /**
