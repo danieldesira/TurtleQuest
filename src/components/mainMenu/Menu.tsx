@@ -10,6 +10,7 @@ import parseGameData from "../../restoreGame/parseGameData";
 import { RiSettings5Fill } from "react-icons/ri";
 import Settings from "../settings/Settings";
 import { FaInstagram } from "react-icons/fa6";
+import LoginButtons from "../LoginButtons";
 
 type Props = { setIsNewGame: Function };
 
@@ -57,6 +58,7 @@ function Menu({ setIsNewGame }: Props) {
             >
               <FaInstagram className="w-14 h-14" />
             </a>
+            <LoginButtons />
           </div>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
