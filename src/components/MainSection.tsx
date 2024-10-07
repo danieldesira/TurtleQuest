@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import Menu from "./mainMenu/Menu";
 import GameSection from "./GameSection";
+import { SessionAuth } from "supertokens-auth-react/recipe/session";
 
 function MainSection() {
   const inProgress = useSelector(
     (state: RootState) => state.game.inProgress.value
   );
+
   const [isNewGame, setIsNewGame] = useState<boolean>(false);
 
   return (
@@ -16,11 +18,13 @@ function MainSection() {
         className="max-w-screen max-h-screen portrait:hidden"
         onContextMenu={(e) => e.preventDefault()}
       >
-        {inProgress ? (
-          <GameSection isNewGame={isNewGame} />
-        ) : (
-          <Menu setIsNewGame={setIsNewGame} />
-        )}
+        <SessionAuth>
+          {inProgress ? (
+            <GameSection isNewGame={isNewGame} />
+          ) : (
+            <Menu setIsNewGame={setIsNewGame} />
+          )}
+        </SessionAuth>
       </div>
       <div className="landscape:hidden flex justify-center items-center bg-red-700">
         <p className="text-white">

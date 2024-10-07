@@ -1,40 +1,53 @@
-import {
-  CredentialResponse,
-  GoogleLogin,
-  GoogleOAuthProvider,
-} from "@react-oauth/google";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Session from "supertokens-auth-react/recipe/session";
+
+type LoginButtonsProps = {
+  set
+}
 
 function LoginButtons() {
   const isAuthenticated = !!localStorage.getItem("authentication");
 
   const [showLogin, setShowLogin] = useState<boolean>(!isAuthenticated);
 
-  const handleSuccess = ({ credential }: CredentialResponse) => {
-    localStorage.setItem("authentication", credential);
-    setShowLogin((_) => false);
+  const checkIfLoggedIn = async () => {
+    const isLoggedIn = await Session.doesSessionExist();
+    setShowLogin(!isLoggedIn);
+  };
+
+  const handleLogin = () => {
+    setShowLogin(false);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authentication");
-    setShowLogin((_) => true);
+    setShowLogin(true);
   };
+
+  useEffect(() => {
+    checkIfLoggedIn();
+  }, []);
 
   return (
     <div className="flex flex-col gap-2 justify-center items-center">
-      <GoogleOAuthProvider clientId="133557707337-n53m2nodegdumjcsjccodb6fppaf6mcv.apps.googleusercontent.com">
-        {showLogin ? (
-          <GoogleLogin onSuccess={handleSuccess} useOneTap />
-        ) : (
-          <button
-            type="button"
-            className="bg-gray-800 text-white rounded-md p-2"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        )}
-      </GoogleOAuthProvider>
+      {showLogin ? (
+        <button
+          type="button"
+          role="button"
+          className="bg-gray-800 text-white rounded-md p-2"
+          onClick={handleLogin}
+        >
+          Login
+        </button>
+      ) : (
+        <button
+          type="button"
+          role="button"
+          className="bg-gray-800 text-white rounded-md p-2"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+      )}
     </div>
   );
 }
