@@ -1,53 +1,25 @@
-import React, { useEffect, useState } from "react";
-import Session from "supertokens-auth-react/recipe/session";
-
-type LoginButtonsProps = {
-  set
-}
+import {
+  GoogleCredentialResponse,
+  GoogleLogin,
+  GoogleOAuthProvider,
+} from "@react-oauth/google";
+import React from "react";
 
 function LoginButtons() {
-  const isAuthenticated = !!localStorage.getItem("authentication");
+  const handleGoogleSuccess = ({ credential }: GoogleCredentialResponse) => {};
 
-  const [showLogin, setShowLogin] = useState<boolean>(!isAuthenticated);
-
-  const checkIfLoggedIn = async () => {
-    const isLoggedIn = await Session.doesSessionExist();
-    setShowLogin(!isLoggedIn);
-  };
-
-  const handleLogin = () => {
-    setShowLogin(false);
-  };
-
-  const handleLogout = () => {
-    setShowLogin(true);
-  };
-
-  useEffect(() => {
-    checkIfLoggedIn();
-  }, []);
+  const handleGoogleError = () =>
+    alert("An error occured while signin with Google");
 
   return (
-    <div className="flex flex-col gap-2 justify-center items-center">
-      {showLogin ? (
-        <button
-          type="button"
-          role="button"
-          className="bg-gray-800 text-white rounded-md p-2"
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-      ) : (
-        <button
-          type="button"
-          role="button"
-          className="bg-gray-800 text-white rounded-md p-2"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
-      )}
+    <div className="flex flex-col gap-2">
+      <GoogleOAuthProvider clientId="133557707337-19ctrvhko436b3aqf8f3mk3ms9l33nla.apps.googleusercontent.com">
+        <GoogleLogin
+          onSuccess={handleGoogleSuccess}
+          onError={handleGoogleError}
+          useOneTap
+        />
+      </GoogleOAuthProvider>
     </div>
   );
 }

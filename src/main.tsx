@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import App from "./components/App";
 import store from "./store";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
-import "./auth";
 
 if (navigator.serviceWorker) {
   try {
