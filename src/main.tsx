@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./components/App";
 import store from "./store";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
+import "./main.css";
 
 if (navigator.serviceWorker) {
   try {
@@ -28,7 +29,7 @@ store.dispatch(
         "Move Peppa to the right end of the screen in order to pass each level. Eat prey and avoid obstacles.",
         "Good luck!",
         "Yours turtley,",
-        "Daniel the game developer",
+        "Daniel - Game Developer",
       ],
     },
   })
