@@ -2,11 +2,12 @@
   "compilerOptions": {
     "jsx": "react",
     "sourceMap": true,
-    "module": "CommonJS",
+    "module": "ESNext",
     "target": "ES2021",
     "allowJs": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["*.config.js", "serviceWorker.js", "dist"]
 }

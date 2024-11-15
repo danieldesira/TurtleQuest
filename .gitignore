@@ -1,2 +1,7 @@
 /node_modules
 /dev
+/src/*/*.js
+/src/*/*.js.map
+/src/*.js
+/src/*.js.map
+/dist
