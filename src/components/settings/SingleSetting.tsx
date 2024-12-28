@@ -18,7 +18,7 @@ function SingleSetting({
       </label>
       {type === "radio" ? (
         options.map((o, index) => (
-          <div className="flex gap-3">
+          <div key={o} className="flex gap-3">
             <input
               key={index}
               type="radio"
