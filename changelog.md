@@ -1,9 +1,11 @@
-# 0.6.3 Beta - 
+# 0.7.0 Beta - 
 * Introduced Login with Google
 * Internal:
     - Switch build system to Vite from Webpack
     - Disable service worker on localhost
     - Fix React warning in ``SingleSetting.tsx``
+    - Configure project to read environment variables
+    - Update dependencies
 
 # 0.6.2 Beta - 21/09/2024 17:00 UTC+1
 * Organised md documents into sections

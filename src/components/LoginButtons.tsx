@@ -13,7 +13,7 @@ function LoginButtons() {
 
   return (
     <div className="flex flex-col gap-2">
-      <GoogleOAuthProvider clientId="133557707337-19ctrvhko436b3aqf8f3mk3ms9l33nla.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <GoogleLogin
           onSuccess={handleGoogleSuccess}
           onError={handleGoogleError}
