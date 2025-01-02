@@ -9,5 +9,5 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
-  "exclude": ["*.config.js", "serviceWorker.js", "dist"]
+  "exclude": ["*.config.js", "serviceWorker.js", "dist", "*.config.cjs"]
 }
