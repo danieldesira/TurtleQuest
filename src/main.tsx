@@ -16,7 +16,7 @@ if (navigator.serviceWorker) {
   }
 }
 
-const appRootElement = document.getElementById("app") as HTMLElement;
+const appRootElement = document.getElementById("root") as HTMLElement;
 const root = createRoot(appRootElement);
 root.render(<App />);
 
