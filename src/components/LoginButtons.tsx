@@ -33,14 +33,16 @@ function LoginButtons() {
     setIsLoggedin(true);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedin(false);
+  };
+
   return (
     <div className="flex flex-col gap-2">
       {isLoggedin ? (
         <button
-          onClick={() => {
-            localStorage.removeItem("token");
-            setIsLoggedin(false);
-          }}
+          onClick={handleLogout}
           className="bg-red-500 text-white rounded p-2"
         >
           Logout

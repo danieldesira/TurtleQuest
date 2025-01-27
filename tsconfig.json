@@ -7,7 +7,8 @@
     "allowJs": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noEmit": true
   },
   "exclude": ["*.config.js", "serviceWorker.js", "dist", "*.config.cjs"]
 }

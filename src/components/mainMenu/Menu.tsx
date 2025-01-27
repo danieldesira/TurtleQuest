@@ -41,7 +41,7 @@ function Menu({ setIsNewGame }: Props) {
     main: (
       <>
         <div className="flex flex-col gap-5">
-          <div className="flex gap-5 justify-center">
+          <div className="flex gap-5 justify-center items-center">
             <h1 className="text-5xl" role="button" onClick={handleAbout}>
               <span className="text-emerald-300">Turtle</span>{" "}
               <span className="text-cyan-500">Quest</span>
