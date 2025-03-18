@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { dialog: { title: "", text: [""] } };
+const initialState = { dialog: { title: "", text: [""], type: "default" } };
 
 const slice = createSlice({
   name: "dialogs",
@@ -9,6 +9,7 @@ const slice = createSlice({
     updateDialogContent: (state, action) => {
       state.dialog.title = action.payload.dialog.title;
       state.dialog.text = action.payload.dialog.text;
+      state.dialog.type = action.payload.dialog.type ?? "default";
     },
   },
 });

@@ -5,14 +5,16 @@ import React from "react";
 import { updateDialogContent } from "../../features/dialogs/dialogReducer";
 
 function CustomDialog() {
-  const { title, text } = useSelector(
+  const { title, text, type } = useSelector(
     (state: RootState) => state.dialogs.dialog
   );
 
   const dispatch = useDispatch();
 
   const handleOk = () =>
-    dispatch(updateDialogContent({ dialog: { title: "", text: [] } }));
+    dispatch(
+      updateDialogContent({ dialog: { title: "", text: [], type: "default" } })
+    );
 
   return (
     <Dialog
@@ -24,6 +26,7 @@ function CustomDialog() {
           ))}
         </>
       }
+      type={type}
       handleOk={handleOk}
     />
   );

@@ -1,5 +1,5 @@
 interface DialogState {
-  dialog: { title: string; text: string[] };
+  dialog: { title: string; text: string[]; type: "default" | "error" };
 }
 
 export default DialogState;

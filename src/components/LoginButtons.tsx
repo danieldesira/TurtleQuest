@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { updateDialogContent } from "../features/dialogs/dialogReducer";
+import { useDispatch } from "react-redux";
 
 declare global {
   interface Window {
@@ -9,28 +11,59 @@ declare global {
 }
 
 function LoginButtons() {
+  const dispatch = useDispatch();
+
   const [isLoggedin, setIsLoggedin] = useState<boolean>(
     !!localStorage.getItem("token")
   );
 
   useEffect(() => {
-    // Initialize Google Sign-In
     window.google.accounts.id.initialize({
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       callback: handleGoogleResponse,
     });
 
-    // Render the Google Sign-In button
     window.google.accounts.id.renderButton(
       document.getElementById("googleSignInButton"),
       { theme: "outline", size: "large" }
     );
   }, [isLoggedin]);
 
-  const handleGoogleResponse = (response: any) => {
-    console.log(response.credential);
-    localStorage.setItem("token", response.credential);
-    setIsLoggedin(true);
+  const showAuthError = () =>
+    dispatch(
+      updateDialogContent({
+        dialog: {
+          title: "Authentication Error",
+          text: [
+            "Failed to login! Please contact us at turtle.quest.web@gmail.com",
+          ],
+          type: "error",
+        },
+      })
+    );
+
+  const handleGoogleResponse = async ({
+    credential,
+  }: {
+    credential: string;
+  }) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+        method: "POST",
+        headers: {
+          Authorization: credential,
+        },
+      });
+
+      if (res.ok) {
+        localStorage.setItem("token", credential);
+        setIsLoggedin(true);
+      } else {
+        showAuthError();
+      }
+    } catch {
+      showAuthError();
+    }
   };
 
   const handleLogout = () => {

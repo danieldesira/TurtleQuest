@@ -4,9 +4,10 @@ interface Props {
   title: string;
   content: ReactElement;
   handleOk: React.MouseEventHandler;
+  type: "default" | "error";
 }
 
-function Dialog({ title, content, handleOk }: Props) {
+function Dialog({ title, content, type, handleOk }: Props) {
   const dialogJsx = (
     <div
       tabIndex={1}
@@ -21,7 +22,9 @@ function Dialog({ title, content, handleOk }: Props) {
         <button
           type="button"
           role="button"
-          className="rounded-3xl m-1 bg-green-600"
+          className={`rounded-3xl m-1 ${
+            type === "default" ? "bg-green-600" : "bg-red-700"
+          }`}
           onClick={handleOk}
         >
           <span className="text-xl ml-2 mr-2">OK</span>
