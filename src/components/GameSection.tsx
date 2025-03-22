@@ -5,13 +5,14 @@ import resizeCanvas from "../utils/resizeCanvas";
 import handleKeyDown from "../controls/handleKeyDown";
 import handleWheel from "../controls/handleWheel";
 import LoadingIndicator from "./LoadingIndicator";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import ControlGroup from "./controls/ControlGroup";
 import Game from "../Game";
 import animate from "../utils/animate";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { stopGame } from "../features/gameState/gameStateReducer";
+import { saveGame } from "../services/api";
 
 type Props = { isNewGame: boolean };
 
@@ -31,10 +32,13 @@ function GameSection({ isNewGame }: Props) {
   };
 
   useEffect(() => {
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
     const canvas = canvasRef.current;
 
-    window.addEventListener("resize", () => resizeCanvas(canvas));
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("resize", () => resizeCanvas(canvas), { signal });
+    window.addEventListener("beforeunload", handleBeforeUnload, { signal });
 
     Game.instance
       .start({ canvas, isNewGame })
@@ -46,11 +50,19 @@ function GameSection({ isNewGame }: Props) {
         dispatch(stopGame());
       });
 
+    const interval = window.setInterval(async () => {
+      await saveGame();
+    }, 3000);
+
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      abortController.abort();
 
       if (Game.instance.animationTimer) {
         cancelAnimationFrame(Game.instance.animationTimer);
+      }
+
+      if (interval) {
+        clearInterval(interval);
       }
     };
   }, []);

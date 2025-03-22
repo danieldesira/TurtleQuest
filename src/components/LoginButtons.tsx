@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { useDispatch } from "react-redux";
+import { login } from "../services/api";
 
 declare global {
   interface Window {
@@ -13,9 +14,7 @@ declare global {
 function LoginButtons() {
   const dispatch = useDispatch();
 
-  const [isLoggedin, setIsLoggedin] = useState<boolean>(
-    !!localStorage.getItem("token")
-  );
+  const [isLoggedin, setIsLoggedin] = useState<boolean>(false);
 
   useEffect(() => {
     window.google.accounts.id.initialize({
@@ -48,14 +47,8 @@ function LoginButtons() {
     credential: string;
   }) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
-        method: "POST",
-        headers: {
-          Authorization: credential,
-        },
-      });
-
-      if (res.ok) {
+      const loginResult = await login(credential);
+      if (loginResult) {
         localStorage.setItem("token", credential);
         setIsLoggedin(true);
       } else {
