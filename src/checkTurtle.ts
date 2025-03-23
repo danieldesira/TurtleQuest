@@ -10,6 +10,7 @@ import {
   useFood,
 } from "./features/turtleMonitor/turtleReducers";
 import { LevelChangeTypes, levelMap } from "./levels/levels";
+import { saveScore } from "./services/api";
 import store from "./store";
 
 /**
@@ -30,8 +31,9 @@ const checkTurtle = async (): Promise<LevelChangeTypes> => {
     turtleState.oxygen.value <= 0 ||
     turtleState.life.value <= 0
   ) {
-    store.dispatch(stopGame());
+    store.dispatch(stopGame({ hasWon: false }));
     deleteGameProgress();
+    await saveScore();
     return LevelChangeTypes.GameOver;
   }
 
@@ -70,8 +72,9 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
     );
     return LevelChangeTypes.NewLevel;
   } else {
-    store.dispatch(stopGame());
+    store.dispatch(stopGame({ hasWon: true }));
     deleteGameProgress();
+    await saveScore();
     return LevelChangeTypes.GameComplete;
   }
 };

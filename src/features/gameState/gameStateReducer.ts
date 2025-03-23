@@ -3,14 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   inProgress: { value: false },
   isLevelLoading: { value: false },
+  hasWon: { value: false },
 };
 
 const slice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    stopGame: (state) => {
+    stopGame: (state, actions) => {
       state.inProgress.value = false;
+      state.hasWon.value = actions.payload.hasWon;
     },
     startGame: (state) => {
       state.inProgress.value = true;
