@@ -3,11 +3,7 @@ import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
 import { restoreCharacters } from "../restoreGame/parseGameData";
 import ILevel from "./ILevel";
 import LevelCharacter from "./LevelCharacter";
-import stringifyGameData from "../restoreGame/stringifyGameData";
 import store from "../store";
-import { stopGame } from "../features/gameState/gameStateReducer";
-import { updateDialogContent } from "../features/dialogs/dialogReducer";
-import Game from "../Game";
 
 abstract class Level implements ILevel {
   protected readonly _backgroundImagePath: string =

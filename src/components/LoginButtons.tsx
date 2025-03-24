@@ -64,15 +64,27 @@ function LoginButtons() {
     setIsLoggedin(false);
   };
 
+  const handleProfile = () => {};
+
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex gap-2">
       {isLoggedin ? (
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 text-white rounded p-2"
-        >
-          Logout
-        </button>
+        <>
+          <button
+            role="button"
+            onClick={handleProfile}
+            className="bg-green-700 text-white rounded p-2"
+          >
+            Profile
+          </button>
+          <button
+            role="button"
+            onClick={handleLogout}
+            className="bg-red-500 text-white rounded p-2"
+          >
+            Logout
+          </button>
+        </>
       ) : (
         <div id="googleSignInButton"></div>
       )}

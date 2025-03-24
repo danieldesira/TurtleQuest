@@ -47,7 +47,7 @@ function GameSection({ isNewGame }: Props) {
         dispatch(
           updateDialogContent({ dialog: { title: "Error", text: [error] } })
         );
-        dispatch(stopGame());
+        dispatch(stopGame({}));
       });
 
     const interval = window.setInterval(async () => {

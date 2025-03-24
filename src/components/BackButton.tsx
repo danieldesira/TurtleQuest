@@ -13,7 +13,7 @@ function BackButton() {
     event.preventDefault();
 
     saveGame();
-    dispatch(stopGame());
+    dispatch(stopGame({}));
   };
 
   return (
