@@ -52,7 +52,7 @@ function GameSection({ isNewGame }: Props) {
 
     const interval = window.setInterval(async () => {
       await saveGame();
-    }, 3000);
+    }, 30000);
 
     return () => {
       abortController.abort();

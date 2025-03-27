@@ -29,6 +29,19 @@ export const saveGame = async () => {
   }
 };
 
+export const fetchLastGame = async () => {
+  const token = localStorage.getItem("token");
+
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
+    method: "GET",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
+  });
+  return await res.json();
+};
+
 export const saveScore = async () => {
   const token = localStorage.getItem("token");
   if (token) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { startGame } from "../../features/gameState/gameStateReducer";
 import { useDispatch } from "react-redux";
 import MenuButton from "./MenuButton";
@@ -11,6 +11,7 @@ import { RiSettings5Fill } from "react-icons/ri";
 import Settings from "../settings/Settings";
 import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../LoginButtons";
+import { fetchLastGame } from "../../services/api";
 
 type Props = { setIsNewGame: Function };
 
@@ -18,6 +19,7 @@ function Menu({ setIsNewGame }: Props) {
   const dispatch = useDispatch();
   const [showAbout, setShowAbout] = useState<boolean>(false);
   const [mode, setMode] = useState<"main" | "settings">("main");
+  const [lastGame, setLastGame] = useState();
 
   const handleNewGame = () => {
     setIsNewGame(true);
@@ -28,7 +30,7 @@ function Menu({ setIsNewGame }: Props) {
   const handleContinueGame = () => {
     setIsNewGame(false);
     dispatch(startGame());
-    parseGameData(localStorage.getItem("currentGame") ?? "{}");
+    parseGameData(JSON.stringify(lastGame));
   };
 
   const handleAbout = () => setShowAbout((_) => true);
@@ -63,7 +65,7 @@ function Menu({ setIsNewGame }: Props) {
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
         <div className="flex flex-col items-center gap-5">
-          {localStorage.getItem("currentGame") ? (
+          {lastGame ? (
             <MenuButton
               callback={handleContinueGame}
               icon={<GiSeaTurtle />}
@@ -75,7 +77,7 @@ function Menu({ setIsNewGame }: Props) {
             icon={<GiSeaTurtle />}
             text="New Game"
           />
-          {localStorage.getItem("currentGame") ? (
+          {lastGame ? (
             <span className="text-blue-800 font-light">
               Caution: Starting a new game will erase current game progress!
             </span>
@@ -85,6 +87,10 @@ function Menu({ setIsNewGame }: Props) {
     ),
     settings: <Settings exit={exitSettings} />,
   };
+
+  useEffect(() => {
+    fetchLastGame().then((res) => setLastGame(res));
+  }, []);
 
   return (
     <>
