@@ -89,7 +89,9 @@ function Menu({ setIsNewGame }: Props) {
   };
 
   useEffect(() => {
-    fetchLastGame().then((res) => setLastGame(res));
+    if (localStorage.getItem("token")) {
+      fetchLastGame().then((res) => setLastGame(res));
+    }
   }, []);
 
   return (
