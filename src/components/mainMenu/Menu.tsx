@@ -12,6 +12,7 @@ import Settings from "../settings/Settings";
 import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../LoginButtons";
 import { fetchLastGame } from "../../services/api";
+import LeaderBoard from "../LeaderBoard";
 
 type Props = { setIsNewGame: Function };
 
@@ -64,6 +65,7 @@ function Menu({ setIsNewGame }: Props) {
           </div>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
+        <LeaderBoard />
         <div className="flex flex-col items-center gap-5">
           {lastGame ? (
             <MenuButton
@@ -96,7 +98,7 @@ function Menu({ setIsNewGame }: Props) {
 
   return (
     <>
-      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5">
+      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5 items-center">
         {screens[mode]}
         <EditionSection />
       </div>
