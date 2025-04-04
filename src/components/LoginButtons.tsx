@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../services/api";
+import {
+  authenticate,
+  logout,
+} from "../features/authentication/authenticationReducer";
+import RootState from "../features/RootState";
 
 declare global {
   interface Window {
@@ -13,8 +18,9 @@ declare global {
 
 function LoginButtons() {
   const dispatch = useDispatch();
-
-  const [isLoggedin, setIsLoggedin] = useState<boolean>(false);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.authentication.isAuthenticated
+  );
 
   useEffect(() => {
     window.google.accounts.id.initialize({
@@ -26,7 +32,7 @@ function LoginButtons() {
       document.getElementById("googleSignInButton"),
       { theme: "outline", size: "large" }
     );
-  }, [isLoggedin]);
+  }, [isAuthenticated]);
 
   const showAuthError = () =>
     dispatch(
@@ -50,7 +56,7 @@ function LoginButtons() {
       const loginResult = await login(credential);
       if (loginResult) {
         localStorage.setItem("token", credential);
-        setIsLoggedin(true);
+        dispatch(authenticate());
       } else {
         showAuthError();
       }
@@ -61,14 +67,14 @@ function LoginButtons() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setIsLoggedin(false);
+    dispatch(logout());
   };
 
   const handleProfile = () => {};
 
   return (
     <div className="flex gap-2">
-      {isLoggedin ? (
+      {isAuthenticated ? (
         <>
           <button
             role="button"

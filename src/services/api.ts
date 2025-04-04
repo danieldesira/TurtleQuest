@@ -63,3 +63,24 @@ export const saveScore = async () => {
     return false;
   }
 };
+
+export type GetScoresResponse = {
+  highScores: {
+    points: number;
+    level: number;
+    player_won: string;
+    player: { name: string };
+  }[];
+  personalBest: { points: number; level: number; player_won: string };
+};
+
+export const fetchScores = async () => {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/points`, {
+    method: "GET",
+    headers: {
+      Authorization: localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  });
+  return (await res.json()) as GetScoresResponse;
+};

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { startGame } from "../../features/gameState/gameStateReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
 import { GiSeaTurtle } from "react-icons/gi";
 import AboutDialog from "../dialog/AboutDialog";
@@ -13,6 +13,7 @@ import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../LoginButtons";
 import { fetchLastGame } from "../../services/api";
 import LeaderBoard from "../LeaderBoard";
+import RootState from "../../features/RootState";
 
 type Props = { setIsNewGame: Function };
 
@@ -21,6 +22,9 @@ function Menu({ setIsNewGame }: Props) {
   const [showAbout, setShowAbout] = useState<boolean>(false);
   const [mode, setMode] = useState<"main" | "settings">("main");
   const [lastGame, setLastGame] = useState();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.authentication.isAuthenticated
+  );
 
   const handleNewGame = () => {
     setIsNewGame(true);
@@ -65,7 +69,7 @@ function Menu({ setIsNewGame }: Props) {
           </div>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
-        <LeaderBoard />
+        {isAuthenticated ? <LeaderBoard /> : null}
         <div className="flex flex-col items-center gap-5">
           {lastGame ? (
             <MenuButton
@@ -91,7 +95,7 @@ function Menu({ setIsNewGame }: Props) {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (isAuthenticated) {
       fetchLastGame().then((res) => setLastGame(res));
     }
   }, []);

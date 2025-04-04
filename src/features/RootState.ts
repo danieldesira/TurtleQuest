@@ -1,3 +1,4 @@
+import AuthenticationState from "./authentication/AuthenticationState";
 import DialogState from "./dialogs/DialogState";
 import GameState from "./gameState/GameState";
 import LevelState from "./levels/LevelState";
@@ -8,6 +9,7 @@ interface RootState {
   dialogs: DialogState;
   turtleMonitor: TurtleState;
   game: GameState;
+  authentication: AuthenticationState;
 }
 
 export default RootState;
