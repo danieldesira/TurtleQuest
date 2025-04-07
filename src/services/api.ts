@@ -69,7 +69,8 @@ export type GetScoresResponse = {
     points: number;
     level: number;
     player_won: string;
-    player: { name: string };
+    players: { name: string };
+    outcomes: { desc: string };
   }[];
   personalBest: { points: number; level: number; player_won: string };
 };

@@ -9,18 +9,28 @@ const LeaderBoard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 max-w-80 text-pink-600">
+    <div className="flex flex-col gap-2">
       {scores ? (
         <>
           <h2 className="text-center text-xl">Leaderboard</h2>
-          <div className="flex flex-col gap-1">
-            {scores.highScores.map((highScore) => (
-              <div className="text-sm">
-                {highScore.player.name} {highScore.points} Level{" "}
-                {highScore.level}
-              </div>
-            ))}
-          </div>
+          <table className="border-separate border-spacing-4">
+            <thead className="text-lg">
+              <th>Player</th>
+              <th>Level</th>
+              <th>Points</th>
+              <th>Outcome</th>
+            </thead>
+            <tbody className="text-sm">
+              {scores.highScores.map((highScore, index) => (
+                <tr key={index}>
+                  <td>{highScore.players.name}</td>
+                  <td>{highScore.level}</td>
+                  <td>{highScore.points}</td>
+                  <td>{highScore.outcomes.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <div className="text-sm">
             Your best score: {scores.personalBest.points} at level{" "}
             {scores.personalBest.level}

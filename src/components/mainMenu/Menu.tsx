@@ -14,6 +14,7 @@ import LoginButtons from "../LoginButtons";
 import { fetchLastGame } from "../../services/api";
 import LeaderBoard from "../LeaderBoard";
 import RootState from "../../features/RootState";
+import InfoDisplay from "../InfoDisplay";
 
 type Props = { setIsNewGame: Function };
 
@@ -69,7 +70,7 @@ function Menu({ setIsNewGame }: Props) {
           </div>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
-        {isAuthenticated ? <LeaderBoard /> : null}
+        {isAuthenticated ? <InfoDisplay content={<LeaderBoard />} /> : null}
         <div className="flex flex-col items-center gap-5">
           {lastGame ? (
             <MenuButton
