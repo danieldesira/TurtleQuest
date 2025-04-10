@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
 
-function LoadingIndicator() {
+const LoadingIndicator = () => {
   const levelNo = useSelector((state: RootState) => state.levels.level.value);
 
   return (
@@ -10,6 +10,6 @@ function LoadingIndicator() {
       <span className="text-5xl text-white">Loading Level {levelNo} ...</span>
     </div>
   );
-}
+};
 
 export default LoadingIndicator;

@@ -1,7 +1,6 @@
 interface GameState {
-  inProgress: { value: boolean };
-  isLevelLoading: { value: boolean };
-  hasWon?: { value: boolean };
+  state: { value: "in-progress" | "saving" | "menu" };
+  isLoadingLevel: { value: boolean };
 }
 
 export default GameState;

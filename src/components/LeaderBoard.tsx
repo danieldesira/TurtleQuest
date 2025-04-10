@@ -32,8 +32,14 @@ const LeaderBoard = () => {
             </tbody>
           </table>
           <div className="text-sm">
-            Your best score: {scores.personalBest.points} at level{" "}
-            {scores.personalBest.level}
+            {scores.personalBest ? (
+              <>
+                Your best score: {scores.personalBest.points} at level{" "}
+                {scores.personalBest.level}
+              </>
+            ) : (
+              <>Go make a name for yourself. Start a new game!</>
+            )}
           </div>
         </>
       ) : (

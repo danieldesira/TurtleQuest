@@ -14,7 +14,7 @@ import { Setting } from "../settings/types";
 function ControlGroup() {
   const turtle = Game.instance.turtle;
   const gameRunning = useSelector(
-    (state: RootState) => state.game.inProgress.value
+    (state: RootState) => state.game.state.value === "in-progress"
   );
   const settings = JSON.parse(
     localStorage.getItem("gameSettings") || "[]"

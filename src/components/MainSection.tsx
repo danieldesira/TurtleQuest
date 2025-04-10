@@ -5,11 +5,15 @@ import Menu from "./mainMenu/Menu";
 import GameSection from "./GameSection";
 
 function MainSection() {
-  const inProgress = useSelector(
-    (state: RootState) => state.game.inProgress.value
-  );
+  const gameState = useSelector((state: RootState) => state.game.state.value);
 
   const [isNewGame, setIsNewGame] = useState<boolean>(false);
+
+  const screens = {
+    "in-progress": <GameSection isNewGame={isNewGame} />,
+    saving: <>Saving game...</>,
+    menu: <Menu setIsNewGame={setIsNewGame} />,
+  };
 
   return (
     <>
@@ -17,11 +21,7 @@ function MainSection() {
         className="max-w-screen max-h-screen portrait:hidden"
         onContextMenu={(e) => e.preventDefault()}
       >
-        {inProgress ? (
-          <GameSection isNewGame={isNewGame} />
-        ) : (
-          <Menu setIsNewGame={setIsNewGame} />
-        )}
+        {screens[gameState]}
       </div>
       <div className="landscape:hidden flex justify-center items-center bg-red-700">
         <p className="text-white">

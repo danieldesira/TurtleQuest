@@ -16,9 +16,9 @@ import { saveGame } from "../services/api";
 
 type Props = { isNewGame: boolean };
 
-function GameSection({ isNewGame }: Props) {
-  const isLevelLoading = useSelector(
-    (state: RootState) => state.game.isLevelLoading.value
+const GameSection = ({ isNewGame }: Props) => {
+  const isLoadingLevel = useSelector(
+    (state: RootState) => state.game.isLoadingLevel.value
   );
 
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ function GameSection({ isNewGame }: Props) {
         dispatch(
           updateDialogContent({ dialog: { title: "Error", text: [error] } })
         );
-        dispatch(stopGame({}));
+        dispatch(stopGame());
       });
 
     const interval = window.setInterval(async () => {
@@ -78,12 +78,12 @@ function GameSection({ isNewGame }: Props) {
           onWheel={handleWheel}
         ></canvas>
       </div>
-      {isLevelLoading ? <LoadingIndicator /> : null}
+      {isLoadingLevel ? <LoadingIndicator /> : null}
       <GameHeader />
       <NextLevelIndication />
       <ControlGroup />
     </div>
   );
-}
+};
 
 export default GameSection;

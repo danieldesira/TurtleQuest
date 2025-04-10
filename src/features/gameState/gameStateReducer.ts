@@ -1,27 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  inProgress: { value: false },
-  isLevelLoading: { value: false },
-  hasWon: { value: false },
+  state: { value: "menu" },
+  isLoadingLevel: { value: false },
 };
 
 const slice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    stopGame: (state, actions) => {
-      state.inProgress.value = false;
-      state.hasWon.value = actions.payload.hasWon;
+    stopGame: (state) => {
+      state.state.value = "menu";
     },
     startGame: (state) => {
-      state.inProgress.value = true;
+      state.state.value = "in-progress";
     },
     startLoadingLevel: (state) => {
-      state.isLevelLoading.value = true;
+      state.isLoadingLevel.value = true;
     },
     stopLoadingLevel: (state) => {
-      state.isLevelLoading.value = false;
+      state.isLoadingLevel.value = false;
+    },
+    startSaving: (state) => {
+      state.state.value = "saving";
+    },
+    completeSaving: (state) => {
+      state.state.value = "menu";
     },
   },
 });
@@ -31,6 +35,8 @@ export const {
   startGame,
   startLoadingLevel,
   stopLoadingLevel,
+  startSaving,
+  completeSaving,
 } = slice.actions;
 
 export default slice.reducer;

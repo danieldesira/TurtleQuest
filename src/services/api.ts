@@ -46,6 +46,7 @@ export const saveScore = async () => {
   const token = localStorage.getItem("token");
   if (token) {
     const state = store.getState();
+    const hasWon = state.levels.level.value > 2;
     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/points`, {
       method: "POST",
       headers: {
@@ -55,7 +56,7 @@ export const saveScore = async () => {
       body: JSON.stringify({
         points: state.turtleMonitor.turtle.xp.value,
         level: state.levels.level.value,
-        hasWon: state.game.hasWon.value,
+        hasWon,
       }),
     });
     return res.ok;
@@ -72,7 +73,7 @@ export type GetScoresResponse = {
     players: { name: string };
     outcomes: { desc: string };
   }[];
-  personalBest: { points: number; level: number; player_won: string };
+  personalBest: { points: number; level: number; player_won: string } | null;
 };
 
 export const fetchScores = async () => {
