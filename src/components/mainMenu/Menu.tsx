@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { startGame } from "../../features/gameState/gameStateReducer";
 import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
 import { GiSeaTurtle } from "react-icons/gi";
@@ -15,6 +14,7 @@ import { fetchLastGame } from "../../services/api";
 import LeaderBoard from "../LeaderBoard";
 import RootState from "../../features/RootState";
 import InfoDisplay from "../InfoDisplay";
+import { triggerGameMode } from "../../features/gameState/gameStateReducer";
 
 type Props = { setIsNewGame: Function };
 
@@ -29,13 +29,13 @@ function Menu({ setIsNewGame }: Props) {
 
   const handleNewGame = () => {
     setIsNewGame(true);
-    dispatch(startGame());
+    dispatch(triggerGameMode());
     Game.instance.reset();
   };
 
   const handleContinueGame = () => {
     setIsNewGame(false);
-    dispatch(startGame());
+    dispatch(triggerGameMode());
     parseGameData(JSON.stringify(lastGame));
   };
 

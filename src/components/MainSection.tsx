@@ -1,28 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import Menu from "./mainMenu/Menu";
 import GameSection from "./GameSection";
+import GameData from "../restoreGame/GameData";
+import { fetchLastGame } from "../services/api";
 
 function MainSection() {
   const gameState = useSelector((state: RootState) => state.game.state.value);
 
   const [isNewGame, setIsNewGame] = useState<boolean>(false);
+  const [lastGame, setLastGame] = useState<GameData>();
+  const [isGameDataLoading, setIsGameDataLoading] = useState<boolean>(true);
 
   const screens = {
-    "in-progress": <GameSection isNewGame={isNewGame} />,
+    "in-progress": <GameSection isNewGame={isNewGame} gameData={lastGame} />,
     saving: <>Saving game...</>,
     menu: <Menu setIsNewGame={setIsNewGame} />,
   };
 
+  useEffect(() => {
+    fetchLastGame()
+      .then((res) => setLastGame(res))
+      .finally(() => setIsGameDataLoading(false));
+  }, []);
+
   return (
     <>
-      <div
-        className="max-w-screen max-h-screen portrait:hidden"
-        onContextMenu={(e) => e.preventDefault()}
-      >
-        {screens[gameState]}
-      </div>
+      {isGameDataLoading ? (
+        <>Loading previous game...</>
+      ) : (
+        <div
+          className="max-w-screen max-h-screen portrait:hidden"
+          onContextMenu={(e) => e.preventDefault()}
+        >
+          {screens[gameState]}
+        </div>
+      )}
       <div className="landscape:hidden flex justify-center items-center bg-red-700">
         <p className="text-white">
           Unable to play game in portrait mode. Please switch your device to

@@ -1,7 +1,8 @@
 import INonMainCharacter from "../characters/interfaces/INonMainCharacter";
+import GameData from "../restoreGame/GameData";
 
 interface ILevel {
-  init(isFreshLevel: boolean): Promise<void>;
+  init(isFreshLevel: boolean, gameData: GameData): Promise<void>;
   get bgImgPath(): string;
   get bgImg(): HTMLImageElement | null;
   set bgOffsetX(offsetX: number);

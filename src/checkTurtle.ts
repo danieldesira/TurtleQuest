@@ -1,6 +1,6 @@
 import Game from "./Game";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
-import { stopGame } from "./features/gameState/gameStateReducer";
+import { triggerMenuMode } from "./features/gameState/gameStateReducer";
 import { levelUp } from "./features/levels/levelReducer";
 import {
   breath,
@@ -31,7 +31,7 @@ const checkTurtle = async (): Promise<LevelChangeTypes> => {
     turtleState.oxygen.value <= 0 ||
     turtleState.life.value <= 0
   ) {
-    store.dispatch(stopGame({ hasWon: false }));
+    store.dispatch(triggerMenuMode());
     deleteGameProgress();
     await saveScore();
     return LevelChangeTypes.GameOver;
@@ -72,7 +72,7 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
     );
     return LevelChangeTypes.NewLevel;
   } else {
-    store.dispatch(stopGame({ hasWon: true }));
+    store.dispatch(triggerMenuMode());
     deleteGameProgress();
     await saveScore();
     return LevelChangeTypes.GameComplete;

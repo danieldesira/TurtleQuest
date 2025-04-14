@@ -4,6 +4,7 @@ import { restoreCharacters } from "../restoreGame/parseGameData";
 import ILevel from "./ILevel";
 import LevelCharacter from "./LevelCharacter";
 import store from "../store";
+import GameData from "../restoreGame/GameData";
 
 abstract class Level implements ILevel {
   protected readonly _backgroundImagePath: string =
@@ -21,15 +22,16 @@ abstract class Level implements ILevel {
   /**
    * Initialises level.
    * @param isFreshLevel Determines whether the level is fresh or restored.
+   * @param gameData The game data in case it is a restored level.
    * @author Daniel Desira
    */
-  async init(isFreshLevel: boolean): Promise<void> {
+  async init(isFreshLevel: boolean, gameData: GameData = null): Promise<void> {
     try {
       await this.loadBgImg();
       if (isFreshLevel) {
         this.spawnCharacters();
       } else {
-        this.restoreCharacters();
+        this.restoreCharacters(gameData);
       }
       await this.loadCharacterImages();
     } catch {
@@ -109,8 +111,8 @@ abstract class Level implements ILevel {
     }
   }
 
-  private restoreCharacters() {
-    restoreCharacters();
+  private restoreCharacters(gameData: GameData) {
+    restoreCharacters(gameData);
   }
 
   private async loadCharacterImages() {

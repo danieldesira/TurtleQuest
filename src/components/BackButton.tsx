@@ -4,8 +4,8 @@ import { saveGame } from "../services/api";
 import { IoIosArrowBack } from "react-icons/io";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import {
-  completeSaving,
-  startSaving,
+  triggerMenuMode,
+  triggerSavingMode,
 } from "../features/gameState/gameStateReducer";
 
 function BackButton() {
@@ -14,7 +14,7 @@ function BackButton() {
   const handleClick = async (event: React.MouseEvent) => {
     event.preventDefault();
 
-    dispatch(startSaving());
+    dispatch(triggerSavingMode());
     try {
       await saveGame();
     } catch {
@@ -26,7 +26,7 @@ function BackButton() {
         })
       );
     } finally {
-      dispatch(completeSaving());
+      dispatch(triggerMenuMode());
     }
   };
 

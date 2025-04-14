@@ -9,10 +9,10 @@ const slice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    stopGame: (state) => {
+    triggerMenuMode: (state) => {
       state.state.value = "menu";
     },
-    startGame: (state) => {
+    triggerGameMode: (state) => {
       state.state.value = "in-progress";
     },
     startLoadingLevel: (state) => {
@@ -21,22 +21,18 @@ const slice = createSlice({
     stopLoadingLevel: (state) => {
       state.isLoadingLevel.value = false;
     },
-    startSaving: (state) => {
+    triggerSavingMode: (state) => {
       state.state.value = "saving";
-    },
-    completeSaving: (state) => {
-      state.state.value = "menu";
     },
   },
 });
 
 export const {
-  stopGame,
-  startGame,
+  triggerGameMode,
+  triggerMenuMode,
   startLoadingLevel,
   stopLoadingLevel,
-  startSaving,
-  completeSaving,
+  triggerSavingMode,
 } = slice.actions;
 
 export default slice.reducer;

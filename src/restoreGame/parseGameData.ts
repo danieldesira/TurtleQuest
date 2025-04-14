@@ -45,14 +45,11 @@ const restoreState = (data: GameData) => {
 
 /**
  * Restores characters from localStorage
+ * @param data The game data
  * @author Daniel Desira
  */
-export const restoreCharacters = () => {
+export const restoreCharacters = (data: GameData) => {
   Game.instance.level.characters.clear();
-
-  const data = JSON.parse(
-    localStorage.getItem("currentGame") ?? "{}"
-  ) as GameData;
 
   for (const character of data.characters) {
     const temp = createCharacterInstance(character.type);

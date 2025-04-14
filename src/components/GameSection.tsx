@@ -11,12 +11,13 @@ import ControlGroup from "./controls/ControlGroup";
 import Game from "../Game";
 import animate from "../utils/animate";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
-import { stopGame } from "../features/gameState/gameStateReducer";
 import { saveGame } from "../services/api";
+import { triggerMenuMode } from "../features/gameState/gameStateReducer";
+import GameData from "../restoreGame/GameData";
 
-type Props = { isNewGame: boolean };
+type Props = { isNewGame: boolean; gameData: GameData };
 
-const GameSection = ({ isNewGame }: Props) => {
+const GameSection = ({ isNewGame, gameData }: Props) => {
   const isLoadingLevel = useSelector(
     (state: RootState) => state.game.isLoadingLevel.value
   );
@@ -41,13 +42,13 @@ const GameSection = ({ isNewGame }: Props) => {
     window.addEventListener("beforeunload", handleBeforeUnload, { signal });
 
     Game.instance
-      .start({ canvas, isNewGame })
+      .start({ canvas, isNewGame, gameData })
       .then(async () => await animate(canvas))
       .catch((error) => {
         dispatch(
           updateDialogContent({ dialog: { title: "Error", text: [error] } })
         );
-        dispatch(stopGame());
+        dispatch(triggerMenuMode());
       });
 
     const interval = window.setInterval(async () => {
