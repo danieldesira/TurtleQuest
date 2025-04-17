@@ -9,7 +9,7 @@ const LeaderBoard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       {scores ? (
         <>
           <h2 className="text-center text-xl">Leaderboard</h2>

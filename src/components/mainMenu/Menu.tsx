@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
-import { GiSeaTurtle } from "react-icons/gi";
 import AboutDialog from "../dialog/AboutDialog";
 import EditionSection from "../EditionSection";
 import Game from "../../Game";
 import parseGameData from "../../restoreGame/parseGameData";
-import { RiSettings5Fill } from "react-icons/ri";
 import Settings from "../settings/Settings";
 import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../LoginButtons";
@@ -18,7 +16,7 @@ import { triggerGameMode } from "../../features/gameState/gameStateReducer";
 
 type Props = { setIsNewGame: Function };
 
-function Menu({ setIsNewGame }: Props) {
+const Menu = ({ setIsNewGame }: Props) => {
   const dispatch = useDispatch();
   const [showAbout, setShowAbout] = useState<boolean>(false);
   const [mode, setMode] = useState<"main" | "settings">("main");
@@ -41,8 +39,6 @@ function Menu({ setIsNewGame }: Props) {
 
   const handleAbout = () => setShowAbout((_) => true);
 
-  const handleSettings = () => setMode((_) => "settings");
-
   const exitSettings = () => setMode((_) => "main");
 
   const screens = {
@@ -54,11 +50,6 @@ function Menu({ setIsNewGame }: Props) {
               <span className="text-emerald-300">Turtle</span>{" "}
               <span className="text-cyan-500">Quest</span>
             </h1>
-            <RiSettings5Fill
-              className="w-14 h-14"
-              role="button"
-              onClick={handleSettings}
-            />
             <a
               href="https://www.instagram.com/turtlequest.webgame/"
               target="_blank"
@@ -73,17 +64,9 @@ function Menu({ setIsNewGame }: Props) {
         {isAuthenticated ? <InfoDisplay content={<LeaderBoard />} /> : null}
         <div className="flex flex-col items-center gap-5">
           {lastGame ? (
-            <MenuButton
-              callback={handleContinueGame}
-              icon={<GiSeaTurtle />}
-              text="Continue Game"
-            />
+            <MenuButton callback={handleContinueGame} text="Continue Game" />
           ) : null}
-          <MenuButton
-            callback={handleNewGame}
-            icon={<GiSeaTurtle />}
-            text="New Game"
-          />
+          <MenuButton callback={handleNewGame} text="New Game" />
           {lastGame ? (
             <span className="text-blue-800 font-light">
               Caution: Starting a new game will erase current game progress!
@@ -110,6 +93,6 @@ function Menu({ setIsNewGame }: Props) {
       {showAbout ? <AboutDialog setShowAbout={setShowAbout} /> : null}
     </>
   );
-}
+};
 
 export default Menu;

@@ -7,6 +7,8 @@ import {
   logout,
 } from "../features/authentication/authenticationReducer";
 import RootState from "../features/RootState";
+import { IoLogOut } from "react-icons/io5";
+import { RiProfileFill, RiSettings5Fill } from "react-icons/ri";
 
 declare global {
   interface Window {
@@ -76,20 +78,21 @@ function LoginButtons() {
     <div className="flex gap-2">
       {isAuthenticated ? (
         <>
-          <button
+          <RiSettings5Fill
+            role="button"
+            //onClick={handleSettings}
+            className="text-green-700 w-14 h-14"
+          />
+          <RiProfileFill
             role="button"
             onClick={handleProfile}
-            className="bg-green-700 text-white rounded p-2"
-          >
-            Profile
-          </button>
-          <button
+            className="text-green-700 w-14 h-14"
+          />
+          <IoLogOut
             role="button"
             onClick={handleLogout}
-            className="bg-red-500 text-white rounded p-2"
-          >
-            Logout
-          </button>
+            className="text-red-500 w-14 h-14"
+          />
         </>
       ) : (
         <div id="googleSignInButton"></div>
