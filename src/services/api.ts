@@ -86,3 +86,14 @@ export const fetchScores = async () => {
   });
   return (await res.json()) as GetScoresResponse;
 };
+
+export const deleteLastGame = async () => {
+  await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
+    method: "DELETE",
+    headers: {
+      Authorization: localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  });
+  return true;
+};

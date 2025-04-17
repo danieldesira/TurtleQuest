@@ -44,7 +44,7 @@ const restoreState = (data: GameData) => {
 };
 
 /**
- * Restores characters from localStorage
+ * Restores characters
  * @param data The game data
  * @author Daniel Desira
  */

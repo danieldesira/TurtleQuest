@@ -10,7 +10,7 @@ import {
   useFood,
 } from "./features/turtleMonitor/turtleReducers";
 import { LevelChangeTypes, levelMap } from "./levels/levels";
-import { saveScore } from "./services/api";
+import { deleteLastGame, saveScore } from "./services/api";
 import store from "./store";
 
 /**
@@ -32,8 +32,7 @@ const checkTurtle = async (): Promise<LevelChangeTypes> => {
     turtleState.life.value <= 0
   ) {
     store.dispatch(triggerMenuMode());
-    deleteGameProgress();
-    await saveScore();
+    await Promise.all([deleteLastGame(), saveScore()]);
     return LevelChangeTypes.GameOver;
   }
 
@@ -73,12 +72,9 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
     return LevelChangeTypes.NewLevel;
   } else {
     store.dispatch(triggerMenuMode());
-    deleteGameProgress();
-    await saveScore();
+    await Promise.all([deleteLastGame(), saveScore()]);
     return LevelChangeTypes.GameComplete;
   }
 };
-
-const deleteGameProgress = () => localStorage.removeItem("currentGame");
 
 export default checkTurtle;
