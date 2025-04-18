@@ -5,7 +5,6 @@ import AboutDialog from "../dialog/AboutDialog";
 import EditionSection from "../EditionSection";
 import Game from "../../Game";
 import parseGameData from "../../restoreGame/parseGameData";
-import Settings from "../settings/Settings";
 import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../LoginButtons";
 import { fetchLastGame } from "../../services/api";
@@ -19,7 +18,6 @@ type Props = { setIsNewGame: Function };
 const Menu = ({ setIsNewGame }: Props) => {
   const dispatch = useDispatch();
   const [showAbout, setShowAbout] = useState<boolean>(false);
-  const [mode, setMode] = useState<"main" | "settings">("main");
   const [lastGame, setLastGame] = useState();
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
@@ -39,11 +37,15 @@ const Menu = ({ setIsNewGame }: Props) => {
 
   const handleAbout = () => setShowAbout((_) => true);
 
-  const exitSettings = () => setMode((_) => "main");
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchLastGame().then((res) => setLastGame(res));
+    }
+  }, []);
 
-  const screens = {
-    main: (
-      <>
+  return (
+    <>
+      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5 items-center">
         <div className="flex flex-col gap-5">
           <div className="flex gap-5 justify-center items-center">
             <h1 className="text-5xl" role="button" onClick={handleAbout}>
@@ -73,21 +75,6 @@ const Menu = ({ setIsNewGame }: Props) => {
             </span>
           ) : null}
         </div>
-      </>
-    ),
-    settings: <Settings exit={exitSettings} />,
-  };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchLastGame().then((res) => setLastGame(res));
-    }
-  }, []);
-
-  return (
-    <>
-      <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5 items-center">
-        {screens[mode]}
         <EditionSection />
       </div>
       {showAbout ? <AboutDialog setShowAbout={setShowAbout} /> : null}

@@ -9,7 +9,7 @@ import {
 import Game from "../../Game";
 import { useSelector } from "react-redux";
 import RootState from "../../features/RootState";
-import { Setting } from "../settings/types";
+import { Setting } from "../membersArea/settings/types";
 
 function ControlGroup() {
   const turtle = Game.instance.turtle;

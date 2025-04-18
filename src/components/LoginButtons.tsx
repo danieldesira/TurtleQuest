@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../services/api";
@@ -9,6 +9,7 @@ import {
 import RootState from "../features/RootState";
 import { IoLogOut } from "react-icons/io5";
 import { RiProfileFill, RiSettings5Fill } from "react-icons/ri";
+import Settings from "./membersArea/settings/Settings";
 
 declare global {
   interface Window {
@@ -23,6 +24,8 @@ function LoginButtons() {
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
+
+  const [showSettings, setShowSettings] = useState<boolean>(false);
 
   useEffect(() => {
     window.google.accounts.id.initialize({
@@ -72,6 +75,8 @@ function LoginButtons() {
     dispatch(logout());
   };
 
+  const handleSettings = () => setShowSettings(true);
+
   const handleProfile = () => {};
 
   return (
@@ -80,7 +85,7 @@ function LoginButtons() {
         <>
           <RiSettings5Fill
             role="button"
-            //onClick={handleSettings}
+            onClick={handleSettings}
             className="text-green-700 w-14 h-14"
           />
           <RiProfileFill
@@ -93,6 +98,7 @@ function LoginButtons() {
             onClick={handleLogout}
             className="text-red-500 w-14 h-14"
           />
+          <Settings showDialog={showSettings} setShowDialog={setShowSettings} />
         </>
       ) : (
         <div id="googleSignInButton"></div>

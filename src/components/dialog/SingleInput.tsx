@@ -1,19 +1,19 @@
 import React from "react";
-import { Setting } from "./types";
+import { Input } from "./types";
 
-type Props = Setting & { handleChange: React.ChangeEventHandler };
+type Props = Input & { handleChange: React.ChangeEventHandler };
 
-function SingleSetting({
+const SingleInput = ({
   name,
   label,
   type,
   value,
   options,
   handleChange,
-}: Props) {
+}: Props) => {
   return (
     <>
-      <label htmlFor={name} className="text-5xl text-slate-950">
+      <label htmlFor={name} className="text-xl">
         {label}
       </label>
       {type === "radio" ? (
@@ -28,7 +28,7 @@ function SingleSetting({
               defaultChecked={o === value}
               onChange={handleChange}
             />
-            <label htmlFor={`${name}-${o}`} className="text-3xl text-slate-950">
+            <label htmlFor={`${name}-${o}`} className="text-lg">
               {o}
             </label>
           </div>
@@ -45,6 +45,6 @@ function SingleSetting({
       )}
     </>
   );
-}
+};
 
-export default SingleSetting;
+export default SingleInput;
