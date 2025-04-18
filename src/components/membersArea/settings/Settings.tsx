@@ -1,57 +1,46 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { ControlsPositionValue, SettingsValue } from "./types";
 import FormDialog from "../../dialog/FormDialog";
 import { Input } from "../../dialog/types";
+import { Settings, updateSettings } from "../../../services/api";
 
 type Props = {
   showDialog: boolean;
   setShowDialog: Dispatch<SetStateAction<boolean>>;
+  initialSettings: Settings;
 };
 
-const Settings = ({ showDialog, setShowDialog }: Props) => {
-  const currentSettings = JSON.parse(
-    localStorage.getItem("gameSettings") ?? "[]"
-  ) as Input[];
-
-  const [settings, setSettings] = useState<Input[]>([
+const Settings = ({ showDialog, setShowDialog, initialSettings }: Props) => {
+  const settingsConfig: Input[] = [
     {
       label: "Control Position",
       name: "controlPosition",
-      value:
-        currentSettings && currentSettings.length
-          ? (currentSettings.find((s) => s.name === "controlPosition")
-              .value as ControlsPositionValue)
-          : "Right",
       type: "radio",
       options: ["Left", "Right"],
     },
-  ]);
+  ];
+
+  const [settings, setSettings] = useState<Settings>(initialSettings);
 
   const handleSettingChange = (event: React.ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
-    setSettings((prev) => {
-      const setting = prev.find((s) => s.name === name);
-      setting.value = value as SettingsValue;
-      return prev;
-    });
+    setSettings({ ...settings, [name]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    localStorage.setItem("gameSettings", JSON.stringify(settings));
+    await updateSettings(settings);
 
     setShowDialog(false);
   };
 
-  //const handleBack = () => exit();
-
   return showDialog ? (
     <FormDialog
       title="Settings"
-      inputs={settings}
+      inputs={settingsConfig}
       handleInputChange={handleSettingChange}
       handleSubmit={handleSubmit}
+      handleClose={() => setShowDialog(false)}
     />
   ) : null;
 };

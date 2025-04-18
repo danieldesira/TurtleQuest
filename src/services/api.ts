@@ -97,3 +97,19 @@ export const deleteLastGame = async () => {
   });
   return true;
 };
+
+export interface Settings {
+  controlPosition: "Left" | "Right";
+}
+
+export const updateSettings = async (settings: Settings) => {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/settings`, {
+    method: "PUT",
+    headers: {
+      Authorization: localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(settings),
+  });
+  return await res.json();
+};
