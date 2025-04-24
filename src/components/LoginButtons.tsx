@@ -10,6 +10,7 @@ import RootState from "../features/RootState";
 import { IoLogOut } from "react-icons/io5";
 import { RiProfileFill, RiSettings5Fill } from "react-icons/ri";
 import Settings from "./membersArea/settings/Settings";
+import { setSettings } from "../features/gameState/gameStateReducer";
 
 declare global {
   interface Window {
@@ -59,8 +60,9 @@ function LoginButtons() {
   }) => {
     try {
       const loginResult = await login(credential);
-      if (loginResult) {
+      if (loginResult.player) {
         localStorage.setItem("token", credential);
+        dispatch(setSettings({ settings: loginResult.player.settings }));
         dispatch(authenticate());
       } else {
         showAuthError();

@@ -9,7 +9,7 @@ export const login = async (credential: string) => {
       "Content-Type": "application/json",
     },
   });
-  return res.ok;
+  return (await res.json()) as { player: { settings: Settings } };
 };
 
 export const saveGame = async () => {

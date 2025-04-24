@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   state: { value: "menu" },
   isLoadingLevel: { value: false },
+  settings: { value: { controlPosition: "Right" } },
 };
 
 const slice = createSlice({
@@ -24,6 +25,9 @@ const slice = createSlice({
     triggerSavingMode: (state) => {
       state.state.value = "saving";
     },
+    setSettings: (state, action) => {
+      state.settings.value = action.payload.settings;
+    },
   },
 });
 
@@ -33,6 +37,7 @@ export const {
   startLoadingLevel,
   stopLoadingLevel,
   triggerSavingMode,
+  setSettings,
 } = slice.actions;
 
 export default slice.reducer;
