@@ -5,6 +5,7 @@ import { Settings, updateSettings } from "../../../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../../features/RootState";
 import { setSettings } from "../../../features/gameState/gameStateReducer";
+import { updateDialogContent } from "../../../features/dialogs/dialogReducer";
 
 type Props = {
   showDialog: boolean;
@@ -33,9 +34,21 @@ const Settings = ({ showDialog, setShowDialog }: Props) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    await updateSettings(settings);
-
     setShowDialog(false);
+
+    try {
+      await updateSettings(settings);
+    } catch {
+      dispatch(
+        updateDialogContent({
+          dialog: {
+            title: "Settings error",
+            text: ["Failed to save settings! Please try again."],
+            type: "error",
+          },
+        })
+      );
+    }
   };
 
   return showDialog ? (
@@ -44,7 +57,6 @@ const Settings = ({ showDialog, setShowDialog }: Props) => {
       inputs={settingsConfig}
       handleInputChange={handleSettingChange}
       handleSubmit={handleSubmit}
-      handleClose={() => setShowDialog(false)}
     />
   ) : null;
 };

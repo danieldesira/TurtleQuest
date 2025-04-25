@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import RootState from "../../features/RootState";
 import { GiStomach } from "react-icons/gi";
 
-function MeterGroup() {
+const MeterGroup = () => {
   const turtleState = useSelector(
     (state: RootState) => state.turtleMonitor.turtle
   );
@@ -21,6 +21,6 @@ function MeterGroup() {
       />
     </>
   );
-}
+};
 
 export default MeterGroup;

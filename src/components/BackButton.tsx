@@ -8,7 +8,7 @@ import {
   triggerSavingMode,
 } from "../features/gameState/gameStateReducer";
 
-function BackButton() {
+const BackButton = () => {
   const dispatch = useDispatch();
 
   const handleClick = async (event: React.MouseEvent) => {
@@ -40,6 +40,6 @@ function BackButton() {
       <IoIosArrowBack />
     </button>
   );
-}
+};
 
 export default BackButton;

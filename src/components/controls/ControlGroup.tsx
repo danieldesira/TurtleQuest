@@ -9,25 +9,22 @@ import {
 import Game from "../../Game";
 import { useSelector } from "react-redux";
 import RootState from "../../features/RootState";
-import { Setting } from "../membersArea/settings/types";
 
-function ControlGroup() {
+const ControlGroup = () => {
   const turtle = Game.instance.turtle;
   const gameRunning = useSelector(
     (state: RootState) => state.game.state.value === "in-progress"
   );
-  const settings = JSON.parse(
-    localStorage.getItem("gameSettings") || "[]"
-  ) as Setting[];
-  const controlPosition = settings.find((s) => s.name === "controlPosition");
+  const { controlPosition } = useSelector(
+    (state: RootState) => state.game.settings.value
+  );
+
   return (
     <>
       {gameRunning ? (
         <div
           className={`fixed bottom-1 ${
-            !controlPosition || controlPosition.value === "Right"
-              ? "right-1"
-              : "left-1"
+            controlPosition === "Left" ? "left-1" : "right-1"
           }`}
         >
           <div className="mb-1 flex justify-center">
@@ -54,6 +51,6 @@ function ControlGroup() {
       ) : null}
     </>
   );
-}
+};
 
 export default ControlGroup;

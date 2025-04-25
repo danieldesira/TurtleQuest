@@ -8,7 +8,7 @@ import parseGameData from "../../restoreGame/parseGameData";
 import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../LoginButtons";
 import { fetchLastGame } from "../../services/api";
-import LeaderBoard from "../LeaderBoard";
+import LeaderBoard from "../scores/LeaderBoard";
 import RootState from "../../features/RootState";
 import InfoDisplay from "../InfoDisplay";
 import { triggerGameMode } from "../../features/gameState/gameStateReducer";
@@ -63,7 +63,9 @@ const Menu = ({ setIsNewGame }: Props) => {
           </div>
           <span className="text-slate-950 text-center">Beta release</span>
         </div>
-        {isAuthenticated ? <InfoDisplay content={<LeaderBoard />} /> : null}
+        {isAuthenticated ? (
+          <InfoDisplay title="Leaderboard" content={<LeaderBoard />} />
+        ) : null}
         <div className="flex flex-col items-center gap-5">
           {lastGame ? (
             <MenuButton callback={handleContinueGame} text="Continue Game" />

@@ -1,5 +1,5 @@
 import Dialog from "./Dialog";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "./types";
 import SingleInput from "./SingleInput";
 
@@ -8,7 +8,6 @@ type Props = {
   inputs: Input[];
   handleSubmit: React.FormEventHandler;
   handleInputChange: React.ChangeEventHandler;
-  handleClose: () => void;
 };
 
 const FormDialog = ({
@@ -16,7 +15,6 @@ const FormDialog = ({
   inputs,
   handleSubmit,
   handleInputChange,
-  handleClose,
 }: Props) => (
   <Dialog
     title={title}
@@ -38,19 +36,12 @@ const FormDialog = ({
             handleChange={handleInputChange}
           />
         ))}
-        <div className="flex gap-5 justify-center">
+        <div className="flex justify-center">
           <button
             type="submit"
-            className="bg-green-600 rounded-md text-xl text-white p-2 flex-1"
+            className="bg-green-600 rounded-md text-xl text-white p-2 flex-1 w-fit"
           >
             Save
-          </button>
-          <button
-            type="button"
-            className="bg-red-600 rounded-md text-xl text-white p-2 flex-1"
-            onClick={handleClose}
-          >
-            Close
           </button>
         </div>
       </form>

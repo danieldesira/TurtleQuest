@@ -1,5 +1,6 @@
 import stringifyGameData from "../restoreGame/stringifyGameData";
 import store from "../store";
+import { GetScoresResponse, LoginResponse, Settings } from "./types";
 
 export const login = async (credential: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
@@ -9,7 +10,8 @@ export const login = async (credential: string) => {
       "Content-Type": "application/json",
     },
   });
-  return (await res.json()) as { player: { settings: Settings } };
+  const data = (await res.json()) as LoginResponse;
+  return data;
 };
 
 export const saveGame = async () => {
@@ -65,17 +67,6 @@ export const saveScore = async () => {
   }
 };
 
-export type GetScoresResponse = {
-  highScores: {
-    points: number;
-    level: number;
-    player_won: string;
-    players: { name: string };
-    outcomes: { desc: string };
-  }[];
-  personalBest: { points: number; level: number; player_won: string } | null;
-};
-
 export const fetchScores = async () => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/api/points`, {
     method: "GET",
@@ -84,23 +75,20 @@ export const fetchScores = async () => {
       "Content-Type": "application/json",
     },
   });
-  return (await res.json()) as GetScoresResponse;
+  const data = (await res.json()) as GetScoresResponse;
+  return data;
 };
 
 export const deleteLastGame = async () => {
-  await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
     method: "DELETE",
     headers: {
       Authorization: localStorage.getItem("token"),
       "Content-Type": "application/json",
     },
   });
-  return true;
+  return res.ok;
 };
-
-export interface Settings {
-  controlPosition: "Left" | "Right";
-}
 
 export const updateSettings = async (settings: Settings) => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/api/settings`, {

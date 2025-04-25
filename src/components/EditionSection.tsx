@@ -1,7 +1,5 @@
 import React from "react";
 
-function EditionSection() {
-  return <></>;
-}
+const EditionSection = () => <></>;
 
 export default EditionSection;
