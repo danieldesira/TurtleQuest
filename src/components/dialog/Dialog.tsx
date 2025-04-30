@@ -4,10 +4,10 @@ type Props = {
   title: string;
   content: ReactElement;
   handleOk?: React.MouseEventHandler;
-  type: "default" | "error" | "form";
+  type?: "default" | "error" | "form";
 };
 
-const Dialog = ({ title, content, type, handleOk }: Props) => {
+const Dialog = ({ title, content, type = "default", handleOk }: Props) => {
   const dialogJsx = (
     <div
       tabIndex={1}

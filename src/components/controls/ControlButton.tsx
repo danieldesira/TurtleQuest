@@ -5,7 +5,7 @@ interface Props {
   callback: Function;
 }
 
-function ControlButton({ icon, callback }: Props) {
+const ControlButton = ({ icon, callback }: Props) => {
   let timer = 0;
 
   const handleMousedown = () => {
@@ -30,6 +30,6 @@ function ControlButton({ icon, callback }: Props) {
       <div className="flex justify-center">{icon}</div>
     </button>
   );
-}
+};
 
 export default ControlButton;

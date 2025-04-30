@@ -6,7 +6,7 @@ import GameSection from "./GameSection";
 import GameData from "../restoreGame/GameData";
 import { fetchLastGame } from "../services/api";
 
-function MainSection() {
+const MainSection = () => {
   const gameState = useSelector((state: RootState) => state.game.state.value);
 
   const [isNewGame, setIsNewGame] = useState<boolean>(false);
@@ -46,6 +46,6 @@ function MainSection() {
       </div>
     </>
   );
-}
+};
 
 export default MainSection;

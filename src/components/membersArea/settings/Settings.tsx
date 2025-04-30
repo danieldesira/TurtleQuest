@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import FormDialog from "../../dialog/FormDialog";
 import { Input } from "../../dialog/types";
-import { Settings, updateSettings } from "../../../services/api";
+import { updateSettings } from "../../../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../../features/RootState";
 import { setSettings } from "../../../features/gameState/gameStateReducer";

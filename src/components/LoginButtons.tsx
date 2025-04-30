@@ -20,7 +20,7 @@ declare global {
   }
 }
 
-function LoginButtons() {
+const LoginButtons = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
@@ -107,6 +107,6 @@ function LoginButtons() {
       )}
     </div>
   );
-}
+};
 
 export default LoginButtons;
