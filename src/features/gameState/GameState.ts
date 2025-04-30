@@ -1,4 +1,4 @@
-import { Settings } from "../../services/api";
+import { Settings } from "../../services/types";
 
 interface GameState {
   state: { value: "in-progress" | "saving" | "menu" };

@@ -7,6 +7,7 @@
     - Configure project to read environment variables
     - Update dependencies
     - Add ``hasWon`` property to Redux store
+* Introduced high scores
 
 # 0.6.2 Beta - 21/09/2024 17:00 UTC+1
 * Organised md documents into sections
