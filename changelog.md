@@ -1,13 +1,17 @@
 # 0.7.0 Beta - 
-* Introduced Login with Google
 * Internal:
     - Switch build system to Vite from Webpack
     - Disable service worker on localhost
-    - Fix React warning in ``SingleSetting.tsx``
+    - Fix React warnings
     - Configure project to read environment variables
     - Update dependencies
-    - Add ``hasWon`` property to Redux store
-* Introduced high scores
+    - Restructure and update Redux store
+    - Refactor ``Dialog`` component and introduce ``FormDialog``
+* Player authentication:
+    - Add Google login
+    - Introduce high scores
+    - Move settings to online account
+    - Move game progress to online account
 
 # 0.6.2 Beta - 21/09/2024 17:00 UTC+1
 * Organised md documents into sections

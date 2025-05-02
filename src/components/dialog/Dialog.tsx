@@ -1,13 +1,17 @@
-import React, { ReactElement } from "react";
+import React from "react";
 
 type Props = {
   title: string;
-  content: ReactElement;
   handleOk?: React.MouseEventHandler;
   type?: "default" | "error" | "form";
 };
 
-const Dialog = ({ title, content, type = "default", handleOk }: Props) => {
+const Dialog = ({
+  title,
+  children,
+  type = "default",
+  handleOk,
+}: React.PropsWithChildren<Props>) => {
   const dialogJsx = (
     <div
       tabIndex={1}
@@ -16,7 +20,7 @@ const Dialog = ({ title, content, type = "default", handleOk }: Props) => {
       <h1 className="text-center text-xl">{title}</h1>
       <hr />
       <div className="w-11/12 m-auto mt-3 mb-3 grid gap-3 max-h-screen-1/4 overflow-y-auto">
-        {content}
+        {children}
       </div>
       {type !== "form" ? (
         <div className="w-fit m-auto">

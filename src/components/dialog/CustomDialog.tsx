@@ -17,18 +17,11 @@ const CustomDialog = () => {
     );
 
   return (
-    <Dialog
-      title={title}
-      content={
-        <>
-          {text.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </>
-      }
-      type={type}
-      handleOk={handleOk}
-    />
+    <Dialog title={title} type={type} handleOk={handleOk}>
+      {text.map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+      ))}
+    </Dialog>
   );
 };
 
