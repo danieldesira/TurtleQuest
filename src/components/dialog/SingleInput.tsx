@@ -11,14 +11,15 @@ const SingleInput = ({
   options,
   handleChange,
 }: Props) => (
-  <div className="flex gap-5 justify-center">
+  <div className="flex gap-5 justify-center items-center">
     <label htmlFor={name} className="text-xl">
       {label}
     </label>
     {type === "radio" ? (
       options.map((o, index) => (
-        <div key={o} className="flex gap-3">
+        <div key={o} className="flex gap-3 items-center">
           <input
+            className="appearance-none w-4 h-4 border-pink-600 border-2 rounded-sm checked:bg-pink-600"
             key={index}
             type="radio"
             id={`${name}-${o}`}
@@ -38,7 +39,7 @@ const SingleInput = ({
         id={name}
         name={name}
         value={value}
-        className="bg-white rounded-sm h-16 w-52 p-10 text-slate-950"
+        className="bg-white rounded-sm h-8 w-52 text-slate-950 border-pink-600 border-2"
         onChange={handleChange}
       />
     )}

@@ -11,6 +11,7 @@ import { IoLogOut } from "react-icons/io5";
 import { RiProfileFill, RiSettings5Fill } from "react-icons/ri";
 import Settings from "./membersArea/settings/Settings";
 import { setSettings } from "../features/gameState/gameStateReducer";
+import Profile from "./membersArea/profile/Profile";
 
 declare global {
   interface Window {
@@ -27,6 +28,7 @@ const LoginButtons = () => {
   );
 
   const [showSettings, setShowSettings] = useState<boolean>(false);
+  const [showProfile, setShowProfile] = useState<boolean>(false);
 
   useEffect(() => {
     window.google.accounts.id.initialize({
@@ -79,7 +81,7 @@ const LoginButtons = () => {
 
   const handleSettings = () => setShowSettings(true);
 
-  const handleProfile = () => {};
+  const handleProfile = () => setShowProfile(true);
 
   return (
     <div className="flex gap-2">
@@ -101,6 +103,7 @@ const LoginButtons = () => {
             className="text-red-500 w-14 h-14"
           />
           <Settings showDialog={showSettings} setShowDialog={setShowSettings} />
+          <Profile showDialog={showProfile} setShowDialog={setShowProfile} />
         </>
       ) : (
         <div id="googleSignInButton"></div>
