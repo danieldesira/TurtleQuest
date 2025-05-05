@@ -13,8 +13,22 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
       label: "Name",
       name: "name",
       type: "text",
+      required: true,
+      maxLength: 120,
     },
-    { label: "Email", name: "email", type: "email" },
+    {
+      label: "Email",
+      name: "email",
+      type: "email",
+      required: true,
+      maxLength: 120,
+    },
+    {
+      label: "Date of Birth",
+      name: "date_of_birth",
+      type: "date",
+      required: true,
+    },
   ];
 
   const handleChange = () => {};

@@ -23,17 +23,21 @@ const FormDialog = ({
       className="flex flex-col gap-5"
       onSubmit={handleSubmit}
     >
-      {inputs.map(({ label, name, value, type, options }) => (
-        <SingleInput
-          key={name}
-          label={label}
-          name={name}
-          value={value}
-          type={type}
-          options={options}
-          handleChange={handleInputChange}
-        />
-      ))}
+      {inputs.map(
+        ({ label, name, value, type, options, required, maxLength }) => (
+          <SingleInput
+            key={name}
+            label={label}
+            name={name}
+            value={value}
+            type={type}
+            options={options}
+            handleChange={handleInputChange}
+            required={required}
+            maxLength={maxLength}
+          />
+        )
+      )}
       <div className="flex justify-center">
         <button
           type="submit"

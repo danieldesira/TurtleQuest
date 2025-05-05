@@ -10,6 +10,8 @@ const SingleInput = ({
   value,
   options,
   handleChange,
+  required,
+  maxLength,
 }: Props) => (
   <div className="flex gap-5 justify-center items-center">
     <label htmlFor={name} className="text-xl">
@@ -39,7 +41,11 @@ const SingleInput = ({
         id={name}
         name={name}
         value={value}
-        className="bg-white rounded-sm h-8 w-52 text-slate-950 border-pink-600 border-2"
+        className="rounded-sm h-8 w-52 text-pink-600 border-pink-600 border-2 bg-transparent accent-pink-600"
+        required={required}
+        aria-required={required}
+        aria-autocomplete="none"
+        maxLength={maxLength}
         onChange={handleChange}
       />
     )}

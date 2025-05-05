@@ -4,4 +4,6 @@ export type Input = {
   value?: string;
   type: "text" | "radio" | "number" | "email" | "date";
   options?: string[];
+  required?: boolean;
+  maxLength?: number;
 };
