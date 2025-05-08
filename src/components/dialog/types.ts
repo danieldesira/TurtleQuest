@@ -6,4 +6,5 @@ export type Input = {
   options?: string[];
   required?: boolean;
   maxLength?: number;
+  readonly?: boolean;
 };

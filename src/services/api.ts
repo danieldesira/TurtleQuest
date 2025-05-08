@@ -1,6 +1,6 @@
 import stringifyGameData from "../restoreGame/stringifyGameData";
 import store from "../store";
-import { GetScoresResponse, LoginResponse, Settings } from "./types";
+import { GetScoresResponse, LoginResponse, Player, Settings } from "./types";
 
 export const login = async (credential: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
@@ -98,6 +98,18 @@ export const updateSettings = async (settings: Settings) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(settings),
+  });
+  return await res.json();
+};
+
+export const updateProfile = async (profile: Player) => {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/player`, {
+    method: "PUT",
+    headers: {
+      Authorization: localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(profile),
   });
   return await res.json();
 };

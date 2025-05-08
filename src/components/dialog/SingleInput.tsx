@@ -12,6 +12,7 @@ const SingleInput = ({
   handleChange,
   required,
   maxLength,
+  readonly,
 }: Props) => (
   <div className="flex gap-5 justify-center items-center">
     <label htmlFor={name} className="text-xl">
@@ -21,7 +22,7 @@ const SingleInput = ({
       options.map((o, index) => (
         <div key={o} className="flex gap-3 items-center">
           <input
-            className="appearance-none w-4 h-4 border-pink-600 border-2 rounded-sm checked:bg-pink-600"
+            className="appearance-none w-4 h-4 border-pink-600 border-2 rounded-sm checked:bg-pink-600 focus:ring-2 focus:ring-pink-400/50"
             key={index}
             type="radio"
             id={`${name}-${o}`}
@@ -41,12 +42,14 @@ const SingleInput = ({
         id={name}
         name={name}
         value={value}
-        className="rounded-sm h-8 w-52 text-pink-600 border-pink-600 border-2 bg-transparent accent-pink-600"
+        className="rounded-sm h-8 w-52 text-pink-600 border-pink-600 border-2 bg-transparent accent-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-400/50"
         required={required}
         aria-required={required}
         aria-autocomplete="none"
         maxLength={maxLength}
         onChange={handleChange}
+        readOnly={readonly}
+        aria-readonly={readonly}
       />
     )}
   </div>

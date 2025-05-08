@@ -12,6 +12,7 @@
     - Introduce high scores
     - Move settings to online account
     - Move game progress to online account
+    - Introduce player profiles
 
 # 0.6.2 Beta - 21/09/2024 17:00 UTC+1
 * Organised md documents into sections

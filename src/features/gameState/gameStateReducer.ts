@@ -4,6 +4,7 @@ const initialState = {
   state: { value: "menu" },
   isLoadingLevel: { value: false },
   settings: { value: { controlPosition: "Right" } },
+  profile: { value: { name: "", email: "" } },
 };
 
 const slice = createSlice({
@@ -28,6 +29,9 @@ const slice = createSlice({
     setSettings: (state, action) => {
       state.settings.value = action.payload.settings;
     },
+    setProfile: (state, action) => {
+      state.profile.value = action.payload.profile;
+    },
   },
 });
 
@@ -38,6 +42,7 @@ export const {
   stopLoadingLevel,
   triggerSavingMode,
   setSettings,
+  setProfile,
 } = slice.actions;
 
 export default slice.reducer;

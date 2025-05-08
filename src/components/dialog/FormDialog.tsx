@@ -1,5 +1,5 @@
+import React from "react";
 import Dialog from "./Dialog";
-import React, { useState } from "react";
 import { Input } from "./types";
 import SingleInput from "./SingleInput";
 
@@ -20,11 +20,20 @@ const FormDialog = ({
     <form
       action="#"
       method="post"
-      className="flex flex-col gap-5"
+      className="flex flex-col gap-5 p-2"
       onSubmit={handleSubmit}
     >
       {inputs.map(
-        ({ label, name, value, type, options, required, maxLength }) => (
+        ({
+          label,
+          name,
+          value,
+          type,
+          options,
+          required,
+          maxLength,
+          readonly,
+        }) => (
           <SingleInput
             key={name}
             label={label}
@@ -35,13 +44,14 @@ const FormDialog = ({
             handleChange={handleInputChange}
             required={required}
             maxLength={maxLength}
+            readonly={readonly}
           />
         )
       )}
       <div className="flex justify-center">
         <button
           type="submit"
-          className="bg-green-600 rounded-md text-xl text-white p-2 flex-1 w-fit"
+          className="bg-pink-600 rounded-md text-xl text-white p-2"
         >
           Save
         </button>

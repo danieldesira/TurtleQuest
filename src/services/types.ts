@@ -14,16 +14,16 @@ export type GetScoresResponse = {
 };
 
 export type Player = {
-  id: number;
-  external_id: string;
-  platform: string;
+  id?: number;
+  external_id?: string;
+  platform?: string;
   name: string;
   email: string;
-  created_at: string;
-  profile_pic: string;
-  date_of_birth: string;
-  last_login_at: string;
-  settings: Settings;
+  created_at?: string;
+  profile_pic?: string;
+  date_of_birth?: string;
+  last_login_at?: string;
+  settings?: Settings;
 };
 
 export type LoginResponse = {
