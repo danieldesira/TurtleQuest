@@ -10,10 +10,7 @@ import RootState from "../features/RootState";
 import { IoLogOut } from "react-icons/io5";
 import { RiProfileFill, RiSettings5Fill } from "react-icons/ri";
 import Settings from "./membersArea/settings/Settings";
-import {
-  setProfile,
-  setSettings,
-} from "../features/gameState/gameStateReducer";
+import { setProfile } from "../features/gameState/gameStateReducer";
 import Profile from "./membersArea/profile/Profile";
 
 declare global {
@@ -45,6 +42,12 @@ const LoginButtons = () => {
     );
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      handleGoogleResponse({ credential: localStorage.getItem("token") });
+    }
+  }, []);
+
   const showAuthError = () =>
     dispatch(
       updateDialogContent({
@@ -67,7 +70,6 @@ const LoginButtons = () => {
       const loginResult = await login(credential);
       if (loginResult.player) {
         localStorage.setItem("token", credential);
-        dispatch(setSettings({ settings: loginResult.player.settings }));
         dispatch(setProfile({ profile: loginResult.player }));
         dispatch(authenticate());
       } else {

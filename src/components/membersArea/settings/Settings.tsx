@@ -14,7 +14,9 @@ type Props = {
 
 const Settings = ({ showDialog, setShowDialog }: Props) => {
   const dispatch = useDispatch();
-  const settings = useSelector((state: RootState) => state.game.settings.value);
+  const settings = useSelector(
+    (state: RootState) => state.game.profile.value.settings
+  );
 
   const settingsConfig: Input[] = [
     {

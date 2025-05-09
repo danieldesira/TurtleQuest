@@ -3,8 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   state: { value: "menu" },
   isLoadingLevel: { value: false },
-  settings: { value: { controlPosition: "Right" } },
-  profile: { value: { name: "", email: "" } },
+  profile: {
+    value: { name: "", email: "", settings: { controlPosition: "Right" } },
+  },
 };
 
 const slice = createSlice({
@@ -27,7 +28,7 @@ const slice = createSlice({
       state.state.value = "saving";
     },
     setSettings: (state, action) => {
-      state.settings.value = action.payload.settings;
+      state.profile.value.settings = action.payload.settings;
     },
     setProfile: (state, action) => {
       state.profile.value = action.payload.profile;

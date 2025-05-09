@@ -16,7 +16,7 @@ const ControlGroup = () => {
     (state: RootState) => state.game.state.value === "in-progress"
   );
   const { controlPosition } = useSelector(
-    (state: RootState) => state.game.settings.value
+    (state: RootState) => state.game.profile.value.settings
   );
 
   return (
