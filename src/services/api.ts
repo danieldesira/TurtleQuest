@@ -1,6 +1,7 @@
 import stringifyGameData from "../restoreGame/stringifyGameData";
 import store from "../store";
 import { GetScoresResponse, LoginResponse, Player, Settings } from "./types";
+import { get } from "./utils";
 
 export const login = async (credential: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
@@ -31,18 +32,7 @@ export const saveGame = async () => {
   }
 };
 
-export const fetchLastGame = async () => {
-  const token = localStorage.getItem("token");
-
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
-    method: "GET",
-    headers: {
-      Authorization: token,
-      "Content-Type": "application/json",
-    },
-  });
-  return await res.json();
-};
+export const fetchLastGame = async () => await get(`api/game`);
 
 export const saveScore = async () => {
   const token = localStorage.getItem("token");
@@ -67,17 +57,8 @@ export const saveScore = async () => {
   }
 };
 
-export const fetchScores = async () => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/points`, {
-    method: "GET",
-    headers: {
-      Authorization: localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
-  });
-  const data = (await res.json()) as GetScoresResponse;
-  return data;
-};
+export const fetchScores = async () =>
+  await get<GetScoresResponse>(`api/points`);
 
 export const deleteLastGame = async () => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {

@@ -17,8 +17,9 @@ const Dialog = ({
       tabIndex={1}
       className="dialog fixed text-white w-4/5 opacity-80 focus:opacity-95 bg-gray-900 pt-5 pb-5 rounded-3xl max-w-xl z-50"
     >
-      <h1 className="text-center text-xl">{title}</h1>
-      <hr />
+      <div className="flex justify-center border-b-white border-b-2 pb-2">
+        <h1 className="text-xl">{title}</h1>
+      </div>
       <div className="w-11/12 m-auto mt-3 mb-3 grid gap-3 max-h-screen-1/4 overflow-y-auto">
         {children}
       </div>
