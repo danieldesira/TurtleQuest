@@ -21,6 +21,9 @@ const GameSection = ({ isNewGame, gameData }: Props) => {
   const isLoadingLevel = useSelector(
     (state: RootState) => state.game.isLoadingLevel.value
   );
+  const currentLevelNo = useSelector(
+    (state: RootState) => state.levels.level.value
+  );
 
   const dispatch = useDispatch();
 
@@ -79,7 +82,9 @@ const GameSection = ({ isNewGame, gameData }: Props) => {
           onWheel={handleWheel}
         ></canvas>
       </div>
-      {isLoadingLevel ? <LoadingIndicator /> : null}
+      {isLoadingLevel ? (
+        <LoadingIndicator message={`Loading level ${currentLevelNo}`} />
+      ) : null}
       <GameHeader />
       <NextLevelIndication />
       <ControlGroup />

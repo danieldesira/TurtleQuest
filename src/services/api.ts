@@ -1,3 +1,4 @@
+import GameData from "../restoreGame/GameData";
 import stringifyGameData from "../restoreGame/stringifyGameData";
 import store from "../store";
 import { GetScoresResponse, LoginResponse, Player, Settings } from "./types";
@@ -32,7 +33,7 @@ export const saveGame = async () => {
   }
 };
 
-export const fetchLastGame = async () => await get(`api/game`);
+export const fetchLastGame = async () => await get<GameData>(`api/game`);
 
 export const saveScore = async () => {
   const token = localStorage.getItem("token");

@@ -61,14 +61,6 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
   store.dispatch(levelUp());
   if (levelMap[store.getState().levels.level.value]) {
     await Game.instance.loadNewLevel(true);
-    store.dispatch(
-      updateDialogContent({
-        dialog: {
-          title: "Level Up",
-          text: [`Welcome to level ${store.getState().levels.level.value}`],
-        },
-      })
-    );
     return LevelChangeTypes.NewLevel;
   } else {
     store.dispatch(triggerMenuMode());

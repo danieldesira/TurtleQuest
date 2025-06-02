@@ -13,14 +13,6 @@ import Settings from "./membersArea/settings/Settings";
 import { setProfile } from "../features/gameState/gameStateReducer";
 import Profile from "./membersArea/profile/Profile";
 
-declare global {
-  interface Window {
-    google: {
-      accounts: { id: { initialize: Function; renderButton: Function } };
-    };
-  }
-}
-
 const LoginButtons = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
