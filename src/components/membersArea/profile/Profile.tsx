@@ -18,6 +18,15 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
 
   const profileConfig: Input[] = [
     {
+      label: "Profile Picture",
+      name: "profile_picture",
+      type: "imageUpload",
+      value: profile.profile_pic,
+      required: false,
+      maxLength: 0,
+      readonly: false,
+    },
+    {
       label: "Name",
       name: "name",
       type: "text",
