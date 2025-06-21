@@ -14,6 +14,10 @@ const SingleInput = ({
   maxLength,
   readonly,
 }: Props) => {
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleImageClick = () => fileInputRef.current?.click();
+
   const inputTypes = {
     radio: options
       ? options.map((o, index) => (
@@ -40,6 +44,16 @@ const SingleInput = ({
           src={value || "/placeholder.png"}
           alt="Uploaded"
           className="w-32 h-32 object-cover mb-2"
+          onClick={handleImageClick}
+        />
+        <input
+          type="file"
+          ref={fileInputRef}
+          id={name}
+          name={name}
+          accept="image/*"
+          className="hidden"
+          onChange={handleChange}
         />
       </div>
     ),

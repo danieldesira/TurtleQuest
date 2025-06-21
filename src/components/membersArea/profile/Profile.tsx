@@ -54,18 +54,28 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
 
   const handleChange = (event: React.ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
-    dispatch(setProfile({ profile: { ...profile, [name]: value } }));
+    if (name === "profile_picture") {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          dispatch(
+            setProfile({ profile: { ...profile, profile_pic: reader.result } })
+          );
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+    } else {
+      dispatch(setProfile({ profile: { ...profile, [name]: value } }));
+    }
   };
 
   const handleSubmit = async () => {
     setShowDialog(false);
 
     try {
-      await updateProfile({
-        name: profile.name,
-        email: profile.email,
-        date_of_birth: profile.date_of_birth,
-      });
+      await updateProfile(profile);
     } catch {
       dispatch(
         updateDialogContent({
