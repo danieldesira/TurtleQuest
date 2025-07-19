@@ -7,6 +7,7 @@
     - Update dependencies
     - Restructure and update Redux store
     - Refactor ``Dialog`` component and introduce ``FormDialog``
+    - Implement better vertical centering for dialogs
 * Player authentication:
     - Add Google login
     - Introduce high scores

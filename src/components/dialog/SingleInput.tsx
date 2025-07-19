@@ -19,28 +19,32 @@ const SingleInput = ({
   const handleImageClick = () => fileInputRef.current?.click();
 
   const inputTypes = {
-    radio: options
-      ? options.map((o, index) => (
-          <div key={o} className="flex gap-3 items-center">
-            <input
-              className="appearance-none w-4 h-4 border-pink-600 border-2 rounded-sm checked:bg-pink-600 focus:ring-2 focus:ring-pink-400/50"
-              key={index}
-              type="radio"
-              id={`${name}-${o}`}
-              name={name}
-              value={o}
-              defaultChecked={o === value}
-              onChange={handleChange}
-            />
-            <label htmlFor={`${name}-${o}`} className="text-lg">
-              {o}
-            </label>
-          </div>
-        ))
-      : null,
+    radio: (
+      <div className="flex gap-3">
+        {options &&
+          options.map((o, index) => (
+            <div key={o} className="flex gap-3 items-center">
+              <input
+                className="appearance-none w-4 h-4 border-pink-600 border-2 rounded-sm checked:bg-pink-600 focus:ring-2 focus:ring-pink-400/50  px-2 py-1"
+                key={index}
+                type="radio"
+                id={`${name}-${o}`}
+                name={name}
+                value={o}
+                defaultChecked={o === value}
+                onChange={handleChange}
+              />
+              <label htmlFor={`${name}-${o}`} className="text-lg">
+                {o}
+              </label>
+            </div>
+          ))}
+      </div>
+    ),
     imageUpload: (
       <div className="flex flex-col items-center">
         <img
+          role="button"
           src={value || "/placeholder.png"}
           alt="Uploaded"
           className="w-32 h-32 object-cover mb-2"
@@ -63,7 +67,7 @@ const SingleInput = ({
         id={name}
         name={name}
         value={value}
-        className="rounded-sm h-8 w-52 text-pink-600 border-pink-600 border-2 bg-transparent accent-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-400/50"
+        className="rounded-sm h-8 w-52 text-pink-600 border-pink-600 border-2 bg-gray-800 accent-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-400/50 px-3"
         required={required}
         aria-required={required}
         aria-autocomplete="none"
@@ -76,8 +80,8 @@ const SingleInput = ({
   };
 
   return (
-    <div className="flex gap-5 justify-center items-center">
-      <label htmlFor={name} className="text-xl">
+    <div className="flex flex-col gap-1 justify-center items-center">
+      <label htmlFor={name} className="text-xl font-semibold">
         {label}
       </label>
       {inputTypes[type] || inputTypes.default}

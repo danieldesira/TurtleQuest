@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 .dialog {
-    top: 30%;
-    left: max(10%, calc(50% - 300px));
+  top: 50%;
+  transform: translateY(-50%);
+  left: max(10%, calc(50% - 300px));
 }

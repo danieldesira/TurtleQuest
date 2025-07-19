@@ -8,10 +8,11 @@ import {
 } from "../features/authentication/authenticationReducer";
 import RootState from "../features/RootState";
 import { IoLogOut } from "react-icons/io5";
-import { RiProfileFill, RiSettings5Fill } from "react-icons/ri";
+import { RiSettings5Fill } from "react-icons/ri";
 import Settings from "./membersArea/settings/Settings";
 import { setProfile } from "../features/gameState/gameStateReducer";
 import Profile from "./membersArea/profile/Profile";
+import { FaUser } from "react-icons/fa6";
 
 const LoginButtons = () => {
   const dispatch = useDispatch();
@@ -82,23 +83,23 @@ const LoginButtons = () => {
   const handleProfile = () => setShowProfile(true);
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-center">
       {isAuthenticated ? (
         <>
           <RiSettings5Fill
             role="button"
             onClick={handleSettings}
-            className="text-green-700 w-14 h-14"
+            className="text-green-700 text-4xl"
           />
-          <RiProfileFill
+          <FaUser
             role="button"
             onClick={handleProfile}
-            className="text-green-700 w-14 h-14"
+            className="text-green-700 text-4xl"
           />
           <IoLogOut
             role="button"
             onClick={handleLogout}
-            className="text-red-500 w-14 h-14"
+            className="text-red-500 text-4xl"
           />
           <Settings showDialog={showSettings} setShowDialog={setShowSettings} />
           <Profile showDialog={showProfile} setShowDialog={setShowProfile} />

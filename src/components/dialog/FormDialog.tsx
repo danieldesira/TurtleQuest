@@ -20,7 +20,7 @@ const FormDialog = ({
     <form
       action="#"
       method="post"
-      className="flex flex-col gap-5 p-2"
+      className="flex flex-col gap-3 p-2"
       onSubmit={handleSubmit}
     >
       {inputs.map(

@@ -7,7 +7,6 @@ import Game from "../../Game";
 import parseGameData from "../../restoreGame/parseGameData";
 import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../LoginButtons";
-import { fetchLastGame } from "../../services/api";
 import LeaderBoard from "../scores/LeaderBoard";
 import RootState from "../../features/RootState";
 import InfoDisplay from "../InfoDisplay";
@@ -37,12 +36,6 @@ const Menu = ({ setIsNewGame }: Props) => {
 
   const handleAbout = () => setShowAbout((_) => true);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchLastGame().then((res) => setLastGame(res));
-    }
-  }, []);
-
   return (
     <>
       <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5 items-center">
@@ -57,7 +50,7 @@ const Menu = ({ setIsNewGame }: Props) => {
               target="_blank"
               title="Follow us on Instagram"
             >
-              <FaInstagram className="w-14 h-14" />
+              <FaInstagram className="text-4xl" />
             </a>
             <LoginButtons />
           </div>

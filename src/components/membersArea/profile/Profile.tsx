@@ -38,7 +38,6 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
       label: "Email",
       name: "email",
       type: "email",
-      required: true,
       maxLength: 120,
       value: profile.email,
       readonly: true,
@@ -58,11 +57,10 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
         const reader = new FileReader();
-        reader.onloadend = () => {
+        reader.onloadend = () =>
           dispatch(
             setProfile({ profile: { ...profile, profile_pic: reader.result } })
           );
-        };
         reader.readAsDataURL(file);
         return;
       }
@@ -89,14 +87,16 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
     }
   };
 
-  return showDialog ? (
-    <FormDialog
-      title="Profile"
-      inputs={profileConfig}
-      handleInputChange={handleChange}
-      handleSubmit={handleSubmit}
-    />
-  ) : null;
+  return (
+    showDialog && (
+      <FormDialog
+        title="Profile"
+        inputs={profileConfig}
+        handleInputChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+    )
+  );
 };
 
 export default Profile;

@@ -11,16 +11,16 @@ const Dialog = ({
   children,
   type = "default",
   handleOk,
-}: React.PropsWithChildren<Props>) => {
-  const dialogJsx = (
+}: React.PropsWithChildren<Props>) =>
+  title && (
     <div
       tabIndex={1}
       className="dialog fixed text-white w-4/5 opacity-80 focus:opacity-95 bg-gray-900 pt-5 pb-5 rounded-3xl max-w-xl z-50"
     >
       <div className="flex justify-center border-b-white border-b-2 pb-2">
-        <h1 className="text-xl">{title}</h1>
+        <h1 className="text-xl font-extrabold">{title}</h1>
       </div>
-      <div className="w-11/12 m-auto mt-3 mb-3 grid gap-3 max-h-screen-1/4 overflow-y-auto">
+      <div className="w-11/12 m-auto mt-3 mb-3 grid gap-3 max-h-screen-1/2 overflow-y-auto">
         {children}
       </div>
       {type !== "form" ? (
@@ -39,8 +39,5 @@ const Dialog = ({
       ) : null}
     </div>
   );
-
-  return <>{title ? dialogJsx : null}</>;
-};
 
 export default Dialog;
