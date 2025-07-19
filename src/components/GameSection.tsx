@@ -15,9 +15,9 @@ import { saveGame } from "../services/api";
 import { triggerMenuMode } from "../features/gameState/gameStateReducer";
 import GameData from "../restoreGame/GameData";
 
-type Props = { isNewGame: boolean; gameData: GameData };
+type Props = { isNewGame: boolean };
 
-const GameSection = ({ isNewGame, gameData }: Props) => {
+const GameSection = ({ isNewGame }: Props) => {
   const isLoadingLevel = useSelector(
     (state: RootState) => state.game.isLoadingLevel.value
   );
@@ -41,6 +41,10 @@ const GameSection = ({ isNewGame, gameData }: Props) => {
 
     const canvas = canvasRef.current;
 
+    // Todo: Implement a new localStorage based game data
+    // This is a placeholder for the game data that would be restored
+    const gameData = {} as GameData;
+
     window.addEventListener("resize", () => resizeCanvas(canvas), { signal });
     window.addEventListener("beforeunload", handleBeforeUnload, { signal });
 
@@ -54,9 +58,9 @@ const GameSection = ({ isNewGame, gameData }: Props) => {
         dispatch(triggerMenuMode());
       });
 
-    const interval = window.setInterval(async () => {
-      await saveGame();
-    }, 30000);
+    const interval = window.setInterval(() => {
+      //todo: Save game data periodically to localStorage
+    }, 500);
 
     return () => {
       abortController.abort();

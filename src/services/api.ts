@@ -33,8 +33,6 @@ export const saveGame = async () => {
   }
 };
 
-export const fetchLastGame = async () => await get<GameData>(`api/game`);
-
 export const saveScore = async () => {
   const token = localStorage.getItem("token");
   if (token) {
