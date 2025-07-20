@@ -29,6 +29,8 @@ const stringifyGameData = (): string => {
     }),
     levelNo: store.getState().levels.level.value,
     xp: store.getState().turtleMonitor.turtle.xp.value,
+    timestamp: new Date(),
+    userEmail: store.getState().game.profile.value.email,
   };
   return JSON.stringify(data);
 };

@@ -1,3 +1,5 @@
+import GameData from "../restoreGame/GameData";
+
 export type Settings = {
   controlPosition: "Left" | "Right";
 };
@@ -30,4 +32,5 @@ export type LoginResponse = {
   message: string;
   player: Player;
   isNewPlayer: boolean;
+  lastGame?: GameData;
 };

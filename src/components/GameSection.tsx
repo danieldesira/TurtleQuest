@@ -11,9 +11,9 @@ import ControlGroup from "./controls/ControlGroup";
 import Game from "../Game";
 import animate from "../utils/animate";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
-import { saveGame } from "../services/api";
 import { triggerMenuMode } from "../features/gameState/gameStateReducer";
 import GameData from "../restoreGame/GameData";
+import stringifyGameData from "../restoreGame/stringifyGameData";
 
 type Props = { isNewGame: boolean };
 
@@ -41,9 +41,9 @@ const GameSection = ({ isNewGame }: Props) => {
 
     const canvas = canvasRef.current;
 
-    // Todo: Implement a new localStorage based game data
-    // This is a placeholder for the game data that would be restored
-    const gameData = {} as GameData;
+    const gameData = JSON.parse(
+      localStorage.getItem("lastGame") || "{}"
+    ) as GameData;
 
     window.addEventListener("resize", () => resizeCanvas(canvas), { signal });
     window.addEventListener("beforeunload", handleBeforeUnload, { signal });
@@ -59,7 +59,7 @@ const GameSection = ({ isNewGame }: Props) => {
       });
 
     const interval = window.setInterval(() => {
-      //todo: Save game data periodically to localStorage
+      localStorage.setItem("lastGame", stringifyGameData());
     }, 500);
 
     return () => {

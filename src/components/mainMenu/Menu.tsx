@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
 import AboutDialog from "../dialog/AboutDialog";
@@ -11,16 +11,20 @@ import LeaderBoard from "../scores/LeaderBoard";
 import RootState from "../../features/RootState";
 import InfoDisplay from "../InfoDisplay";
 import { triggerGameMode } from "../../features/gameState/gameStateReducer";
+import GameData from "../../restoreGame/GameData";
 
-type Props = { setIsNewGame: Function };
+type Props = { setIsNewGame: Dispatch<React.SetStateAction<boolean>> };
 
 const Menu = ({ setIsNewGame }: Props) => {
   const dispatch = useDispatch();
   const [showAbout, setShowAbout] = useState<boolean>(false);
-  const [lastGame, setLastGame] = useState();
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
+
+  const lastGame = JSON.parse(
+    localStorage.getItem("lastGame") || "{}"
+  ) as GameData;
 
   const handleNewGame = () => {
     setIsNewGame(true);
@@ -34,7 +38,7 @@ const Menu = ({ setIsNewGame }: Props) => {
     parseGameData(JSON.stringify(lastGame));
   };
 
-  const handleAbout = () => setShowAbout((_) => true);
+  const handleAbout = () => setShowAbout(true);
 
   return (
     <>
@@ -60,15 +64,15 @@ const Menu = ({ setIsNewGame }: Props) => {
           <InfoDisplay title="Leaderboard" content={<LeaderBoard />} />
         ) : null}
         <div className="flex flex-col items-center gap-5">
-          {lastGame ? (
+          {lastGame && (
             <MenuButton callback={handleContinueGame} text="Continue Game" />
-          ) : null}
+          )}
           <MenuButton callback={handleNewGame} text="New Game" />
-          {lastGame ? (
+          {lastGame && (
             <span className="text-blue-800 font-light">
               Caution: Starting a new game will erase current game progress!
             </span>
-          ) : null}
+          )}
         </div>
         <EditionSection />
       </div>

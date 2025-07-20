@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../services/api";
-import {
-  authenticate,
-  logout,
-} from "../features/authentication/authenticationReducer";
+import { authenticate } from "../features/authentication/authenticationReducer";
 import RootState from "../features/RootState";
-import { IoLogOut } from "react-icons/io5";
-import { RiSettings5Fill } from "react-icons/ri";
-import Settings from "./membersArea/settings/Settings";
 import { setProfile } from "../features/gameState/gameStateReducer";
-import Profile from "./membersArea/profile/Profile";
-import { FaUser } from "react-icons/fa6";
+import MembersArea from "./membersArea/MembersArea";
 
 const LoginButtons = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
-
-  const [showSettings, setShowSettings] = useState<boolean>(false);
-  const [showProfile, setShowProfile] = useState<boolean>(false);
 
   useEffect(() => {
     window.google.accounts.id.initialize({
@@ -61,6 +51,7 @@ const LoginButtons = () => {
   }) => {
     try {
       const loginResult = await login(credential);
+
       if (loginResult.player) {
         localStorage.setItem("token", credential);
         dispatch(setProfile({ profile: loginResult.player }));
@@ -68,45 +59,18 @@ const LoginButtons = () => {
       } else {
         showAuthError();
       }
+
+      if (loginResult.lastGame) {
+        localStorage.setItem("lastGame", JSON.stringify(loginResult.lastGame));
+      }
     } catch {
       showAuthError();
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    dispatch(logout());
-  };
-
-  const handleSettings = () => setShowSettings(true);
-
-  const handleProfile = () => setShowProfile(true);
-
   return (
     <div className="flex gap-2 items-center">
-      {isAuthenticated ? (
-        <>
-          <RiSettings5Fill
-            role="button"
-            onClick={handleSettings}
-            className="text-green-700 text-4xl"
-          />
-          <FaUser
-            role="button"
-            onClick={handleProfile}
-            className="text-green-700 text-4xl"
-          />
-          <IoLogOut
-            role="button"
-            onClick={handleLogout}
-            className="text-red-500 text-4xl"
-          />
-          <Settings showDialog={showSettings} setShowDialog={setShowSettings} />
-          <Profile showDialog={showProfile} setShowDialog={setShowProfile} />
-        </>
-      ) : (
-        <div id="googleSignInButton"></div>
-      )}
+      {isAuthenticated ? <MembersArea /> : <div id="googleSignInButton"></div>}
     </div>
   );
 };
