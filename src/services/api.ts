@@ -1,5 +1,3 @@
-import GameData from "../restoreGame/GameData";
-import stringifyGameData from "../restoreGame/stringifyGameData";
 import store from "../store";
 import { GetScoresResponse, LoginResponse, Player, Settings } from "./types";
 import { get } from "./utils";
@@ -25,7 +23,7 @@ export const saveGame = async () => {
         Authorization: token,
         "Content-Type": "application/json",
       },
-      body: stringifyGameData(),
+      body: localStorage.getItem("lastGame")!,
     });
     return res.ok;
   } else {

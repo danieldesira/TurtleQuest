@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
 import AboutDialog from "../dialog/AboutDialog";
@@ -12,6 +12,8 @@ import RootState from "../../features/RootState";
 import InfoDisplay from "../InfoDisplay";
 import { triggerGameMode } from "../../features/gameState/gameStateReducer";
 import GameData from "../../restoreGame/GameData";
+import { saveGame } from "../../services/api";
+import { updateDialogContent } from "../../features/dialogs/dialogReducer";
 
 type Props = { setIsNewGame: Dispatch<React.SetStateAction<boolean>> };
 
@@ -21,10 +23,9 @@ const Menu = ({ setIsNewGame }: Props) => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
+  const profile = useSelector((state: RootState) => state.game.profile.value);
 
-  const lastGame = JSON.parse(
-    localStorage.getItem("lastGame") || "{}"
-  ) as GameData;
+  const isLastGameAvailable = !!localStorage.getItem("lastGame");
 
   const handleNewGame = () => {
     setIsNewGame(true);
@@ -35,17 +36,47 @@ const Menu = ({ setIsNewGame }: Props) => {
   const handleContinueGame = () => {
     setIsNewGame(false);
     dispatch(triggerGameMode());
-    parseGameData(JSON.stringify(lastGame));
+    const lastGame = localStorage.getItem("lastGame");
+    parseGameData(lastGame);
   };
 
   const handleAbout = () => setShowAbout(true);
+
+  const uploadLastGame = async () => {
+    const lastGame = JSON.parse(
+      localStorage.getItem("lastGame") || "{}"
+    ) as GameData;
+    if (isAuthenticated && profile.email === lastGame.userEmail) {
+      try {
+        await saveGame();
+      } catch {
+        dispatch(
+          updateDialogContent({
+            dialog: {
+              title: "Error",
+              text: ["Failed to upload last game! Please try again later."],
+              type: "error",
+            },
+          })
+        );
+      }
+    }
+  };
+
+  useEffect(() => {
+    uploadLastGame();
+  }, [isAuthenticated]);
 
   return (
     <>
       <div className="fixed top-0 left-0 h-full w-full flex flex-col justify-between bg-cute bg-no-repeat bg-center p-5 items-center">
         <div className="flex flex-col gap-5">
           <div className="flex gap-5 justify-center items-center">
-            <h1 className="text-5xl" role="button" onClick={handleAbout}>
+            <h1
+              className="text-5xl font-bold"
+              role="button"
+              onClick={handleAbout}
+            >
               <span className="text-emerald-300">Turtle</span>{" "}
               <span className="text-cyan-500">Quest</span>
             </h1>
@@ -64,11 +95,11 @@ const Menu = ({ setIsNewGame }: Props) => {
           <InfoDisplay title="Leaderboard" content={<LeaderBoard />} />
         ) : null}
         <div className="flex flex-col items-center gap-5">
-          {lastGame && (
+          {isLastGameAvailable && (
             <MenuButton callback={handleContinueGame} text="Continue Game" />
           )}
           <MenuButton callback={handleNewGame} text="New Game" />
-          {lastGame && (
+          {isLastGameAvailable && (
             <span className="text-blue-800 font-light">
               Caution: Starting a new game will erase current game progress!
             </span>

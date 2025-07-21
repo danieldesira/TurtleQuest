@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../services/api";
@@ -6,12 +6,15 @@ import { authenticate } from "../features/authentication/authenticationReducer";
 import RootState from "../features/RootState";
 import { setProfile } from "../features/gameState/gameStateReducer";
 import MembersArea from "./membersArea/MembersArea";
+import LoadingIndicator from "./LoadingIndicator";
 
 const LoginButtons = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     window.google.accounts.id.initialize({
@@ -50,6 +53,8 @@ const LoginButtons = () => {
     credential: string;
   }) => {
     try {
+      setIsLoading(true);
+
       const loginResult = await login(credential);
 
       if (loginResult.player) {
@@ -65,11 +70,14 @@ const LoginButtons = () => {
       }
     } catch {
       showAuthError();
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="flex gap-2 items-center">
+      {isLoading && <LoadingIndicator message="Logging in..." />}
       {isAuthenticated ? <MembersArea /> : <div id="googleSignInButton"></div>}
     </div>
   );

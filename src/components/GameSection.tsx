@@ -24,6 +24,9 @@ const GameSection = ({ isNewGame }: Props) => {
   const currentLevelNo = useSelector(
     (state: RootState) => state.levels.level.value
   );
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.authentication.isAuthenticated
+  );
 
   const dispatch = useDispatch();
 
@@ -35,21 +38,29 @@ const GameSection = ({ isNewGame }: Props) => {
     event.returnValue = false; // Required by Chrome
   };
 
+  const saveGameProgress = () => {
+    if (isAuthenticated) {
+      localStorage.setItem("lastGame", stringifyGameData());
+    }
+  };
+
   useEffect(() => {
     const abortController = new AbortController();
     const { signal } = abortController;
 
     const canvas = canvasRef.current;
 
-    const gameData = JSON.parse(
-      localStorage.getItem("lastGame") || "{}"
-    ) as GameData;
-
     window.addEventListener("resize", () => resizeCanvas(canvas), { signal });
     window.addEventListener("beforeunload", handleBeforeUnload, { signal });
 
     Game.instance
-      .start({ canvas, isNewGame, gameData })
+      .start({
+        canvas,
+        isNewGame,
+        gameData: JSON.parse(
+          localStorage.getItem("lastGame") || "{}"
+        ) as GameData,
+      })
       .then(async () => await animate(canvas))
       .catch((error) => {
         dispatch(
@@ -58,9 +69,7 @@ const GameSection = ({ isNewGame }: Props) => {
         dispatch(triggerMenuMode());
       });
 
-    const interval = window.setInterval(() => {
-      localStorage.setItem("lastGame", stringifyGameData());
-    }, 500);
+    const interval = window.setInterval(saveGameProgress, 500);
 
     return () => {
       abortController.abort();
