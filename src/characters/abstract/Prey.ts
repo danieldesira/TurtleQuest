@@ -1,5 +1,5 @@
 import Game from "../../Game";
-import Directions from "../../enums/Directions";
+import { Directions } from "../../constants";
 import { eat } from "../../features/turtleMonitor/turtleReducers";
 import store from "../../store";
 import IPrey from "../interfaces/IPrey";

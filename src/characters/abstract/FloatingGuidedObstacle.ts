@@ -1,5 +1,5 @@
+import { Direction, Directions } from "../../constants";
 import Game from "../../Game";
-import Directions from "../../enums/Directions";
 import checkBoundingBoxCollision, {
   getCharacterBoundingBox,
 } from "../../utils/checkCollision";
@@ -7,8 +7,8 @@ import { generateRandomBit } from "../../utils/generic";
 import Obstacle from "./Obstacle";
 
 abstract class FloatingGuidedObstacle extends Obstacle {
-  protected _direction: Directions;
-  
+  protected _direction: Direction;
+
   protected get initialPositionXFrom(): number {
     return Game.instance.level.bgImg.width / 2;
   }

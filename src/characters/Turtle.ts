@@ -1,5 +1,5 @@
+import { Directions } from "../constants";
 import Game from "../Game";
-import Directions from "../enums/Directions";
 import Character from "./abstract/Character";
 import CharacterOptions from "./interfaces/CharacterOptions";
 import IMainCharacter from "./interfaces/IMainCharacter";

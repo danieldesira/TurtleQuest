@@ -1,8 +1,12 @@
-import Directions from "../../enums/Directions";
+import { Direction } from "../../constants";
 
 interface ICharacter {
   loadImage(): Promise<void>;
-  paint(context: CanvasRenderingContext2D, bgOffsetX?: number, bgOffsetY?: number): void;
+  paint(
+    context: CanvasRenderingContext2D,
+    bgOffsetX?: number,
+    bgOffsetY?: number
+  ): void;
   get x(): number;
   get y(): number;
   set x(x: number);
@@ -10,8 +14,8 @@ interface ICharacter {
   get image(): HTMLImageElement;
   get height(): number;
   get width(): number;
-  get direction(): Directions;
-  set direction(direction: Directions);
+  get direction(): Direction;
+  set direction(direction: Direction);
 }
 
 export default ICharacter;

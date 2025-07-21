@@ -1,8 +1,8 @@
-import Directions from "../../enums/Directions";
+import { Direction } from "../../constants";
 
 interface IMainCharacter {
-  resetPosition(): void; 
-  get direction(): Directions;
+  resetPosition(): void;
+  get direction(): Direction;
   moveUp(): void;
   moveDown(): void;
   moveLeft(): void;

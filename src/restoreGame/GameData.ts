@@ -1,4 +1,4 @@
-import Directions from "../enums/Directions";
+import { Direction } from "../constants";
 
 interface GameData {
   turtle: TurtleData;
@@ -12,7 +12,7 @@ interface GameData {
 interface TurtleData {
   x: number;
   y: number;
-  direction: Directions;
+  direction: Direction;
   oxygen: number;
   food: number;
   health: number;
@@ -23,7 +23,7 @@ interface CharacterData {
   type: string;
   x: number;
   y: number;
-  direction: Directions;
+  direction: Direction;
 }
 
 export default GameData;

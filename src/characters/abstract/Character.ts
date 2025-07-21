@@ -1,5 +1,5 @@
+import { Direction, Directions } from "../../constants";
 import Game from "../../Game";
-import Directions from "../../enums/Directions";
 import ICharacter from "../interfaces/ICharacter";
 
 abstract class Character implements ICharacter {
@@ -10,7 +10,7 @@ abstract class Character implements ICharacter {
   protected abstract readonly _imageFilename: string;
   protected abstract readonly _width: number;
   protected abstract readonly _height: number;
-  protected _direction: Directions = Directions.Right;
+  protected _direction: Direction = Directions.Right;
 
   /**
    * Loads image for character.
@@ -89,7 +89,7 @@ abstract class Character implements ICharacter {
     return this._direction;
   }
 
-  set direction(direction: Directions) {
+  set direction(direction: Direction) {
     this._direction = direction;
   }
 

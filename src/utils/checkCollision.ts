@@ -1,5 +1,5 @@
 import ICharacter from "../characters/interfaces/ICharacter";
-import Directions from "../enums/Directions";
+import { Directions } from "../constants";
 
 interface BoundingBox {
   minX: number;
@@ -33,13 +33,13 @@ const checkBoundingBoxCollision = (
 };
 
 /**
- * Calculates bounding box for a given character depending on its 
+ * Calculates bounding box for a given character depending on its
  * current direction.
  * @param character The character
  * @returns Character bounding box
  * @author Daniel Desira
  */
-const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
+export const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
   let box: BoundingBox = null;
   switch (character.direction) {
     case Directions.Down:
@@ -79,5 +79,3 @@ const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
 };
 
 export default checkBoundingBoxCollision;
-
-export { getCharacterBoundingBox };
