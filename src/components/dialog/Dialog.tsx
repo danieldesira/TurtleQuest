@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { updateDialogContent } from "../../features/dialogs/dialogReducer";
 
 type Props = {
   title: string;
@@ -11,11 +13,20 @@ const Dialog = ({
   children,
   type = "default",
   handleOk,
-}: React.PropsWithChildren<Props>) =>
-  title && (
-    <div
-      tabIndex={1}
+}: React.PropsWithChildren<Props>) => {
+  const dispatch = useDispatch();
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Escape") {
+      dispatch(updateDialogContent({ dialog: { title: "", text: [] } }));
+    }
+  };
+
+  return (
+    <dialog
+      open={!!title}
       className="dialog fixed text-white w-4/5 opacity-80 focus:opacity-95 bg-gray-900 pt-5 pb-5 rounded-3xl max-w-xl z-50"
+      onKeyDown={handleKeyDown}
     >
       <div className="flex justify-center border-b-white border-b-2 pb-2">
         <h1 className="text-xl font-extrabold">{title}</h1>
@@ -37,7 +48,8 @@ const Dialog = ({
           </button>
         </div>
       ) : null}
-    </div>
+    </dialog>
   );
+};
 
 export default Dialog;

@@ -6,14 +6,17 @@
     - Configure project to read environment variables
     - Update dependencies
     - Restructure and update Redux store
-    - Refactor ``Dialog`` component and introduce ``FormDialog``
-    - Implement better vertical centering for dialogs
 * Player authentication:
     - Add Google login
     - Introduce high scores
     - Move settings to online account
     - Move game progress to online account
     - Introduce player profiles
+    - Introduce periodical game progress saves in ``localStorage``
+* Dialogs:
+    - Refactor ``Dialog`` component and introduce ``FormDialog``
+    - Implement better vertical centering
+    - Allow user to close through ``Escape`` key
 
 # 0.6.2 Beta - 21/09/2024 17:00 UTC+1
 * Organised md documents into sections
