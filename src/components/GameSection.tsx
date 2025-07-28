@@ -27,6 +27,9 @@ const GameSection = ({ isNewGame }: Props) => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
+  const isSaving = useSelector(
+    (state: RootState) => state.game.state.value === "saving"
+  );
 
   const dispatch = useDispatch();
 
@@ -101,6 +104,7 @@ const GameSection = ({ isNewGame }: Props) => {
       <GameHeader />
       <NextLevelIndication />
       <ControlGroup />
+      {isSaving && <LoadingIndicator message="Saving game progress..." />}
     </div>
   );
 };

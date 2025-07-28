@@ -1,6 +1,8 @@
 import Game from "./Game";
-import { updateDialogContent } from "./features/dialogs/dialogReducer";
-import { triggerMenuMode } from "./features/gameState/gameStateReducer";
+import {
+  triggerMenuMode,
+  triggerSavingMode,
+} from "./features/gameState/gameStateReducer";
 import { levelUp } from "./features/levels/levelReducer";
 import {
   breath,
@@ -31,8 +33,10 @@ const checkTurtle = async (): Promise<LevelChangeTypes> => {
     turtleState.oxygen.value <= 0 ||
     turtleState.life.value <= 0
   ) {
+    store.dispatch(triggerSavingMode());
+    await deleteLastGameAndSaveScore();
+
     store.dispatch(triggerMenuMode());
-    await Promise.all([deleteLastGame(), saveScore()]);
     return LevelChangeTypes.GameOver;
   }
 
@@ -63,10 +67,17 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
     await Game.instance.loadNewLevel(true);
     return LevelChangeTypes.NewLevel;
   } else {
+    store.dispatch(triggerSavingMode());
+    await deleteLastGameAndSaveScore();
+
     store.dispatch(triggerMenuMode());
-    await Promise.all([deleteLastGame(), saveScore()]);
     return LevelChangeTypes.GameComplete;
   }
+};
+
+const deleteLastGameAndSaveScore = async (): Promise<void> => {
+  await Promise.all([deleteLastGame(), saveScore()]);
+  localStorage.removeItem("lastGame");
 };
 
 export default checkTurtle;

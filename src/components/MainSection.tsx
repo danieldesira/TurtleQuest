@@ -6,15 +6,12 @@ import GameSection from "./GameSection";
 
 const MainSection = () => {
   const gameState = useSelector((state: RootState) => state.game.state.value);
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.authentication.isAuthenticated
-  );
 
   const [isNewGame, setIsNewGame] = useState<boolean>(false);
 
   const screens = {
+    saving: <GameSection isNewGame={isNewGame} />,
     "in-progress": <GameSection isNewGame={isNewGame} />,
-    saving: <>Saving game...</>,
     menu: <Menu setIsNewGame={setIsNewGame} />,
   };
 
