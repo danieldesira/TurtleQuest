@@ -17,6 +17,7 @@
     - Refactor ``Dialog`` component and introduce ``FormDialog``
     - Implement better vertical centering
     - Allow user to close through ``Escape`` key
+    - Add 500ms transition on opacity
 
 # 0.6.2 Beta - 21/09/2024 17:00 UTC+1
 * Organised md documents into sections

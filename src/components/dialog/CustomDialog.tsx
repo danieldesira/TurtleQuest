@@ -1,7 +1,7 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../features/RootState";
 import Dialog from "./Dialog";
-import React from "react";
 import { updateDialogContent } from "../../features/dialogs/dialogReducer";
 
 const CustomDialog = () => {

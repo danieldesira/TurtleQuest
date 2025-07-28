@@ -95,11 +95,11 @@ const Menu = ({ setIsNewGame }: Props) => {
           <InfoDisplay title="Leaderboard" content={<LeaderBoard />} />
         ) : null}
         <div className="flex flex-col items-center gap-5">
-          {isLastGameAvailable && (
+          {isLastGameAvailable && isAuthenticated && (
             <MenuButton callback={handleContinueGame} text="Continue Game" />
           )}
           <MenuButton callback={handleNewGame} text="New Game" />
-          {isLastGameAvailable && (
+          {isLastGameAvailable && isAuthenticated && (
             <span className="text-blue-800 font-light">
               Caution: Starting a new game will erase current game progress!
             </span>
