@@ -7,12 +7,16 @@ import RootState from "../features/RootState";
 import { setProfile } from "../features/gameState/gameStateReducer";
 import MembersArea from "./membersArea/MembersArea";
 import LoadingIndicator from "./LoadingIndicator";
+import GameData from "../restoreGame/GameData";
+import { LoginResponse, Player } from "../services/types";
+import { useLogout } from "./membersArea/hooks";
 
 const LoginButtons = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
+  const logout = useLogout();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -47,6 +51,23 @@ const LoginButtons = () => {
       })
     );
 
+  const storeAccountGameDataLocally = (accountData: LoginResponse) =>
+    localStorage.setItem("lastGame", JSON.stringify(accountData.lastGame));
+
+  const checkGameData = (accountData: LoginResponse) => {
+    if (accountData.lastGame) {
+      const locallySavedGame = localStorage.getItem("lastGame");
+      if (locallySavedGame) {
+        const parsedLocalSavedGame = JSON.parse(locallySavedGame) as GameData;
+        if (parsedLocalSavedGame.timestamp <= accountData.lastGame.timestamp) {
+          storeAccountGameDataLocally(accountData);
+        }
+      } else {
+        storeAccountGameDataLocally(accountData);
+      }
+    }
+  };
+
   const handleGoogleResponse = async ({
     credential,
   }: {
@@ -65,11 +86,10 @@ const LoginButtons = () => {
         showAuthError();
       }
 
-      if (loginResult.lastGame) {
-        localStorage.setItem("lastGame", JSON.stringify(loginResult.lastGame));
-      }
+      checkGameData(loginResult);
     } catch {
       showAuthError();
+      logout();
     } finally {
       setIsLoading(false);
     }
@@ -77,7 +97,7 @@ const LoginButtons = () => {
 
   return (
     <div className="flex gap-2 items-center">
-      {isLoading && <LoadingIndicator message="Logging in..." />}
+      {isLoading && <LoadingIndicator message="Loading account data" />}
       {isAuthenticated ? <MembersArea /> : <div id="googleSignInButton"></div>}
     </div>
   );

@@ -4,19 +4,13 @@ import { IoLogOut } from "react-icons/io5";
 import { RiSettings5Fill } from "react-icons/ri";
 import Settings from "./settings/Settings";
 import Profile from "./profile/Profile";
-import { useDispatch } from "react-redux";
-import { logout } from "../../features/authentication/authenticationReducer";
+import { useLogout } from "./hooks";
 
 const MembersArea = () => {
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showProfile, setShowProfile] = useState<boolean>(false);
 
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    dispatch(logout());
-  };
+  const logout = useLogout();
 
   const handleSettings = () => setShowSettings(true);
 
@@ -36,7 +30,7 @@ const MembersArea = () => {
       />
       <IoLogOut
         role="button"
-        onClick={handleLogout}
+        onClick={logout}
         className="text-red-500 text-4xl"
       />
       <Settings showDialog={showSettings} setShowDialog={setShowSettings} />

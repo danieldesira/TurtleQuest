@@ -9,11 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import ControlGroup from "./controls/ControlGroup";
 import Game from "../Game";
-import animate from "../utils/animate";
+import animate from "../utils/runGameLoop";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { triggerMenuMode } from "../features/gameState/gameStateReducer";
 import GameData from "../restoreGame/GameData";
-import stringifyGameData from "../restoreGame/stringifyGameData";
 
 type Props = { isNewGame: boolean };
 
@@ -23,9 +22,6 @@ const GameSection = ({ isNewGame }: Props) => {
   );
   const currentLevelNo = useSelector(
     (state: RootState) => state.levels.level.value
-  );
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.authentication.isAuthenticated
   );
   const isSaving = useSelector(
     (state: RootState) => state.game.state.value === "saving"
@@ -39,12 +35,6 @@ const GameSection = ({ isNewGame }: Props) => {
     // Display default dialog before closing
     event.preventDefault();
     event.returnValue = false; // Required by Chrome
-  };
-
-  const saveGameProgress = () => {
-    if (isAuthenticated) {
-      localStorage.setItem("lastGame", stringifyGameData());
-    }
   };
 
   useEffect(() => {
@@ -72,17 +62,11 @@ const GameSection = ({ isNewGame }: Props) => {
         dispatch(triggerMenuMode());
       });
 
-    const interval = window.setInterval(saveGameProgress, 500);
-
     return () => {
       abortController.abort();
 
       if (Game.instance.animationTimer) {
         cancelAnimationFrame(Game.instance.animationTimer);
-      }
-
-      if (interval) {
-        clearInterval(interval);
       }
     };
   }, []);
@@ -104,7 +88,7 @@ const GameSection = ({ isNewGame }: Props) => {
       <GameHeader />
       <NextLevelIndication />
       <ControlGroup />
-      {isSaving && <LoadingIndicator message="Saving game progress..." />}
+      {isSaving && <LoadingIndicator message="Saving..." />}
     </div>
   );
 };

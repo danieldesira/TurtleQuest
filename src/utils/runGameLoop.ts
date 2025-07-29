@@ -4,13 +4,14 @@ import { LevelChangeTypes } from "../levels/levels";
 import checkTurtle from "../checkTurtle";
 import store from "../store";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
+import stringifyGameData from "../restoreGame/stringifyGameData";
 
 /**
  * Animates the game frame by frame depeding on outcomes of game logic.
  * @param canvas The canvas element.
  * @author Daniel Desira
  */
-const animate = async (canvas: HTMLCanvasElement) => {
+const runGameLoop = async (canvas: HTMLCanvasElement) => {
   try {
     const levelChangeType = await checkTurtle();
     if (
@@ -23,8 +24,10 @@ const animate = async (canvas: HTMLCanvasElement) => {
       Game.instance.turtle.paint(context);
       Game.instance.level.paintCharacters(context);
 
+      saveGameProgress();
+
       Game.instance.animationTimer = requestAnimationFrame(
-        async () => await animate(canvas)
+        async () => await runGameLoop(canvas)
       );
     } else if (levelChangeType === LevelChangeTypes.GameComplete) {
       store.dispatch(
@@ -56,4 +59,11 @@ const animate = async (canvas: HTMLCanvasElement) => {
   }
 };
 
-export default animate;
+const saveGameProgress = () => {
+  const isAuthenticated = store.getState().authentication.isAuthenticated;
+  if (isAuthenticated) {
+    localStorage.setItem("lastGame", stringifyGameData());
+  }
+};
+
+export default runGameLoop;
