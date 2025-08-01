@@ -1,33 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { saveGame } from "../services/api";
 import { IoIosArrowBack } from "react-icons/io";
-import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import {
   triggerMenuMode,
-  triggerSavingMode,
 } from "../features/gameState/gameStateReducer";
 
 const BackButton = () => {
   const dispatch = useDispatch();
 
-  const handleClick = async (event: React.MouseEvent) => {
+  const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();
-
-    dispatch(triggerSavingMode());
-    try {
-      await saveGame();
-    } catch {
-      dispatch(
-        updateDialogContent({
-          title: "Saving Error",
-          text: ["Game did not save successfully"],
-          type: "error",
-        })
-      );
-    } finally {
-      dispatch(triggerMenuMode());
-    }
+    dispatch(triggerMenuMode());
   };
 
   return (

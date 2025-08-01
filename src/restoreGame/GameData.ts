@@ -5,8 +5,6 @@ interface GameData {
   characters: CharacterData[];
   levelNo: number;
   xp: number;
-  timestamp: Date;
-  userEmail: string;
 }
 
 interface TurtleData {

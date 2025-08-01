@@ -33,4 +33,5 @@ export type LoginResponse = {
   player: Player;
   isNewPlayer: boolean;
   lastGame?: GameData;
+  lastGameSavedOn?: number;
 };

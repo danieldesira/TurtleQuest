@@ -13,11 +13,14 @@ import { useLogout } from "./membersArea/hooks";
 
 const LoginButtons = () => {
   const dispatch = useDispatch();
+  const logout = useLogout();
+
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
-  const logout = useLogout();
-
+  const userProfile = useSelector(
+    (state: RootState) => state.game.profile.value
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const LoginButtons = () => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !userProfile.email) {
       handleGoogleResponse({ credential: localStorage.getItem("token") });
     }
   }, []);
@@ -52,14 +55,21 @@ const LoginButtons = () => {
     );
 
   const storeAccountGameDataLocally = (accountData: LoginResponse) =>
-    localStorage.setItem("lastGame", JSON.stringify(accountData.lastGame));
+    localStorage.setItem(
+      `${userProfile.email}LastGame`,
+      JSON.stringify(accountData.lastGame)
+    );
 
   const checkGameData = (accountData: LoginResponse) => {
     if (accountData.lastGame) {
-      const locallySavedGame = localStorage.getItem("lastGame");
-      if (locallySavedGame) {
-        const parsedLocalSavedGame = JSON.parse(locallySavedGame) as GameData;
-        if (parsedLocalSavedGame.timestamp <= accountData.lastGame.timestamp) {
+      const locallySavedGame = localStorage.getItem(
+        `${userProfile.email}LastGame`
+      );
+      const localTimestamp = localStorage.getItem(
+        `${userProfile.email}LastGameTimestamp`
+      );
+      if (locallySavedGame && localTimestamp) {
+        if (Number(localTimestamp) <= accountData.lastGameSavedOn) {
           storeAccountGameDataLocally(accountData);
         }
       } else {

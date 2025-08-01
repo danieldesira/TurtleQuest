@@ -13,6 +13,7 @@ import animate from "../utils/runGameLoop";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { triggerMenuMode } from "../features/gameState/gameStateReducer";
 import GameData from "../restoreGame/GameData";
+import { getLastGameLocalStorage } from "../utils/lastGameLocalStorage";
 
 type Props = { isNewGame: boolean };
 
@@ -26,6 +27,7 @@ const GameSection = ({ isNewGame }: Props) => {
   const isSaving = useSelector(
     (state: RootState) => state.game.state.value === "saving"
   );
+  const profile = useSelector((state: RootState) => state.game.profile.value);
 
   const dispatch = useDispatch();
 
@@ -51,7 +53,7 @@ const GameSection = ({ isNewGame }: Props) => {
         canvas,
         isNewGame,
         gameData: JSON.parse(
-          localStorage.getItem("lastGame") || "{}"
+          getLastGameLocalStorage()
         ) as GameData,
       })
       .then(async () => await animate(canvas))

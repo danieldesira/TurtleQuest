@@ -14,18 +14,20 @@ import { triggerGameMode } from "../../features/gameState/gameStateReducer";
 import GameData from "../../restoreGame/GameData";
 import { saveGame } from "../../services/api";
 import { updateDialogContent } from "../../features/dialogs/dialogReducer";
+import { getLastGameLocalStorage } from "../../utils/lastGameLocalStorage";
 
 type Props = { setIsNewGame: Dispatch<React.SetStateAction<boolean>> };
 
 const Menu = ({ setIsNewGame }: Props) => {
   const dispatch = useDispatch();
+
   const [showAbout, setShowAbout] = useState<boolean>(false);
+  const [isLastGameAvailable, setIsLastGameAvailable] =
+    useState<boolean>(false);
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
   const profile = useSelector((state: RootState) => state.game.profile.value);
-
-  const isLastGameAvailable = !!localStorage.getItem("lastGame");
 
   const handleNewGame = () => {
     setIsNewGame(true);
@@ -36,19 +38,16 @@ const Menu = ({ setIsNewGame }: Props) => {
   const handleContinueGame = () => {
     setIsNewGame(false);
     dispatch(triggerGameMode());
-    const lastGame = localStorage.getItem("lastGame");
-    parseGameData(lastGame);
+    parseGameData(getLastGameLocalStorage());
   };
 
   const handleAbout = () => setShowAbout(true);
 
   const uploadLastGame = async () => {
-    const lastGame = JSON.parse(
-      localStorage.getItem("lastGame") || "{}"
-    ) as GameData;
-    if (isAuthenticated && profile.email === lastGame.userEmail) {
+    const lastGame = JSON.parse(getLastGameLocalStorage()) as GameData;
+    if (isAuthenticated) {
       try {
-        await saveGame();
+        await saveGame(lastGame);
       } catch {
         dispatch(
           updateDialogContent({
@@ -63,9 +62,16 @@ const Menu = ({ setIsNewGame }: Props) => {
     }
   };
 
+  const checkLastGameLocalStorage = () =>
+    setIsLastGameAvailable(!!getLastGameLocalStorage());
+
   useEffect(() => {
     uploadLastGame();
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    checkLastGameLocalStorage();
+  }, [profile.email]);
 
   return (
     <>
@@ -95,11 +101,11 @@ const Menu = ({ setIsNewGame }: Props) => {
           <InfoDisplay title="Leaderboard" content={<LeaderBoard />} />
         ) : null}
         <div className="flex flex-col items-center gap-5">
-          {isLastGameAvailable && isAuthenticated && (
+          {isAuthenticated && isLastGameAvailable && (
             <MenuButton callback={handleContinueGame} text="Continue Game" />
           )}
           <MenuButton callback={handleNewGame} text="New Game" />
-          {isLastGameAvailable && isAuthenticated && (
+          {isAuthenticated && isLastGameAvailable && (
             <span className="text-blue-800 font-light">
               Caution: Starting a new game will erase current game progress!
             </span>

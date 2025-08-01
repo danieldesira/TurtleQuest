@@ -14,6 +14,7 @@ import {
 import { LevelChangeTypes, levelMap } from "./levels/levels";
 import { deleteLastGame, saveScore } from "./services/api";
 import store from "./store";
+import { deleteLastGameLocalStorage } from "./utils/lastGameLocalStorage";
 
 /**
  * Fires checks regarding game status and reacts accordingly.
@@ -77,7 +78,7 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
 
 const deleteLastGameAndSaveScore = async (): Promise<void> => {
   await Promise.all([deleteLastGame(), saveScore()]);
-  localStorage.removeItem("lastGame");
+  deleteLastGameLocalStorage();
 };
 
 export default checkTurtle;

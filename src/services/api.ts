@@ -1,3 +1,4 @@
+import GameData from "../restoreGame/GameData";
 import store from "../store";
 import { GetScoresResponse, LoginResponse, Player, Settings } from "./types";
 import { get } from "./utils";
@@ -14,7 +15,7 @@ export const login = async (credential: string) => {
   return data;
 };
 
-export const saveGame = async () => {
+export const saveGame = async (lastGame: GameData) => {
   const token = localStorage.getItem("token");
   if (token) {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
@@ -23,7 +24,7 @@ export const saveGame = async () => {
         Authorization: token,
         "Content-Type": "application/json",
       },
-      body: localStorage.getItem("lastGame")!,
+      body: JSON.stringify(lastGame),
     });
     return res.ok;
   } else {
