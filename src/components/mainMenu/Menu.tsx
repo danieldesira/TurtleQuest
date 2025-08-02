@@ -14,7 +14,10 @@ import { triggerGameMode } from "../../features/gameState/gameStateReducer";
 import GameData from "../../restoreGame/GameData";
 import { saveGame } from "../../services/api";
 import { updateDialogContent } from "../../features/dialogs/dialogReducer";
-import { getLastGameLocalStorage } from "../../utils/lastGameLocalStorage";
+import {
+  getLastGameLocalStorage,
+  getLastGameTimestampLocalStorage,
+} from "../../utils/lastGameLocalStorage";
 
 type Props = { setIsNewGame: Dispatch<React.SetStateAction<boolean>> };
 
@@ -45,9 +48,10 @@ const Menu = ({ setIsNewGame }: Props) => {
 
   const uploadLastGame = async () => {
     const lastGame = JSON.parse(getLastGameLocalStorage()) as GameData;
+    const timestamp = Number(getLastGameTimestampLocalStorage());
     if (isAuthenticated) {
       try {
-        await saveGame(lastGame);
+        await saveGame({ lastGame, timestamp });
       } catch {
         dispatch(
           updateDialogContent({

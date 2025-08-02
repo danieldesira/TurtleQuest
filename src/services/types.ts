@@ -26,6 +26,7 @@ export type Player = {
   date_of_birth?: string;
   last_login_at?: string;
   settings?: Settings;
+  last_game_saved_on?: number;
 };
 
 export type LoginResponse = {
@@ -33,5 +34,4 @@ export type LoginResponse = {
   player: Player;
   isNewPlayer: boolean;
   lastGame?: GameData;
-  lastGameSavedOn?: number;
 };

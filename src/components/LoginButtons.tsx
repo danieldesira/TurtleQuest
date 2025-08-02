@@ -10,6 +10,12 @@ import LoadingIndicator from "./LoadingIndicator";
 import GameData from "../restoreGame/GameData";
 import { LoginResponse, Player } from "../services/types";
 import { useLogout } from "./membersArea/hooks";
+import {
+  getLastGameLocalStorage,
+  getLastGameTimestampLocalStorage,
+  saveLastGameLocalStorage,
+  saveLastGameTimestampLocalStorage,
+} from "../utils/lastGameLocalStorage";
 
 const LoginButtons = () => {
   const dispatch = useDispatch();
@@ -54,22 +60,17 @@ const LoginButtons = () => {
       })
     );
 
-  const storeAccountGameDataLocally = (accountData: LoginResponse) =>
-    localStorage.setItem(
-      `${userProfile.email}LastGame`,
-      JSON.stringify(accountData.lastGame)
-    );
+  const storeAccountGameDataLocally = (accountData: LoginResponse) => {
+    saveLastGameLocalStorage(JSON.stringify(accountData.lastGame));
+    saveLastGameTimestampLocalStorage(accountData.player.last_game_saved_on);
+  };
 
   const checkGameData = (accountData: LoginResponse) => {
     if (accountData.lastGame) {
-      const locallySavedGame = localStorage.getItem(
-        `${userProfile.email}LastGame`
-      );
-      const localTimestamp = localStorage.getItem(
-        `${userProfile.email}LastGameTimestamp`
-      );
+      const locallySavedGame = getLastGameLocalStorage();
+      const localTimestamp = getLastGameTimestampLocalStorage();
       if (locallySavedGame && localTimestamp) {
-        if (Number(localTimestamp) <= accountData.lastGameSavedOn) {
+        if (Number(localTimestamp) <= accountData.player.last_game_saved_on) {
           storeAccountGameDataLocally(accountData);
         }
       } else {

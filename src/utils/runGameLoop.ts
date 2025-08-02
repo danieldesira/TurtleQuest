@@ -5,7 +5,10 @@ import checkTurtle from "../checkTurtle";
 import store from "../store";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import stringifyGameData from "../restoreGame/stringifyGameData";
-import { saveLastGameLocalStorage } from "./lastGameLocalStorage";
+import {
+  saveLastGameLocalStorage,
+  saveLastGameTimestampLocalStorage,
+} from "./lastGameLocalStorage";
 
 /**
  * Animates the game frame by frame depeding on outcomes of game logic.
@@ -64,6 +67,7 @@ const saveGameProgress = () => {
   const isAuthenticated = store.getState().authentication.isAuthenticated;
   if (isAuthenticated) {
     saveLastGameLocalStorage(stringifyGameData());
+    saveLastGameTimestampLocalStorage();
   }
 };
 

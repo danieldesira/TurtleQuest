@@ -16,8 +16,8 @@ const stringifyGameData = (): string => {
       food: store.getState().turtleMonitor.turtle.food.value,
       oxygen: store.getState().turtleMonitor.turtle.oxygen.value,
       health: store.getState().turtleMonitor.turtle.life.value,
-      stomachCapacity: store.getState().turtleMonitor.turtle.stomachCapacity
-        .value,
+      stomachCapacity:
+        store.getState().turtleMonitor.turtle.stomachCapacity.value,
     },
     characters: [...Game.instance.level.characters].map((c) => {
       return {
@@ -29,8 +29,6 @@ const stringifyGameData = (): string => {
     }),
     levelNo: store.getState().levels.level.value,
     xp: store.getState().turtleMonitor.turtle.xp.value,
-    timestamp: new Date(),
-    userEmail: store.getState().game.profile.value.email,
   };
   return JSON.stringify(data);
 };

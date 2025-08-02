@@ -15,7 +15,10 @@ export const login = async (credential: string) => {
   return data;
 };
 
-export const saveGame = async (lastGame: GameData) => {
+export const saveGame = async (data: {
+  lastGame: GameData;
+  timestamp: number;
+}) => {
   const token = localStorage.getItem("token");
   if (token) {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
@@ -24,7 +27,7 @@ export const saveGame = async (lastGame: GameData) => {
         Authorization: token,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(lastGame),
+      body: JSON.stringify(data),
     });
     return res.ok;
   } else {
