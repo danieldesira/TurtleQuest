@@ -18,10 +18,7 @@ import {
 const runGameLoop = async (canvas: HTMLCanvasElement) => {
   try {
     const levelChangeType = await checkTurtle();
-    if (
-      levelChangeType === LevelChangeTypes.SameLevel ||
-      levelChangeType === LevelChangeTypes.NewLevel
-    ) {
+    if (levelChangeType === "SameLevel" || levelChangeType === "NewLevel") {
       const context = canvas.getContext("2d");
 
       paintLevelBg({ canvas, context });
@@ -33,24 +30,7 @@ const runGameLoop = async (canvas: HTMLCanvasElement) => {
       Game.instance.animationTimer = requestAnimationFrame(
         async () => await runGameLoop(canvas)
       );
-    } else if (levelChangeType === LevelChangeTypes.GameComplete) {
-      store.dispatch(
-        updateDialogContent({
-          dialog: {
-            title: "Game Complete",
-            text: ["Game complete. Congratulations!"],
-          },
-        })
-      );
-
-      cancelAnimationFrame(Game.instance.animationTimer);
     } else {
-      store.dispatch(
-        updateDialogContent({
-          dialog: { title: "You lose", text: ["Better luck next time!"] },
-        })
-      );
-
       cancelAnimationFrame(Game.instance.animationTimer);
     }
   } catch (error) {

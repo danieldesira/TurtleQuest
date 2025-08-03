@@ -35,7 +35,12 @@ const slice = createSlice({
       state.profile.value = action.payload.profile;
     },
     setPersonalBest: (state, action) => {
-      state.personalBest.value = action.payload.personalBest;
+      if (
+        state.personalBest.value.level <= action.payload.personalBest.level &&
+        state.personalBest.value.points < action.payload.personalBest.points
+      ) {
+        state.personalBest.value = action.payload.personalBest;
+      }
     },
   },
 });

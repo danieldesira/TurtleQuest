@@ -16,10 +16,10 @@ const ScoreTable = ({ scores }: Props) => (
     <tbody className="text-xs">
       {scores.highScores.map((highScore, index) => (
         <tr key={index}>
-          <td>{highScore.players.name}</td>
-          <td>{highScore.level}</td>
-          <td>{highScore.points}</td>
-          <td>{highScore.outcomes.desc}</td>
+          <td className="text-center">{highScore.players.name}</td>
+          <td className="text-right">{highScore.level}</td>
+          <td className="text-right">{highScore.points}</td>
+          <td className="text-center">{highScore.outcomes.desc}</td>
         </tr>
       ))}
     </tbody>

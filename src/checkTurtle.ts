@@ -1,5 +1,8 @@
 import Game from "./Game";
+import LevelText from "./components/LevelText";
+import { updateDialogContent } from "./features/dialogs/dialogReducer";
 import {
+  setPersonalBest,
   triggerMenuMode,
   triggerSavingMode,
 } from "./features/gameState/gameStateReducer";
@@ -37,11 +40,8 @@ const checkTurtle = async (): Promise<LevelChangeTypes> => {
     turtleState.oxygen.value <= 0 ||
     turtleState.life.value <= 0
   ) {
-    store.dispatch(triggerSavingMode());
-    await deleteLastGameAndSaveScore();
-
-    store.dispatch(triggerMenuMode());
-    return LevelChangeTypes.GameOver;
+    await handleLoss();
+    return "GameEnd";
   }
 
   if (mainCharacter.y <= 0) {
@@ -59,7 +59,7 @@ const checkTurtle = async (): Promise<LevelChangeTypes> => {
 
   Game.instance.level.moveCharacters();
 
-  return LevelChangeTypes.SameLevel;
+  return "SameLevel";
 };
 
 const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
@@ -69,13 +69,10 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
   store.dispatch(levelUp());
   if (levelMap[store.getState().levels.level.value]) {
     await Game.instance.loadNewLevel(true);
-    return LevelChangeTypes.NewLevel;
+    return "NewLevel";
   } else {
-    store.dispatch(triggerSavingMode());
-    await deleteLastGameAndSaveScore();
-
-    store.dispatch(triggerMenuMode());
-    return LevelChangeTypes.GameComplete;
+    await handleWin();
+    return "GameEnd";
   }
 };
 
@@ -83,6 +80,67 @@ const deleteLastGameAndSaveScore = async (): Promise<void> => {
   await Promise.all([deleteLastGame(), saveScore()]);
   deleteLastGameLocalStorage();
   deleteLastGameTimestampLocalStorage();
+};
+
+const checkIfBestPersonalScore = () => {
+  const points = store.getState().turtleMonitor.turtle.xp.value;
+  const level = store.getState().levels.level.value;
+
+  if (
+    store.getState().game.personalBest.value.level <= level &&
+    store.getState().game.personalBest.value.points < points
+  ) {
+    store.dispatch(
+      updateDialogContent({
+        dialog: {
+          title: "New Personal Best",
+          text: ["Congratulations!", `Points: ${points}`, `Level: ${level}`],
+        },
+      })
+    );
+  }
+
+  store.dispatch(
+    setPersonalBest({
+      personalBest: {
+        points,
+        level,
+      },
+    })
+  );
+};
+
+const handleGameEnd = async () => {
+  checkIfBestPersonalScore();
+
+  store.dispatch(triggerSavingMode());
+  await deleteLastGameAndSaveScore();
+  store.dispatch(triggerMenuMode());
+};
+
+const handleLoss = async () => {
+  await handleGameEnd();
+
+  store.dispatch(
+    updateDialogContent({
+      dialog: { title: "You lose", text: ["Better luck next time!"] },
+    })
+  );
+};
+
+const handleWin = async () => {
+  await handleGameEnd();
+
+  store.dispatch(
+    updateDialogContent({
+      dialog: {
+        title: "Game Complete",
+        text: ["Game complete. Congratulations!"],
+      },
+    })
+  );
+
+  checkIfBestPersonalScore();
 };
 
 export default checkTurtle;
