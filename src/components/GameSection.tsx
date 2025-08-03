@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import NextLevelIndication from "./NextLevelIndication";
 import GameHeader from "./GameHeader";
 import resizeCanvas from "../utils/resizeCanvas";
@@ -52,9 +52,7 @@ const GameSection = ({ isNewGame }: Props) => {
       .start({
         canvas,
         isNewGame,
-        gameData: JSON.parse(
-          getLastGameLocalStorage()
-        ) as GameData,
+        gameData: JSON.parse(getLastGameLocalStorage()) as GameData,
       })
       .then(async () => await animate(canvas))
       .catch((error) => {

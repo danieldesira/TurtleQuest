@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../services/api";
@@ -10,8 +10,7 @@ import {
 } from "../features/gameState/gameStateReducer";
 import MembersArea from "./membersArea/MembersArea";
 import LoadingIndicator from "./LoadingIndicator";
-import GameData from "../restoreGame/GameData";
-import { LoginResponse, Player } from "../services/types";
+import { LoginResponse } from "../services/types";
 import { useLogout } from "./membersArea/hooks";
 import {
   getLastGameLocalStorage,

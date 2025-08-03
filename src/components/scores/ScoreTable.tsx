@@ -1,4 +1,3 @@
-import React from "react";
 import { GetScoresResponse } from "../../services/types";
 
 type Props = { scores: GetScoresResponse };

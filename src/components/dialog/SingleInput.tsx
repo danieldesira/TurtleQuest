@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import { Input } from "./types";
 
 type Props = Input & { handleChange: React.ChangeEventHandler };
@@ -14,7 +14,7 @@ const SingleInput = ({
   maxLength,
   readonly,
 }: Props) => {
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageClick = () => fileInputRef.current?.click();
 

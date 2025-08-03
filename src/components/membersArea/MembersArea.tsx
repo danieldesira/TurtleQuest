@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaUser } from "react-icons/fa6";
 import { IoLogOut } from "react-icons/io5";
 import { RiSettings5Fill } from "react-icons/ri";

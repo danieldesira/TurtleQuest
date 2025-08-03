@@ -1,4 +1,3 @@
-import React from "react";
 import MeterContainer from "./MeterContainer";
 import { FaFishFins, FaLungs } from "react-icons/fa6";
 import { FaHeartbeat } from "react-icons/fa";

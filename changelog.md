@@ -6,9 +6,11 @@
     - Configure project to read environment variables
     - Update dependencies
     - Restructure and update Redux store
+    - Refactor level change types
 * Player authentication:
     - Add Google login
     - Introduce high scores
+    - Add personal best notification dialog
     - Move settings to online account
     - Move game progress to online account
     - Introduce player profiles

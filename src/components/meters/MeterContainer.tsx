@@ -1,4 +1,3 @@
-import React from "react";
 import GameMeter from "./GameMeter";
 
 interface Props {

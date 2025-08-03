@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { fetchHighScores } from "../../services/api";
 import { GetScoresResponse } from "../../services/types";
 import Dialog from "../dialog/Dialog";

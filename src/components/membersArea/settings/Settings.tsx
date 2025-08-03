@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import FormDialog from "../../dialog/FormDialog";
 import { Input } from "../../dialog/types";
 import { updateSettings } from "../../../services/api";

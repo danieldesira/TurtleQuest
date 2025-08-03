@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Dialog from "./Dialog";
 import { version } from "../../../package.json";
 import { FaGithub } from "react-icons/fa6";
