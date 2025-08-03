@@ -12,7 +12,6 @@ export type GetScoresResponse = {
     players: { name: string };
     outcomes: { desc: string };
   }[];
-  personalBest: { points: number; level: number; player_won: string } | null;
 };
 
 export type Player = {
@@ -34,4 +33,5 @@ export type LoginResponse = {
   player: Player;
   isNewPlayer: boolean;
   lastGame?: GameData;
+  personalBest?: { points: number; level: number; player_won: string } | null;
 };

@@ -58,7 +58,7 @@ export const saveScore = async () => {
   }
 };
 
-export const fetchScores = async () =>
+export const fetchHighScores = async () =>
   await get<GetScoresResponse>(`api/points`);
 
 export const deleteLastGame = async () => {

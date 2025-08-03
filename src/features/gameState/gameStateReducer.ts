@@ -6,6 +6,7 @@ const initialState = {
   profile: {
     value: { name: "", email: "", settings: { controlPosition: "Right" } },
   },
+  personalBest: { value: { points: 0, level: 0 } },
 };
 
 const slice = createSlice({
@@ -33,6 +34,9 @@ const slice = createSlice({
     setProfile: (state, action) => {
       state.profile.value = action.payload.profile;
     },
+    setPersonalBest: (state, action) => {
+      state.personalBest.value = action.payload.personalBest;
+    },
   },
 });
 
@@ -44,6 +48,7 @@ export const {
   triggerSavingMode,
   setSettings,
   setProfile,
+  setPersonalBest,
 } = slice.actions;
 
 export default slice.reducer;

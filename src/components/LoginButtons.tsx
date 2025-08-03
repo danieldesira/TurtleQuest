@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../services/api";
 import { authenticate } from "../features/authentication/authenticationReducer";
 import RootState from "../features/RootState";
-import { setProfile } from "../features/gameState/gameStateReducer";
+import {
+  setPersonalBest,
+  setProfile,
+} from "../features/gameState/gameStateReducer";
 import MembersArea from "./membersArea/MembersArea";
 import LoadingIndicator from "./LoadingIndicator";
 import GameData from "../restoreGame/GameData";
@@ -79,6 +82,13 @@ const LoginButtons = () => {
     }
   };
 
+  const checkPersonalBest = (accountData: LoginResponse) => {
+    const { personalBest } = accountData;
+    if (personalBest) {
+      dispatch(setPersonalBest({ personalBest }));
+    }
+  };
+
   const handleGoogleResponse = async ({
     credential,
   }: {
@@ -98,6 +108,7 @@ const LoginButtons = () => {
       }
 
       checkGameData(loginResult);
+      checkPersonalBest(loginResult);
     } catch {
       showAuthError();
       logout();
