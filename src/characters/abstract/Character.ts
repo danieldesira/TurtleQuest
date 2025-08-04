@@ -10,7 +10,7 @@ abstract class Character implements ICharacter {
   protected abstract readonly _imageFilename: string;
   protected abstract readonly _width: number;
   protected abstract readonly _height: number;
-  protected _direction: Direction = Directions.Right;
+  protected _direction: Direction = "Right";
 
   /**
    * Loads image for character.
@@ -103,7 +103,7 @@ abstract class Character implements ICharacter {
     const x = this._x - Game.instance.level.bgOffsetX;
     const y = this._y - Game.instance.level.bgOffsetY;
     context.translate(x, y);
-    context.rotate(this._direction);
+    context.rotate(Directions[this._direction]);
     context.translate(-x, -y);
   }
 }

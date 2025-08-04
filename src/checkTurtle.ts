@@ -77,9 +77,22 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
 };
 
 const deleteLastGameAndSaveScore = async (): Promise<void> => {
-  await Promise.all([deleteLastGame(), saveScore()]);
-  deleteLastGameLocalStorage();
-  deleteLastGameTimestampLocalStorage();
+  try {
+    await Promise.all([deleteLastGame(), saveScore()]);
+  } catch {
+    store.dispatch(
+      updateDialogContent({
+        dialog: {
+          title: "Error",
+          text: ["Failed to save game score"],
+          type: "error",
+        },
+      })
+    );
+  } finally {
+    deleteLastGameLocalStorage();
+    deleteLastGameTimestampLocalStorage();
+  }
 };
 
 const checkIfBestPersonalScore = () => {

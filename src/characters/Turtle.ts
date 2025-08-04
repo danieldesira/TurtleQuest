@@ -1,4 +1,3 @@
-import { Directions } from "../constants";
 import Game from "../Game";
 import Character from "./abstract/Character";
 import CharacterOptions from "./interfaces/CharacterOptions";
@@ -26,7 +25,7 @@ class Turtle extends Character implements IMainCharacter {
   resetPosition() {
     this._x = 50;
     this._y = 10;
-    this._direction = Directions.Right;
+    this._direction = "Right";
   }
 
   /**
@@ -34,7 +33,7 @@ class Turtle extends Character implements IMainCharacter {
    * @author Daniel Desira
    */
   moveUp() {
-    this._direction = Directions.Up;
+    this._direction = "Up";
     if (this._y > 0) {
       this._y -= this._speed;
     }
@@ -45,7 +44,7 @@ class Turtle extends Character implements IMainCharacter {
    * @author Daniel Desira
    */
   moveDown() {
-    this._direction = Directions.Down;
+    this._direction = "Down";
     if (this._y < Game.instance.level.bgImg.height) {
       this._y += this._speed;
     }
@@ -56,7 +55,7 @@ class Turtle extends Character implements IMainCharacter {
    * @author Daniel Desira
    */
   moveLeft() {
-    this._direction = Directions.Left;
+    this._direction = "Left";
     if (this._x > 0) {
       this._x -= this._speed;
     }
@@ -67,7 +66,7 @@ class Turtle extends Character implements IMainCharacter {
    * @author Daniel Desira
    */
   moveRight() {
-    this._direction = Directions.Right;
+    this._direction = "Right";
     this._x += this._speed;
   }
 

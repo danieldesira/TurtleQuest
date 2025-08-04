@@ -1,7 +1,7 @@
 import GameData from "../restoreGame/GameData";
 import store from "../store";
 import { GetScoresResponse, LoginResponse, Player, Settings } from "./types";
-import { get } from "./utils";
+import { del, get, post, put } from "./utils";
 
 export const login = async (credential: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
@@ -18,80 +18,22 @@ export const login = async (credential: string) => {
 export const saveGame = async (data: {
   lastGame: GameData;
   timestamp: number;
-}) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
-      method: "PUT",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    return res.ok;
-  } else {
-    return false;
-  }
-};
+}) => await put("api/game", data);
 
-export const saveScore = async () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    const state = store.getState();
-    const hasWon = state.levels.level.value > 2;
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/points`, {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        points: state.turtleMonitor.turtle.xp.value,
-        level: state.levels.level.value,
-        hasWon,
-      }),
-    });
-    return res.ok;
-  } else {
-    return false;
-  }
-};
+export const saveScore = async () =>
+  await post("api/points", {
+    points: store.getState().turtleMonitor.turtle.xp.value,
+    level: store.getState().levels.level.value,
+    hasWon: store.getState().levels.level.value > 2,
+  });
 
 export const fetchHighScores = async () =>
-  await get<GetScoresResponse>(`api/points`);
+  await get<GetScoresResponse>("api/points");
 
-export const deleteLastGame = async () => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/game`, {
-    method: "DELETE",
-    headers: {
-      Authorization: localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
-  });
-  return res.ok;
-};
+export const deleteLastGame = async () => await del("api/game");
 
-export const updateSettings = async (settings: Settings) => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/settings`, {
-    method: "PUT",
-    headers: {
-      Authorization: localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(settings),
-  });
-  return await res.json();
-};
+export const updateSettings = async (settings: Settings) =>
+  await put("api/settings", settings);
 
-export const updateProfile = async (profile: Player) => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/player`, {
-    method: "PUT",
-    headers: {
-      Authorization: localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(profile),
-  });
-  return await res.json();
-};
+export const updateProfile = async (profile: Player) =>
+  await put("api/player", profile);

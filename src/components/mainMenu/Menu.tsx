@@ -25,8 +25,9 @@ const Menu = ({ setIsNewGame }: Props) => {
   const dispatch = useDispatch();
 
   const [showAbout, setShowAbout] = useState<boolean>(false);
-  const [isLastGameAvailable, setIsLastGameAvailable] =
-    useState<boolean>(false);
+  const [isLastGameAvailable, setIsLastGameAvailable] = useState<boolean>(
+    false
+  );
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
@@ -49,7 +50,7 @@ const Menu = ({ setIsNewGame }: Props) => {
   const uploadLastGame = async () => {
     const lastGame = JSON.parse(getLastGameLocalStorage()) as GameData;
     const timestamp = Number(getLastGameTimestampLocalStorage());
-    if (isAuthenticated) {
+    if (isAuthenticated && lastGame && timestamp) {
       try {
         await saveGame({ lastGame, timestamp });
       } catch {

@@ -1,5 +1,4 @@
 import ICharacter from "../characters/interfaces/ICharacter";
-import { Directions } from "../constants";
 
 interface BoundingBox {
   minX: number;
@@ -42,7 +41,7 @@ const checkBoundingBoxCollision = (
 export const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
   let box: BoundingBox = null;
   switch (character.direction) {
-    case Directions.Down:
+    case "Down":
       box = {
         minX: character.x - character.height,
         maxX: character.x,
@@ -50,7 +49,7 @@ export const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
         maxY: character.y + character.width,
       };
       break;
-    case Directions.Up:
+    case "Up":
       box = {
         minX: character.x,
         maxX: character.x + character.height,
@@ -58,7 +57,7 @@ export const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
         maxY: character.y,
       };
       break;
-    case Directions.Left:
+    case "Left":
       box = {
         minX: character.x - character.width,
         maxX: character.x,
@@ -66,7 +65,7 @@ export const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
         maxY: character.y,
       };
       break;
-    case Directions.Right:
+    case "Right":
       box = {
         minX: character.x,
         maxX: character.x + character.width,

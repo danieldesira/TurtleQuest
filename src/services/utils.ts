@@ -25,7 +25,7 @@ const request = async <T>(
 export const get = async <T>(url: string): Promise<T> =>
   await request<T>(url, "GET");
 
-export const post = async <T>(url: string, body: unknown): Promise<T> =>
+export const post = async <T>(url: string, body: unknown = null): Promise<T> =>
   await request<T>(url, "post", body);
 
 export const put = async <T>(url: string, body: unknown): Promise<T> =>

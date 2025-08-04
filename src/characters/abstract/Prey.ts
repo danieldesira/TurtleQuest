@@ -1,5 +1,4 @@
 import Game from "../../Game";
-import { Directions } from "../../constants";
 import { eat } from "../../features/turtleMonitor/turtleReducers";
 import store from "../../store";
 import IPrey from "../interfaces/IPrey";
@@ -44,23 +43,20 @@ abstract class Prey extends NonMain implements IPrey {
       horizontalDistance < maxPreyDistance &&
       verticalDistance < maxPreyDistance
     ) {
+      this._direction = turtle.direction;
       switch (turtle.direction) {
-        case Directions.Left:
-          this._direction = Directions.Left;
+        case "Left":
           this._x -= this._speed;
           break;
-        case Directions.Right:
-          this._direction = Directions.Right;
+        case "Right":
           this._x += this._speed;
           break;
-        case Directions.Down:
-          this._direction = Directions.Down;
+        case "Down":
           if (this._y <= Game.instance.level.benthicOffsetY) {
             this._y += this._speed;
           }
           break;
-        case Directions.Up:
-          this._direction = Directions.Up;
+        case "Up":
           if (this._y > 0) {
             this._y -= this._speed;
           }

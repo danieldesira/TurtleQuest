@@ -1,4 +1,4 @@
-import { Direction, Directions } from "../../constants";
+import { Direction } from "../../constants";
 import Game from "../../Game";
 import checkBoundingBoxCollision, {
   getCharacterBoundingBox,
@@ -27,7 +27,7 @@ abstract class FloatingGuidedObstacle extends Obstacle {
   }
 
   private setInitialDirection(): void {
-    this._direction = generateRandomBit() ? Directions.Left : Directions.Right;
+    this._direction = generateRandomBit() ? "Left" : "Right";
   }
 
   /**
@@ -36,15 +36,15 @@ abstract class FloatingGuidedObstacle extends Obstacle {
    * @author Daniel Desira
    */
   swim(): void {
-    if (this._direction === Directions.Left) {
+    if (this._direction === "Left") {
       this._x -= this._speed;
       if (this._x <= 0) {
-        this._direction = Directions.Right;
+        this._direction = "Right";
       }
     } else {
       this._x += this._speed;
       if (this._x >= Game.instance.level.bgImg.width) {
-        this._direction = Directions.Left;
+        this._direction = "Left";
       }
     }
   }

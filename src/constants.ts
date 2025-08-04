@@ -5,4 +5,4 @@ export const Directions = {
   Down: Math.PI * 0.5,
 } as const;
 
-export type Direction = (typeof Directions)[keyof typeof Directions];
+export type Direction = "Right" | "Left" | "Up" | "Down";
