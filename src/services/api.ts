@@ -3,17 +3,8 @@ import store from "../store";
 import { GetScoresResponse, LoginResponse, Player, Settings } from "./types";
 import { del, get, post, put } from "./utils";
 
-export const login = async (credential: string) => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
-    method: "POST",
-    headers: {
-      Authorization: credential,
-      "Content-Type": "application/json",
-    },
-  });
-  const data = (await res.json()) as LoginResponse;
-  return data;
-};
+export const login = async (credential: string) =>
+  await post("api/login", { token: credential, service: "google" }) as LoginResponse;
 
 export const saveGame = async (data: {
   lastGame: GameData;

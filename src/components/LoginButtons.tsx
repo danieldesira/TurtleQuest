@@ -99,7 +99,7 @@ const LoginButtons = () => {
       const loginResult = await login(credential);
 
       if (loginResult.player) {
-        localStorage.setItem("token", credential);
+        localStorage.setItem("token", loginResult.jwtToken);
         dispatch(setProfile({ profile: loginResult.player }));
         dispatch(authenticate());
       } else {

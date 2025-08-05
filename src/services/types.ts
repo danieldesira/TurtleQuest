@@ -34,4 +34,5 @@ export type LoginResponse = {
   isNewPlayer: boolean;
   lastGame?: GameData;
   personalBest?: { points: number; level: number; player_won: string } | null;
+  jwtToken: string;
 };
