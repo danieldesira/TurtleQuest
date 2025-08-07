@@ -32,12 +32,12 @@ const LoginButtons = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    window.google.accounts.id.initialize({
+    window.google?.accounts?.id?.initialize({
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       callback: handleGoogleResponse,
     });
 
-    window.google.accounts.id.renderButton(
+    window.google?.accounts?.id?.renderButton(
       document.getElementById("googleSignInButton"),
       { theme: "outline", size: "large" }
     );

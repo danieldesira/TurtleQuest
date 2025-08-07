@@ -1,4 +1,5 @@
 import Turtle from "./characters/Turtle";
+import { updateDialogContent } from "./features/dialogs/dialogReducer";
 import {
   startLoadingLevel,
   stopLoadingLevel,
@@ -6,7 +7,7 @@ import {
 import { resetLevel } from "./features/levels/levelReducer";
 import { resetTurtle } from "./features/turtleMonitor/turtleReducers";
 import ILevel from "./levels/ILevel";
-import { createLevelInstance } from "./levels/levels";
+import { createLevelInstance, levelMap } from "./levels/levels";
 import GameData from "./restoreGame/GameData";
 import store from "./store";
 import resizeCanvas from "./utils/resizeCanvas";
@@ -52,12 +53,23 @@ class Game {
    * @author Daniel Desira
    */
   async loadNewLevel(isFreshLevel: boolean, gameData: GameData = null) {
+    const newLevelNo = store.getState().levels.level.value;
     try {
-      this._level = createLevelInstance(store.getState().levels.level.value);
+      this._level = createLevelInstance(newLevelNo);
       if (this._level) {
         store.dispatch(startLoadingLevel());
         await this._level.init(isFreshLevel, gameData);
         store.dispatch(stopLoadingLevel());
+        store.dispatch(
+          store.dispatch(
+            updateDialogContent({
+              dialog: {
+                title: `Level ${newLevelNo}`,
+                text: [levelMap[newLevelNo].description],
+              },
+            })
+          )
+        );
       }
       if (isFreshLevel) {
         this.turtle.resetPosition();

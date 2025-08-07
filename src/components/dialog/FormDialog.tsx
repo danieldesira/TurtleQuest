@@ -47,14 +47,6 @@ const FormDialog = ({
           />
         )
       )}
-      <div className="flex justify-center">
-        <button
-          type="submit"
-          className="bg-pink-600 rounded-md text-xl text-white p-2"
-        >
-          Save
-        </button>
-      </div>
     </form>
   </Dialog>
 );

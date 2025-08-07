@@ -1,7 +1,5 @@
 import Game from "../Game";
 import { paintLevelBg } from "../levels/background";
-import { LevelChangeTypes } from "../levels/levels";
-import checkTurtle from "../checkTurtle";
 import store from "../store";
 import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import stringifyGameData from "../restoreGame/stringifyGameData";
@@ -9,6 +7,8 @@ import {
   saveLastGameLocalStorage,
   saveLastGameTimestampLocalStorage,
 } from "./lastGameLocalStorage";
+import checkTurtleAndProgressGame from "../checkTurtle";
+import { isCustomDialogOpen } from "./generic";
 
 /**
  * Animates the game frame by frame depeding on outcomes of game logic.
@@ -17,7 +17,9 @@ import {
  */
 const runGameLoop = async (canvas: HTMLCanvasElement) => {
   try {
-    const levelChangeType = await checkTurtle();
+    const levelChangeType = isCustomDialogOpen()
+      ? "SameLevel"
+      : await checkTurtleAndProgressGame();
     if (levelChangeType === "SameLevel" || levelChangeType === "NewLevel") {
       const context = canvas.getContext("2d");
 

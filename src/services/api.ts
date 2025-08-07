@@ -1,10 +1,14 @@
+import { hasPlayerWon } from "../levels/levels";
 import GameData from "../restoreGame/GameData";
 import store from "../store";
 import { GetScoresResponse, LoginResponse, Player, Settings } from "./types";
 import { del, get, post, put } from "./utils";
 
 export const login = async (credential: string) =>
-  await post("api/login", { token: credential, service: "google" }) as LoginResponse;
+  (await post("api/login", {
+    token: credential,
+    service: "google",
+  })) as LoginResponse;
 
 export const saveGame = async (data: {
   lastGame: GameData;
@@ -15,7 +19,7 @@ export const saveScore = async () =>
   await post("api/points", {
     points: store.getState().turtleMonitor.turtle.xp.value,
     level: store.getState().levels.level.value,
-    hasWon: store.getState().levels.level.value > 2,
+    hasWon: hasPlayerWon(store.getState().levels.level.value),
   });
 
 export const fetchHighScores = async () =>

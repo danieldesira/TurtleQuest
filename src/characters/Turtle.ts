@@ -1,4 +1,5 @@
 import Game from "../Game";
+import { isCustomDialogOpen } from "../utils/generic";
 import Character from "./abstract/Character";
 import CharacterOptions from "./interfaces/CharacterOptions";
 import IMainCharacter from "./interfaces/IMainCharacter";
@@ -33,9 +34,11 @@ class Turtle extends Character implements IMainCharacter {
    * @author Daniel Desira
    */
   moveUp() {
-    this._direction = "Up";
-    if (this._y > 0) {
-      this._y -= this._speed;
+    if (!isCustomDialogOpen()) {
+      this._direction = "Up";
+      if (this._y > 0) {
+        this._y -= this._speed;
+      }
     }
   }
 
@@ -44,9 +47,11 @@ class Turtle extends Character implements IMainCharacter {
    * @author Daniel Desira
    */
   moveDown() {
-    this._direction = "Down";
-    if (this._y < Game.instance.level.bgImg.height) {
-      this._y += this._speed;
+    if (!isCustomDialogOpen()) {
+      this._direction = "Down";
+      if (this._y < Game.instance.level.bgImg.height) {
+        this._y += this._speed;
+      }
     }
   }
 
@@ -55,9 +60,11 @@ class Turtle extends Character implements IMainCharacter {
    * @author Daniel Desira
    */
   moveLeft() {
-    this._direction = "Left";
-    if (this._x > 0) {
-      this._x -= this._speed;
+    if (!isCustomDialogOpen()) {
+      this._direction = "Left";
+      if (this._x > 0) {
+        this._x -= this._speed;
+      }
     }
   }
 
@@ -66,8 +73,10 @@ class Turtle extends Character implements IMainCharacter {
    * @author Daniel Desira
    */
   moveRight() {
-    this._direction = "Right";
-    this._x += this._speed;
+    if (!isCustomDialogOpen()) {
+      this._direction = "Right";
+      this._x += this._speed;
+    }
   }
 
   /**

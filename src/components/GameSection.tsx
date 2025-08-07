@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import NextLevelIndication from "./NextLevelIndication";
-import GameHeader from "./GameHeader";
+import GameHeader from "./gameHeader/GameHeader";
 import resizeCanvas from "../utils/resizeCanvas";
 import handleKeyDown from "../controls/handleKeyDown";
 import handleWheel from "../controls/handleWheel";

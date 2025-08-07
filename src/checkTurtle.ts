@@ -1,5 +1,4 @@
 import Game from "./Game";
-import LevelText from "./components/LevelText";
 import { updateDialogContent } from "./features/dialogs/dialogReducer";
 import {
   setPersonalBest,
@@ -27,7 +26,7 @@ import {
  * @returns Promise to game status.
  * @author Daniel Desira
  */
-const checkTurtle = async (): Promise<LevelChangeTypes> => {
+const checkTurtleAndProgressGame = async (): Promise<LevelChangeTypes> => {
   const mainCharacter = Game.instance.turtle;
 
   store.dispatch(useFood());
@@ -67,7 +66,8 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
     gainPoints({ turtle: { xpValue: Game.instance.level.points } })
   );
   store.dispatch(levelUp());
-  if (levelMap[store.getState().levels.level.value]) {
+  const newLevelNo = store.getState().levels.level.value;
+  if (levelMap[newLevelNo]) {
     await Game.instance.loadNewLevel(true);
     return "NewLevel";
   } else {
@@ -78,7 +78,9 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
 
 const deleteLastGameAndSaveScore = async (): Promise<void> => {
   try {
-    await Promise.all([deleteLastGame(), saveScore()]);
+    if (store.getState().authentication.isAuthenticated) {
+      await Promise.all([deleteLastGame(), saveScore()]);
+    }
   } catch {
     store.dispatch(
       updateDialogContent({
@@ -156,4 +158,4 @@ const handleWin = async () => {
   checkIfBestPersonalScore();
 };
 
-export default checkTurtle;
+export default checkTurtleAndProgressGame;
