@@ -5,6 +5,7 @@ type Props = {
   title: string;
   handleOk?: () => void;
   type?: "default" | "error" | "form";
+  handleSubmit?: React.FormEventHandler;
 };
 
 const Dialog = ({
@@ -12,6 +13,7 @@ const Dialog = ({
   children,
   type = "default",
   handleOk,
+  handleSubmit,
 }: React.PropsWithChildren<Props>) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -25,26 +27,34 @@ const Dialog = ({
         className="fixed inset-0 flex flex-col gap-2 items-center justify-center text-white w-4/5 opacity-80 focus:opacity-95 transition-opacity duration-500 bg-gray-900 p-5 rounded-3xl max-w-xl z-50"
         onKeyDown={handleKeyDown}
       >
-        <div className="flex justify-center border-b-white border-b-2 pb-2">
+        <div className="flex justify-center items-center gap-2 border-b-white border-b-2 pb-2">
+          <img src="./favicon.svg" alt="" className="w-5 h-5" />
           <h1 className="text-xl font-extrabold">{title}</h1>
         </div>
-        <div className="flex flex-col w-11/12 gap-3 max-h-screen-1/2 overflow-y-auto">
-          {children}
-        </div>
-        <DialogButton
-          variant={type === "form" ? "default" : type}
-          buttonType={type === "form" ? "submit" : "button"}
-          handleClick={handleOk}
+        <form
+          action="#"
+          method="post"
+          className="flex flex-col gap-3 items-center w-full"
+          onSubmit={handleSubmit}
         >
-          {type === "form" ? (
-            <>
-              <FaFloppyDisk />
-              Save
-            </>
-          ) : (
-            <>OK</>
-          )}
-        </DialogButton>
+          <div className="flex flex-col w-11/12 gap-3 max-h-screen-1/2 overflow-y-auto">
+            {children}
+          </div>
+          <DialogButton
+            variant={type === "form" ? "default" : type}
+            buttonType={type === "form" ? "submit" : "button"}
+            handleClick={handleOk}
+          >
+            {type === "form" ? (
+              <>
+                <FaFloppyDisk />
+                Save
+              </>
+            ) : (
+              <>OK</>
+            )}
+          </DialogButton>
+        </form>
       </dialog>
     )
   );

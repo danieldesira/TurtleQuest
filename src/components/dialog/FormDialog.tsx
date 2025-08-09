@@ -15,39 +15,32 @@ const FormDialog = ({
   handleSubmit,
   handleInputChange,
 }: Props) => (
-  <Dialog title={title} type="form">
-    <form
-      action="#"
-      method="post"
-      className="flex flex-col gap-3 p-2"
-      onSubmit={handleSubmit}
-    >
-      {inputs.map(
-        ({
-          label,
-          name,
-          value,
-          type,
-          options,
-          required,
-          maxLength,
-          readonly,
-        }) => (
-          <SingleInput
-            key={name}
-            label={label}
-            name={name}
-            value={value}
-            type={type}
-            options={options}
-            handleChange={handleInputChange}
-            required={required}
-            maxLength={maxLength}
-            readonly={readonly}
-          />
-        )
-      )}
-    </form>
+  <Dialog title={title} type="form" handleSubmit={handleSubmit}>
+    {inputs.map(
+      ({
+        label,
+        name,
+        value,
+        type,
+        options,
+        required,
+        maxLength,
+        readonly,
+      }) => (
+        <SingleInput
+          key={name}
+          label={label}
+          name={name}
+          value={value}
+          type={type}
+          options={options}
+          handleChange={handleInputChange}
+          required={required}
+          maxLength={maxLength}
+          readonly={readonly}
+        />
+      )
+    )}
   </Dialog>
 );
 

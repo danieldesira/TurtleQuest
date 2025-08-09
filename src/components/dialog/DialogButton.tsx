@@ -14,7 +14,7 @@ const DialogButton = ({
     type={buttonType}
     className={`${
       variant === "default" ? "bg-pink-600" : "bg-red-700"
-    } rounded-md text-xl text-white pl-2 pr-2 w-fit`}
+    } rounded-md text-xl text-white pl-2 pr-2 w-fit flex gap-2 items-center`}
     onClick={handleClick}
   >
     {children}

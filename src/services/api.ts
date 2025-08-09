@@ -32,3 +32,5 @@ export const updateSettings = async (settings: Settings) =>
 
 export const updateProfile = async (profile: Player) =>
   await put("api/player", profile);
+
+export const revokeJwt = async () => await post("api/logout");

@@ -22,6 +22,7 @@
   - Allow user to close through `Escape` key
   - Add 500ms transition on opacity
   - Improve button look-n-feel
+  - Add turtle icon to title area
 - Gameplay
   - Pause game until dialogs are closed
   - Custom dialog messages for new levels

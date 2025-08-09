@@ -39,9 +39,6 @@ const AboutDialog = ({ setShowAbout }: Props) => (
         Dedications
       </a>
     </div>
-    <div className="flex justify-center">
-      <img src="./favicon.svg" alt="" width={30} />
-    </div>
     <div className="flex gap-5 justify-center">
       <a
         href="https://github.com/danieldesira/TurtleQuest"
