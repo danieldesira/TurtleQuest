@@ -16,6 +16,7 @@
   - Move game progress to online account
   - Introduce player profiles
   - Introduce periodical game progress saves in `localStorage`
+  - Add cookie use notice
 - Dialogs:
   - Refactor `Dialog` component and introduce `FormDialog`
   - Implement better vertical centering

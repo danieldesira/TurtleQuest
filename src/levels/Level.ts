@@ -18,6 +18,7 @@ abstract class Level implements ILevel {
   protected abstract readonly _benthicOffsetY: number;
   protected abstract readonly _currentSpeed: number;
   protected abstract readonly _points: number;
+  protected abstract readonly _levelDescription: string[];
 
   /**
    * Initialises level.
@@ -89,6 +90,10 @@ abstract class Level implements ILevel {
 
   get points() {
     return this._points;
+  }
+
+  get levelDescription(): string[] {
+    return this._levelDescription;
   }
 
   private spawnCharacters() {

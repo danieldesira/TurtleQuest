@@ -5,18 +5,10 @@ import Level2 from "./Level2";
 export type LevelChangeTypes = "GameEnd" | "NewLevel" | "SameLevel";
 
 export const levelMap: {
-  [key: number]: { description: string; constructor: new () => Level };
+  [key: number]: new () => Level;
 } = {
-  1: {
-    description:
-      "Warm up level. Avoid plastic bags. Eat shrimp and sardines. Move the turtle to the right edge of the screen.",
-    constructor: Level1,
-  },
-  2: {
-    description:
-      "Mind the boat. You may also eat crabs at the bottom for extra points!",
-    constructor: Level2,
-  },
+  1: Level1,
+  2: Level2,
 };
 
 /**
@@ -26,7 +18,7 @@ export const levelMap: {
  * @author Daniel Desira
  */
 export const createLevelInstance = (levelNo: number): Level => {
-  const LevelConstructor = levelMap[levelNo].constructor;
+  const LevelConstructor = levelMap[levelNo];
   if (LevelConstructor) {
     return new LevelConstructor();
   } else {

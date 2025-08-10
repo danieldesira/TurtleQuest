@@ -6,13 +6,13 @@ const request = async <T>(
   const res = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, {
     method,
     headers: {
-      Authorization: localStorage.getItem("token"),
       "Content-Type": "application/json",
     },
     body: body ? JSON.stringify(body) : undefined,
+    credentials: "include",
   });
   if (res.ok) {
-    return (await res.json()) as T;
+    return res.status === 204 ? null : ((await res.json()) as T);
   } else {
     throw new Error(
       `Request error: ${url}: ${res.status}: ${JSON.stringify(

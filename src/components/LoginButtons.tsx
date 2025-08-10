@@ -26,9 +26,6 @@ const LoginButtons = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
-  const userProfile = useSelector(
-    (state: RootState) => state.game.profile.value
-  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -42,12 +39,6 @@ const LoginButtons = () => {
       { theme: "outline", size: "large" }
     );
   }, [isAuthenticated]);
-
-  useEffect(() => {
-    if (isAuthenticated && !userProfile.email) {
-      handleGoogleResponse({ credential: localStorage.getItem("token") });
-    }
-  }, []);
 
   const showAuthError = () =>
     dispatch(
@@ -99,7 +90,6 @@ const LoginButtons = () => {
       const loginResult = await login(credential);
 
       if (loginResult.player) {
-        localStorage.setItem("token", loginResult.jwtToken);
         dispatch(setProfile({ profile: loginResult.player }));
         dispatch(authenticate());
       } else {

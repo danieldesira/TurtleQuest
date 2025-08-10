@@ -65,7 +65,7 @@ class Game {
             updateDialogContent({
               dialog: {
                 title: `Level ${newLevelNo}`,
-                text: [levelMap[newLevelNo].description],
+                text: this._level.levelDescription,
               },
             })
           )

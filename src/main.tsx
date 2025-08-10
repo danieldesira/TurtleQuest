@@ -29,6 +29,8 @@ store.dispatch(
         "Good luck!",
         "Yours turtley,",
         "Daniel - Game Developer",
+        "",
+        "We use cookies to improve your experience. By using our site, you agree to our use of cookies. We do not collect any personal data.",
       ],
     },
   })

@@ -16,6 +16,7 @@ interface ILevel {
   get currentSpeed(): number;
   get points(): number;
   checkIfTurtleMeetsCharacters(): void;
+  get levelDescription(): string[];
 }
 
 export default ILevel;
