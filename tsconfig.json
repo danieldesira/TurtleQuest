@@ -5,7 +5,7 @@
     "module": "ESNext",
     "target": "ES2021",
     "allowJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "noEmit": true

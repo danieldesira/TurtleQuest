@@ -1,4 +1,4 @@
-# 0.7.0 Beta -
+# 0.7.0 Beta - 11/08/2025 18:15
 
 - Internal:
   - Switch build system to Vite from Webpack
@@ -16,7 +16,7 @@
   - Move game progress to online account
   - Introduce player profiles
   - Introduce periodical game progress saves in `localStorage`
-  - Add cookie use notice
+  - Add cookie usage notice
 - Dialogs:
   - Refactor `Dialog` component and introduce `FormDialog`
   - Implement better vertical centering
@@ -24,7 +24,7 @@
   - Add 500ms transition on opacity
   - Improve button look-n-feel
   - Add turtle icon to title area
-- Gameplay
+- Gameplay:
   - Pause game until dialogs are closed
   - Custom dialog messages for new levels
   - Pause game functionality
