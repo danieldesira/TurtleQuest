@@ -6,7 +6,6 @@ abstract class Character implements ICharacter {
   protected _x: number;
   protected _y: number;
   protected _image: HTMLImageElement | null;
-  protected readonly _baseImagePath: string = "./static/images/characters/";
   protected abstract readonly _imageFilename: string;
   protected abstract readonly _width: number;
   protected abstract readonly _height: number;
@@ -22,7 +21,7 @@ abstract class Character implements ICharacter {
       const image = document.createElement("img");
       image.width = this._width;
       image.height = this._height;
-      image.src = this._baseImagePath + this._imageFilename;
+      image.src = this._imageFilename;
       image.onload = () => {
         this._image = image;
         resolve();

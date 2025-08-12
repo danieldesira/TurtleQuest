@@ -1,5 +1,6 @@
 import Obstacle from "./abstract/Obstacle";
 import CharacterOptions from "./interfaces/CharacterOptions";
+import plasticBagImage from "@static/images/characters/plasticBag.svg";
 
 class PlasticBag extends Obstacle {
   protected readonly _imageFilename: string;
@@ -20,7 +21,7 @@ class PlasticBag extends Obstacle {
     height,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? "plasticBag.svg";
+    this._imageFilename = imageFilename ?? plasticBagImage;
     this._damage = damage ?? 8;
     this._stomachImpact = stomachImpact ?? 20;
     this._points = points ?? -20;

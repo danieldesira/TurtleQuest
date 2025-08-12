@@ -7,8 +7,6 @@ import store from "../store";
 import GameData from "../restoreGame/GameData";
 
 abstract class Level implements ILevel {
-  protected readonly _backgroundImagePath: string =
-    "./static/images/backgrounds/";
   protected abstract readonly _backgroundImageFilename: string;
   protected abstract readonly _initialCharacters: LevelCharacter[];
   protected _backgroundImage: HTMLImageElement | null;
@@ -45,8 +43,7 @@ abstract class Level implements ILevel {
   private loadBgImg(): Promise<void> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
-      backgroundImage.src =
-        this._backgroundImagePath + this._backgroundImageFilename;
+      backgroundImage.src = this._backgroundImageFilename;
       backgroundImage.onload = () => {
         this._backgroundImage = backgroundImage;
         resolve();
@@ -70,10 +67,6 @@ abstract class Level implements ILevel {
 
   get bgOffsetY(): number {
     return this._bgOffsetY;
-  }
-
-  get bgImgPath() {
-    return this._backgroundImagePath;
   }
 
   get bgImg() {

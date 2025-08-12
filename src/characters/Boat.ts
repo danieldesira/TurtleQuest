@@ -1,5 +1,6 @@
 import FloatingGuidedObstacle from "./abstract/FloatingGuidedObstacle";
 import CharacterOptions from "./interfaces/CharacterOptions";
+import boatImage from "@static/images/characters/boat.svg";
 
 class Boat extends FloatingGuidedObstacle {
   protected readonly _damage: number;
@@ -25,7 +26,7 @@ class Boat extends FloatingGuidedObstacle {
     this._speed = speed ?? 3;
     this._stomachImpact = stomachImpact ?? 0;
     this._points = points ?? -50;
-    this._imageFilename = imageFilename ?? "boat.svg";
+    this._imageFilename = imageFilename ?? boatImage;
     this._width = width ?? 300;
     this._height = height ?? 100;
     this._type = "Boat";

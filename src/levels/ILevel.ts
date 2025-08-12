@@ -3,7 +3,6 @@ import GameData from "../restoreGame/GameData";
 
 interface ILevel {
   init(isFreshLevel: boolean, gameData: GameData): Promise<void>;
-  get bgImgPath(): string;
   get bgImg(): HTMLImageElement | null;
   set bgOffsetX(offsetX: number);
   set bgOffsetY(offsetY: number);

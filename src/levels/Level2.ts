@@ -5,9 +5,10 @@ import PlasticBag from "../characters/PlasticBag";
 import Shrimp from "../characters/Shrimp";
 import Level from "./Level";
 import LevelCharacter from "./LevelCharacter";
+import level2Bg from "@static/images/backgrounds/level2.png";
 
 class Level2 extends Level {
-  protected readonly _backgroundImageFilename: string = "level2.png";
+  protected readonly _backgroundImageFilename: string = level2Bg;
   protected readonly _initialCharacters: LevelCharacter[] = [
     { constructor: PlasticBag, amount: 10 },
     { constructor: NeptuneGrass, amount: 4 },

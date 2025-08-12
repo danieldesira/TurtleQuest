@@ -3,10 +3,11 @@ import { isCustomDialogOpen } from "../utils/generic";
 import Character from "./abstract/Character";
 import CharacterOptions from "./interfaces/CharacterOptions";
 import IMainCharacter from "./interfaces/IMainCharacter";
+import turtleImage from "@static/images/characters/turtle.svg";
 
 class Turtle extends Character implements IMainCharacter {
   static scientificName: string = "Carretta carretta";
-  protected readonly _imageFilename: string = "turtle.svg";
+  protected readonly _imageFilename: string = turtleImage;
   protected readonly _speed: number = 1;
   protected readonly _width: number;
   protected readonly _height: number;

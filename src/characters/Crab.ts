@@ -1,5 +1,6 @@
 import BenthicPrey from "./abstract/BenthicPrey";
 import CharacterOptions from "./interfaces/CharacterOptions";
+import crabImage from "@static/images/characters/benthicCrab.svg";
 
 class Crab extends BenthicPrey {
   protected readonly _imageFilename: string;
@@ -21,7 +22,7 @@ class Crab extends BenthicPrey {
     height,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? "benthicCrab.svg";
+    this._imageFilename = imageFilename ?? crabImage;
     this._foodValue = foodValue ?? 20;
     this._speed = speed ?? 0.6;
     this._stomachImpact = stomachImpact ?? 10;
