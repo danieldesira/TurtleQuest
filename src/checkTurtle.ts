@@ -76,10 +76,17 @@ const handleOffBgWidth = async (): Promise<LevelChangeTypes> => {
   }
 };
 
-const deleteLastGameAndSaveScore = async (): Promise<void> => {
+const deleteLastGameAndSaveScore = async (hasWon: boolean): Promise<void> => {
   try {
     if (store.getState().authentication.isAuthenticated) {
-      await Promise.all([deleteLastGame(), saveScore()]);
+      await Promise.all([
+        deleteLastGame(),
+        saveScore({
+          points: store.getState().turtleMonitor.turtle.xp.value,
+          level: store.getState().levels.level.value,
+          hasWon,
+        }),
+      ]);
     }
   } catch {
     store.dispatch(
@@ -125,16 +132,16 @@ const checkIfBestPersonalScore = () => {
   );
 };
 
-const handleGameEnd = async () => {
+const handleGameEnd = async (hasWon: boolean) => {
   checkIfBestPersonalScore();
 
   store.dispatch(triggerSavingMode());
-  await deleteLastGameAndSaveScore();
+  await deleteLastGameAndSaveScore(hasWon);
   store.dispatch(triggerMenuMode());
 };
 
 const handleLoss = async () => {
-  await handleGameEnd();
+  await handleGameEnd(false);
 
   store.dispatch(
     updateDialogContent({
@@ -144,7 +151,7 @@ const handleLoss = async () => {
 };
 
 const handleWin = async () => {
-  await handleGameEnd();
+  await handleGameEnd(true);
 
   store.dispatch(
     updateDialogContent({

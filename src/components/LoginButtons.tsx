@@ -10,7 +10,7 @@ import {
 } from "../features/gameState/gameStateReducer";
 import MembersArea from "./membersArea/MembersArea";
 import LoadingIndicator from "./LoadingIndicator";
-import { LoginResponse } from "../services/types";
+import { LoginResponse } from "../services/interfaces";
 import { useLogout } from "./membersArea/hooks";
 import {
   getLastGameLocalStorage,

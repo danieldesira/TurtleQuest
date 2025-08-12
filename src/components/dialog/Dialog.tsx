@@ -1,5 +1,6 @@
 import { FaFloppyDisk } from "react-icons/fa6";
 import DialogButton from "./DialogButton";
+import { GiTurtleShell } from "react-icons/gi";
 
 type Props = {
   title: string;
@@ -28,7 +29,7 @@ const Dialog = ({
         onKeyDown={handleKeyDown}
       >
         <div className="flex justify-center items-center gap-2 border-b-white border-b-2 pb-2">
-          <img src="./favicon.svg" alt="" className="w-5 h-5" />
+          <GiTurtleShell />
           <h1 className="text-xl font-extrabold">{title}</h1>
         </div>
         <form

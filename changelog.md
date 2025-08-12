@@ -1,3 +1,8 @@
+# 0.7.1 Beta - 12/08/2025 13:15
+
+* Fix dialog icon by replacing with React Icons
+* Refactor api interfacing especially in points saving drastically simplifying logic
+
 # 0.7.0 Beta - 11/08/2025 18:15
 
 - Internal:

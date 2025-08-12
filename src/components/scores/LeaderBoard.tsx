@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { fetchHighScores } from "../../services/api";
-import { GetScoresResponse } from "../../services/types";
+import { GetScoresResponse } from "../../services/interfaces";
 import Dialog from "../dialog/Dialog";
 import ScoreTable from "./ScoreTable";
 import { useDispatch, useSelector } from "react-redux";

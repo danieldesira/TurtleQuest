@@ -25,14 +25,3 @@ export const createLevelInstance = (levelNo: number): Level => {
     throw new Error("Level undefined");
   }
 };
-
-/**
- * Returns flag if the level no is beyond the last possible level
- * @param levelNo The level no
- * @returns Flag determining win
- * @author Daniel Desira
- */
-export const hasPlayerWon = (levelNo: number): boolean => {
-  const keys = Object.keys(levelMap).map((key) => parseInt(key));
-  return Math.max(...keys) < levelNo;
-};

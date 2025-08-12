@@ -1,4 +1,4 @@
-import { GetScoresResponse } from "../../services/types";
+import { GetScoresResponse } from "../../services/interfaces";
 
 type Props = { scores: GetScoresResponse };
 

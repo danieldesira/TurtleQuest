@@ -1,4 +1,4 @@
-import { Player } from "../../services/types";
+import { Player } from "../../services/interfaces";
 
 interface GameState {
   state: { value: "in-progress" | "menu" | "saving" };
