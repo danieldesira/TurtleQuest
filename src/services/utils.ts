@@ -1,3 +1,6 @@
+import { logout } from "../features/authentication/authenticationReducer";
+import store from "../store";
+
 const request = async <T>(
   url: string,
   method: string,
@@ -13,6 +16,8 @@ const request = async <T>(
   });
   if (res.ok) {
     return res.status === 204 ? null : ((await res.json()) as T);
+  } else if (res.status === 401) {
+    store.dispatch(logout());
   } else {
     throw new Error(
       `Request error: ${url}: ${res.status}: ${JSON.stringify(

@@ -18,6 +18,7 @@ import {
   getLastGameLocalStorage,
   getLastGameTimestampLocalStorage,
 } from "../../utils/lastGameLocalStorage";
+import InstructionsDialog from "../dialog/InstructionsDialog";
 
 type Props = { setIsNewGame: Dispatch<React.SetStateAction<boolean>> };
 
@@ -25,9 +26,9 @@ const Menu = ({ setIsNewGame }: Props) => {
   const dispatch = useDispatch();
 
   const [showAbout, setShowAbout] = useState<boolean>(false);
-  const [isLastGameAvailable, setIsLastGameAvailable] = useState<boolean>(
-    false
-  );
+  const [showInstructions, setShowInstructions] = useState<boolean>(false);
+  const [isLastGameAvailable, setIsLastGameAvailable] =
+    useState<boolean>(false);
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
@@ -46,6 +47,8 @@ const Menu = ({ setIsNewGame }: Props) => {
   };
 
   const handleAbout = () => setShowAbout(true);
+
+  const handleInstructions = () => setShowInstructions(true);
 
   const uploadLastGame = async () => {
     const lastGame = JSON.parse(getLastGameLocalStorage()) as GameData;
@@ -115,10 +118,14 @@ const Menu = ({ setIsNewGame }: Props) => {
               Caution: Starting a new game will erase current game progress!
             </span>
           )}
+          <MenuButton callback={handleInstructions} text="Instructions" />
         </div>
         <EditionSection />
       </div>
-      {showAbout ? <AboutDialog setShowAbout={setShowAbout} /> : null}
+      {showAbout && <AboutDialog setShowAbout={setShowAbout} />}
+      {showInstructions && (
+        <InstructionsDialog setShowInstructions={setShowInstructions} />
+      )}
     </>
   );
 };

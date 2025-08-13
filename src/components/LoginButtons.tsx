@@ -100,7 +100,6 @@ const LoginButtons = () => {
       checkPersonalBest(loginResult);
     } catch {
       showAuthError();
-      logout();
     } finally {
       setIsLoading(false);
     }
