@@ -1,3 +1,4 @@
+import { getLevelText } from "../../levels/levels";
 import { GetScoresResponse } from "../../services/interfaces";
 
 type Props = { scores: GetScoresResponse };
@@ -16,7 +17,7 @@ const ScoreTable = ({ scores }: Props) => (
       {scores.highScores.map((highScore, index) => (
         <tr key={index}>
           <td className="text-center">{highScore.players.name}</td>
-          <td className="text-right">{highScore.level}</td>
+          <td className="text-right">{getLevelText(highScore.level)}</td>
           <td className="text-right">{highScore.points}</td>
           <td className="text-center">{highScore.outcomes.desc}</td>
         </tr>

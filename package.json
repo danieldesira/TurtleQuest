@@ -1,6 +1,6 @@
 {
   "name": "turtle-quest",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "homepage": "https://danieldesira.github.io/TurtleQuest",
   "type": "module",
   "private": true,

@@ -13,7 +13,7 @@ import {
   respire,
   useFood,
 } from "./features/turtleMonitor/turtleReducers";
-import { LevelChangeTypes, levelMap } from "./levels/levels";
+import { getLevelText, LevelChangeTypes, levelMap } from "./levels/levels";
 import { deleteLastGame, saveScore } from "./services/api";
 import store from "./store";
 import {
@@ -116,7 +116,11 @@ const checkIfBestPersonalScore = () => {
       updateDialogContent({
         dialog: {
           title: "New Personal Best",
-          text: ["Congratulations!", `Points: ${points}`, `Level: ${level}`],
+          text: [
+            "Congratulations!",
+            `Points: ${points}`,
+            `Level: ${getLevelText(level)}`,
+          ],
         },
       })
     );

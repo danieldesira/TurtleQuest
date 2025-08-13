@@ -1,3 +1,6 @@
+# 0.7.3 Beta -
+* Show *Completed* rather than ``finalLevel+1``
+
 # 0.7.2 Beta - 13/08/2025 00:35 UTC+1
 * Fix build to include character and level background images
 * Add ``@static`` path alias

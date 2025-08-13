@@ -25,3 +25,13 @@ export const createLevelInstance = (levelNo: number): Level => {
     throw new Error("Level undefined");
   }
 };
+
+/**
+ * Returns the text representation of a level number.
+ * If the level is not defined, it assumes game completion.
+ * @param levelNo The level number
+ * @returns The text representation of the level
+ * @author Daniel Desira
+ */
+export const getLevelText = (levelNo: number): string =>
+  levelMap[levelNo] ? levelNo.toString() : "Completed";

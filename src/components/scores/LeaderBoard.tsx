@@ -6,6 +6,7 @@ import ScoreTable from "./ScoreTable";
 import { useDispatch, useSelector } from "react-redux";
 import { updateDialogContent } from "../../features/dialogs/dialogReducer";
 import RootState from "../../features/RootState";
+import { getLevelText } from "../../levels/levels";
 
 const LeaderBoard = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,8 @@ const LeaderBoard = () => {
       <div className="text-sm">
         {personalBest?.points ? (
           <>
-            Your best score: {personalBest.points} at level {personalBest.level}
+            Your best score: {personalBest.points} at level{" "}
+            {getLevelText(personalBest.level)}
           </>
         ) : (
           <>Go make a name for yourself. Start a new game!</>
