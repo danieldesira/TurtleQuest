@@ -1,7 +1,7 @@
 # 0.7.3 Beta -
 
 - Show _Completed_ rather than `finalLevel+1`
-- Move instructions to a menu item
+- Move instructions to a menu item and reformat dialog plus add a cute picture
 - Logout if a request returns a 401
 
 # 0.7.2 Beta - 13/08/2025 00:35 UTC+1

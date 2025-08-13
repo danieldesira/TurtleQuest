@@ -16,9 +16,10 @@ const request = async <T>(
   });
   if (res.ok) {
     return res.status === 204 ? null : ((await res.json()) as T);
-  } else if (res.status === 401) {
-    store.dispatch(logout());
   } else {
+    if (res.status === 401) {
+      store.dispatch(logout());
+    }
     throw new Error(
       `Request error: ${url}: ${res.status}: ${JSON.stringify(
         await res.json()

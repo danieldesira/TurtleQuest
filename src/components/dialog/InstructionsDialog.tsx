@@ -1,4 +1,5 @@
 import Dialog from "./Dialog";
+import babyTurtleImage from "@static/images/babyTurtle.jpg";
 
 type Props = {
   setShowInstructions: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,6 +25,12 @@ const InstructionsDialog = ({ setShowInstructions }: Props) => {
         <br />
         Daniel - Game Developer
       </p>
+      <figure className="text-center">
+        <img src={babyTurtleImage} alt="Baby turtle" className="w-full" />
+        <figcaption className="font-light italic">
+          Photo by Steff Cutajar from Għadira nest excavation (2025)
+        </figcaption>
+      </figure>
     </Dialog>
   );
 };
