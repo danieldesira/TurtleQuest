@@ -1,3 +1,7 @@
+# 0.7.5 Beta - 
+
+- Add Share button in win/lose dialog
+
 # 0.7.4 Beta - 14/08/2025 14:10 UTC+1
 
 - Include game screenshot in build and refactor image paths

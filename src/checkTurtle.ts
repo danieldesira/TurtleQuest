@@ -136,6 +136,35 @@ const checkIfBestPersonalScore = () => {
   );
 };
 
+const shareGameButton = {
+  label: "Share",
+  action: async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Turtle Quest",
+          text: `I just reached level ${
+            store.getState().levels.level.value
+          } with ${
+            store.getState().turtleMonitor.turtle.xp.value
+          } points in Turtle Quest!`,
+          url: window.location.href,
+        });
+      } catch {
+        store.dispatch(
+          updateDialogContent({
+            dialog: {
+              title: "Share Failed",
+              text: ["Failed to share the game."],
+              type: "error",
+            },
+          })
+        );
+      }
+    }
+  },
+};
+
 const handleGameEnd = async (hasWon: boolean) => {
   checkIfBestPersonalScore();
 
@@ -149,7 +178,11 @@ const handleLoss = async () => {
 
   store.dispatch(
     updateDialogContent({
-      dialog: { title: "You lose", text: ["Better luck next time!"] },
+      dialog: {
+        title: "You lose",
+        text: ["Better luck next time!"],
+        buttons: [shareGameButton],
+      },
     })
   );
 };
@@ -162,6 +195,7 @@ const handleWin = async () => {
       dialog: {
         title: "Game Complete",
         text: ["Game complete. Congratulations!"],
+        buttons: [shareGameButton],
       },
     })
   );
