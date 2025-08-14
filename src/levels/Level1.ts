@@ -3,10 +3,9 @@ import Sardine from "../characters/Sardine";
 import Shrimp from "../characters/Shrimp";
 import Level from "./Level";
 import LevelCharacter from "./LevelCharacter";
-import level1Bg from "@static/images/backgrounds/level1.png";
 
 class Level1 extends Level {
-  protected readonly _backgroundImageFilename: string = level1Bg;
+  protected readonly _backgroundImageFilename: string = "level1.png";
   protected readonly _initialCharacters: LevelCharacter[] = [
     { constructor: Shrimp, amount: 20 },
     { constructor: Sardine, amount: 10 },

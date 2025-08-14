@@ -10,6 +10,7 @@ abstract class Character implements ICharacter {
   protected abstract readonly _width: number;
   protected abstract readonly _height: number;
   protected _direction: Direction = "Right";
+  protected readonly _imageBasePath: string = "/images/characters/";
 
   /**
    * Loads image for character.
@@ -21,7 +22,7 @@ abstract class Character implements ICharacter {
       const image = document.createElement("img");
       image.width = this._width;
       image.height = this._height;
-      image.src = this._imageFilename;
+      image.src = this.imagePath;
       image.onload = () => {
         this._image = image;
         resolve();
@@ -90,6 +91,10 @@ abstract class Character implements ICharacter {
 
   set direction(direction: Direction) {
     this._direction = direction;
+  }
+
+  get imagePath(): string {
+    return this._imageBasePath + this._imageFilename;
   }
 
   /**

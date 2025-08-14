@@ -1,6 +1,5 @@
 import PackPrey from "./abstract/PackPrey";
 import CharacterOptions from "./interfaces/CharacterOptions";
-import sardineImage from "@static/images/characters/sardine.svg";
 
 class Sardine extends PackPrey {
   protected readonly _imageFilename: string;
@@ -22,7 +21,7 @@ class Sardine extends PackPrey {
     height,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? sardineImage;
+    this._imageFilename = imageFilename ?? "sardine.svg";
     this._foodValue = foodValue ?? 0.6;
     this._speed = speed ?? 1.3;
     this._stomachImpact = stomachImpact ?? 1;

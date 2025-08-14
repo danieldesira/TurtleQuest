@@ -13,10 +13,4 @@ export default defineConfig({
       cert: fs.readFileSync(path.resolve(__dirname, "certs/localhost+2.pem")),
     },
   },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@static": path.resolve(__dirname, "./static"),
-    },
-  },
 });

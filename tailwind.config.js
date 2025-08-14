@@ -13,7 +13,7 @@ module.exports = {
         "screen-1/4": "25vh",
       },
       backgroundImage: {
-        cute: `url("../static/images/backgrounds/hatchingTurtles.svg")`,
+        cute: `url("../images/backgrounds/hatchingTurtles.svg")`,
       },
       colors: {
         primary: "#DB2777",

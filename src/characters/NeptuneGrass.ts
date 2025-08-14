@@ -1,6 +1,5 @@
 import BenthicPrey from "./abstract/BenthicPrey";
 import CharacterOptions from "./interfaces/CharacterOptions";
-import neptuneGrassImage from "@static/images/characters/neptuneGrass.svg";
 
 class NeptuneGrass extends BenthicPrey {
   protected readonly _imageFilename: string;
@@ -22,7 +21,7 @@ class NeptuneGrass extends BenthicPrey {
     speed,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? neptuneGrassImage;
+    this._imageFilename = imageFilename ?? "neptuneGrass.svg";
     this._foodValue = foodValue ?? 5;
     this._stomachImpact = stomachImpact ?? 10;
     this._points = points ?? 1;

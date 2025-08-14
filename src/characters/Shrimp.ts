@@ -1,6 +1,5 @@
 import Prey from "./abstract/Prey";
 import CharacterOptions from "./interfaces/CharacterOptions";
-import shrimpImage from "@static/images/characters/shrimp.svg";
 
 class Shrimp extends Prey {
   protected readonly _imageFilename: string;
@@ -22,7 +21,7 @@ class Shrimp extends Prey {
     height,
   }: CharacterOptions = {}) {
     super();
-    this._imageFilename = imageFilename ?? shrimpImage;
+    this._imageFilename = imageFilename ?? "shrimp.svg";
     this._foodValue = foodValue ?? 0.01;
     this._speed = speed ?? 0.6;
     this._stomachImpact = stomachImpact ?? 0.05;

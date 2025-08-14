@@ -16,6 +16,7 @@ interface ILevel {
   get points(): number;
   checkIfTurtleMeetsCharacters(): void;
   get levelDescription(): string[];
+  get imagePath(): string;
 }
 
 export default ILevel;

@@ -90,6 +90,8 @@ const LoginDialog = ({ setShowLogin }: Props) => {
 
       checkGameData(loginResult);
       checkPersonalBest(loginResult);
+
+      handleClose();
     } catch {
       showAuthError();
     } finally {

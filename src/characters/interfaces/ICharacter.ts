@@ -16,6 +16,7 @@ interface ICharacter {
   get width(): number;
   get direction(): Direction;
   set direction(direction: Direction);
+  get imagePath(): string;
 }
 
 export default ICharacter;

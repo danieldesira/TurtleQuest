@@ -17,6 +17,7 @@ abstract class Level implements ILevel {
   protected abstract readonly _currentSpeed: number;
   protected abstract readonly _points: number;
   protected abstract readonly _levelDescription: string[];
+  protected readonly _imageBasePath: string = "/images/backgrounds/";
 
   /**
    * Initialises level.
@@ -43,7 +44,7 @@ abstract class Level implements ILevel {
   private loadBgImg(): Promise<void> {
     return new Promise((resolve, reject) => {
       const backgroundImage = document.createElement("img");
-      backgroundImage.src = this._backgroundImageFilename;
+      backgroundImage.src = this.imagePath;
       backgroundImage.onload = () => {
         this._backgroundImage = backgroundImage;
         resolve();
@@ -87,6 +88,10 @@ abstract class Level implements ILevel {
 
   get levelDescription(): string[] {
     return this._levelDescription;
+  }
+
+  get imagePath(): string {
+    return this._imageBasePath + this._backgroundImageFilename;
   }
 
   private spawnCharacters() {

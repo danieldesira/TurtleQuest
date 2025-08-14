@@ -1,3 +1,8 @@
+# 0.7.4 Beta - 14/08/2025 14:10 UTC+1
+
+- Include game screenshot in build and refactor image paths
+- Close login dialog on successful Google login
+
 # 0.7.3 Beta - 14/08/2025 10:10 UTC+1
 
 - Show _Completed_ rather than `finalLevel+1`
