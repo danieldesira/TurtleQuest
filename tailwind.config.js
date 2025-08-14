@@ -15,6 +15,10 @@ module.exports = {
       backgroundImage: {
         cute: `url("../static/images/backgrounds/hatchingTurtles.svg")`,
       },
+      colors: {
+        primary: "#DB2777",
+        danger: "#B91C1C",
+      },
     },
   },
   plugins: ["postcss"],

@@ -17,7 +17,12 @@ const LoginButtons = () => {
       {isAuthenticated ? (
         <MembersArea />
       ) : (
-        <button type="button" role="button" onClick={handleLoginClick}>
+        <button
+          type="button"
+          role="button"
+          className="bg-primary text-white pl-2 pr-2 rounded-sm"
+          onClick={handleLoginClick}
+        >
           Login
         </button>
       )}

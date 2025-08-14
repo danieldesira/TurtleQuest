@@ -13,7 +13,7 @@ const DialogButton = ({
   <button
     type={buttonType}
     className={`${
-      variant === "default" ? "bg-pink-600" : "bg-red-700"
+      variant === "default" ? "bg-primary" : "bg-danger"
     } rounded-md text-xl text-white pl-2 pr-2 w-fit flex gap-2 items-center`}
     onClick={handleClick}
   >

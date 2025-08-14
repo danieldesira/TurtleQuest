@@ -111,7 +111,12 @@ const LoginDialog = ({ setShowLogin }: Props) => {
 
   return (
     <Dialog title="Login" handleOk={handleClose}>
-      <div id="googleSignInButton"></div>
+      <div className="flex flex-col justify-center items-center gap-3">
+        <div id="googleSignInButton"></div>
+      </div>
+      <span className="font-light italic text-center text-sm">
+        Or continue without logging in...
+      </span>
       {isLoading && <LoadingIndicator message="Loading account data" />}
     </Dialog>
   );

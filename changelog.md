@@ -1,8 +1,11 @@
-# 0.7.3 Beta -
+# 0.7.3 Beta - 14/08/2025 10:10 UTC+1
 
 - Show _Completed_ rather than `finalLevel+1`
 - Move instructions to a menu item and reformat dialog plus add a cute picture
 - Logout if a request returns a 401
+- Move Google SSO button to a login dialog
+- Set menu background to always cover full screen
+- Set brand colour in Tailwind config
 
 # 0.7.2 Beta - 13/08/2025 00:35 UTC+1
 

@@ -27,7 +27,7 @@ const InstructionsDialog = ({ setShowInstructions }: Props) => {
       </p>
       <figure className="text-center">
         <img src={babyTurtleImage} alt="Baby turtle" className="w-full" />
-        <figcaption className="font-light italic">
+        <figcaption className="font-light italic text-sm">
           Photo by Steff Cutajar from Għadira nest excavation (2025)
         </figcaption>
       </figure>
