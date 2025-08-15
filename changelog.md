@@ -4,6 +4,7 @@
 - Open login dialog on initial page load
 - Move edition section to about dialog
 - Adjust /player PUT service method to only send necessary properties in payload
+- Adopt pink primary brand colour more consistently
 
 # 0.7.4 Beta - 14/08/2025 14:10 UTC+1
 

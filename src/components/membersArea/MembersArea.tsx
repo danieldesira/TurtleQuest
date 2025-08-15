@@ -21,17 +21,17 @@ const MembersArea = () => {
       <RiSettings5Fill
         role="button"
         onClick={handleSettings}
-        className="text-green-700 text-4xl"
+        className="text-primary text-4xl"
       />
       <FaUser
         role="button"
         onClick={handleProfile}
-        className="text-green-700 text-4xl"
+        className="text-primary text-4xl"
       />
       <IoLogOut
         role="button"
         onClick={logout}
-        className="text-red-500 text-4xl"
+        className="text-danger text-4xl"
       />
       <Settings showDialog={showSettings} setShowDialog={setShowSettings} />
       <Profile showDialog={showProfile} setShowDialog={setShowProfile} />

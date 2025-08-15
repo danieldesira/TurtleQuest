@@ -98,7 +98,7 @@ const Menu = ({ setIsNewGame }: Props) => {
               target="_blank"
               title="Follow us on Instagram"
             >
-              <FaInstagram className="text-4xl" />
+              <FaInstagram className="text-primary text-4xl" />
             </a>
             <LoginButtons />
           </div>

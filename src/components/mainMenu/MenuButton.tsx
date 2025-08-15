@@ -4,7 +4,7 @@ interface Props {
 }
 
 const MenuButton = ({ callback, text }: Props) => (
-  <span className="text-slate-950 text-5xl" role="button" onClick={callback}>
+  <span className="text-primary text-5xl" role="button" onClick={callback}>
     {text}
   </span>
 );
