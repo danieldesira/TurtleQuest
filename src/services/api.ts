@@ -2,9 +2,9 @@ import GameData from "../restoreGame/GameData";
 import {
   GetScoresResponse,
   LoginResponse,
-  Player,
   SaveScoreRequest,
   Settings,
+  UpdatePlayerPayload,
 } from "./interfaces";
 import { del, get, post, put } from "./utils";
 
@@ -34,7 +34,7 @@ export const deleteLastGame = async () => await del("api/game");
 export const updateSettings = async (settings: Settings) =>
   await put("api/settings", settings);
 
-export const updateProfile = async (profile: Player) =>
+export const updateProfile = async (profile: UpdatePlayerPayload) =>
   await put("api/player", profile);
 
 export const requestLogout = async () => await post("api/logout");

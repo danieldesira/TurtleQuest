@@ -73,7 +73,11 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
     setShowDialog(false);
 
     try {
-      await updateProfile(profile);
+      await updateProfile({
+        profile_pic: profile.profile_pic!,
+        name: profile.name,
+        date_of_birth: profile.date_of_birth,
+      });
     } catch {
       dispatch(
         updateDialogContent({

@@ -41,3 +41,9 @@ export interface SaveScoreRequest {
   level: number;
   hasWon: boolean;
 }
+
+export interface UpdatePlayerPayload {
+  name: string;
+  date_of_birth: string;
+  profile_pic: string;
+}
