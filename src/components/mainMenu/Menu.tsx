@@ -2,7 +2,6 @@ import { Dispatch, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
 import AboutDialog from "../dialog/AboutDialog";
-import EditionSection from "../EditionSection";
 import Game from "../../Game";
 import parseGameData from "../../restoreGame/parseGameData";
 import { FaInstagram } from "react-icons/fa6";
@@ -120,7 +119,6 @@ const Menu = ({ setIsNewGame }: Props) => {
           )}
           <MenuButton callback={handleInstructions} text="Instructions" />
         </div>
-        <EditionSection />
       </div>
       {showAbout && <AboutDialog setShowAbout={setShowAbout} />}
       {showInstructions && (

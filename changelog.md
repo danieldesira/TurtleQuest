@@ -1,6 +1,8 @@
-# 0.7.5 Beta - 
+# 0.7.5 Beta (Malta hatching Edition) - 
 
 - Add Share button in win/lose dialog
+- Open login dialog on initial page load
+- Move edition section to about dialog
 
 # 0.7.4 Beta - 14/08/2025 14:10 UTC+1
 
