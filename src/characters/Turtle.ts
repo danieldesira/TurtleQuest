@@ -79,23 +79,24 @@ class Turtle extends Character implements IMainCharacter {
     }
   }
 
-  /**
-   * Paints turtle while taking direction into account.
-   * @param context The canvas 2D context
-   * @override
-   * @author Daniel Desira
-   */
-  paint(context: CanvasRenderingContext2D) {
-    this.applyRotation(context);
-    context.drawImage(
-      this._image,
-      this._x - Game.instance.level.bgOffsetX,
-      this._y - Game.instance.level.bgOffsetY,
-      this._width,
-      this._height
-    );
-    context.resetTransform();
-  }
+  // /**
+  //  * Paints turtle while taking direction into account.
+  //  * @param context The canvas 2D context
+  //  * @override
+  //  * @author Daniel Desira
+  //  */
+  // paint(context: CanvasRenderingContext2D) {
+  //   context.save();
+  //   this.applyRotation(context);
+  //   context.drawImage(
+  //     this._image,
+  //     -this._width / 2,
+  //     -this._height / 2,
+  //     this._width,
+  //     this._height
+  //   );
+  //   context.restore();
+  // }
 }
 
 export default Turtle;

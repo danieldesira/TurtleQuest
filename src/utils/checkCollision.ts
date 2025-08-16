@@ -41,36 +41,22 @@ const checkBoundingBoxCollision = (
 export const getCharacterBoundingBox = (character: ICharacter): BoundingBox => {
   let box: BoundingBox = null;
   switch (character.direction) {
+    case "Up":
     case "Down":
       box = {
-        minX: character.x - character.height,
-        maxX: character.x,
-        minY: character.y,
-        maxY: character.y + character.width,
-      };
-      break;
-    case "Up":
-      box = {
-        minX: character.x,
-        maxX: character.x + character.height,
-        minY: character.y - character.width,
-        maxY: character.y,
+        minX: character.x - character.width / 2,
+        maxX: character.x + character.height / 2,
+        minY: character.y - character.width / 2,
+        maxY: character.y + character.height / 2,
       };
       break;
     case "Left":
-      box = {
-        minX: character.x - character.width,
-        maxX: character.x,
-        minY: character.y - character.height,
-        maxY: character.y,
-      };
-      break;
     case "Right":
       box = {
-        minX: character.x,
-        maxX: character.x + character.width,
-        minY: character.y,
-        maxY: character.y + character.height,
+        minX: character.x - character.width / 2,
+        maxX: character.x + character.width / 2,
+        minY: character.y - character.height / 2,
+        maxY: character.y + character.height / 2,
       };
       break;
   }

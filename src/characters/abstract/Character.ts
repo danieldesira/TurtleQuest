@@ -37,23 +37,20 @@ abstract class Character implements ICharacter {
   /**
    * Paints the character. Needs to be called after <code>loadImage()</code>.
    * @param context Canvas context.
-   * @param bgXOffset Horizontal offset on canvas.
-   * @param bgYOffset Vertical offset on canvas.
    * @author Daniel Desira
    */
-  paint(
-    context: CanvasRenderingContext2D,
-    bgXOffset: number = 0,
-    bgYOffset: number = 0
-  ): void {
+  paint(context: CanvasRenderingContext2D): void {
     if (this._image) {
+      context.save();
+      this.applyRotation(context);
       context.drawImage(
         this._image,
-        this.x - bgXOffset,
-        this.y - bgYOffset,
-        this._image.width,
-        this._image.height
+        -this._width / 2,
+        -this._height / 2,
+        this._width,
+        this._height
       );
+      context.restore();
     }
   }
 
@@ -104,11 +101,13 @@ abstract class Character implements ICharacter {
    * @author Daniel Desira
    */
   protected applyRotation(context: CanvasRenderingContext2D) {
-    const x = this._x - Game.instance.level.bgOffsetX;
-    const y = this._y - Game.instance.level.bgOffsetY;
-    context.translate(x, y);
+    //const x = this._x - Game.instance.level.bgOffsetX;
+    //const y = this._y - Game.instance.level.bgOffsetY;
+    context.translate(
+      this._x - Game.instance.level.bgOffsetX,
+      this._y - Game.instance.level.bgOffsetY
+    );
     context.rotate(Directions[this._direction]);
-    context.translate(-x, -y);
   }
 }
 
