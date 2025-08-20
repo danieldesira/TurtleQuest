@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import FormDialog from "../../dialog/FormDialog";
 import { Input } from "../../dialog/types";
 import { setProfile } from "../../../features/gameState/gameStateReducer";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../../features/RootState";
 import { updateProfile, uploadProfilePicture } from "../../../services/api";
 import { updateDialogContent } from "../../../features/dialogs/dialogReducer";
+import LoadingIndicator from "../../LoadingIndicator";
 
 type Props = {
   showDialog: boolean;
@@ -14,7 +15,9 @@ type Props = {
 
 const Profile = ({ showDialog, setShowDialog }: Props) => {
   const dispatch = useDispatch();
+
   const profile = useSelector((state: RootState) => state.game.profile.value);
+  const [isUploadingPicture, setIsUploadingPicture] = useState<boolean>(false);
 
   const profileConfig: Input[] = [
     {
@@ -56,7 +59,22 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
     if (name === "profile_picture") {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
-        await uploadProfilePicture(file);
+        try {
+          setIsUploadingPicture(true);
+          await uploadProfilePicture(file);
+        } catch {
+          dispatch(
+            updateDialogContent({
+              dialog: {
+                title: "Error uploading Profile Picture",
+                text: ["Failed to upload profile picture. Try again later."],
+                type: "error",
+              },
+            })
+          );
+        } finally {
+          setIsUploadingPicture(false);
+        }
       }
     } else {
       dispatch(setProfile({ profile: { ...profile, [name]: value } }));
@@ -86,12 +104,17 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
 
   return (
     showDialog && (
-      <FormDialog
-        title="Profile"
-        inputs={profileConfig}
-        handleInputChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
+      <>
+        <FormDialog
+          title="Profile"
+          inputs={profileConfig}
+          handleInputChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        {isUploadingPicture && (
+          <LoadingIndicator message="Uploading profile picture..." />
+        )}
+      </>
     )
   );
 };

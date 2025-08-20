@@ -1,10 +1,12 @@
-# 0.7.5 Beta (Malta hatching Edition) - 
+# 0.7.5 Beta (Malta hatching Edition) -
 
 - Add Share button in win/lose dialog
 - Open login dialog on initial page load
 - Move edition section to about dialog
 - Adjust /player PUT service method to only send necessary properties in payload
 - Adopt pink primary brand colour more consistently
+- Upload image on profile picture change event
+- Refactor request helper methods as static ``Request`` class
 
 # 0.7.4 Beta - 14/08/2025 14:10 UTC+1
 

@@ -1,18 +1,12 @@
 import { logout } from "../features/authentication/authenticationReducer";
 import store from "../store";
 
-const convertFileToFormData = (file: File): FormData => {
-  const formData = new FormData();
-  formData.append("file", file);
-  return formData;
-};
-
 const request = async <T>(
   url: string,
   method: string,
   body: unknown = null,
   contentType: "application/json" | "multipart/form-data" = "application/json"
-): Promise<T> => {
+) => {
   const data =
     contentType === "multipart/form-data" && body instanceof File
       ? body
@@ -39,17 +33,22 @@ const request = async <T>(
   }
 };
 
-export const get = async <T>(url: string): Promise<T> =>
-  await request<T>(url, "GET");
+const Request = {
+  async get<T>(url: string) {
+    return await request<T>(url, "GET");
+  },
+  async post<T>(url: string, body: unknown = null) {
+    return await request<T>(url, "post", body);
+  },
+  async put<T>(url: string, body: unknown) {
+    return await request<T>(url, "put", body);
+  },
+  async delete<T>(url: string) {
+    return await request<T>(url, "delete");
+  },
+  async uploadFile<T>(url: string, file: File) {
+    return await request<T>(url, "put", file, "multipart/form-data");
+  },
+};
 
-export const post = async <T>(url: string, body: unknown = null): Promise<T> =>
-  await request<T>(url, "post", body);
-
-export const put = async <T>(url: string, body: unknown): Promise<T> =>
-  await request<T>(url, "put", body);
-
-export const del = async <T>(url: string): Promise<T> =>
-  await request<T>(url, "delete");
-
-export const uploadFile = async <T>(url: string, file: File): Promise<T> =>
-  await request<T>(url, "put", file, "multipart/form-data");
+export default Request;
