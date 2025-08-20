@@ -6,7 +6,7 @@ import {
   Settings,
   UpdatePlayerPayload,
 } from "./interfaces";
-import { del, get, post, put } from "./utils";
+import { del, get, post, put, uploadFile } from "./utils";
 
 export const login = async (credential: string) =>
   (await post("api/login", {
@@ -38,3 +38,6 @@ export const updateProfile = async (profile: UpdatePlayerPayload) =>
   await put("api/player", profile);
 
 export const requestLogout = async () => await post("api/logout");
+
+export const uploadProfilePicture = async (file: File) =>
+  await uploadFile("api/profile-pic", file);

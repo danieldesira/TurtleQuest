@@ -1,17 +1,28 @@
 import { logout } from "../features/authentication/authenticationReducer";
 import store from "../store";
 
+const convertFileToFormData = (file: File): FormData => {
+  const formData = new FormData();
+  formData.append("file", file);
+  return formData;
+};
+
 const request = async <T>(
   url: string,
   method: string,
-  body: unknown = null
+  body: unknown = null,
+  contentType: "application/json" | "multipart/form-data" = "application/json"
 ): Promise<T> => {
+  const data =
+    contentType === "multipart/form-data" && body instanceof File
+      ? body
+      : JSON.stringify(body);
   const res = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, {
     method,
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": contentType,
     },
-    body: body ? JSON.stringify(body) : undefined,
+    body: data,
     credentials: "include",
   });
   if (res.ok) {
@@ -22,7 +33,7 @@ const request = async <T>(
     }
     throw new Error(
       `Request error: ${url}: ${res.status}: ${JSON.stringify(
-        await res.json()
+        await res.text()
       )}`
     );
   }
@@ -39,3 +50,6 @@ export const put = async <T>(url: string, body: unknown): Promise<T> =>
 
 export const del = async <T>(url: string): Promise<T> =>
   await request<T>(url, "delete");
+
+export const uploadFile = async <T>(url: string, file: File): Promise<T> =>
+  await request<T>(url, "put", file, "multipart/form-data");

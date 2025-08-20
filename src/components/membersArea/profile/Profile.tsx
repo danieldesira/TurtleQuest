@@ -4,7 +4,7 @@ import { Input } from "../../dialog/types";
 import { setProfile } from "../../../features/gameState/gameStateReducer";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../../features/RootState";
-import { updateProfile } from "../../../services/api";
+import { updateProfile, uploadProfilePicture } from "../../../services/api";
 import { updateDialogContent } from "../../../features/dialogs/dialogReducer";
 
 type Props = {
@@ -21,7 +21,7 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
       label: "Profile Picture",
       name: "profile_picture",
       type: "imageUpload",
-      value: profile.profile_pic,
+      value: profile.profile_pic_url,
       required: false,
       maxLength: 0,
       readonly: false,
@@ -51,18 +51,12 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
     },
   ];
 
-  const handleChange = (event: React.ChangeEvent) => {
+  const handleChange = async (event: React.ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
     if (name === "profile_picture") {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () =>
-          dispatch(
-            setProfile({ profile: { ...profile, profile_pic: reader.result } })
-          );
-        reader.readAsDataURL(file);
-        return;
+        await uploadProfilePicture(file);
       }
     } else {
       dispatch(setProfile({ profile: { ...profile, [name]: value } }));
@@ -74,7 +68,6 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
 
     try {
       await updateProfile({
-        profile_pic: profile.profile_pic!,
         name: profile.name,
         date_of_birth: profile.date_of_birth,
       });

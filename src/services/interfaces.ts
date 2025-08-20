@@ -21,7 +21,7 @@ export interface Player {
   name: string;
   email: string;
   created_at?: string;
-  profile_pic?: string;
+  profile_pic_url?: string;
   date_of_birth?: string;
   last_login_at?: string;
   settings?: Settings;
@@ -45,5 +45,4 @@ export interface SaveScoreRequest {
 export interface UpdatePlayerPayload {
   name: string;
   date_of_birth: string;
-  profile_pic: string;
 }
