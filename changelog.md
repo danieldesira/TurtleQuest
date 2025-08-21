@@ -7,6 +7,7 @@
 - Adopt pink primary brand colour more consistently
 - Upload image on profile picture change event
 - Refactor request helper methods as static ``Request`` class
+- Add player profile pictures to high scores dialog
 
 # 0.7.4 Beta - 14/08/2025 14:10 UTC+1
 

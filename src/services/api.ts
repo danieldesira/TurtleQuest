@@ -2,9 +2,10 @@ import GameData from "../restoreGame/GameData";
 import {
   GetScoresResponse,
   LoginResponse,
-  SaveScoreRequest,
+  SaveScorePayload,
   Settings,
   UpdatePlayerPayload,
+  UpdateProfilePictureResponse,
 } from "./interfaces";
 import Request from "./Request";
 
@@ -19,7 +20,7 @@ export const saveGame = async (data: {
   timestamp: number;
 }) => await Request.put("api/game", data);
 
-export const saveScore = async ({ points, level, hasWon }: SaveScoreRequest) =>
+export const saveScore = async ({ points, level, hasWon }: SaveScorePayload) =>
   await Request.post("api/points", {
     points,
     level,
@@ -27,7 +28,7 @@ export const saveScore = async ({ points, level, hasWon }: SaveScoreRequest) =>
   });
 
 export const fetchHighScores = async () =>
-  await Request.get<GetScoresResponse>("api/points");
+  await Request.get<GetScoresResponse>("api/high-scores");
 
 export const deleteLastGame = async () => await Request.delete("api/game");
 
@@ -40,4 +41,4 @@ export const updateProfile = async (profile: UpdatePlayerPayload) =>
 export const requestLogout = async () => await Request.post("api/logout");
 
 export const uploadProfilePicture = async (file: File) =>
-  await Request.uploadFile("api/profile-pic", file);
+  await Request.uploadFile<UpdateProfilePictureResponse>("api/profile-pic", file);

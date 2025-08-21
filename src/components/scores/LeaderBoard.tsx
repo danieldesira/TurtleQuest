@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { fetchHighScores } from "../../services/api";
-import { GetScoresResponse } from "../../services/interfaces";
+import { GetHighScoresResponse } from "../../services/interfaces";
 import Dialog from "../dialog/Dialog";
 import ScoreTable from "./ScoreTable";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,15 +11,16 @@ import { getLevelText } from "../../levels/levels";
 const LeaderBoard = () => {
   const dispatch = useDispatch();
 
-  const [scores, setScores] = useState<GetScoresResponse>();
+  const [scores, setScores] = useState<GetHighScoresResponse>();
   const [showScoresDialog, setShowScoresDialog] = useState<boolean>(false);
   const personalBest = useSelector(
     (state: RootState) => state.game.personalBest.value
   );
 
-  const fetchScores = async () => {
+  const handleViewScores = async () => {
     try {
       setScores(await fetchHighScores());
+      setShowScoresDialog(true);
     } catch {
       dispatch(
         updateDialogContent({
@@ -31,11 +32,6 @@ const LeaderBoard = () => {
         })
       );
     }
-  };
-
-  const handleViewScores = async () => {
-    await fetchScores();
-    setShowScoresDialog(true);
   };
 
   const closeHighScores = () => setShowScoresDialog(false);
@@ -62,7 +58,7 @@ const LeaderBoard = () => {
       </button>
       {showScoresDialog && (
         <Dialog title="High Scores" handleOk={closeHighScores}>
-          <ScoreTable scores={scores} />
+          <ScoreTable highScores={scores} />
         </Dialog>
       )}
     </div>

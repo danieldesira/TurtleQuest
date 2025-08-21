@@ -1,22 +1,32 @@
 import { logout } from "../features/authentication/authenticationReducer";
 import store from "../store";
 
+type ContentType = "application/json" | "multipart/form-data";
+
+const processPayload = (payload: unknown, contentType: ContentType) => {
+  if (!payload) {
+    return null;
+  }
+
+  if (contentType === "multipart/form-data" && payload instanceof File) {
+    return payload;
+  }
+
+  return JSON.stringify(payload);
+};
+
 const request = async <T>(
   url: string,
   method: string,
-  body: unknown = null,
-  contentType: "application/json" | "multipart/form-data" = "application/json"
+  payload: unknown = null,
+  contentType: ContentType = "application/json"
 ) => {
-  const data =
-    contentType === "multipart/form-data" && body instanceof File
-      ? body
-      : JSON.stringify(body);
   const res = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, {
     method,
     headers: {
       "Content-Type": contentType,
     },
-    body: data,
+    body: processPayload(payload, contentType),
     credentials: "include",
   });
   if (res.ok) {
@@ -35,7 +45,7 @@ const request = async <T>(
 
 const Request = {
   async get<T>(url: string) {
-    return await request<T>(url, "GET");
+    return await request<T>(url, "get");
   },
   async post<T>(url: string, body: unknown = null) {
     return await request<T>(url, "post", body);
