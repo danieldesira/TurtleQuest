@@ -4,7 +4,7 @@ import GameHeader from "./gameHeader/GameHeader";
 import resizeCanvas from "../utils/resizeCanvas";
 import handleKeyDown from "../controls/handleKeyDown";
 import handleWheel from "../controls/handleWheel";
-import LoadingIndicator from "./LoadingIndicator";
+import LoadingIndicator from "./LoadingOverlay";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import ControlGroup from "./controls/ControlGroup";

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../../features/RootState";
 import { updateProfile, uploadProfilePicture } from "../../../services/api";
 import { updateDialogContent } from "../../../features/dialogs/dialogReducer";
-import LoadingIndicator from "../../LoadingIndicator";
+import LoadingIndicator from "../../LoadingOverlay";
 
 type Props = {
   showDialog: boolean;

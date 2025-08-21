@@ -15,7 +15,7 @@ import {
   setProfile,
 } from "../../features/gameState/gameStateReducer";
 import { useEffect, useState } from "react";
-import LoadingIndicator from "../LoadingIndicator";
+import LoadingIndicator from "../LoadingOverlay";
 import RootState from "../../features/RootState";
 
 type Props = {
