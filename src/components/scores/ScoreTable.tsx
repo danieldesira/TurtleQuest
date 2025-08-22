@@ -1,7 +1,7 @@
 import { getLevelText } from "../../levels/levels";
-import { GetHighScoresResponse } from "../../services/interfaces";
+import { HighScore } from "../../services/interfaces";
 
-type Props = { highScores: GetHighScoresResponse };
+type Props = { highScores: HighScore[] };
 
 const ScoreTable = ({ highScores }: Props) => (
   <table className="border-separate border-spacing-1">

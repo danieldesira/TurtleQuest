@@ -4,13 +4,13 @@ export interface Settings {
   controlPosition: "Left" | "Right";
 }
 
-export type GetHighScoresResponse = {
+export interface HighScore {
   points: number;
   level: number;
   player_won: string;
   players: { name: string; profile_pic_url: string };
   outcomes: { desc: string };
-}[];
+}
 
 export interface Player {
   id?: number;

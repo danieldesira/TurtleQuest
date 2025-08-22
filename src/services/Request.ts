@@ -1,14 +1,12 @@
 import { logout } from "../features/authentication/authenticationReducer";
 import store from "../store";
 
-type ContentType = "application/json" | "multipart/form-data";
-
-const processPayload = (payload: unknown, contentType: ContentType) => {
+const processPayload = (payload: unknown) => {
   if (!payload) {
     return null;
   }
 
-  if (contentType === "multipart/form-data" && payload instanceof File) {
+  if (payload instanceof File) {
     return payload;
   }
 
@@ -19,14 +17,14 @@ const request = async <T>(
   url: string,
   method: string,
   payload: unknown = null,
-  contentType: ContentType = "application/json"
+  contentType: string = "application/json"
 ) => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, {
     method,
     headers: {
       "Content-Type": contentType,
     },
-    body: processPayload(payload, contentType),
+    body: processPayload(payload),
     credentials: "include",
   });
   if (res.ok) {
@@ -57,7 +55,7 @@ const Request = {
     return await request<T>(url, "delete");
   },
   async uploadFile<T>(url: string, file: File) {
-    return await request<T>(url, "put", file, "multipart/form-data");
+    return await request<T>(url, "put", file, file.type);
   },
 };
 

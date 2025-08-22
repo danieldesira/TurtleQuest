@@ -45,7 +45,7 @@ const SingleInput = ({
       <div className="flex flex-col items-center">
         <img
           role="button"
-          src={value || "/placeholder.png"}
+          src={value}
           alt="Uploaded"
           className="w-32 h-32 object-cover mb-2"
           onClick={handleImageClick}

@@ -15,8 +15,8 @@ import {
   setProfile,
 } from "../../features/gameState/gameStateReducer";
 import { useEffect, useState } from "react";
-import LoadingIndicator from "../LoadingOverlay";
 import RootState from "../../features/RootState";
+import LoadingOverlay from "../LoadingOverlay";
 
 type Props = {
   setShowLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -119,7 +119,7 @@ const LoginDialog = ({ setShowLogin }: Props) => {
       <span className="font-light italic text-center text-sm">
         Or continue without logging in...
       </span>
-      {isLoading && <LoadingIndicator message="Loading account data" />}
+      {isLoading && <LoadingOverlay message="Loading account data" />}
     </Dialog>
   );
 };

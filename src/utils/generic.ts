@@ -1,3 +1,4 @@
+import { readjustCanvasForBg } from "../levels/background";
 import store from "../store";
 
 /**
@@ -14,3 +15,17 @@ export const generateRandomBit = (): boolean => !!Math.round(Math.random());
  */
 export const isCustomDialogOpen = (): boolean =>
   !!store.getState().dialogs.dialog.title;
+
+/**
+ * Resizes canvas while taking the background size in
+ * consideration.
+ * @param canvas The canvas element
+ * @author Daniel Desira
+ */
+export const resizeCanvas = (canvas: HTMLCanvasElement) => {
+  if (canvas) {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    readjustCanvasForBg(canvas);
+  }
+};

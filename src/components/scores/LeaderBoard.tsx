@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { fetchHighScores } from "../../services/api";
-import { GetHighScoresResponse } from "../../services/interfaces";
+import { HighScore } from "../../services/interfaces";
 import Dialog from "../dialog/Dialog";
 import ScoreTable from "./ScoreTable";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import { getLevelText } from "../../levels/levels";
 const LeaderBoard = () => {
   const dispatch = useDispatch();
 
-  const [scores, setScores] = useState<GetHighScoresResponse>();
+  const [scores, setScores] = useState<HighScore[]>();
   const [showScoresDialog, setShowScoresDialog] = useState<boolean>(false);
   const personalBest = useSelector(
     (state: RootState) => state.game.personalBest.value

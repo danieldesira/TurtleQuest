@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../../features/RootState";
 import { updateProfile, uploadProfilePicture } from "../../../services/api";
 import { updateDialogContent } from "../../../features/dialogs/dialogReducer";
-import LoadingIndicator from "../../LoadingOverlay";
+import LoadingOverlay from "../../LoadingOverlay";
 
 type Props = {
   showDialog: boolean;
@@ -54,14 +54,21 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
     },
   ];
 
-  const handleChange = async (event: React.ChangeEvent) => {
-    const { name, value } = event.target as HTMLInputElement;
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
     if (name === "profile_picture") {
-      const file = (event.target as HTMLInputElement).files?.[0];
+      const file = event.target.files?.[0];
       if (file) {
         try {
           setIsUploadingPicture(true);
-          await uploadProfilePicture(file);
+          const res = await uploadProfilePicture(file);
+          if (res.profilePicUrl) {
+            dispatch(
+              setProfile({
+                profile: { ...profile, profile_pic_url: res.profilePicUrl },
+              })
+            );
+          }
         } catch {
           dispatch(
             updateDialogContent({
@@ -112,7 +119,7 @@ const Profile = ({ showDialog, setShowDialog }: Props) => {
           handleSubmit={handleSubmit}
         />
         {isUploadingPicture && (
-          <LoadingIndicator message="Uploading profile picture..." />
+          <LoadingOverlay message="Uploading profile picture..." />
         )}
       </>
     )

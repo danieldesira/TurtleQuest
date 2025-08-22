@@ -1,10 +1,8 @@
 import { useEffect, useRef } from "react";
 import NextLevelIndication from "./NextLevelIndication";
 import GameHeader from "./gameHeader/GameHeader";
-import resizeCanvas from "../utils/resizeCanvas";
 import handleKeyDown from "../controls/handleKeyDown";
 import handleWheel from "../controls/handleWheel";
-import LoadingIndicator from "./LoadingOverlay";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "../features/RootState";
 import ControlGroup from "./controls/ControlGroup";
@@ -14,6 +12,8 @@ import { updateDialogContent } from "../features/dialogs/dialogReducer";
 import { triggerMenuMode } from "../features/gameState/gameStateReducer";
 import GameData from "../restoreGame/GameData";
 import { getLastGameLocalStorage } from "../utils/lastGameLocalStorage";
+import LoadingOverlay from "./LoadingOverlay";
+import { resizeCanvas } from "../utils/generic";
 
 type Props = { isNewGame: boolean };
 
@@ -27,7 +27,6 @@ const GameSection = ({ isNewGame }: Props) => {
   const isSaving = useSelector(
     (state: RootState) => state.game.state.value === "saving"
   );
-  const profile = useSelector((state: RootState) => state.game.profile.value);
 
   const dispatch = useDispatch();
 
@@ -83,12 +82,12 @@ const GameSection = ({ isNewGame }: Props) => {
         ></canvas>
       </div>
       {isLoadingLevel ? (
-        <LoadingIndicator message={`Loading level ${currentLevelNo}`} />
+        <LoadingOverlay message={`Loading level ${currentLevelNo}`} />
       ) : null}
       <GameHeader />
       <NextLevelIndication />
       <ControlGroup />
-      {isSaving && <LoadingIndicator message="Saving..." />}
+      {isSaving && <LoadingOverlay message="Saving..." />}
     </div>
   );
 };

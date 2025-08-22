@@ -7,10 +7,10 @@ import {
 import { resetLevel } from "./features/levels/levelReducer";
 import { resetTurtle } from "./features/turtleMonitor/turtleReducers";
 import ILevel from "./levels/ILevel";
-import { createLevelInstance, levelMap } from "./levels/levels";
+import { createLevelInstance } from "./levels/levels";
 import GameData from "./restoreGame/GameData";
 import store from "./store";
-import resizeCanvas from "./utils/resizeCanvas";
+import { resizeCanvas } from "./utils/generic";
 
 class Game {
   private static _instance: Game;
