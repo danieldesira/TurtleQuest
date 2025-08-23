@@ -8,7 +8,9 @@ const LoginButtons = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.authentication.isAuthenticated
   );
-  const [showLoginDialog, setShowLoginDialog] = useState<boolean>(true);
+  const [showLoginDialog, setShowLoginDialog] = useState<boolean>(
+    !isAuthenticated
+  );
 
   const handleLoginClick = () => setShowLoginDialog(true);
 

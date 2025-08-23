@@ -7,6 +7,7 @@ type Props = {
   handleOk?: () => void;
   type?: "default" | "error" | "form";
   handleSubmit?: React.FormEventHandler;
+  buttons?: { label: string; action: () => void }[];
 };
 
 const Dialog = ({
@@ -15,6 +16,7 @@ const Dialog = ({
   type = "default",
   handleOk,
   handleSubmit,
+  buttons,
 }: React.PropsWithChildren<Props>) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -54,6 +56,12 @@ const Dialog = ({
             ) : (
               <>OK</>
             )}
+            {buttons &&
+              buttons.map(({ label, action }, index) => (
+                <DialogButton key={index} handleClick={action}>
+                  {label}
+                </DialogButton>
+              ))}
           </DialogButton>
         </form>
       </dialog>

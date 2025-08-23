@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../features/RootState";
 import Dialog from "./Dialog";
 import { updateDialogContent } from "../../features/dialogs/dialogReducer";
-import DialogButton from "./DialogButton";
 
 const CustomDialog = () => {
   const { title, text, type, buttons } = useSelector(
@@ -17,16 +16,10 @@ const CustomDialog = () => {
     );
 
   return (
-    <Dialog title={title} type={type} handleOk={handleOk}>
+    <Dialog title={title} type={type} handleOk={handleOk} buttons={buttons}>
       {text.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
       ))}
-      {buttons &&
-        buttons.map(({ label, action }, index) => (
-          <DialogButton key={index} handleClick={action}>
-            {label}
-          </DialogButton>
-        ))}
     </Dialog>
   );
 };

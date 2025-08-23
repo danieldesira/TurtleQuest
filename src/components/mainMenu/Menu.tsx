@@ -18,6 +18,7 @@ import {
   getLastGameTimestampLocalStorage,
 } from "../../utils/lastGameLocalStorage";
 import InstructionsDialog from "../dialog/InstructionsDialog";
+import Dialog from "../dialog/Dialog";
 
 type Props = { setIsNewGame: Dispatch<React.SetStateAction<boolean>> };
 
@@ -34,6 +35,36 @@ const Menu = ({ setIsNewGame }: Props) => {
   const profile = useSelector((state: RootState) => state.game.profile.value);
 
   const handleNewGame = () => {
+    const hasLastGame = !!getLastGameLocalStorage();
+    if (hasLastGame) {
+      dispatch(
+        updateDialogContent({
+          dialog: {
+            title: "Start New Game",
+            text: [
+              "Starting a new game will erase your current progress.",
+              "Are you sure you want to continue?",
+            ],
+            buttons: [
+              {
+                label: "Cancel",
+                action: () =>
+                  dispatch(
+                    updateDialogContent({
+                      dialog: { title: "", text: [], buttons: undefined },
+                    })
+                  ),
+              },
+            ],
+          },
+        })
+      );
+    } else {
+      startNewGame();
+    }
+  };
+
+  const startNewGame = () => {
     setIsNewGame(true);
     dispatch(triggerGameMode());
     Game.instance.reset();
