@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/authentication/authenticationReducer";
 import { requestLogout } from "../../services/api";
-import { useEffect, useState } from "react";
+import { resetPersonalBest } from "../../features/gameState/gameStateReducer";
 
 export const useLogout = () => {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ export const useLogout = () => {
       await requestLogout();
     } finally {
       dispatch(logout());
+      dispatch(resetPersonalBest());
     }
   };
 };

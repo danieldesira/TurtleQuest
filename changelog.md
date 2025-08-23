@@ -1,4 +1,4 @@
-# 0.7.5 Beta (Malta hatching Edition) -
+# 0.7.5 Beta (Malta&Gozo hatching Edition) -
 
 - Add Share button in win/lose dialog
 - Open login dialog on initial page load
@@ -9,6 +9,8 @@
 - Refactor request helper methods as static ``Request`` class
 - Add player profile pictures to high scores dialog
 - Rename ``LoadingIndicator`` to ``LoadingOverlay`` and increase its z-index to match dialog
+- Show player profile picture in members area instead of generic icon
+- Fix bug: TURTLE10 - Reset personal best on logout
 
 # 0.7.4 Beta - 14/08/2025 14:10 UTC+1
 

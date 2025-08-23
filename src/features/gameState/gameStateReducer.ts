@@ -42,6 +42,10 @@ const slice = createSlice({
         state.personalBest.value = action.payload.personalBest;
       }
     },
+    resetPersonalBest: (state) => {
+      state.personalBest.value.level = 0;
+      state.personalBest.value.points = 0;
+    },
   },
 });
 
@@ -54,6 +58,7 @@ export const {
   setSettings,
   setProfile,
   setPersonalBest,
+  resetPersonalBest,
 } = slice.actions;
 
 export default slice.reducer;

@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { FaUser } from "react-icons/fa6";
 import { IoLogOut } from "react-icons/io5";
 import { RiSettings5Fill } from "react-icons/ri";
 import Settings from "./settings/Settings";
 import Profile from "./profile/Profile";
 import { useLogout } from "./hooks";
+import { useSelector } from "react-redux";
+import RootState from "../../features/RootState";
 
 const MembersArea = () => {
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showProfile, setShowProfile] = useState<boolean>(false);
+  const profile = useSelector((state: RootState) => state.game.profile.value);
 
   const logout = useLogout();
 
@@ -23,10 +25,11 @@ const MembersArea = () => {
         onClick={handleSettings}
         className="text-primary text-4xl"
       />
-      <FaUser
+      <img
         role="button"
+        src={profile.profile_pic_url}
         onClick={handleProfile}
-        className="text-primary text-4xl"
+        className="w-8 h-8 rounded-sm"
       />
       <IoLogOut
         role="button"
