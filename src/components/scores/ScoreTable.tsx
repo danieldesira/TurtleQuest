@@ -16,19 +16,22 @@ const ScoreTable = ({ highScores }: Props) => (
     </thead>
     <tbody className="text-xs">
       {highScores.map(
-        ({ players: player, outcomes: outcome, points, level }, index) => (
+        (
+          { playerName, playerProfilePicUrl, level, points, outcome },
+          index
+        ) => (
           <tr key={index}>
             <td className="text-center">
               <img
-                src={player.profile_pic_url}
-                alt={player.name}
+                src={playerProfilePicUrl}
+                alt={playerName}
                 className="w-8 h-8 rounded-full"
               />
             </td>
-            <td className="text-center">{player.name}</td>
+            <td className="text-center">{playerName}</td>
             <td className="text-right">{getLevelText(level)}</td>
             <td className="text-right">{points}</td>
-            <td className="text-center">{outcome.desc}</td>
+            <td className="text-center">{outcome}</td>
           </tr>
         )
       )}

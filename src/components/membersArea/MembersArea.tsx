@@ -3,7 +3,7 @@ import { IoLogOut } from "react-icons/io5";
 import { RiSettings5Fill } from "react-icons/ri";
 import Settings from "./settings/Settings";
 import Profile from "./profile/Profile";
-import { useLogout, useRefreshProfilePicture } from "./hooks";
+import { useLogout } from "./hooks";
 import { useSelector } from "react-redux";
 import RootState from "../../features/RootState";
 
@@ -13,7 +13,6 @@ const MembersArea = () => {
   const profile = useSelector((state: RootState) => state.game.profile.value);
 
   const logout = useLogout();
-  useRefreshProfilePicture();
 
   const handleSettings = () => setShowSettings(true);
 

@@ -7,9 +7,9 @@ export interface Settings {
 export interface HighScore {
   points: number;
   level: number;
-  player_won: string;
-  players: { name: string; profile_pic_url: string };
-  outcomes: { desc: string };
+  playerName: string;
+  playerProfilePicUrl: string;
+  outcome: string;
 }
 
 export interface Player {
