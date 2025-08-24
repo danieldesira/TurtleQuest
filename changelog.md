@@ -12,6 +12,7 @@
 - Show player profile picture in members area instead of generic icon
 - Fix bug [TURTLE-10]: Reset personal best on logout
 - Fix bug [TURTLE-11]: Do not show login dialog if authenticated
+- New Game dialog when there is already a saved game for authenticated player
 
 # 0.7.4 Beta - 14/08/2025 14:10 UTC+1
 

@@ -43,26 +43,28 @@ const Dialog = ({
           <div className="flex flex-col w-11/12 gap-3 max-h-screen-1/2 overflow-y-auto">
             {children}
           </div>
-          <DialogButton
-            variant={type === "form" ? "default" : type}
-            buttonType={type === "form" ? "submit" : "button"}
-            handleClick={handleOk}
-          >
-            {type === "form" ? (
-              <>
-                <FaFloppyDisk />
-                Save
-              </>
-            ) : (
-              <>OK</>
-            )}
+          <div className="flex gap-2">
+            <DialogButton
+              variant={type === "form" ? "default" : type}
+              buttonType={type === "form" ? "submit" : "button"}
+              handleClick={handleOk}
+            >
+              {type === "form" ? (
+                <>
+                  <FaFloppyDisk />
+                  Save
+                </>
+              ) : (
+                <>OK</>
+              )}
+            </DialogButton>
             {buttons &&
               buttons.map(({ label, action }, index) => (
                 <DialogButton key={index} handleClick={action}>
                   {label}
                 </DialogButton>
               ))}
-          </DialogButton>
+          </div>
         </form>
       </dialog>
     )

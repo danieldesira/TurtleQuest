@@ -2,14 +2,11 @@ import { Dispatch, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
 import AboutDialog from "../dialog/AboutDialog";
-import Game from "../../Game";
-import parseGameData from "../../restoreGame/parseGameData";
 import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../LoginButtons";
 import LeaderBoard from "../scores/LeaderBoard";
 import RootState from "../../features/RootState";
 import InfoDisplay from "../InfoDisplay";
-import { triggerGameMode } from "../../features/gameState/gameStateReducer";
 import GameData from "../../restoreGame/GameData";
 import { saveGame } from "../../services/api";
 import { updateDialogContent } from "../../features/dialogs/dialogReducer";
@@ -18,12 +15,15 @@ import {
   getLastGameTimestampLocalStorage,
 } from "../../utils/lastGameLocalStorage";
 import InstructionsDialog from "../dialog/InstructionsDialog";
-import Dialog from "../dialog/Dialog";
+import { useGameStartActions } from "./hooks";
+import NewGameDialog from "./NewGameDialog";
 
 type Props = { setIsNewGame: Dispatch<React.SetStateAction<boolean>> };
 
 const Menu = ({ setIsNewGame }: Props) => {
   const dispatch = useDispatch();
+  const { startNewGame, continuePreviousGame } =
+    useGameStartActions(setIsNewGame);
 
   const [showAbout, setShowAbout] = useState<boolean>(false);
   const [showInstructions, setShowInstructions] = useState<boolean>(false);
@@ -33,47 +33,15 @@ const Menu = ({ setIsNewGame }: Props) => {
     (state: RootState) => state.authentication.isAuthenticated
   );
   const profile = useSelector((state: RootState) => state.game.profile.value);
+  const [showNewGameDialog, setShowNewGameDialog] = useState<boolean>(false);
 
   const handleNewGame = () => {
     const hasLastGame = !!getLastGameLocalStorage();
     if (hasLastGame) {
-      dispatch(
-        updateDialogContent({
-          dialog: {
-            title: "Start New Game",
-            text: [
-              "Starting a new game will erase your current progress.",
-              "Are you sure you want to continue?",
-            ],
-            buttons: [
-              {
-                label: "Cancel",
-                action: () =>
-                  dispatch(
-                    updateDialogContent({
-                      dialog: { title: "", text: [], buttons: undefined },
-                    })
-                  ),
-              },
-            ],
-          },
-        })
-      );
+      setShowNewGameDialog(true);
     } else {
       startNewGame();
     }
-  };
-
-  const startNewGame = () => {
-    setIsNewGame(true);
-    dispatch(triggerGameMode());
-    Game.instance.reset();
-  };
-
-  const handleContinueGame = () => {
-    setIsNewGame(false);
-    dispatch(triggerGameMode());
-    parseGameData(getLastGameLocalStorage());
   };
 
   const handleAbout = () => setShowAbout(true);
@@ -140,20 +108,21 @@ const Menu = ({ setIsNewGame }: Props) => {
         ) : null}
         <div className="flex flex-col items-center gap-5">
           {isAuthenticated && isLastGameAvailable && (
-            <MenuButton callback={handleContinueGame} text="Continue Game" />
+            <MenuButton callback={continuePreviousGame} text="Continue Game" />
           )}
           <MenuButton callback={handleNewGame} text="New Game" />
-          {isAuthenticated && isLastGameAvailable && (
-            <span className="text-blue-800 font-light">
-              Caution: Starting a new game will erase current game progress!
-            </span>
-          )}
           <MenuButton callback={handleInstructions} text="Instructions" />
         </div>
       </div>
       {showAbout && <AboutDialog setShowAbout={setShowAbout} />}
       {showInstructions && (
         <InstructionsDialog setShowInstructions={setShowInstructions} />
+      )}
+      {showNewGameDialog && (
+        <NewGameDialog
+          setIsOpen={setShowNewGameDialog}
+          setIsNewGame={setIsNewGame}
+        />
       )}
     </>
   );
