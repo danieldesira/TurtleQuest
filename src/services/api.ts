@@ -45,3 +45,6 @@ export const uploadProfilePicture = async (file: File) =>
     "api/profile-pic",
     file
   );
+
+export const fetchProfilePicUrl = async () =>
+  await Request.get<{ profilePicUrl: string }>("api/profile-pic");

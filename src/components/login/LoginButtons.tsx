@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import RootState from "../features/RootState";
-import MembersArea from "./membersArea/MembersArea";
+import RootState from "../../features/RootState";
+import MembersArea from "../membersArea/MembersArea";
 import { useState } from "react";
-import LoginDialog from "./dialog/LoginDialog";
+import LoginDialog from "./LoginDialog";
 
 const LoginButtons = () => {
   const isAuthenticated = useSelector(

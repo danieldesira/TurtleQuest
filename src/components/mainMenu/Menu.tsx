@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
 import AboutDialog from "../dialog/AboutDialog";
 import { FaInstagram } from "react-icons/fa6";
-import LoginButtons from "../LoginButtons";
+import LoginButtons from "../login/LoginButtons";
 import LeaderBoard from "../scores/LeaderBoard";
 import RootState from "../../features/RootState";
 import InfoDisplay from "../InfoDisplay";

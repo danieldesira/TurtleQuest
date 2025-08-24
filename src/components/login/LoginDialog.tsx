@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import Dialog from "./Dialog";
+import Dialog from "../dialog/Dialog";
 import { authenticate } from "../../features/authentication/authenticationReducer";
 import { login } from "../../services/api";
 import {
