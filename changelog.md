@@ -1,3 +1,7 @@
+# 0.7.6.1 Beta (Malta&Gozo hatching Edition) - 25/08/2025 17:05 UTC+1
+
+- [Turtle-14]: Attempt to fix Vercel PWA issue
+
 # 0.7.6 Beta (Malta&Gozo hatching Edition) - 25/08/2025 17:05 UTC+1
 
 - Improve responsive layout in menu and a few dialogs
