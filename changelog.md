@@ -1,4 +1,4 @@
-# 0.7.5 Beta (Malta&Gozo hatching Edition) -
+# 0.7.5 Beta (Malta&Gozo hatching Edition) - 25/08/2025 13:25 UTC+1
 
 - Add Share button in win/lose dialog
 - Open login dialog on initial page load

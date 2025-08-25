@@ -21,7 +21,7 @@ const ScoreTable = ({ highScores }: Props) => (
           index
         ) => (
           <tr key={index}>
-            <td className="text-center">
+            <td className="flex justify-center">
               <img
                 src={playerProfilePicUrl}
                 alt={playerName}
