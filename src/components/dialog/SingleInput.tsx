@@ -47,7 +47,7 @@ const SingleInput = ({
           role="button"
           src={value}
           alt="Uploaded"
-          className="w-32 h-32 object-cover mb-2"
+          className="w-32 h-32 object-cover mb-2 hidden lg:block"
           onClick={handleImageClick}
         />
         <input
@@ -56,7 +56,7 @@ const SingleInput = ({
           id={name}
           name={name}
           accept="image/*"
-          className="hidden"
+          className="block lg:hidden"
           onChange={handleChange}
         />
       </div>

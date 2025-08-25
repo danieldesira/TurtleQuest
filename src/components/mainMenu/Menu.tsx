@@ -1,7 +1,7 @@
 import { Dispatch, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
-import AboutDialog from "../dialog/AboutDialog";
+import AboutDialog from "./AboutDialog";
 import { FaInstagram } from "react-icons/fa6";
 import LoginButtons from "../login/LoginButtons";
 import LeaderBoard from "../scores/LeaderBoard";
@@ -14,9 +14,10 @@ import {
   getLastGameLocalStorage,
   getLastGameTimestampLocalStorage,
 } from "../../utils/lastGameLocalStorage";
-import InstructionsDialog from "../dialog/InstructionsDialog";
+import InstructionsDialog from "./InstructionsDialog";
 import { useGameStartActions } from "./hooks";
 import NewGameDialog from "./NewGameDialog";
+import { socials } from "./config";
 
 type Props = { setIsNewGame: Dispatch<React.SetStateAction<boolean>> };
 
@@ -82,26 +83,31 @@ const Menu = ({ setIsNewGame }: Props) => {
   return (
     <>
       <div className="flex flex-col justify-between bg-cute bg-no-repeat bg-center bg-cover p-5 items-center h-screen w-screen">
-        <div className="flex flex-col gap-5">
-          <div className="flex gap-5 justify-center items-center">
-            <h1
-              className="text-5xl font-bold"
-              role="button"
-              onClick={handleAbout}
-            >
-              <span className="text-emerald-300">Turtle</span>{" "}
-              <span className="text-cyan-500">Quest</span>
-            </h1>
-            <a
-              href="https://www.instagram.com/turtlequest.webgame/"
-              target="_blank"
-              title="Follow us on Instagram"
-            >
-              <FaInstagram className="text-primary text-4xl" />
-            </a>
-            <LoginButtons />
-          </div>
-          <span className="text-slate-950 text-center">Beta release</span>
+        <div className="flex gap-5 justify-center items-center">
+          <h1
+            className="text-5xl font-bold"
+            role="button"
+            onClick={handleAbout}
+          >
+            <span className="text-emerald-300">Turtle</span>{" "}
+            <span className="text-cyan-500">Quest</span>
+          </h1>
+          <span className="text-sm font-light">Beta</span>
+          <a
+            href={socials.instagram.url}
+            target="_blank"
+            title={socials.instagram.tooltip}
+          >
+            <socials.instagram.Icon className="text-primary text-4xl" />
+          </a>
+          <a
+            href={socials.youtube.url}
+            target="_blank"
+            title={socials.youtube.tooltip}
+          >
+            <socials.youtube.Icon className="text-primary text-4xl" />
+          </a>
+          <LoginButtons />
         </div>
         {isAuthenticated ? (
           <InfoDisplay title="Leaderboard" content={<LeaderBoard />} />

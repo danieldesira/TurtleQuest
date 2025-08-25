@@ -1,3 +1,9 @@
+# 0.7.6 Beta (Malta&Gozo hatching Edition) - 25/08/2025 17:05 UTC+1
+
+- Improve responsive layout in menu and a few dialogs
+- Add social media config file and add YouTube
+- Minor app manifest changes
+
 # 0.7.5 Beta (Malta&Gozo hatching Edition) - 25/08/2025 13:25 UTC+1
 
 - Add Share button in win/lose dialog

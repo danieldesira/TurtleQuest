@@ -1,12 +1,19 @@
 {
-    "manifest_version": 1,
-    "name": "Turtle Quest",
-    "short_name": "Turtle Quest",
-    "version": "0.5.0",
-    "display": "fullscreen",
-    "orientation": "landscape",
-    "start_url": "./index.html",
-    "description": "Educational game about the loggerhead turtle",
-    "author": "desiradaniel2007@gmail.com",
-    "default_locale": "en"
+  "manifest_version": 1.1,
+  "name": "Turtle Quest",
+  "short_name": "Turtle Quest",
+  "version": "0.7.6",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "start_url": "./index.html",
+  "description": "Educational game about the loggerhead turtle",
+  "author": "desiradaniel2007@gmail.com",
+  "default_locale": "en",
+  "icons": [
+    {
+      "src": "/images/characters/turtle.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ]
 }

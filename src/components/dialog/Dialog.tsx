@@ -40,7 +40,7 @@ const Dialog = ({
           className="flex flex-col gap-3 items-center w-full"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col w-11/12 gap-3 max-h-screen-1/2 overflow-y-auto">
+          <div className="flex flex-col w-11/12 gap-3 max-h-44 lg:max-h-full overflow-y-auto">
             {children}
           </div>
           <div className="flex gap-2">
