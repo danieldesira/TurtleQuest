@@ -1,6 +1,4 @@
-export const registerServiceWorker = async (
-  workerType: "cache" | "notification",
-) => {
+export const registerServiceWorker = async (workerType: "cache") => {
   if (navigator.serviceWorker) {
     const worker = await navigator.serviceWorker.register(
       `${workerType}ServiceWorker.js`,

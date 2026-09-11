@@ -22,6 +22,7 @@ import type { CharacterGameClassification } from "../../characters/types";
 import { controlSettingsStore } from "../../inMemoryStores/ControlSettingsStore";
 import { lastGameStore } from "../../inMemoryStores/LastGameStore";
 import { $, $id } from "./domQuery";
+import { showNotification } from "../notifications";
 
 export const setupGameControls = () => {
   const upControl = $id("upControl") as GameControl;
@@ -147,6 +148,12 @@ export const initialiseGame = async (isNewGame: boolean) => {
 export const setupAppVisibilityHandler = () => {
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && game.isGameScreenActive) {
+      if (!game.isPaused) {
+        showNotification(
+          "Mission Sea Turtle Nest",
+          `Game paused because you switched to another tab, closed the current tab or minimized the browser. Please note that game progress might be lost if you close the tab during gameplay.`,
+        );
+      }
       showGamePausedDialog();
     }
   });
