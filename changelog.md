@@ -15,6 +15,8 @@
   - Uninstall `prettier`
   - Add `npm run preview` to preview production env in development
   - Update Tailwind CSS to 4.3.3 and Vite to 8.1.5
+  - Delete notifications service worker
+  - Use `friendlyName` from `package.json` in codebase
 - Authentication:
   - Implement Facebook SSO
 - Settings:
@@ -24,8 +26,9 @@
   - Remove Linkedin link
   - `Continue Game` menu item text changed to include level number:
     `Continue Level ${lastLevel}`
-- Gameplay UI:
+- Gameplay:
   - Vertically center game canvas
+  - Desktop notification when user switches tab, closes or minimises
 - Offline PWA:
   - Fix bug preventing loading game from cache when offline
 

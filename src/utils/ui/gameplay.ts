@@ -23,6 +23,7 @@ import { controlSettingsStore } from "../../inMemoryStores/ControlSettingsStore"
 import { lastGameStore } from "../../inMemoryStores/LastGameStore";
 import { $, $id } from "./domQuery";
 import { showNotification } from "../notifications";
+import { friendlyName } from "../../../package.json";
 
 export const setupGameControls = () => {
   const upControl = $id("upControl") as GameControl;
@@ -107,8 +108,8 @@ export const setupGameShareBtn = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Mission Sea Turtle Nest",
-          text: `I just ${game.currentLevelNo === 9 ? "won" : `reached level ${game.currentLevelNo}`} with ${game.xp} points in Mission Sea Turtle Nest!`,
+          title: friendlyName,
+          text: `I just ${game.currentLevelNo === 9 ? "won" : `reached level ${game.currentLevelNo}`} with ${game.xp} points in ${friendlyName}!`,
           url: window.location.href,
         });
       } catch {
@@ -150,7 +151,7 @@ export const setupAppVisibilityHandler = () => {
     if (document.hidden && game.isGameScreenActive) {
       if (!game.isPaused) {
         showNotification(
-          "Mission Sea Turtle Nest",
+          friendlyName,
           `Game paused because you switched to another tab, closed the current tab or minimized the browser. Please note that game progress might be lost if you close the tab during gameplay.`,
         );
       }

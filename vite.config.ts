@@ -14,10 +14,6 @@ export default defineConfig({
           __dirname,
           "src/serviceWorkers/cacheServiceWorker.ts",
         ),
-        notificationServiceWorker: path.resolve(
-          __dirname,
-          "src/serviceWorkers/notificationServiceWorker.ts",
-        ),
       },
       output: {
         entryFileNames: () => "[name].js",
