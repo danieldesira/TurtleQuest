@@ -1,7 +1,5 @@
 import { launchCustomDialog } from "./ui/customDialog";
 import { friendlyName } from "../../package.json";
-import { registerServiceWorker } from "./serviceWorkers";
-import FetchRequest from "../services/FetchRequest";
 
 export const checkNotificationPermission = async () => {
   if (!Notification) {
@@ -30,7 +28,7 @@ export const checkNotificationPermission = async () => {
   }
 };
 
-const showNotification = (title: string, content: string) =>
+export const showNotification = (title: string, content: string) =>
   new Notification(title, { body: content, icon: "/favicon.svg" });
 
 export const setupNotificationPermissionListener = async () => {
@@ -39,32 +37,10 @@ export const setupNotificationPermissionListener = async () => {
   });
   permission.onchange = async () => {
     if (permission.state === "granted") {
-      await registerServiceWorker("notification");
-      navigator.serviceWorker.addEventListener(
-        "message",
-        (event: MessageEvent) => {
-          if (event.data?.pushSubscriptionEndpoint) {
-            localStorage.setItem(
-              "pushSubscriptionEndpoint",
-              event.data.pushSubscriptionEndpoint,
-            );
-          }
-        },
-      );
       showNotification(
         friendlyName,
         "Desktop notifications have just been enabled.",
       );
-    } else {
-      const subscriptionEndpoint = localStorage.getItem(
-        "pushSubscriptionEndpoint",
-      );
-      if (subscriptionEndpoint) {
-        await FetchRequest.delete({
-          url: `https://dpns.onrender.com/api/subscription?endpoint=${encodeURIComponent(subscriptionEndpoint)}`,
-          includeCredentials: false,
-        });
-      }
     }
   };
 };
